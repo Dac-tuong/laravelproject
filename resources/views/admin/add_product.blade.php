@@ -20,12 +20,13 @@ if ($message_success) {
         </div>
         <div class="form-group">
             <label>Tên sản phẩm</label>
-            <input type="text" class="form-control name-product" name="product_name" placeholder="Nhập tên Sản phẩm"
-                required>
+            <input type="text" class="form-control" data-slug-source="product" name="product_name"
+                placeholder="Nhập tên Sản phẩm" required>
         </div>
         <div class="form-group">
-            <label>Slug tên</label>
-            <input type="text" class="form-control slug-name" name="slug_name" placeholder="slug tên" required>
+            <label>Slug</label>
+            <input type="text" class="form-control" data-slug-target="product" name="name_product_slug"
+                placeholder="slug tên sẽ tự động nhập" required>
         </div>
         <div class="form-group">
             <label>Giá</label>

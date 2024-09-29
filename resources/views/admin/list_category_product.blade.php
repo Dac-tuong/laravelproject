@@ -30,12 +30,10 @@
                     <?php
                     if ($cate_pro->category_status == 0) {
                     ?>
-                    <a href="{{URL::to('/inactive-cate-product'.'/'.$cate_pro->category_id)}}"><i
-                            class="fa-solid fa-thumbs-down"></i></a>
+                    <a href="{{URL::to('/inactive-cate-product'.'/'.$cate_pro->category_id)}}">Ẩn</a>
                     <?php
                     } else { ?>
-                    <a href="{{URL::to('/active-cate-product'.'/'.$cate_pro->category_id)}}"><i
-                            class="fa-solid fa-thumbs-up"></i></a>
+                    <a href="{{URL::to('/active-cate-product'.'/'.$cate_pro->category_id)}}">Hện</a>
                     <?php  } ?>
                 <td><a href="{{URL::to('/edit-category-product'.'/'.$cate_pro->category_id)}}">Sửa</a>/
                     <a href="{{URL::to('/delete-category-product'.'/'.$cate_pro->category_id)}}">Xóa</a>

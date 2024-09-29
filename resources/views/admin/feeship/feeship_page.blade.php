@@ -16,18 +16,6 @@
                 @endforeach
             </select>
         </div>
-        <!-- <div>
-            <label for="">Quận/Huyện</label>
-            <select name="district" id="district" class="district">
-                <option value="">Chọn Quận huyện</option>
-            </select>
-        </div>
-        <div>
-            <label for="">Xã Phường</label>
-            <select name="wards" id="wards">
-                <option value="">Chọn Quận huyện</option>
-            </select>
-        </div> -->
         <div>
             <button type="submit" name="add-feeship" id="add-feeship">Thêm giá vận chuyển</button>
         </div>

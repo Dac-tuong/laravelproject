@@ -10,7 +10,13 @@
         </div>
         <div class="form-group">
             <label>Tên sản phẩm</label>
-            <input type="text" name="product_name" required class="form-control" value="{{ $products->product_name }}">
+            <input type="text" name="product_name" data-slug-source="product-edit" required class="form-control"
+                value="{{ $products->product_name }}">
+        </div>
+        <div class="form-group">
+            <label>Slug</label>
+            <input type="text" name="slug_name_product" data-slug-target="product-edit" required class="form-control"
+                value="">
         </div>
         <div class="form-group">
             <label>Giá</label>

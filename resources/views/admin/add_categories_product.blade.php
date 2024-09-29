@@ -15,8 +15,14 @@ if ($message_success) {
 <form action="{{URL::to('/save-category-product')}}" method="POST">
     {{csrf_field()}}
     <div class="form-group">
-        <label></label>
-        <input type="text" class="form-control" name="categories_product_name" placeholder="Nhập tên loại">
+        <label>Tên Danh mục</label>
+        <input type="text" class="form-control" name="categories_name" data-slug-source="category"
+            placeholder="Nhập tên loại">
+    </div>
+    <div class="form-group">
+        <label>Slug</label>
+        <input type="text" class="form-control" name="categories_name_slug" data-slug-target="category"
+            placeholder="Slug sẽ tự động tạo">
     </div>
     <div class="form-group">
         <label>Tình Trạng</label>

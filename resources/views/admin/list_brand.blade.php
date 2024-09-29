@@ -32,10 +32,10 @@
                     <?php
                     if ($brand->brand_status == 0) {
                     ?>
-                        <a href="{{URL::to('/inactive-brand'.'/'.$brand->brand_id)}}"><i class="fa-solid fa-thumbs-down"></i></a>
+                        <a href="{{URL::to('/inactive-brand'.'/'.$brand->brand_id)}}">Ẩn</a>
                     <?php
                     } else { ?>
-                        <a href="{{URL::to('/active-brand'.'/'.$brand->brand_id)}}"><i class="fa-solid fa-thumbs-up"></i></a>
+                        <a href="{{URL::to('/active-brand'.'/'.$brand->brand_id)}}">Hiện</a>
                     <?php  } ?>
                 <td><a href="{{URL::to('/edit-brand'.'/'.$brand->brand_id)}}">Sửa</a>/
                     <a href="{{URL::to('/delete-brand'.'/'.$brand->brand_id)}}">Xóa</a>

@@ -15,8 +15,14 @@ if ($message_success) {
 <form action="{{URL::to('/save-brand')}}" method="POST">
     {{csrf_field()}}
     <div class="form-group">
-        <label></label>
-        <input type="text" class="form-control" name="brand_name" placeholder="Nhập tên thương hiệu">
+        <label>Thương hiệu</label>
+        <input type="text" class="form-control" name="brand_name" data-slug-source="brand"
+            placeholder="Nhập tên thương hiệu">
+    </div>
+    <div class="form-group">
+        <label>Thương hiệu</label>
+        <input type="text" class="form-control" name="brand_name_slug" data-slug-target="brand"
+            placeholder="Nhập tên thương hiệu">
     </div>
     <div class="form-group">
         <label>Tình Trạng</label>

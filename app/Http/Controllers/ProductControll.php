@@ -85,11 +85,11 @@ class ProductControll extends Controller
         $product = new Product;
         $product->product_code = $data['product_code'];
         $product->product_name =  $data['product_name'];
-        $product->product_slug =  $data['slug_name'];
+        $product->name_product_slug =  $data['name_product_slug'];
         $product->product_price = $data['product_price'];
         $product->product_quantity =  $data['product_quantity'];
-        $product->categories_product = $data['categories_product'];
-        $product->brand_product = $data['brand_product'];
+        $product->categories_product_id = $data['categories_product'];
+        $product->brand_product_id = $data['brand_product'];
         $product->product_status = $data['product_status'];
 
         $get_image = $request->file('product_image');

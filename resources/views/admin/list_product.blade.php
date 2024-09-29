@@ -49,12 +49,10 @@
                             <td> <?php
                                     if ($product->product_status == 0) {
                                     ?>
-                                <a href="{{URL::to('/inactive-product'.'/'.$product->product_id)}}"><i
-                                        class="fa-solid fa-thumbs-down"></i></a>
+                                    <a href="{{URL::to('/inactive-product'.'/'.$product->product_id)}}">Ẩn</a>
                                 <?php
                                     } else { ?>
-                                <a href="{{URL::to('/active-product'.'/'.$product->product_id)}}"><i
-                                        class="fa-solid fa-thumbs-up"></i></a>
+                                    <a href="{{URL::to('/active-product'.'/'.$product->product_id)}}">Hiện</a>
                                 <?php  } ?>
                             </td>
                             <td><a href="{{URL::to('/edit-product'.'/'.$product->product_id)}}">Sửa</a>/

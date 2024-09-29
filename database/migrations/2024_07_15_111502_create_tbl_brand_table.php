@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_brand', function (Blueprint $table) {
-            $table->increments('brand_id');
+            $table->increments('brand_id')->unsigned();
             $table->string('brand_name');
+            $table->string('brand_name_slug');
             $table->integer('brand_status');
             $table->timestamps();
         });

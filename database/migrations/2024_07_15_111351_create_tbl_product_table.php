@@ -17,14 +17,23 @@ return new class extends Migration
             $table->increments('product_id');
             $table->string('product_code');
             $table->string('product_name');
-            $table->string('product_slug');
+            $table->string('name_product_slug');
             $table->string('product_image');
             $table->integer('product_price');
             $table->integer('product_quantity');
-            $table->integer('categories_product_id')->unsigned();
-            $table->integer('brand_product_id')->unsigned();
+            $table->integer('categories_product_id')->unsigned(); // Foreign key must be unsigned
+            $table->integer('brand_product_id')->unsigned();      // Foreign key must be unsigned
             $table->integer('product_status');
             $table->timestamps();
+
+            // Foreign key constraints
+            $table->foreign('categories_product_id')
+                ->references('category_id')->on('tbl_category')
+                ->onDelete('cascade');
+
+            $table->foreign('brand_product_id')
+                ->references('brand_id')->on('tbl_brand')
+                ->onDelete('cascade');
         });
     }
 
