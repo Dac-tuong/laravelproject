@@ -287,55 +287,40 @@
      </script>
 
      <script>
-         $(document).ready(function() {
-             $('.send-order').click(function() {
+         document.querySelector('.send-order').addEventListener('click', function() {
+             var allValid = true;
+             var formData = {};
 
-                 var fullname = $('#fullname').val();
-                 var phonenumber = $('#phonenumber').val();
-                 var email_order = $('#email_order').val();
-                 var city = $('#city').val();
-                 var district = $('#district').val();
-                 var wards = $('#wards').val();
-                 var address = $('#address').val();
-                 var note_order = $('#note_order').val();
-                 var _token = $('input[name="_token"]').val();
-                 var priceFeeshipText = $('#feeship').text();
-                 var priceFeeshipValue = parseInt(priceFeeshipText.replace(/\./g, ''));
-                 var priceOrderText = $('#displayTotal').text();
-                 var priceOrderValue = parseInt(priceOrderText.replace(/\./g, ''));
+             // Lặp qua tất cả các phần tử có thuộc tính data-input-value
+             document.querySelectorAll('[data-input-value]').forEach(function(input) {
+                 var sourceType = input.getAttribute(
+                     'data-input-value');
+                 var inputValue = input.value;
 
-                 // Kiểm tra dữ liệu trước khi gửi
+                 var check_error = document.querySelector('[data-check-value="' + sourceType + '"]')
 
+                 if (inputValue === "") {
+                     check_error.style.display = 'block';
+                     allValid = false;
+                 }
 
-                 $.ajax({
-                     url: '/order-product',
-                     method: 'POST',
-                     data: {
-                         fullname: fullname,
-                         phonenumber: phonenumber,
-                         email_order: email_order,
-                         city: city,
-                         district: district,
-                         wards: wards,
-                         address: address,
-                         note_order: note_order,
-                         feeship: priceFeeshipValue,
-                         total_order: priceOrderValue,
-                         _token: _token
-                     },
-                     success: function(response) {
-                         if (response.status === 'success') {
-                             // Hiển thị thông báo thành công
-                             alert(response.message); // Hiển thị thông báo đã lưu thành công
-                         }
-                     },
-                     error: function(xhr, status, error) {
-                         alert('Có lỗi xảy ra khi gửi đơn hàng: ' + error);
+                 if (sourceType === "phonenumber") {
+                     var phonePattern = /^\d{10,11}$/;
+
+                     if (!phonePattern.test(inputValue)) {
+                         check_error.textContent = 'Số điện thoại không hợp lệ!';
+                         check_error.style.display = 'block';
+                         allValid = false;
                      }
-                 });
-             });
+                 }
+                 //  check_error.style.display = 'none';
+                 if (allValid) {
+                     formData[sourceType] = inputValue;
+                 }
+                 alert(formData);
 
-         });
+             });
+         })
      </script>
  </body>
 

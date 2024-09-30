@@ -22,47 +22,65 @@ $coupon_session = Session::get('coupon');
                 @csrf
                 <div class="mb-3 row">
                     <div class="col-md-6 mb-3">
-                        <input class="form-control" type="text" name="fullname" id="fullname" placeholder="Họ và tên">
+                        <input class="form-control" type="text" data-input-value="fullname" name="fullname"
+                            id="fullname" placeholder="Họ và tên">
+                        <label for="" data-check-value="fullname" style="display: none; color: red;">Vui lòng điền thông
+                            tin</label>
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <input class="form-control" type="text" name="phonenumber" id="phonenumber"
-                            placeholder="Số điện thoại">
+                        <input class="form-control" type="text" data-input-value="phonenumber" name="phonenumber"
+                            id="phonenumber" placeholder="Số điện thoại">
+                        <label for="" data-check-value="phonenumber" style="display: none; color: red;">Vui lòng điền
+                            thông tin</label>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <input class="form-control" type="text" name="email_order" id="email_order"
-                        placeholder="Email người nhận">
+                    <input class="form-control" type="text" data-input-value="email_order" name="email_order"
+                        id="email_order" placeholder="Email người nhận">
+                    <label for="" data-check-value="email_order" style="display: none; color: red;">Vui lòng điền thông
+                        tin</label>
                 </div>
 
                 <div class="mb-3 row">
                     <div class="col-md-4">
-                        <select id="city" name="city" class="form-control">
+                        <select id="city" name="city" data-input-value="city" class="form-control">
                             <option value="">Chọn tỉnh thành phố</option>
                             @foreach($provinces as $province)
                             <option value=" {{ $province->matp }}">{{ $province->name }}</option>
                             @endforeach
                         </select>
+                        <label for="" data-check-value="city" style="display: none; color: red;">Vui lòng điền thông
+                            tin</label>
                     </div>
 
                     <div class="col-md-4">
-                        <select id="district" name="district" class="form-control">
+                        <select id="district" data-input-value="district" name="district" class="form-control">
                             <option value="">Chọn Quận/Huyện</option>
                         </select>
+                        <label for="" data-check-value="district" style="display: none; color: red;">Vui lòng điền thông
+                            tin</label>
                     </div>
                     <div class="col-md-4">
-                        <select id="wards" name="wards" class="form-control">
+                        <select id="wards" name="wards" data-input-value="wards" class="form-control">
                             <option value="">Chọn Xã/Phường</option>
                         </select>
+                        <label for="" data-check-value="wards" style="display: none; color: red;">Vui lòng điền thông
+                            tin</label>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <input type="text" name="address" id="address" class="form-control">
+                    <input type="text" name="address" data-input-value="address" id="address" class="form-control">
+                    <label for="" data-check-value="address" style="display: none; color: red;">Vui lòng điền thông
+                        tin</label>
                 </div>
                 <div class="mb-3">
-                    <textarea class="form-control note-user" name="note_order" id="note_order"
+                    <textarea class="form-control" data-input-value="note_order" name="note_order" id="note_order"
                         placeholder="Ghi chú"></textarea>
+                    <label for="" data-check-value="note_order" style="display: none; color: red;">Vui lòng điền thông
+                        tin</label>
                 </div>
+
                 <div class="mb-3">
                     <button class="send-order mb-2" type="submit" id="" name="add_shipping_address" id="">Hoàn thành
                         thanh
