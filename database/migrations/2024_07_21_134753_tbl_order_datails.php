@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('tbl_order_details', function (Blueprint $table) {
             $table->increments('id_order_detail');
             $table->string('order_code');
-            $table->integer('product_id');
-            $table->string('product_name');
+            $table->integer('product_id_order');
             $table->integer('product_price');
+            $table->integer('feeship');
+            $table->integer('discounted_price');
             $table->integer('product_sale_quantity');
+            $table->string('order_note')->nullable();
             $table->timestamps();
         });
     }

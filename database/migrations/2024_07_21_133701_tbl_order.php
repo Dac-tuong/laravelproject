@@ -17,11 +17,19 @@ return new class extends Migration
             $table->increments('id_order');
             $table->string('order_code');
             $table->string('order_email');
-            $table->integer('shipping_id');
-            $table->integer('id_customer');
+            $table->integer('id_customer_order')->unsigned();
+            $table->integer('shipping_id')->unsigned();
             $table->integer('order_total');
             $table->integer('order_status');
+            $table->string('order_cancellation_note')->nullable();
             $table->timestamps();
+
+            $table->foreign('shipping_id')
+                ->references('id_shipping')->on('tbl_shipping_address')
+                ->onDelete('cascade');
+            $table->foreign('id_customer_order')
+                ->references('id_user')->on('tbl_user')
+                ->onDelete('cascade');
         });
     }
 

@@ -291,6 +291,9 @@
          $('.send-order').click(function() {
              var allValid = true;
              var formData = {};
+             var feeshipText = $('#feeship').text();
+             var feeshipInt = parseInt(feeshipText.replace(/\./g, ''));
+             //  var totalOrder = $('displayTotal').text()
 
              $('[data-input-value]').each(function() {
                  var sourceType = $(this).data('input-value');
@@ -299,6 +302,9 @@
                      allValid = false;
                  }
              })
+
+             console.log(feeshipInt);
+             //  console.log(totalOrder);
          })
          // Lặp qua tất cả các phần tử có thuộc tính data-input-value
 

@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_shipping_address', function (Blueprint $table) {
-            $table->increments('id_shipping');
-            $table->integer('id_customer');
+            $table->increments('id_shipping')->unsigned();
+            $table->integer('id_customer')->unsigned();
             $table->string('fullname');
             $table->string(column: 'order_phone');
             $table->string('matp');
@@ -23,6 +23,10 @@ return new class extends Migration
             $table->string('xaid');
             $table->string('diachi');
             $table->timestamps();
+
+            $table->foreign('id_customer')
+                ->references('id_user')->on('tbl_user')
+                ->onDelete('cascade');
         });
     }
 
