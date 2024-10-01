@@ -82,7 +82,7 @@ $coupon_session = Session::get('coupon');
                 </div>
 
                 <div class="mb-3">
-                    <button class="send-order mb-2" type="submit" id="" name="add_shipping_address" id="">Hoàn thành
+                    <button class="send-order mb-2" type="button" id="" name="add_shipping_address" id="">Hoàn thành
                         thanh
                         toán</button>
                 </div>
