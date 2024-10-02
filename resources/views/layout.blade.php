@@ -246,7 +246,6 @@
                      show_cart_quantity();
 
                  },
-
              });
          });
      });
@@ -273,8 +272,6 @@
                  if (feeship.type === 'childList' || feeship.type === 'characterData') {
                      var priceFeeshipText = $('#feeship').text();
                      var priceFeeshipValue = parseInt(priceFeeshipText.replace(/\./g, ''));
-
-
                      totalOrder = priceFeeshipValue + priceCartValue;
                      $("#displayTotal").html(totalOrder);
                  }
@@ -293,7 +290,11 @@
              var formData = {};
              var feeshipText = $('#feeship').text();
              var feeshipInt = parseInt(feeshipText.replace(/\./g, ''));
-             //  var totalOrder = $('displayTotal').text()
+             var _token = $('input[name="_token"]').val();
+             var totalOrderText = $('#displayTotal').text();
+             var totalOrderInt = parseInt(totalOrderText.replace(/\./g, ''));
+             var discountText = $('#discount').text();
+             var discountInt = parseInt(discountText.replace(/\./g, ''));
 
              $('[data-input-value]').each(function() {
                  var sourceType = $(this).data('input-value');
@@ -301,14 +302,35 @@
                  if (!checkErrorInput(sourceType, inputValue)) {
                      allValid = false;
                  }
+                 formData[sourceType] = inputValue;
+
              })
 
-             console.log(feeshipInt);
-             //  console.log(totalOrder);
-         })
-         // Lặp qua tất cả các phần tử có thuộc tính data-input-value
+             if (allValid) {
+                 formData.feeship = feeshipInt;
+                 formData.totalOrder = totalOrderInt;
+                 formData.discount = discountInt;
 
+                 formData._token = _token;
+                 console.log("FormData được thu thập:", formData);
+                 //  $.ajax({
+                 //      url: '/order-product',
+                 //      method: 'POST',
+                 //      data: formData,
+                 //      success: function(response) {
+                 //          if (response.status === 'success') {
+                 //              alert(response.message + ' Giảm giá: ' + response
+                 //                  .discount_coupon);
+                 //          }
+                 //      },
+                 //      error: function(xhr, status, error) {
+                 //          alert('Có lỗi xảy ra khi gửi đơn hàng: ' + error);
+                 //      }
+                 //  });
+             }
+         })
      });
+
      // Hàm kiểm tra giá trị của input và hiển thị lỗi
      function checkErrorInput(sourceType, inputValue) {
          var check_error = document.querySelector('[data-check-value="' + sourceType + '"]');

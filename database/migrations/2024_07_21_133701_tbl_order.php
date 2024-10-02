@@ -14,20 +14,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_order', function (Blueprint $table) {
-            $table->increments('id_order');
-            $table->string('order_code');
+            $table->increments('id_order')->unsigned();
+            $table->string('order_code')->unique();
             $table->string('order_email');
-            $table->integer('id_customer_order')->unsigned();
+            $table->integer('id_customer')->unsigned();
             $table->integer('shipping_id')->unsigned();
+            $table->integer('feeship');
+            $table->integer('discounted_price');
             $table->integer('order_total');
             $table->integer('order_status');
-            $table->string('order_cancellation_note')->nullable();
             $table->timestamps();
 
             $table->foreign('shipping_id')
                 ->references('id_shipping')->on('tbl_shipping_address')
                 ->onDelete('cascade');
-            $table->foreign('id_customer_order')
+            $table->foreign('id_customer')
                 ->references('id_user')->on('tbl_user')
                 ->onDelete('cascade');
         });

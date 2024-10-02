@@ -9,7 +9,7 @@ class OrderProduct extends Model
 {
     // use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['order_code', 'order_email', 'shipping_id', 'id_customer', 'order_total', 'order_status', 'shipping_method'];
+    protected $fillable = ['order_code', 'order_email',  'id_customer', 'shipping_id', 'feeship', 'discounted_price', 'order_total', 'order_status'];
     protected $primaryKey = 'id_order';
     protected $table = 'tbl_order';
 

@@ -10,6 +10,7 @@ use App\Models\Brand;
 use App\Models\Coupons;
 use App\Models\Feeship;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use App\Models\Province;
 use App\Models\District;
 use App\Models\OrderDetail;
@@ -147,11 +148,12 @@ class CheckoutController extends Controller
     public function order_product(Request $request)
     {
 
-        // $variable_Cart = Session::get('cart');
-        $id_user = Session::get('id_customer');
+
 
         $data = $request->all();
 
+        $variable_Cart = Session::get('cart');
+        $id_user = Session::get('id_customer');
 
         $nameorder = $data['fullname'];
         $phonenumber = $data['phonenumber'];
@@ -159,6 +161,8 @@ class CheckoutController extends Controller
         $district = $data['district'];
         $wards = $data['wards'];
         $address = $data['address'];
+
+
 
         $shipping_address = new ShippingAddress();
         $shipping_address->id_customer = $id_user;
@@ -169,9 +173,47 @@ class CheckoutController extends Controller
         $shipping_address->xaid = $wards;
         $shipping_address->diachi = $address;
         $shipping_address->save();
+
+        $id_shipping_address =  $shipping_address->id_shipping;
+        $email = $data['email_order'];
+
+        $shipping_fee = $data['feeship'];
+        $order_total = $data['totalOrder'];
+
+        $randomString = Str::random(5);
+        $code_order = $randomString;
+
+
+
+        $add_order = new OrderProduct();
+        $add_order->order_code = $code_order;
+        $add_order->id_customer_order = $id_user;
+        $add_order->order_email = $email;
+        $add_order->shipping_id = $id_shipping_address;
+        $add_order->order_total = $order_total;
+        $add_order->order_status = 1;
+        $add_order->save();
+
+
+        if ($variable_Cart) {
+            $add_order_product = new OrderDetail();
+            foreach ($variable_Cart as $item) {
+                // Tạo một instance mới của OrderProduct
+                // Giả sử $item có các thuộc tính product_id, product_price và product_quantity
+                $add_order_product->product_id_order = $item['masp']; // ID sản phẩm
+                $add_order_product->product_price = $item['gia']; // Giá sản phẩm
+                $add_order_product->product_sale_quantity = $item['soluong']; // Số lượng sản phẩm
+                // Lưu vào cơ sở dữ liệu
+
+            }
+            $add_order_product->feeship = $shipping_fee;
+            $add_order_product->save();
+        }
+
         return response()->json([
             'status' => 'success',
-            'message' => 'Đơn hàng đã được gửi thành công!'
+            'message' => 'Đơn hàng đã được gửi thành công!',
+
         ]);
     }
 }

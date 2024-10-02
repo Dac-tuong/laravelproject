@@ -132,6 +132,15 @@ $coupon_session = Session::get('coupon');
                 @foreach ($coupon_session as $coupon )
                 <!-- NẾU ĐIỀU KIỆN BẰNG PERCENT  -->
                 @if ($coupon['coupon_type'] == 'percent')
+
+                <div class="flex-center-between row-summary">
+                    <span>
+                        Áp dụng giảm:
+                    </span>
+                    <span>
+                        - <strong id="discount">{{$coupon['discount']}}</strong>%
+                    </span>
+                </div>
                 @php
                 $price_discount = ($total_price * $coupon['discount'])/100;
                 $price_cart = ($total_price - $price_discount) ;
@@ -140,6 +149,10 @@ $coupon_session = Session::get('coupon');
                 <p>Tổng đơn hàng <strong id="price_cart">{{ number_format($price_cart, 0, ',', '.') }}</strong> VNĐ</p>
                 <!-- NẾU ĐIỀU KIỆN BẰNG FIXED  -->
                 @elseif($coupon['coupon_type'] == 'fixed')
+                <span>
+                    Giảm giá :
+                </span>
+                <span> <strong id="discount">{{ number_format($coupon['discount'], 0, ',', '.') }}</strong> VNĐ</span>
                 @php
                 $price_discount = $coupon['discount'];
                 $price_cart = ($total_price - $price_discount);
@@ -161,6 +174,10 @@ $coupon_session = Session::get('coupon');
                 @endif
 
                 @endif
+                <span>
+                    Giảm giá :
+                </span>
+                <span> <strong id="discount">0</strong></span>
                 <p> Phí vận chuyển <strong id="feeship">0</strong> VND</p>
 
                 <p>Tổng giá trị:<strong id="displayTotal">0</strong> VND</p>
