@@ -436,10 +436,26 @@ p {
     margin: 0px;
     padding: 0px;
 }
+
+.shipping-address {
+    margin-top: 5px;
+}
+
+.shipping-address p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.order-summary {
+    margin-top: 5px;
+}
+
+.order-summary p {
+    margin: 0px;
+    padding: 0px;
+}
 .order-note {
     width: 320px;
     min-height: 100px;
     resize: none;
-}
-.order-table {
 }

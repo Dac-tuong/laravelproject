@@ -1,6 +1,8 @@
 @extends('admin_layout')
 @section('admin_content')
-
+@php
+$totalCart = 0; // Khởi tạo biến tổng tiền
+@endphp
 <!-- Tiêu đề trang -->
 <div class="order-details-header">
     <div class="order-details-label">
@@ -29,7 +31,7 @@
             <tbody>
                 @foreach ($detailOrder as $order)
                 <tr>
-                    <td>{{$order->product_name}}</td>
+                    <td>{{$order->product_name_order}}</td>
                     <td>{{$order->product_sale_quantity}}</td>
                     <td>{{ number_format($order->product_price, 0, ',', '.') }} VNĐ</td>
                     <td>
@@ -37,6 +39,8 @@
                         $order_price_product= $order->product_price;
                         $order_quantity_sale = $order->product_sale_quantity;
                         $summary_product = $order_price_product* $order_quantity_sale;
+                        $totalCart +=$summary_product;
+
                         @endphp
                         {{ number_format($summary_product, 0, ',', '.') }} VNĐ
                     </td>
@@ -51,8 +55,9 @@
         <p><strong>Tổng số lượng sản phẩm:</strong>
             {{$orderCount}}
         </p>
-        <p><strong>Tổng tiền sản phẩm:</strong> 1,200,000 VND</p>
-        <p><strong>Phí vận chuyển:</strong> 50,000 VND</p>
+        <p>Tổng tiền sản phẩm:<strong>{{ number_format($totalCart, 0, ',', '.') }} VNĐ</strong></p>
+        <p>Giảm giá:<strong>{{$orderShip->discount_coupon_id }} VNĐ</strong></p>
+        <p>Phí vận chuyển:<strong>{{ number_format($orderShip->feeship, 0, ',', '.') }}</strong>VNĐ</p>
         <p><strong>Tổng cộng:</strong> {{ number_format($orderShip->order_total, 0, ',', '.') }} VNĐ</p>
     </div>
 </div>
@@ -66,9 +71,9 @@
             <label for="order-status">Cập nhật tình trạng đơn hàng:</label>
             <br>
             <select name="order-status" id="order-status">
-                <option value="processing">Chờ xử lý</option>
-                <option value="completed">Đã hoàn thành</option>
-                <option value="canceled">Đã hủy</option>
+                <option value="1">Chờ xử lý</option>
+                <option value="2">Đã hoàn thành</option>
+                <option value="0">Đã hủy</option>
             </select>
             <br>
             <button type="submit">Cập nhật</button>
@@ -86,15 +91,20 @@
         <p><strong>Ngày đặt hàng:</strong> {{$orderShip->created_at}}</p>
         <p><strong>Tình trạng đơn hàng:</strong> Chờ xử lý</p>
         <p><strong>Phương thức thanh toán:</strong> Thẻ tín dụng</p>
-        <p><strong>Ghi chú:</strong> Giao nhanh nha</p>
+        <p><strong>Ghi chú:</strong> {{$orderShip->order_note}}</p>
     </div>
     <!-- Thông tin khách hàng -->
     <div class="customer-info">
         <h2>Thông tin khách hàng</h2>
-        <p><strong>Tên khách hàng:</strong> Nguyễn Văn A</p>
-        <p><strong>Email:</strong> nguyen.vana@example.com</p>
-        <p><strong>Số điện thoại:</strong> 0123456789</p>
-        <p><strong>Địa chỉ giao hàng:</strong> 123 Đường ABC, Quận 1, TP.HCM</p>
+        <p><strong>Tên khách hàng:</strong>{{$orderShip->shippingAddress->fullname}}</p>
+        <p><strong>Email:</strong> {{$orderShip->order_email}}</p>
+        <p><strong>Số điện thoại:</strong> {{$orderShip->shippingAddress->order_phone}}</p>
+    </div>
+    <div class="shipping-address">
+        <h2>Địa chỉ giao hàng</h2>
+        <p><strong>Tên khách hàng:</strong>{{$orderShip->shippingAddress->fullname}}</p>
+        <p><strong>Email:</strong> {{$orderShip->order_email}}</p>
+        <p><strong>Số điện thoại:</strong> {{$orderShip->shippingAddress->order_phone}}</p>
     </div>
 </div>
 

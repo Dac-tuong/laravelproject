@@ -20,9 +20,11 @@ return new class extends Migration
             $table->integer('id_customer')->unsigned();
             $table->integer('shipping_id')->unsigned();
             $table->integer('feeship');
-            $table->integer('discount_coupon_id')->unsigned();
+            $table->integer('discount_coupon_id')->unsigned()->nullable();
             $table->integer('order_total');
             $table->integer('order_status');
+            $table->string('order_cancellation_reason')->nullable();
+            $table->text('order_note')->nullable();
             $table->timestamps();
 
             $table->foreign('shipping_id')

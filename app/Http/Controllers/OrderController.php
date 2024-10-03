@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coupons;
 use App\Models\OrderDetail;
 use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\SalesProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use PHPUnit\Framework\Constraint\Count;
 
 class OrderController extends Controller
 {
@@ -28,6 +30,11 @@ class OrderController extends Controller
         }
 
         $order_ship = OrderProduct::with(['shippingAddress'])->where('order_code', $order_code)->first();
+
+        $find_coupon =  $order_ship->discount_coupon_id;
+
+        $check_coupon = Coupons::where('id_coupon', $find_coupon)->first();
+
         return view('admin.order.order_detail')->with('detailOrder', $data_detailOrder)->with('orderShip', $order_ship)->with('orderCount', $order_count_quantity);
     }
 

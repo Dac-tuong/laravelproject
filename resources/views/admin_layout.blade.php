@@ -22,7 +22,7 @@
      <link href="{{asset('admin/css/custom.css')}}" rel="stylesheet" />
      <link href="{{asset('admin/css/custom_table.css')}}" rel="stylesheet" />
 
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
      <!-- GOOGLE FONTS-->
      <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
@@ -209,68 +209,68 @@
  <script src="{{asset('admin/js/jquery-3.6.0.min.js')}}"></script>
 
  <script>
-     $(document).ready(function() {
+$(document).ready(function() {
 
-         $('#add-feeship').click(function() {
-             var id_province = $('#province').val();
-             var _token = $('input[name="_token"]').val();
+    $('#add-feeship').click(function() {
+        var id_province = $('#province').val();
+        var _token = $('input[name="_token"]').val();
 
-             $.ajax({
-                 url: '/add-feeship',
-                 method: 'POST',
-                 data: {
-                     id_province: id_province,
-                     _token: _token
-                 },
-                 success: function(response) {
-                     if (response.exists) {
-                         alert('Dữ liệu này đã tồn tại');
-                     } else {
-                         alert('Thêm phí vận chuyển thành công');
-                     }
-                 },
-                 error: function(xhr, status, error) {
-                     alert('Đã có lỗi xảy ra: ' + error);
-                 }
-             });
-         });
-     })
+        $.ajax({
+            url: '/add-feeship',
+            method: 'POST',
+            data: {
+                id_province: id_province,
+                _token: _token
+            },
+            success: function(response) {
+                if (response.exists) {
+                    alert('Dữ liệu này đã tồn tại');
+                } else {
+                    alert('Thêm phí vận chuyển thành công');
+                }
+            },
+            error: function(xhr, status, error) {
+                alert('Đã có lỗi xảy ra: ' + error);
+            }
+        });
+    });
+})
  </script>
 
  <script>
-     function removeVietnameseDiacritics(str) {
-         return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D');
-     }
+function removeVietnameseDiacritics(str) {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D');
+}
 
-     function generateRandomString(length) {
-         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-         let result = '';
-         const charactersLength = characters.length;
-         for (let i = 0; i < length; i++) {
-             result += characters.charAt(Math.floor(Math.random() * charactersLength));
-         }
-         return result;
-     }
+function generateRandomString(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
 
-     document.querySelectorAll('[data-slug-source]').forEach(function(input) {
-         input.addEventListener('input', function() {
-             var sourceType = this.getAttribute('data-slug-source');
-             var title = this.value;
-             var slug = removeVietnameseDiacritics(title)
-                 .toLowerCase()
-                 .replace(/ /g, '-')
-                 .replace(/[^\w-]+/g, '')
-                 .replace(/--+/g, '-')
-                 .replace(/^-+/, '')
-                 .replace(/-+$/, '');
-             var randomString = generateRandomString(6); // Độ dài chuỗi ngẫu nhiên là 6
-             slug += '-' + randomString;
-             var targetInput = document.querySelector('[data-slug-target="' + sourceType + '"]');
-             if (targetInput) {
-                 targetInput.value = slug;
-             }
-         });
-     });
+document.querySelectorAll('[data-slug-source]').forEach(function(input) {
+    input.addEventListener('input', function() {
+        var sourceType = this.getAttribute('data-slug-source');
+        var title = this.value;
+        var slug = removeVietnameseDiacritics(title)
+            .toLowerCase()
+            .replace(/ /g, '-')
+            .replace(/[^\w-]+/g, '')
+            .replace(/--+/g, '-')
+            .replace(/^-+/, '')
+            .replace(/-+$/, '');
+        var randomString = generateRandomString(6); // Độ dài chuỗi ngẫu nhiên là 6
+        slug += '-' + randomString;
+        var targetInput = document.querySelector('[data-slug-target="' + sourceType + '"]');
+        if (targetInput) {
+            targetInput.value = slug;
+        }
+    });
+});
  </script>
 
  </html>

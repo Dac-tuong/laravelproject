@@ -75,10 +75,7 @@ $coupon_session = Session::get('coupon');
                         tin</label>
                 </div>
                 <div class="mb-3">
-                    <textarea class="form-control" data-input-value="note_order" name="note_order" id="note_order"
-                        placeholder="Ghi chú"></textarea>
-                    <label for="" data-check-value="note_order" style="display: none; color: red;">Vui lòng điền thông
-                        tin</label>
+                    <textarea class="form-control" name="note_order" id="note_order" placeholder="Ghi chú"></textarea>
                 </div>
 
                 <div class="mb-3">

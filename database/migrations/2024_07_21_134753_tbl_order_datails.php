@@ -17,9 +17,9 @@ return new class extends Migration
             $table->increments('id_order_detail');
             $table->string('order_code');
             $table->integer('product_id_order')->unsigned();
+            $table->string('product_name_order');
             $table->integer('product_price');
             $table->integer('product_sale_quantity');
-            $table->string('order_note')->nullable();
             $table->timestamps();
 
             $table->foreign('product_id_order')

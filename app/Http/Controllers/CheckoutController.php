@@ -180,11 +180,7 @@ class CheckoutController extends Controller
         $shipping_fee = $data['feeship'];
         $order_total = $data['totalOrder'];
         $discount = $data['discount'];
-        // if ($discount == "") {
-        //     $discount = 0;
-        // } else {
-        //     $discount = $data['discount'];
-        // }
+        $note = $data['note'];
 
         $randomString = Str::random(5);
         $code_order = $randomString;
@@ -199,11 +195,21 @@ class CheckoutController extends Controller
         $add_order->feeship = $shipping_fee;
         $add_order->discount_coupon_id = $discount;
         $add_order->order_total = $order_total;
-
         $add_order->order_status = 1;
+        $add_order->order_note = $note;
         $add_order->save();
 
-
+        if ($variable_Cart) {
+            foreach ($variable_Cart as $item) {
+                $add_detail_order = new OrderDetail();
+                $add_detail_order->order_code = $code_order;
+                $add_detail_order->product_id_order = $item['masp'];
+                $add_detail_order->product_name_order = $item['tensp'];
+                $add_detail_order->product_price = $item['gia'];
+                $add_detail_order->product_sale_quantity = $item['soluong'];
+                $add_detail_order->save();
+            }
+        }
 
         return response()->json([
             'status' => 'success',

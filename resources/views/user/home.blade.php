@@ -36,14 +36,13 @@
 
                         <h5 class="home-product-item__name">{{ $product->product_name }}</h5>
                         <div class=" home-product-item__price">
-                            <span class="home-product-item__price-old">3.899.000 ₫</span>
                             <span class="home-product-item__price-current">
                                 {{ number_format($product->product_price, 0, ',', '.') }}
                             </span>
                         </div>
                         <div class=" home-product-item__origin">
                             <span class="home-product-item__origin-brand">{{$product->brand_name}}</span>
-                            <span class="home-product-item__origin-warehouse"> Hồ Chí Minh</span>
+
                         </div>
                     </a>
 
