@@ -196,6 +196,7 @@ class CartController extends Controller
                         $is_avaiabel = 0;
                         if ($is_avaiabel == 0) {
                             $cou[] = array(
+                                'coupon_id' => $coupon->id_coupon,
                                 'coupon_code' => $coupon->coupon_code,
                                 'coupon_type' => $coupon->coupon_type,
                                 'discount' => $coupon->discount,
@@ -204,6 +205,7 @@ class CartController extends Controller
                         }
                     } else {
                         $cou[] = array(
+                            'coupon_id' => $coupon->id_coupon,
                             'coupon_code' => $coupon->coupon_code,
                             'coupon_type' => $coupon->coupon_type,
                             'discount' => $coupon->discount,
@@ -233,6 +235,8 @@ class CartController extends Controller
         } else {
             echo 'Bạn chưa đăng nhập';
         }
+
+        // Session::forget('coupon');
         return Redirect::to('cart');
     }
 

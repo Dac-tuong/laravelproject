@@ -204,173 +204,145 @@
      <script src="{{asset("user/js/toastr.js")}}"></script>
 
      <script>
-     $(document).ready(function() {
-         //show quantity cart
-         show_cart_quantity();
+         $(document).ready(function() {
+             //show quantity cart
+             show_cart_quantity();
 
-         function show_cart_quantity() {
-             $.ajax({
-                 url: "{{ url('/count-cart') }}", // Sử dụng URL helper để đảm bảo URL chính xác
-                 method: "GET",
-                 success: function(data) {
-                     $('#quantity-cart').html(data);
-                 }
-             });
-         }
+             function show_cart_quantity() {
+                 $.ajax({
+                     url: "{{ url('/count-cart') }}", // Sử dụng URL helper để đảm bảo URL chính xác
+                     method: "GET",
+                     success: function(data) {
+                         $('#quantity-cart').html(data);
+                     }
+                 });
+             }
 
 
-         $('.add-to-cart').click(function() {
-             var id = $(this).data('id_product');
+             $('.add-to-cart').click(function() {
+                 var id = $(this).data('id_product');
 
-             // Lấy thông tin sản phẩm từ các input ẩn trong HTML
-             var productData = {
-                 cart_product_id: $('.cart_product_id_' + id).val(),
-                 cart_product_name: $('.cart_product_name_' + id).val(),
-                 cart_product_image: $('.cart_product_image_' + id).val(),
-                 cart_product_price: $('.cart_product_price_' + id).val(),
-                 cart_product_qty: $('.cart_product_qty_' + id).val(),
-                 _token: $('input[name="_token"]').val()
-             };
+                 // Lấy thông tin sản phẩm từ các input ẩn trong HTML
+                 var productData = {
+                     cart_product_id: $('.cart_product_id_' + id).val(),
+                     cart_product_name: $('.cart_product_name_' + id).val(),
+                     cart_product_image: $('.cart_product_image_' + id).val(),
+                     cart_product_price: $('.cart_product_price_' + id).val(),
+                     cart_product_qty: $('.cart_product_qty_' + id).val(),
+                     _token: $('input[name="_token"]').val()
+                 };
 
-             // Gửi yêu cầu Ajax để thêm sản phẩm vào giỏ hàng
-             $.ajax({
-                 url: '{{url("/add-cart")}}',
-                 method: 'POST',
-                 data: productData,
-                 success: function(response) {
-                     toastr.options = {
-                         "positionClass": "toast-bottom-right",
-                         "timeOut": "3000"
-                     };
-                     toastr.success('Đã thêm sản phẩm vào giỏ hàng', '');
-                     show_cart_quantity();
+                 // Gửi yêu cầu Ajax để thêm sản phẩm vào giỏ hàng
+                 $.ajax({
+                     url: '{{url("/add-cart")}}',
+                     method: 'POST',
+                     data: productData,
+                     success: function(response) {
+                         toastr.options = {
+                             "positionClass": "toast-bottom-right",
+                             "timeOut": "3000"
+                         };
+                         toastr.success('Đã thêm sản phẩm vào giỏ hàng', '');
+                         show_cart_quantity();
 
-                 },
+                     },
+                 });
              });
          });
-     });
      </script>
 
 
      <script src="{{asset("user/js/select_shipping.js")}}"></script>
-     <script>
-     $(document).ready(function() {
-         var priceCartText = $('#price_cart').text();
-         var priceCartValue = parseInt(priceCartText.replace(/\./g, ''));
 
-         var targetNode = document.getElementById('feeship');
-
-         //  console.log('Giá phí vận chuyển:', priceFeeshipValue);
-         var config = {
-             childList: true,
-             characterData: true,
-             subtree: true
-         };
-
-         var checkChangeFeeship = function(listFeeships) {
-             for (var feeship of listFeeships) {
-                 if (feeship.type === 'childList' || feeship.type === 'characterData') {
-                     var priceFeeshipText = $('#feeship').text();
-                     var priceFeeshipValue = parseInt(priceFeeshipText.replace(/\./g, ''));
-                     totalOrder = priceFeeshipValue + priceCartValue;
-                     $("#displayTotal").html(totalOrder);
-                 }
-             }
-         }
-         var observer = new MutationObserver(checkChangeFeeship);
-         observer.observe(targetNode, config)
-
-     });
-     </script>
 
      <script>
-     $(document).ready(function() {
-         $('.send-order').click(function() {
-             var allValid = true;
-             var formData = {};
-             var feeshipText = $('#feeship').text();
-             var feeshipInt = parseInt(feeshipText.replace(/\./g, ''));
-             var _token = $('input[name="_token"]').val();
-             var totalOrderText = $('#displayTotal').text();
-             var totalOrderInt = parseInt(totalOrderText.replace(/\./g, ''));
-             var discountText = $('#discount').text();
-             var discountInt = parseInt(discountText.replace(/\./g, ''));
+         $(document).ready(function() {
+             $('.send-order').click(function() {
+                 var allValid = true;
+                 var formData = {};
+                 var feeshipText = $('#feeship').text();
+                 var feeshipInt = parseInt(feeshipText.replace(/\./g, ''));
+                 var _token = $('input[name="_token"]').val();
+                 var totalOrderText = $('#displayTotal').text();
+                 var totalOrderInt = parseInt(totalOrderText.replace(/\./g, ''));
+                 var discounValue = $('#id_coupon').val();
 
-             $('[data-input-value]').each(function() {
-                 var sourceType = $(this).data('input-value');
-                 var inputValue = $(this).val();
-                 if (!checkErrorInput(sourceType, inputValue)) {
-                     allValid = false;
+
+                 $('[data-input-value]').each(function() {
+                     var sourceType = $(this).data('input-value');
+                     var inputValue = $(this).val();
+                     if (!checkErrorInput(sourceType, inputValue)) {
+                         allValid = false;
+                     }
+                     formData[sourceType] = inputValue;
+
+                 })
+
+                 if (allValid) {
+                     formData.feeship = feeshipInt;
+                     formData.totalOrder = totalOrderInt;
+                     formData.discount = discounValue;
+
+                     formData._token = _token;
+                     console.log("FormData được thu thập:", formData);
+                     $.ajax({
+                         url: '/order-product',
+                         method: 'POST',
+                         data: formData,
+                         success: function(response) {
+                             if (response.status === 'success') {
+                                 alert(response.message + ' Giảm giá: ' + response
+                                     .discount_coupon);
+                             }
+                         },
+                         error: function(xhr, status, error) {
+                             alert('Có lỗi xảy ra khi gửi đơn hàng: ' + error);
+                         }
+                     });
                  }
-                 formData[sourceType] = inputValue;
-
              })
+         });
 
-             if (allValid) {
-                 formData.feeship = feeshipInt;
-                 formData.totalOrder = totalOrderInt;
-                 formData.discount = discountInt;
+         // Hàm kiểm tra giá trị của input và hiển thị lỗi
+         function checkErrorInput(sourceType, inputValue) {
+             var check_error = document.querySelector('[data-check-value="' + sourceType + '"]');
 
-                 formData._token = _token;
-                 console.log("FormData được thu thập:", formData);
-                 //  $.ajax({
-                 //      url: '/order-product',
-                 //      method: 'POST',
-                 //      data: formData,
-                 //      success: function(response) {
-                 //          if (response.status === 'success') {
-                 //              alert(response.message + ' Giảm giá: ' + response
-                 //                  .discount_coupon);
-                 //          }
-                 //      },
-                 //      error: function(xhr, status, error) {
-                 //          alert('Có lỗi xảy ra khi gửi đơn hàng: ' + error);
-                 //      }
-                 //  });
-             }
-         })
-     });
-
-     // Hàm kiểm tra giá trị của input và hiển thị lỗi
-     function checkErrorInput(sourceType, inputValue) {
-         var check_error = document.querySelector('[data-check-value="' + sourceType + '"]');
-
-         if (inputValue === "") {
-             showLabelError(check_error, 'Vui lòng điền thông tin');
-             return false;
-         }
-
-         if (sourceType === "phonenumber") {
-             var phonePattern = /^(0[3|5|7|8|9])+([0-9]{8})$/;
-             if (!phonePattern.test(inputValue)) {
-                 showLabelError(check_error, 'Số điện thoại không hợp lệ');
+             if (inputValue === "") {
+                 showLabelError(check_error, 'Vui lòng điền thông tin');
                  return false;
              }
+
+             if (sourceType === "phonenumber") {
+                 var phonePattern = /^(0[3|5|7|8|9])+([0-9]{8})$/;
+                 if (!phonePattern.test(inputValue)) {
+                     showLabelError(check_error, 'Số điện thoại không hợp lệ');
+                     return false;
+                 }
+             }
+
+             if (sourceType === 'email_order') {
+                 var validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                 if (!validateEmail.test(inputValue)) {
+                     showLabelError(check_error, 'Email không hợp lệ');
+                     return false;
+                 }
+             }
+
+             showLabelError(check_error, '', true);
+             return true;
+
          }
 
-         if (sourceType === 'email_order') {
-             var validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-             if (!validateEmail.test(inputValue)) {
-                 showLabelError(check_error, 'Email không hợp lệ');
-                 return false;
+         // Hàm gán nội dung thông báo lỗi vào thẻ label
+         function showLabelError(label, message, isValid = false) {
+             if (isValid) {
+                 label.style.display = 'none';
+             } else {
+                 label.style.display = 'block';
+                 label.textContent = message;
              }
          }
-
-         showLabelError(check_error, '', true);
-         return true;
-
-     }
-
-     // Hàm gán nội dung thông báo lỗi vào thẻ label
-     function showLabelError(label, message, isValid = false) {
-         if (isValid) {
-             label.style.display = 'none';
-         } else {
-             label.style.display = 'block';
-             label.textContent = message;
-         }
-     }
      </script>
 
  </body>

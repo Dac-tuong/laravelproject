@@ -70,9 +70,12 @@ $coupon_session = Session::get('coupon');
             </div>
 
             @if ($coupon_session)
+
             @foreach ($coupon_session as $coupon )
+
             @if ($coupon['coupon_type'] == 'percent')
             <div class="flex-center-between row-summary">
+
                 <span>
                     Áp dụng giảm:
                 </span>

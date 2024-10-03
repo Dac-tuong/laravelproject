@@ -179,6 +179,12 @@ class CheckoutController extends Controller
 
         $shipping_fee = $data['feeship'];
         $order_total = $data['totalOrder'];
+        $discount = $data['discount'];
+        // if ($discount == "") {
+        //     $discount = 0;
+        // } else {
+        //     $discount = $data['discount'];
+        // }
 
         $randomString = Str::random(5);
         $code_order = $randomString;
@@ -187,28 +193,17 @@ class CheckoutController extends Controller
 
         $add_order = new OrderProduct();
         $add_order->order_code = $code_order;
-        $add_order->id_customer_order = $id_user;
         $add_order->order_email = $email;
+        $add_order->id_customer = $id_user;
         $add_order->shipping_id = $id_shipping_address;
+        $add_order->feeship = $shipping_fee;
+        $add_order->discount_coupon_id = $discount;
         $add_order->order_total = $order_total;
+
         $add_order->order_status = 1;
         $add_order->save();
 
 
-        if ($variable_Cart) {
-            $add_order_product = new OrderDetail();
-            foreach ($variable_Cart as $item) {
-                // Tạo một instance mới của OrderProduct
-                // Giả sử $item có các thuộc tính product_id, product_price và product_quantity
-                $add_order_product->product_id_order = $item['masp']; // ID sản phẩm
-                $add_order_product->product_price = $item['gia']; // Giá sản phẩm
-                $add_order_product->product_sale_quantity = $item['soluong']; // Số lượng sản phẩm
-                // Lưu vào cơ sở dữ liệu
-
-            }
-            $add_order_product->feeship = $shipping_fee;
-            $add_order_product->save();
-        }
 
         return response()->json([
             'status' => 'success',

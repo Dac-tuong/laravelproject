@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('id_customer')->unsigned();
             $table->integer('shipping_id')->unsigned();
             $table->integer('feeship');
-            $table->integer('discounted_price');
+            $table->integer('discount_coupon_id')->unsigned();
             $table->integer('order_total');
             $table->integer('order_status');
             $table->timestamps();
@@ -30,6 +30,9 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->foreign('id_customer')
                 ->references('id_user')->on('tbl_user')
+                ->onDelete('cascade');
+            $table->foreign('discount_coupon_id')
+                ->references('id_coupon')->on('tbl_coupons')
                 ->onDelete('cascade');
         });
     }

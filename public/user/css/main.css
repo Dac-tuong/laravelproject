@@ -213,6 +213,9 @@
     height: 40px;
     border-radius: 4px;
 }
+.row-summary {
+    border: 1px solid red;
+}
 
 /*==========================CHECK OUT=====================*/
 .footer {

@@ -50,6 +50,13 @@ $(document).ready(function () {
             success: function (data) {
                 var feeshipValue = data.feeship;
                 $("#feeship").html(feeshipValue);
+                var priceCartText = $("#price_cart").text();
+                var priceCartInt = parseInt(priceCartText.replace(/\./g, ""));
+                var priceFeeshipInt = parseInt(feeshipValue.replace(/\./g, ""));
+
+                var totalOrder = priceCartInt + priceFeeshipInt;
+
+                $("#displayTotal").html(totalOrder);
             },
         });
     });
