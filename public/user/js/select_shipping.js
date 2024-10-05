@@ -48,8 +48,8 @@ $(document).ready(function () {
                 _token: _token,
             },
             success: function (data) {
-                var feeshipValue = data.feeship;
-                $("#feeship").html(feeshipValue);
+                var feeshipValue = data;
+                $("#feeship").html(data);
                 var priceCartText = $("#price_cart").text();
                 var priceCartInt = parseInt(priceCartText.replace(/\./g, ""));
                 var priceFeeshipInt = parseInt(feeshipValue.replace(/\./g, ""));

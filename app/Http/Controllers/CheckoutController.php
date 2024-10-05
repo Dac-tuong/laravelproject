@@ -130,25 +130,23 @@ class CheckoutController extends Controller
             ->first();
 
 
-        $formatted_feeship = number_format($get_feeship->feeship, 0, ',', '.');
-        return response()->json(['feeship' => $formatted_feeship]);
-        // $output = '';
+        // $formatted_feeship = number_format($get_feeship->feeship, 0, ',', '.');
+        // return response()->json(['feeship' => $formatted_feeship]);
+        $output = '';
 
 
         // Nếu tìm thấy phí ship, hiển thị kết quả
 
-        // $output = number_format($get_feeship->feeship, 0, ',', '.');
+        $output = number_format($get_feeship->feeship, 0, ',', '.');
 
         // Xuất kết quả
-        // echo $output;
+        echo $output;
     }
 
 
 
     public function order_product(Request $request)
     {
-
-
 
         $data = $request->all();
 

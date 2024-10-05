@@ -10,9 +10,24 @@ use App\Models\SalesProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use PHPUnit\Framework\Constraint\Count;
+use Illuminate\Support\Facades\App;
+
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends Controller
 {
+
+    public function print_order($order_code)
+    {
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($this->print_order_convert($order_code));
+        return $pdf->stream();
+    }
+
+    public function print_order_convert($order_code)
+    {
+        return $order_code;
+    }
     public function order_view()
     {
         $ls_dataOrder = OrderProduct::with(['shippingAddress'])->get();
@@ -35,43 +50,19 @@ class OrderController extends Controller
 
         $check_coupon = Coupons::where('id_coupon', $find_coupon)->first();
 
-        return view('admin.order.order_detail')->with('detailOrder', $data_detailOrder)->with('orderShip', $order_ship)->with('orderCount', $order_count_quantity);
-    }
-
-    public function accept($order_code)
-    {
-        $change_status = OrderProduct::find($order_code);
-
-        $data_detailOrder = OrderDetail::where('order_code', $order_code)->get();
-        foreach ($data_detailOrder as $detail) {
-            $product_id = $detail->product_id;
-            $dataProduct = Product::find($product_id);
-            if ($dataProduct->product_quantity == 0) {
-                echo 'Không thể xác nhận';
+        if ($check_coupon) {
+            if ($check_coupon->coupon_type == 'fixed') {
+                // Giảm giá theo số tiền cố định
+                $discount_amount =
+                    number_format($check_coupon->discount, 0, ',', '.') . ' VNĐ';
+            } else {
+                // Giảm giá theo phần trăm
+                $discount_amount = $check_coupon->discount . ' %';
             }
-            // echo ' xác nhận';
-            $change_status->order_status = 2;
-            $change_status->save();
-
-            $dataProduct->product_quantity = $dataProduct->product_quantity - 1;
-            $dataProduct->save();
-
-            $sale = new SalesProduct();  // Sử dụng mô hình Sale
-            $sale->id_product = $product_id;
-            $sale->quantity_saled = $detail->product_sale_quantity;
-            $sale->name_product = $dataProduct->product_name;
-            $sale->save();
         }
+        // Nếu không tìm thấy coupon
+        $discount_amount = 0 . ' VNĐ'; // Không có giảm giá
 
-
-        return Redirect::to('order-view');
-    }
-
-    public function not_accept($order_code)
-    {
-        $change_status = OrderProduct::find($order_code);
-        $change_status->order_status = 0;
-        $change_status->save();
-        return Redirect::to('order-view');
+        return view('admin.order.order_detail')->with('detailOrder', $data_detailOrder)->with('orderShip', $order_ship)->with('orderCount', $order_count_quantity)->with('discountAmount', $discount_amount);
     }
 }

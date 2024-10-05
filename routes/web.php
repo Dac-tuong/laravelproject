@@ -125,8 +125,9 @@ use App\Http\Controllers\OrderController;
 
 Route::get('/order-view', [OrderController::class, 'order_view']);
 Route::get('/view-detail/{order_code}', [OrderController::class, 'view_detail']);
-Route::get('/accept/{order_code}', [OrderController::class, 'accept']);
-Route::get('/not-accept/{order_code}', [OrderController::class, 'not_accept']);
+
+Route::get('/print-order/{order_code}', [OrderController::class, 'print_order']);
+Route::post('/update-status-order', [CouponsController::class, 'update_status-order']);
 
 use App\Http\Controllers\SlideController;
 

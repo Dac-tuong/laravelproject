@@ -211,6 +211,7 @@
  <script>
 $(document).ready(function() {
 
+
     $('#add-feeship').click(function() {
         var id_province = $('#province').val();
         var _token = $('input[name="_token"]').val();
@@ -270,6 +271,19 @@ document.querySelectorAll('[data-slug-source]').forEach(function(input) {
             targetInput.value = slug;
         }
     });
+});
+ </script>
+
+ <script>
+document.getElementById('order-form').addEventListener('submit', function(event) {
+    var orderStatus = document.getElementById('order-status').value;
+    var orderNote = document.getElementById('order-note').value;
+
+    // Kiểm tra nếu order-status là "0" (Đã hủy) và order-note trống
+    if (orderStatus == '0' && orderNote.trim() === '') {
+        event.preventDefault(); // Ngăn không cho form submit
+        alert('Vui lòng nhập ghi chú khi đơn hàng đã bị hủy!');
+    }
 });
  </script>
 

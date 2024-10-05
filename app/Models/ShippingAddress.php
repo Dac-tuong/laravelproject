@@ -16,19 +16,18 @@ class ShippingAddress extends Model
     {
         return $this->hasMany(OrderProduct::class, 'shipping_id', 'id_shipping');
     }
-
-    public function districts()
-    {
-        return $this->belongsTo(District::class, 'matp', 'matp');
-    }
-
     public function province()
     {
         return $this->belongsTo(Province::class, 'matp', 'matp');
     }
 
+    public function districts()
+    {
+        return $this->belongsTo(District::class, 'maqh', 'maqh');
+    }
+
     public function wards()
     {
-        return $this->belongsTo(Ward::class, 'maqh', 'maqh');
+        return $this->belongsTo(Ward::class, 'xaid', 'xaid');
     }
 }

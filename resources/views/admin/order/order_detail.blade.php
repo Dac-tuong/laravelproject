@@ -11,7 +11,7 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
     <!-- Hành động-->
     <div class="order-details-action">
         <a href="order-list">Quay lại danh sách đơn hàng</a>
-        <button onclick="printInvoice()">In hóa đơn</button>
+        <a href="{{URL::to('/print-order'.'/'.$orderShip->order_code)}}">In đơn hàng</a>
     </div>
 </div>
 <!-- Danh sách sản phẩm -->
@@ -55,9 +55,9 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
         <p><strong>Tổng số lượng sản phẩm:</strong>
             {{$orderCount}}
         </p>
-        <p>Tổng tiền sản phẩm:<strong>{{ number_format($totalCart, 0, ',', '.') }} VNĐ</strong></p>
-        <p>Giảm giá:<strong>{{$orderShip->discount_coupon_id }} VNĐ</strong></p>
-        <p>Phí vận chuyển:<strong>{{ number_format($orderShip->feeship, 0, ',', '.') }}</strong>VNĐ</p>
+        <p><strong>Tổng tiền sản phẩm:</strong>{{ number_format($totalCart, 0, ',', '.') }} VNĐ</p>
+        <p><strong>Giảm giá:</strong> {{$discountAmount }}</p>
+        <p><strong>Phí vận chuyển:</strong> {{ number_format($orderShip->feeship, 0, ',', '.') }}VNĐ</p>
         <p><strong>Tổng cộng:</strong> {{ number_format($orderShip->order_total, 0, ',', '.') }} VNĐ</p>
     </div>
 </div>
@@ -67,21 +67,19 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
 <div class="col-sm-4">
     <div>
         <h2>Chỉnh sửa đơn hàng</h2>
-        <form action="update-order-status" method="POST">
+        <form id="order-form" action="{{URL::to('/update-status-order')}}" method="POST">
             <label for="order-status">Cập nhật tình trạng đơn hàng:</label>
             <br>
             <select name="order-status" id="order-status">
                 <option value="1">Chờ xử lý</option>
-                <option value="2">Đã hoàn thành</option>
+                <option value="2">Đã xác nhận</option>
                 <option value="0">Đã hủy</option>
             </select>
             <br>
-            <button type="submit">Cập nhật</button>
-        </form>
-        <form action="add-order-note" method="POST">
             <label for="order-note">Thêm ghi chú:</label>
-            <textarea name="order-note" class="order-note"></textarea>
-            <button type="submit">Thêm ghi chú</button>
+            <textarea name="order-note" id="order-note" class="order-note"></textarea>
+            <br>
+            <button type="submit">Cập nhật</button>
         </form>
     </div>
     <!-- Thông tin đơn hàng -->
@@ -102,9 +100,10 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
     </div>
     <div class="shipping-address">
         <h2>Địa chỉ giao hàng</h2>
-        <p><strong>Tên khách hàng:</strong>{{$orderShip->shippingAddress->fullname}}</p>
-        <p><strong>Email:</strong> {{$orderShip->order_email}}</p>
-        <p><strong>Số điện thoại:</strong> {{$orderShip->shippingAddress->order_phone}}</p>
+        <p><strong>Tỉnh/thành:</strong>{{$orderShip->shippingAddress->province->name}}</p>
+        <p><strong>Quận Huyện:</strong> {{$orderShip->shippingAddress->districts->name}}</p>
+        <p><strong>Xã/phường:</strong>{{$orderShip->shippingAddress->wards->name}}</p>
+        <p><strong>Địa chỉ :</strong>{{$orderShip->shippingAddress->diachi}}</p>
     </div>
 </div>
 
