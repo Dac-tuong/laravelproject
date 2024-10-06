@@ -2,15 +2,11 @@
     background-color: blue;
 }
 .header-nav {
-    height: 60px;
     display: flex;
     align-items: center;
-    margin: 0 8px;
+    padding-block: 10px;
 }
-.header__logo {
-    width: 100px;
-    border: 1px solid white;
-}
+
 .header__logo-home {
     color: transparent;
     text-decoration: none;
@@ -217,6 +213,9 @@
     border: 1px solid red;
 }
 
+.img-style {
+    height: 65px;
+}
 /*==========================CHECK OUT=====================*/
 .footer {
     background-color: aqua;

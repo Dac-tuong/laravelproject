@@ -107,23 +107,4 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @endsection

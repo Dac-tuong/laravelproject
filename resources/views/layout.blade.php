@@ -53,12 +53,10 @@
              <div class="container-xxl" style=" border: 1px solid black;">
                  <!-- header with search -->
                  <div class="header-nav row" style="margin: 0">
-                     <div class="col-lg-2 col-md-3 col-sm-5 col-xs-3">
-                         <div class="header__logo ">
-                             <a href="{{URL::to('/')}}" class="header__logo-home">
-                                 logo
-                             </a>
-                         </div>
+                     <div class="col-lg-2 col-md-3 ">
+                         <a href="{{URL::to('/')}}" class="header__logo-home">
+                             <img class="img-style" src="{{ URL::to('/user/image/logo.png') }}" alt="">
+                         </a>
                      </div>
                      <div class="col-lg-8 col-md-6 col-sm-7">
                          <div class="header__search ">
