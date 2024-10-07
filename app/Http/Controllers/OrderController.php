@@ -30,15 +30,21 @@ class OrderController extends Controller
         // Khởi tạo biến đếm số lượng sản phẩm
         $order_count_quantity = 0;
 
+        $summary_order = 0;
         // Lấy thông tin chi tiết đơn hàng
         $data_detailOrder = OrderDetail::where('order_code', $order_code)->get();
 
         foreach ($data_detailOrder as $detailOrder) {
             $order_count_quantity += $detailOrder['product_sale_quantity'];
+            $order_price_product =  $detailOrder['product_price'];
+            $order_quantity_sale = $detailOrder['product_sale_quantity'];
+            $summary_product = $order_price_product * $order_quantity_sale;
+            $summary_order += $summary_product;
         }
 
         // Lấy thông tin vận chuyển của đơn hàng
         $order_ship = OrderProduct::with(['shippingAddress'])->where('order_code', $order_code)->first();
+
 
         // Kiểm tra xem đơn hàng có tồn tại không
         if (!$order_ship) {
@@ -64,14 +70,12 @@ class OrderController extends Controller
         }
 
 
-        return view('admin.order.view_pdf', [
-            'order' => $order_ship,
-            'order_count_quantity' => $order_count_quantity,
-            'discount_amount' => $discount_amount
-        ])->render();
-
-        // return view('admin.order.view_pdf', ['order' => $order])->render(); //
-        // return $order_code;
+        return view('admin.order.view_pdf')
+            ->with('detailOrder', $data_detailOrder)
+            ->with('orderShip', $order_ship)
+            ->with('orderCount', $order_count_quantity)
+            ->with('discountAmount', $discount_amount)
+            ->with('summaryOrder', $summary_order);
     }
     public function order_view()
     {

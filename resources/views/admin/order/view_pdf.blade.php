@@ -1,56 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Thông tin đơn hàng</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
     <style>
+    @page {
+        margin: 0px;
+    }
+
     body {
-        font-family: DejaVu Sans;
+        font-family: DejaVu Sans, sans-serif;
+        font-size: 14px;
+        margin: 0;
     }
 
-    h1 {
-        color: #333;
-    }
-
-    table {
+    .header-page {
         width: 100%;
-        border-collapse: collapse;
+        background-color: blue;
+        display: flex;
+        align-items: center;
     }
 
-    table,
-    th,
-    td {
-        border: 1px solid black;
-        padding: 8px;
-        text-align: left;
+    .navbar-page {
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
+
+    .logo {
+        float: left;
+
+        /* background-color: transparent; */
+    }
+
+    .info {
+        float: right;
+
+        /* background-color: transparent; */
+    }
+
+    .logo img {
+        height: 70px;
     }
     </style>
 </head>
 
 <body>
-    <h1>Thông tin đơn hàng</h1>
+    <div class="header-page">
+        <div class="navbar-page">
+            <div class="logo">
+                <img src="{{public_path('/admin/images/logo/logo.png')}}">
+            </div>
+            <div class="info">
+                <p>Thành phố Cần Thơ, Quận Tân Bình, Phường Trường Lạc</p>
+                <p>Email: dactuong13@gmail.com</p>
+                <p>Số điện thoại: 0356459122</p>
+            </div>
+        </div>
+    </div>
 
-    <p>Mã đơn hàng: {{ $order->order_code }}</p>
-    <p>Khách hàng: {{ $order->customer_name }}</p>
-    <p>Địa chỉ giao hàng: {{ $order->shippingAddress->address }}</p>
-    <p>Ngày đặt hàng: {{ $order->created_at }}</p>
-    <p>Tổng số lượng sản phẩm: {{ $order_count_quantity }}</p>
-    <p>Tổng tiền: {{ number_format($order->total_price, 0, ',', '.') }} VNĐ</p>
-    <p>Giảm giá: {{ $discount_amount }}</p>
-
-    <h2>Chi tiết sản phẩm</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Tên sản phẩm</th>
-                <th>Số lượng</th>
-                <th>Giá bán</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-    </table>
 </body>
 
 </html>

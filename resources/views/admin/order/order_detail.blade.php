@@ -40,7 +40,6 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
                         $order_quantity_sale = $order->product_sale_quantity;
                         $summary_product = $order_price_product* $order_quantity_sale;
                         $totalCart +=$summary_product;
-
                         @endphp
                         {{ number_format($summary_product, 0, ',', '.') }} VNĐ
                     </td>

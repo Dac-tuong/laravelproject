@@ -41,7 +41,8 @@
                      <span class="icon-bar"></span>
                      <span class="icon-bar"></span>
                  </button>
-                 <a class="navbar-brand" href="index.html">Binary admin</a>
+                 <a class="navbar-brand" href="index.html"><img src="{{ URL::to('/admin/images/logo/logo.png') }}"
+                         alt=""></a>
              </div>
              <div style="color: white; padding: 15px 50px 5px 50px;float: right; font-size: 16px;">
                  <?php
@@ -211,82 +212,82 @@
  <script src="{{asset('admin/js/jquery-3.6.0.min.js')}}"></script>
 
  <script>
-     $(document).ready(function() {
+$(document).ready(function() {
 
 
-         $('#add-feeship').click(function() {
-             var id_province = $('#province').val();
-             var _token = $('input[name="_token"]').val();
+    $('#add-feeship').click(function() {
+        var id_province = $('#province').val();
+        var _token = $('input[name="_token"]').val();
 
-             $.ajax({
-                 url: '/add-feeship',
-                 method: 'POST',
-                 data: {
-                     id_province: id_province,
-                     _token: _token
-                 },
-                 success: function(response) {
-                     if (response.exists) {
-                         alert('Dữ liệu này đã tồn tại');
-                     } else {
-                         alert('Thêm phí vận chuyển thành công');
-                     }
-                 },
-                 error: function(xhr, status, error) {
-                     alert('Đã có lỗi xảy ra: ' + error);
-                 }
-             });
-         });
-     })
+        $.ajax({
+            url: '/add-feeship',
+            method: 'POST',
+            data: {
+                id_province: id_province,
+                _token: _token
+            },
+            success: function(response) {
+                if (response.exists) {
+                    alert('Dữ liệu này đã tồn tại');
+                } else {
+                    alert('Thêm phí vận chuyển thành công');
+                }
+            },
+            error: function(xhr, status, error) {
+                alert('Đã có lỗi xảy ra: ' + error);
+            }
+        });
+    });
+})
  </script>
 
  <script>
-     function removeVietnameseDiacritics(str) {
-         return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D');
-     }
+function removeVietnameseDiacritics(str) {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D');
+}
 
-     function generateRandomString(length) {
-         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-         let result = '';
-         const charactersLength = characters.length;
-         for (let i = 0; i < length; i++) {
-             result += characters.charAt(Math.floor(Math.random() * charactersLength));
-         }
-         return result;
-     }
+function generateRandomString(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
 
-     document.querySelectorAll('[data-slug-source]').forEach(function(input) {
-         input.addEventListener('input', function() {
-             var sourceType = this.getAttribute('data-slug-source');
-             var title = this.value;
-             var slug = removeVietnameseDiacritics(title)
-                 .toLowerCase()
-                 .replace(/ /g, '-')
-                 .replace(/[^\w-]+/g, '')
-                 .replace(/--+/g, '-')
-                 .replace(/^-+/, '')
-                 .replace(/-+$/, '');
-             var randomString = generateRandomString(6); // Độ dài chuỗi ngẫu nhiên là 6
-             slug += '-' + randomString;
-             var targetInput = document.querySelector('[data-slug-target="' + sourceType + '"]');
-             if (targetInput) {
-                 targetInput.value = slug;
-             }
-         });
-     });
+document.querySelectorAll('[data-slug-source]').forEach(function(input) {
+    input.addEventListener('input', function() {
+        var sourceType = this.getAttribute('data-slug-source');
+        var title = this.value;
+        var slug = removeVietnameseDiacritics(title)
+            .toLowerCase()
+            .replace(/ /g, '-')
+            .replace(/[^\w-]+/g, '')
+            .replace(/--+/g, '-')
+            .replace(/^-+/, '')
+            .replace(/-+$/, '');
+        var randomString = generateRandomString(6); // Độ dài chuỗi ngẫu nhiên là 6
+        slug += '-' + randomString;
+        var targetInput = document.querySelector('[data-slug-target="' + sourceType + '"]');
+        if (targetInput) {
+            targetInput.value = slug;
+        }
+    });
+});
  </script>
 
  <script>
-     document.getElementById('order-form').addEventListener('submit', function(event) {
-         var orderStatus = document.getElementById('order-status').value;
-         var orderNote = document.getElementById('order-note').value;
+document.getElementById('order-form').addEventListener('submit', function(event) {
+    var orderStatus = document.getElementById('order-status').value;
+    var orderNote = document.getElementById('order-note').value;
 
-         // Kiểm tra nếu order-status là "0" (Đã hủy) và order-note trống
-         if (orderStatus == '0' && orderNote.trim() === '') {
-             event.preventDefault(); // Ngăn không cho form submit
-             alert('Vui lòng nhập ghi chú khi đơn hàng đã bị hủy!');
-         }
-     });
+    // Kiểm tra nếu order-status là "0" (Đã hủy) và order-note trống
+    if (orderStatus == '0' && orderNote.trim() === '') {
+        event.preventDefault(); // Ngăn không cho form submit
+        alert('Vui lòng nhập ghi chú khi đơn hàng đã bị hủy!');
+    }
+});
  </script>
 
  </html>
