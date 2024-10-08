@@ -29,7 +29,7 @@ class OrderController extends Controller
 
         // Khởi tạo biến đếm số lượng sản phẩm
         $order_count_quantity = 0;
-
+        $summary_product = 0;
         $summary_order = 0;
         // Lấy thông tin chi tiết đơn hàng
         $data_detailOrder = OrderDetail::where('order_code', $order_code)->get();
@@ -44,12 +44,21 @@ class OrderController extends Controller
 
         // Lấy thông tin vận chuyển của đơn hàng
         $order_ship = OrderProduct::with(['shippingAddress'])->where('order_code', $order_code)->first();
+        $order_ship->order_status;
 
-
+        if ($order_ship->order_status == 1) {
+            $status = 'Đơn hàng đang xữ lý';
+        } elseif ($order_ship->order_status == 2) {
+            $status = 'Đơn hàng đã xữ lý';
+        } else {
+            $status = 'Đơn hàng đã hủy';
+        }
         // Kiểm tra xem đơn hàng có tồn tại không
         if (!$order_ship) {
             return "Đơn hàng không tồn tại.";
         }
+
+
 
         // Lấy coupon giảm giá nếu có
         $find_coupon = $order_ship->discount_coupon_id;
@@ -74,7 +83,9 @@ class OrderController extends Controller
             ->with('detailOrder', $data_detailOrder)
             ->with('orderShip', $order_ship)
             ->with('orderCount', $order_count_quantity)
+            ->with('orderStatus', $status)
             ->with('discountAmount', $discount_amount)
+            ->with('summaryProduct', $summary_product)
             ->with('summaryOrder', $summary_order);
     }
     public function order_view()
