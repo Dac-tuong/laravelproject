@@ -58,8 +58,6 @@ class OrderController extends Controller
             return "Đơn hàng không tồn tại.";
         }
 
-
-
         // Lấy coupon giảm giá nếu có
         $find_coupon = $order_ship->discount_coupon_id;
         $discount_amount = 0; // Mặc định không có giảm giá
@@ -96,7 +94,6 @@ class OrderController extends Controller
     }
     public function view_detail($order_code)
     {
-
         $order_count_quantity = 0;
         $data_detailOrder = OrderDetail::where('order_code', $order_code)->get();
 
@@ -123,6 +120,52 @@ class OrderController extends Controller
         // Nếu không tìm thấy coupon
         $discount_amount = 0 . ' VNĐ'; // Không có giảm giá
 
-        return view('admin.order.order_detail')->with('detailOrder', $data_detailOrder)->with('orderShip', $order_ship)->with('orderCount', $order_count_quantity)->with('discountAmount', $discount_amount);
+        if ($order_ship->order_status == 0) {
+            $order_status = 'Đã hủy';
+        } elseif ($order_ship->order_status == 2) {
+            $order_status = 'Đã xác nhận';
+        } else {
+            $order_status = 'Đơn hàng mới';
+        }
+
+        return view('admin.order.order_detail')
+            ->with('detailOrder', $data_detailOrder)
+            ->with('orderShip', $order_ship)
+            ->with('orderCount', $order_count_quantity)
+            ->with('orderStatus', $order_status)
+            ->with('discountAmount', $discount_amount);
+    }
+
+
+    public function update_status_order(Request $request)
+    {
+        $data = $request->all();
+        $orderCode = $data['ordercode'];
+        $orderReason = $data['orderreason'];
+        $orderStatus = $data['orderstatus'];
+
+        $order_update = OrderProduct::where('order_code', $orderCode)->first();
+        $order_update->order_status = $orderStatus;
+        $order_update->order_cancellation_reason = $orderReason;
+        $order_update->save();
+
+
+        $orderStatusText = '';
+
+        if ($order_update->order_status == 0) {
+            $orderStatusText = 'Đã hủy';
+        } elseif ($order_update->order_status == 2) {
+            $orderStatusText = 'Đã xác nhận';
+        } else {
+            $orderStatusText = 'Đơn hàng mới';
+        }
+
+
+        // Trả về phản hồi JSON mà không lưu vào CSDL
+        return response()->json([
+            'message' => 'Đơn hàng đã được cập nhật.',
+            'orderStatusText' => $orderStatusText // Trả về tên trạng thái
+
+        ]);
     }
 }

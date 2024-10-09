@@ -47,54 +47,58 @@
          <li class="header__navbar-user-list-item header__navbar-user-logout ">
              <a href="{{URL::to('/logout')}}">Đăng xuất</a>
          </li>
+          <a href="{{ URL::to('/logout') }}" class="sign-out">Đăng xuất</a>
      </ul> -->
      <div class="app">
          <header class="header">
              <div class="container-xxl" style=" border: 1px solid black;">
                  <!-- header with search -->
                  <div class="header-nav row" style="margin: 0">
-                     <div class="col-lg-2 col-md-3 ">
+                     <div class="col-lg-2 col-md-3 col-sm-5 col-xs-3">
                          <a href="{{URL::to('/')}}" class="header__logo-home">
                              <img class="img-style" src="{{ URL::to('/user/image/logo.png') }}" alt="">
                          </a>
                      </div>
-                     <div class="col-lg-8 col-md-6 col-sm-7">
-                         <div class="header__search ">
-                             <form action="{{URL::to('/search')}}" method="POST">
-                                 {{csrf_field()}}
-                                 <div class="header__search-input-warp">
-                                     <input type="text" class="header__search-input" name='keywords_search'
-                                         placeholder="Nhập để tìm kiếm">
-                                 </div>
-                                 <button class="header__search-btn" type="submit" name="search">
-                                     <i class="header__search-btn-icon fa-solid fa-magnifying-glass"></i>
-                                     Tìm
-                                 </button>
-                             </form>
-                         </div>
-                     </div>
-                     <div class="col-lg-2 col-md-3 col-sm-5 p-0">
-                         <div class="controll">
-                             <div class="cart">
-                                 <a href="{{URL::to('/cart')}}">Cart</a>
+                     <div class="col-lg-8 col-md-6 col-sm-9">
+                         <div class="row d-flex justify-content-between align-items-center">
+                             <div class="header__search col-lg-11 col-md-9 col-sm-9 ">
+                                 <form action="{{URL::to('/search')}}" method="POST">
+                                     {{csrf_field()}}
+                                     <div class="header__search-input-warp">
+                                         <input type="text" class="header__search-input" name='keywords_search'
+                                             placeholder="Nhập để tìm kiếm">
+                                     </div>
+                                     <button class="header__search-btn" type="submit" name="search">
+                                         <i class="header__search-btn-icon fa-solid fa-magnifying-glass"></i>
+                                         Tìm
+                                     </button>
+                                 </form>
+                             </div>
+                             <div class="cart-row col-lg-1 col-md-3 col-sm-3">
+                                 <a class="cart-link" href="{{URL::to('/cart')}}"><img
+                                         src="{{ URL::to('user/image/shopping-cart.png' ) }}" alt=""></a>
                                  <span id="quantity-cart">
-
                                  </span>
                              </div>
-
-
-                             <div class="customer">
-                                 @if (Session::get('id_customer'))
-                                 <!-- User is logged in -->
-                                 <a href="{{ URL::to('/logout') }}" class="sign-out">Đăng xuất</a>
-                                 @else
-                                 <!-- User is not logged in -->
-                                 <a href="{{ URL::to('/login-index') }}" class="sign-in">Đăng nhập</a>
-                                 <a href="{{ URL::to('/register-index') }}" class="sign-up">Đăng ký</a>
-                                 @endif
-
-                             </div>
                          </div>
+                     </div>
+                     <div class="col-lg-2 col-md-3 col-sm-4 p-0">
+                         <div class="customer">
+                             @if (Session::get('id_customer'))
+                             <!-- User is logged in -->
+                             <a href="" class="user-customer">
+                                 <img src=" {{ URL::to('user/image/avatar-user.png' ) }}" alt="">
+                                 {{Session::get('name_customer')}}
+                             </a>
+
+                             @else
+                             <!-- User is not logged in -->
+                             <a href="{{ URL::to('/login-index') }}" class="sign-in">Đăng nhập</a>
+                             <a href="{{ URL::to('/register-index') }}" class="sign-up">Đăng ký</a>
+                             @endif
+
+                         </div>
+
                      </div>
                  </div>
              </div>
@@ -202,51 +206,51 @@
      <script src="{{asset("user/js/toastr.js")}}"></script>
 
      <script>
-     $(document).ready(function() {
-         //show quantity cart
-         show_cart_quantity();
+         $(document).ready(function() {
+             //show quantity cart
+             show_cart_quantity();
 
-         function show_cart_quantity() {
-             $.ajax({
-                 url: "{{ url('/count-cart') }}", // Sử dụng URL helper để đảm bảo URL chính xác
-                 method: "GET",
-                 success: function(data) {
-                     $('#quantity-cart').html(data);
-                 }
-             });
-         }
+             function show_cart_quantity() {
+                 $.ajax({
+                     url: "{{ url('/count-cart') }}", // Sử dụng URL helper để đảm bảo URL chính xác
+                     method: "GET",
+                     success: function(data) {
+                         $('#quantity-cart').html(data);
+                     }
+                 });
+             }
 
 
-         $('.add-to-cart').click(function() {
-             var id = $(this).data('id_product');
+             $('.add-to-cart').click(function() {
+                 var id = $(this).data('id_product');
 
-             // Lấy thông tin sản phẩm từ các input ẩn trong HTML
-             var productData = {
-                 cart_product_id: $('.cart_product_id_' + id).val(),
-                 cart_product_name: $('.cart_product_name_' + id).val(),
-                 cart_product_image: $('.cart_product_image_' + id).val(),
-                 cart_product_price: $('.cart_product_price_' + id).val(),
-                 cart_product_qty: $('.cart_product_qty_' + id).val(),
-                 _token: $('input[name="_token"]').val()
-             };
+                 // Lấy thông tin sản phẩm từ các input ẩn trong HTML
+                 var productData = {
+                     cart_product_id: $('.cart_product_id_' + id).val(),
+                     cart_product_name: $('.cart_product_name_' + id).val(),
+                     cart_product_image: $('.cart_product_image_' + id).val(),
+                     cart_product_price: $('.cart_product_price_' + id).val(),
+                     cart_product_qty: $('.cart_product_qty_' + id).val(),
+                     _token: $('input[name="_token"]').val()
+                 };
 
-             // Gửi yêu cầu Ajax để thêm sản phẩm vào giỏ hàng
-             $.ajax({
-                 url: '{{url("/add-cart")}}',
-                 method: 'POST',
-                 data: productData,
-                 success: function(response) {
-                     toastr.options = {
-                         "positionClass": "toast-bottom-right",
-                         "timeOut": "3000"
-                     };
-                     toastr.success('Đã thêm sản phẩm vào giỏ hàng', '');
-                     show_cart_quantity();
+                 // Gửi yêu cầu Ajax để thêm sản phẩm vào giỏ hàng
+                 $.ajax({
+                     url: '{{url("/add-cart")}}',
+                     method: 'POST',
+                     data: productData,
+                     success: function(response) {
+                         toastr.options = {
+                             "positionClass": "toast-bottom-right",
+                             "timeOut": "3000"
+                         };
+                         toastr.success('Đã thêm sản phẩm vào giỏ hàng', '');
+                         show_cart_quantity();
 
-                 },
+                     },
+                 });
              });
          });
-     });
      </script>
 
 
@@ -254,96 +258,96 @@
 
 
      <script>
-     $(document).ready(function() {
-         $('.send-order').click(function() {
-             var allValid = true;
-             var formData = {};
-             var feeshipText = $('#feeship').text();
-             var feeshipInt = parseInt(feeshipText.replace(/\./g, ''));
-             var _token = $('input[name="_token"]').val();
-             var totalOrderText = $('#displayTotal').text();
-             var totalOrderInt = parseInt(totalOrderText.replace(/\./g, ''));
-             var discounValue = $('#id_coupon').val();
-             var note_order = $('#note_order').val();
+         $(document).ready(function() {
+             $('.send-order').click(function() {
+                 var allValid = true;
+                 var formData = {};
+                 var feeshipText = $('#feeship').text();
+                 var feeshipInt = parseInt(feeshipText.replace(/\./g, ''));
+                 var _token = $('input[name="_token"]').val();
+                 var totalOrderText = $('#displayTotal').text();
+                 var totalOrderInt = parseInt(totalOrderText.replace(/\./g, ''));
+                 var discounValue = $('#id_coupon').val();
+                 var note_order = $('#note_order').val();
 
 
-             $('[data-input-value]').each(function() {
-                 var sourceType = $(this).data('input-value');
-                 var inputValue = $(this).val();
-                 if (!checkErrorInput(sourceType, inputValue)) {
-                     allValid = false;
-                 }
-                 formData[sourceType] = inputValue;
-
-             })
-
-             if (allValid) {
-                 formData.feeship = feeshipInt;
-                 formData.totalOrder = totalOrderInt;
-                 formData.discount = discounValue;
-
-                 formData.note = note_order;
-
-                 formData._token = _token;
-                 console.log("FormData được thu thập:", formData);
-                 $.ajax({
-                     url: '/order-product',
-                     method: 'POST',
-                     data: formData,
-                     success: function(response) {
-                         if (response.status === 'success') {
-                             alert(response.message + ' Giảm giá: ' + response
-                                 .discount_coupon);
-                         }
-                     },
-                     error: function(xhr, status, error) {
-                         alert('Có lỗi xảy ra khi gửi đơn hàng: ' + error);
+                 $('[data-input-value]').each(function() {
+                     var sourceType = $(this).data('input-value');
+                     var inputValue = $(this).val();
+                     if (!checkErrorInput(sourceType, inputValue)) {
+                         allValid = false;
                      }
-                 });
-             }
-         })
-     });
+                     formData[sourceType] = inputValue;
 
-     // Hàm kiểm tra giá trị của input và hiển thị lỗi
-     function checkErrorInput(sourceType, inputValue) {
-         var check_error = document.querySelector('[data-check-value="' + sourceType + '"]');
+                 })
 
-         if (inputValue === "") {
-             showLabelError(check_error, 'Vui lòng điền thông tin');
-             return false;
-         }
+                 if (allValid) {
+                     formData.feeship = feeshipInt;
+                     formData.totalOrder = totalOrderInt;
+                     formData.discount = discounValue;
 
-         if (sourceType === "phonenumber") {
-             var phonePattern = /^(0[3|5|7|8|9])+([0-9]{8})$/;
-             if (!phonePattern.test(inputValue)) {
-                 showLabelError(check_error, 'Số điện thoại không hợp lệ');
+                     formData.note = note_order;
+
+                     formData._token = _token;
+                     console.log("FormData được thu thập:", formData);
+                     $.ajax({
+                         url: '/order-product',
+                         method: 'POST',
+                         data: formData,
+                         success: function(response) {
+                             if (response.status === 'success') {
+                                 alert(response.message + ' Giảm giá: ' + response
+                                     .discount_coupon);
+                             }
+                         },
+                         error: function(xhr, status, error) {
+                             alert('Có lỗi xảy ra khi gửi đơn hàng: ' + error);
+                         }
+                     });
+                 }
+             })
+         });
+
+         // Hàm kiểm tra giá trị của input và hiển thị lỗi
+         function checkErrorInput(sourceType, inputValue) {
+             var check_error = document.querySelector('[data-check-value="' + sourceType + '"]');
+
+             if (inputValue === "") {
+                 showLabelError(check_error, 'Vui lòng điền thông tin');
                  return false;
              }
+
+             if (sourceType === "phonenumber") {
+                 var phonePattern = /^(0[3|5|7|8|9])+([0-9]{8})$/;
+                 if (!phonePattern.test(inputValue)) {
+                     showLabelError(check_error, 'Số điện thoại không hợp lệ');
+                     return false;
+                 }
+             }
+
+             if (sourceType === 'email_order') {
+                 var validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                 if (!validateEmail.test(inputValue)) {
+                     showLabelError(check_error, 'Email không hợp lệ');
+                     return false;
+                 }
+             }
+
+             showLabelError(check_error, '', true);
+             return true;
+
          }
 
-         if (sourceType === 'email_order') {
-             var validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-             if (!validateEmail.test(inputValue)) {
-                 showLabelError(check_error, 'Email không hợp lệ');
-                 return false;
+         // Hàm gán nội dung thông báo lỗi vào thẻ label
+         function showLabelError(label, message, isValid = false) {
+             if (isValid) {
+                 label.style.display = 'none';
+             } else {
+                 label.style.display = 'block';
+                 label.textContent = message;
              }
          }
-
-         showLabelError(check_error, '', true);
-         return true;
-
-     }
-
-     // Hàm gán nội dung thông báo lỗi vào thẻ label
-     function showLabelError(label, message, isValid = false) {
-         if (isValid) {
-             label.style.display = 'none';
-         } else {
-             label.style.display = 'block';
-             label.textContent = message;
-         }
-     }
      </script>
 
  </body>

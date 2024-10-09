@@ -64,32 +64,35 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
 <!-- Tổng kết đơn hàng -->
 
 <div class="col-sm-4">
-    <div>
-        <h2>Chỉnh sửa đơn hàng</h2>
-        <form id="order-form" action="{{URL::to('/update-status-order')}}" method="POST">
-            <label for="order-status">Cập nhật tình trạng đơn hàng:</label>
-            <br>
-            <select name="order-status" id="order-status">
-                <option value="1">Chờ xử lý</option>
-                <option value="2">Đã xác nhận</option>
-                <option value="0">Đã hủy</option>
-            </select>
-            <br>
-            <label for="order-note">Thêm ghi chú:</label>
-            <textarea name="order-note" id="order-note" class="order-note"></textarea>
-            <br>
-            <button type="submit">Cập nhật</button>
-        </form>
-    </div>
     <!-- Thông tin đơn hàng -->
     <div class="order-info">
         <h2>Thông tin đơn hàng</h2>
         <p><strong>Mã đơn hàng:</strong> #{{$orderShip->order_code}}</p>
         <p><strong>Ngày đặt hàng:</strong> {{$orderShip->created_at}}</p>
-        <p><strong>Tình trạng đơn hàng:</strong> Chờ xử lý</p>
+        <p><strong>Tình trạng đơn hàng:</strong> <span id="current-order-status">{{$orderStatus}}</span></p>
         <p><strong>Phương thức thanh toán:</strong> Thẻ tín dụng</p>
         <p><strong>Ghi chú:</strong> {{$orderShip->order_note}}</p>
     </div>
+    <div>
+        <h2>Chỉnh sửa đơn hàng</h2>
+        <form>
+            @csrf
+            <input type="hidden" id="order-code" value="{{$orderShip->order_code}}">
+            <label for="order-status">Cập nhật tình trạng đơn hàng:</label>
+            <br>
+            <select name="order-status" id="order-status">
+                <option value="1" {{ $orderShip->order_status == 1 ? 'selected' : '' }}>Chờ xử lý</option>
+                <option value="2" {{ $orderShip->order_status == 2 ? 'selected' : '' }}>Đã xác nhận</option>
+                <option value="0" {{ $orderShip->order_status == 0 ? 'selected' : '' }}>Đã hủy</option>
+            </select>
+            <br>
+            <label for="order-note">Thêm ghi chú:</label>
+            <textarea name="order-note" id="order-note" class="order-note"></textarea>
+            <br>
+            <button type="button" id="update-order" class="update-order">Cập nhật</button>
+        </form>
+    </div>
+
     <!-- Thông tin khách hàng -->
     <div class="customer-info">
         <h2>Thông tin khách hàng</h2>

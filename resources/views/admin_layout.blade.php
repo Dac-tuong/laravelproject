@@ -213,8 +213,6 @@
 
  <script>
 $(document).ready(function() {
-
-
     $('#add-feeship').click(function() {
         var id_province = $('#province').val();
         var _token = $('input[name="_token"]').val();
@@ -278,15 +276,40 @@ document.querySelectorAll('[data-slug-source]').forEach(function(input) {
  </script>
 
  <script>
-document.getElementById('order-form').addEventListener('submit', function(event) {
-    var orderStatus = document.getElementById('order-status').value;
-    var orderNote = document.getElementById('order-note').value;
+$(document).ready(function() {
+    $('.update-order').click(function() {
+        var orderStatus = $('#order-status').val();
+        var orderNote = $('#order-note').val();
+        var orderCode = $('#order-code').val();
+        var _token = $('input[name="_token"]').val();
+        var statusText = $("#order-status option:selected").text();
+        var formupdate = {
+            orderStatus: orderStatus,
+            orderNote: orderNote,
+            orderCode: orderCode,
+            _token: _token
+        }
 
-    // Kiểm tra nếu order-status là "0" (Đã hủy) và order-note trống
-    if (orderStatus == '0' && orderNote.trim() === '') {
-        event.preventDefault(); // Ngăn không cho form submit
-        alert('Vui lòng nhập ghi chú khi đơn hàng đã bị hủy!');
-    }
+        $.ajax({
+            url: "/update-status-order",
+            method: 'POST',
+            data: {
+                orderstatus: orderStatus,
+                orderreason: orderNote,
+                ordercode: orderCode,
+                _token: _token
+            },
+            success: function(response) {
+                alert(response.message);
+                $('#current-order-status').text(statusText);
+
+            },
+            error: function(xhr, status, error) {
+                alert('Có lỗi xảy ra, vui lòng thử lại.');
+            }
+        });
+    });
+
 });
  </script>
 

@@ -11,7 +11,7 @@ $coupon_session = Session::get('coupon');
 <h1>Giỏ hàng của bạn</h1>
 <div class="row">
     <div class="col-lg-8 col-md-8 col-sm-12">
-        <div class="cart">
+        <div class="shopping-cart">
             @if ($cart && count($cart) > 0)
             <table class="table-cart">
                 <thead>
@@ -21,7 +21,12 @@ $coupon_session = Session::get('coupon');
                         <th>Số lượng</th>
                         <th>Thành tiền</th>
                         <th>
-                            <a class="btn-delete" href="{{URL::to('/delete-all')}}">Xóa tất cả</a>
+                            <a class="btn btn-sm btn-outline-danger" href="{{URL::to('/delete-all')}}"
+                                onclick="return confirm('Bạn có chắc là muốn xoá tất cả sản phẩm ra khỏi giỏ hàng?')">Xoá
+                                tất cả
+                            </a>
+
+                            <!-- <a class="btn-delete" href="">Xóa tất cả</a> -->
                         </th>
                     </tr>
                 </thead>
@@ -38,15 +43,16 @@ $coupon_session = Session::get('coupon');
 
                         <td>{{ number_format($item['gia'], 0, ',', '.') }} VNĐ</td>
                         <td>
-                            <a href="{{ URL::to('/increase-quantity') . '/' . $item['masp'] }}">
+                            <a href="{{ URL::to('/increase-quantity') . '/' . $item['masp'] }}" title="Tăng số lượng">
                                 <i class="fa-solid fa-plus"></i></a>
                             {{ $item['soluong'] }}
-                            <a href="{{ URL::to('/decrease-quantity') . '/' . $item['masp'] }}">
+                            <a href="{{ URL::to('/decrease-quantity') . '/' . $item['masp'] }}" title="Giảm số lượng">
                                 <i class="fas fa-minus"></i>
                             </a>
                         </td>
                         <td>{{ number_format($item['total'], 0, ',', '.') }} VNĐ</td>
-                        <th><a href="{{ URL::to('/delete') . '/' . $item['session_id'] }}">
+                        <th><a href="{{ URL::to('/delete') . '/' . $item['session_id'] }}"
+                                title="Xoá sản phẩm ra khỏi giỏ">
                                 <i class="fa-solid fa-trash"></i></a>
                         </th>
                     </tr>
@@ -62,8 +68,8 @@ $coupon_session = Session::get('coupon');
 
     <div class="col-lg-4 col-md-4 col-sm-12">
         <div class="summary-cart">
-            <div class="flex-center-between row-summary">
-                <span> Tổng cộng :</span>
+            <div>
+                <span>Tổng cộng :</span>
                 <span>
                     {{ number_format($total_price, 0, ',', '.') }} VNĐ
                 </span>
@@ -74,7 +80,7 @@ $coupon_session = Session::get('coupon');
             @foreach ($coupon_session as $coupon )
 
             @if ($coupon['coupon_type'] == 'percent')
-            <div class="flex-center-between row-summary">
+            <div>
 
                 <span>
                     Áp dụng giảm:
@@ -87,7 +93,7 @@ $coupon_session = Session::get('coupon');
             $price_discount = ($total_price * $coupon['discount'])/100;
             $price_cart = $total_price - $price_discount;
             @endphp
-            <div class="flex-center-between row-summary">
+            <div>
                 <span>
                     Số tiền sau khi giảm:
                 </span>
@@ -98,7 +104,7 @@ $coupon_session = Session::get('coupon');
 
 
             @elseif($coupon['coupon_type'] == 'fixed')
-            <div class="flex-center-between row-summary">
+            <div>
                 <span>
                     Giảm giá :
                 </span>
@@ -109,7 +115,7 @@ $coupon_session = Session::get('coupon');
             $price_cart = $total_price - $price_discount;
 
             @endphp
-            <div class="flex-center-between row-summary">
+            <div>
                 <span>
                     Thành tiền:
                 </span>
@@ -118,14 +124,14 @@ $coupon_session = Session::get('coupon');
             @endif
             @endforeach
             @else
-            <div class="flex-center-between row-summary">
+            <div>
                 <span>Số tiền giảm:</span>
                 <span>
                     0đ
                 </span>
             </div>
 
-            <div class="flex-center-between row-summary">
+            <div>
                 <span>
                     Thành tiền:
                 </span>
@@ -135,26 +141,28 @@ $coupon_session = Session::get('coupon');
             <hr>
             @if ($coupon_session)
             <div>
-                <span>Đã áp dungg mã giảm giá</span>
+                <span>Đã áp dụng mã giảm giá</span>
                 <span> <a class="btn-delete" href="{{URL::to('/delete-coupon')}}">Xóa mã giảm giá</a></span>
             </div>
             @endif
             <div>
                 @if ($cart== true)
-                <div class="coupon-form">
+                <div class="coupon-container">
                     <form action="{{ URL::to('/check-coupon') }}" method="POST" class="">
-                        {{ csrf_field() }}
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete="off">
                         <label>Dùng code giảm giá nếu có</label>
                         <br>
-                        <input type="text" name="code_coupon">
-
-                        <input type="submit" name="use_code" value="Dùng mã">
+                        <div class="discount-code-area">
+                            <input class="coupon-input" type="text" name="code_coupon"
+                                placeholder="Dùng mã giảm giá (nếu có)" required>
+                            <input class="coupon-check" type="submit" name="use_code" value="Dùng mã">
+                        </div>
                     </form>
                 </div>
                 @endif
             </div>
             <div>
-                <a href="{{ URL::to('/checkout') }}">Checkout</a>
+                <a class="checkout-link" href="{{ URL::to('/checkout') }}">Thanh toán</a>
             </div>
         </div>
 

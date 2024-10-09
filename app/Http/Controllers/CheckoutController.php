@@ -149,7 +149,6 @@ class CheckoutController extends Controller
     {
 
         $data = $request->all();
-
         $variable_Cart = Session::get('cart');
         $id_user = Session::get('id_customer');
 
@@ -159,8 +158,6 @@ class CheckoutController extends Controller
         $district = $data['district'];
         $wards = $data['wards'];
         $address = $data['address'];
-
-
 
         $shipping_address = new ShippingAddress();
         $shipping_address->id_customer = $id_user;
@@ -182,7 +179,6 @@ class CheckoutController extends Controller
 
         $randomString = Str::random(5);
         $code_order = $randomString;
-
 
 
         $add_order = new OrderProduct();
