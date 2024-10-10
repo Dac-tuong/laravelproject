@@ -19,6 +19,9 @@
      <link rel="stylesheet" href="{{asset("user/css/toastr.css")}}">
      <link rel="stylesheet" href="{{asset("user/css/bootstrap.css")}}">
 
+     <!-- <link rel="stylesheet" href="{{asset("user/css/bootstrap.min.css")}}"> -->
+
+
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
          crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -86,8 +89,8 @@
                          <div class="customer">
                              @if (Session::get('id_customer'))
                              <!-- User is logged in -->
-                             <a href="" class="user-customer">
-                                 <img src=" {{ URL::to('user/image/avatar-user.png' ) }}" alt="">
+                             <a href="#" class="user-customer" onclick="openSidebar()">
+                                 <img src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
                                  {{Session::get('name_customer')}}
                              </a>
 
@@ -103,6 +106,34 @@
                  </div>
              </div>
          </header>
+         <!-- Overlay -->
+         <div id="overlay" class="overlay"></div>
+
+         <!-- sidebar -->
+         <div id="sidebar" class="sidebar">
+             <!-- Nội dung sidebar -->
+
+             <div class="sidebar-header">
+                 <a href="#" class="user-customer-sidebar" onclick="openSidebar()">
+                     <img src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
+                     {{Session::get('name_customer')}}
+                 </a>
+                 <button class="close-sidebar" onclick="closeSidebar()">X</button>
+             </div>
+
+             <div class="sidebar-body">
+                 <ul class="sidebar-content">
+                     <li> <a href="{{ URL::to('/logout') }}">Đăng xuất</a></li>
+                     <li> <a href="{{URL::to('/cart')}}">Giỏ hàng</a></li>
+                     <li> <a href="{{URL::to('/checkout')}}">Thanh toán</a></li>
+                     <li> <a href="{{ URL::to('/logout') }}">Đăng xuất</a></li>
+                     <li> <a href="{{ URL::to('/logout') }}">Đăng xuất</a></li>
+                 </ul>
+             </div>
+
+         </div>
+         <!-- sidebar -->
+
          <section class="app_container">
              <div class="container-xxl" style=" border: 1px solid black;">
                  <div class="nav-sidebar">
@@ -206,7 +237,31 @@
      <script src="{{asset("user/js/toastr.js")}}"></script>
 
      <script>
+         // Mở sidebar
+         function openSidebar() {
+             // Hiển thị sidebar bằng cách đặt left về 0
+             document.getElementById('sidebar').style.right = '0';
+             //  document.getElementById('sidebar').style.display = 'block';
+             // Hiển thị overlay bằng cách thay đổi display thành block
+             document.getElementById('overlay').style.display = 'block';
+         }
+
+         function closeSidebar() {
+             // Hiển thị sidebar bằng cách đặt left về 0
+             document.getElementById('sidebar').style.right = '-250px';
+             //  document.getElementById('sidebar').style.display = 'none';
+             // Hiển thị overlay bằng cách thay đổi display thành block
+             document.getElementById('overlay').style.display = 'none';
+         }
+     </script>
+
+
+     <script src="{{asset("user/js/select_shipping.js")}}"></script>
+
+
+     <script>
          $(document).ready(function() {
+
              //show quantity cart
              show_cart_quantity();
 
@@ -250,15 +305,8 @@
                      },
                  });
              });
-         });
-     </script>
 
 
-     <script src="{{asset("user/js/select_shipping.js")}}"></script>
-
-
-     <script>
-         $(document).ready(function() {
              $('.send-order').click(function() {
                  var allValid = true;
                  var formData = {};
@@ -349,7 +397,7 @@
              }
          }
      </script>
-
+     <!-- <script src="{{asset("user/js/bootstrap.bundle.min.js")}}"></script> -->
  </body>
 
  </html>

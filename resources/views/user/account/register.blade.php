@@ -41,7 +41,7 @@
                 <input type="submit" class="submit-btn" name="dangky" value="Đăng ký">
 
                 <div class="row-link">
-                    <a class="link-submit" href="dangnhap.php">Đăng nhập nếu có tài khoản</a>
+                    <a class="link-submit" href="{{ URL::to('/login-index') }}">Đăng nhập nếu có tài khoản</a>
                 </div>
             </div>
 

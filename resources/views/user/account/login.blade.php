@@ -40,7 +40,8 @@ $message = Session::get('message');
             <div class="row row-form">
                 <input class="submit-btn" type="submit" name="dangnhap" id="" value="Đăng nhập">
 
-                <div class="row-link"><a class="link-submit" href="dangky.php">Đăng ký nếu chưa có tài khoản</a>
+                <div class="row-link"><a class="link-submit" href="{{ URL::to('/register-index') }}">Đăng ký nếu chưa có
+                        tài khoản</a>
                 </div>
             </div>
 

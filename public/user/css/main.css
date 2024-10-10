@@ -115,12 +115,6 @@
     text-decoration: none;
 }
 
-.sign-out {
-    font-weight: 500;
-    color: white;
-    font-size: 20px;
-    text-decoration: none;
-}
 .menu {
     display: flex;
     justify-content: space-between;
@@ -164,6 +158,96 @@
     text-decoration: none;
     font-weight: 500;
 }
+
+/* ==============================SIDEBAR============================ */
+
+#sidebar {
+    position: fixed;
+    right: 0px; /* Ẩn sidebar khi không hiển thị */
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #f1f1f1;
+    border-left: 1px solid #ccc;
+    padding: 15px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease; /* Hiệu ứng chuyển động khi hiện sidebar */
+    z-index: 1;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+}
+.user-customer-sidebar {
+    font-weight: 500;
+    color: black;
+    font-size: 20px;
+    text-decoration: none;
+}
+.user-customer-sidebar img {
+    width: 40px;
+    margin-right: 5px;
+    border-radius: 50%;
+    height: 40px;
+    object-fit: cover;
+}
+.close-sidebar {
+    border: none;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-sidebar:hover {
+    color: red;
+}
+
+.sidebar-body {
+    margin-top: 10px;
+}
+.sidebar-content {
+    /* margin-left: 4px; */
+    border: 1px solid black;
+}
+.sidebar-content li {
+    list-style: none;
+    padding: 5px 0px;
+    transition: background-color 0.4s;
+}
+
+.sidebar-content li:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.sidebar-content li a {
+    text-align: center;
+    font-weight: 500;
+    color: black;
+    font-size: 20px;
+    text-decoration: none;
+}
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Màu nền tối với độ trong suốt */
+    display: none;
+    z-index: 1;
+}
+
+/* Hiển thị sidebar và overlay */
+
+/* ==============================SIDEBAR============================ */
 
 /*==========================HOME PRODUCT=====================*/
 
