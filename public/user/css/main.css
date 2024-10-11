@@ -164,11 +164,11 @@
 
 #sidebar {
     position: fixed;
-    right: 0px; /* Ẩn sidebar khi không hiển thị */
+    right: -300px; /* Ẩn sidebar khi không hiển thị */
     top: 0;
     width: 300px;
     height: 100%;
-    display: none;
+
     background-color: #f1f1f1;
     border-left: 1px solid #ccc;
     padding: 15px;
@@ -348,6 +348,39 @@
     margin-right: 20px;
 }
 /*==========================CART=====================*/
+
+/*==========================INFORMATION CUSTOMER=====================*/
+.frame-inforcustomer {
+    background-color: #ffffff;
+    border: 1px solid black;
+    padding: 20px 20px;
+}
+
+.image-customer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-inline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.position-relative {
+    position: relative !important;
+}
+
+.avatar-customer {
+    height: 250px;
+    border-radius: 50%;
+}
+.infomation-customer {
+    margin-top: 4px;
+}
+/*==========================INFORMATION CUSTOMER=====================*/
 
 /*==========================CHECK OUT=====================*/
 

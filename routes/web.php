@@ -71,8 +71,13 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/detail-product/{product_id}', [HomeController::class, 'detail_product']);
+
 Route::post('/search', [HomeController::class, 'search']);
 
+
+use App\Http\Controllers\SidebarController;
+
+Route::get('/thong-tin-ca-nhan', [SidebarController::class, 'thong_tin_ca_nhan']);
 
 // Users account
 use App\Http\Controllers\CheckoutController;

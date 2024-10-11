@@ -47,6 +47,9 @@ class HomeController extends Controller
         $search_product = Product::with(['category', 'brand'])->where('product_name', 'like', '%' . $keyword . '%')
             ->get();
 
-        return view('user.product.search')->with('search_product', $search_product)->with('brands', $brand)->with('categorys', $category);
+        return view('user.product.search')
+            ->with('search_product', $search_product)
+            ->with('brands', $brand)
+            ->with('categorys', $category);
     }
 }
