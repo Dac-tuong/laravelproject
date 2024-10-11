@@ -59,7 +59,7 @@ $coupon_session = Session::get('coupon');
                     @endforeach
                 </tbody>
             </table>
-
+            <hr>
             @else
             <p>Giỏ hàng của bạn đang trống.</p>
             @endif

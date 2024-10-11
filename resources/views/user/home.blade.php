@@ -14,9 +14,9 @@
     <h3>SẢN PHẨM MỚI NHẤT</h3>
     <div class="row">
         @foreach ($products as $key => $product)
-        <div class="col-lg-2 col-md-4 col-sm-6">
+        <div class="col-lg-2 col-md-4 col-sm-6 product-content col-6">
             <form>
-                <div class="home-product-item">
+                <div class="product-info">
                     @csrf
                     <!-- Input ẩn để lưu trữ thông tin sản phẩm -->
                     <input type="hidden" value="{{ $product->product_id }}"
@@ -34,14 +34,14 @@
                         <img class="home-product-img" src="{{ URL::to('uploads/product/' . $product->product_image) }}"
                             alt="{{ $product->product_name }}" />
 
-                        <h5 class="home-product-item__name">{{ $product->product_name }}</h5>
-                        <div class=" home-product-item__price">
-                            <span class="home-product-item__price-current">
+                        <h5 class="productinfo__name">{{ $product->product_name }}</h5>
+                        <div class=" productinfo__price">
+                            <span class="productinfo__price-current">
                                 {{ number_format($product->product_price, 0, ',', '.') }}
                             </span>
                         </div>
-                        <div class=" home-product-item__origin">
-                            <span class="home-product-item__origin-brand">{{$product->brand_name}}</span>
+                        <div class=" productinfo__origin">
+                            <span class="productinfo__origin-brand">{{$product->brand_name}}</span>
 
                         </div>
                     </a>
@@ -53,9 +53,8 @@
                     </button>
                 </div>
             </form>
-
-            @endforeach
         </div>
+        @endforeach
         <!-- Hiển thị liên kết phân trang tùy chỉnh -->
         <div class="pagination">
             @if ($products->onFirstPage())

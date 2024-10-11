@@ -123,7 +123,7 @@
 
              <div class="sidebar-body">
                  <ul class="sidebar-content">
-                     <li> <a href="{{ URL::to('/logout') }}">Đăng xuất</a></li>
+                     <li> <a href="{{ URL::to('/thong-tin-ca-nhan') }}">Thông tin khách hàng</a></li>
                      <li> <a href="{{URL::to('/cart')}}">Giỏ hàng</a></li>
                      <li> <a href="{{URL::to('/checkout')}}">Thanh toán</a></li>
                      <li> <a href="{{ URL::to('/logout') }}">Đăng xuất</a></li>
@@ -248,7 +248,7 @@
 
          function closeSidebar() {
              // Hiển thị sidebar bằng cách đặt left về 0
-             document.getElementById('sidebar').style.right = '-250px';
+             document.getElementById('sidebar').style.right = '-300px';
              //  document.getElementById('sidebar').style.display = 'none';
              // Hiển thị overlay bằng cách thay đổi display thành block
              document.getElementById('overlay').style.display = 'none';

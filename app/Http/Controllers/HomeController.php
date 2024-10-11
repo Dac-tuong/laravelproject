@@ -24,7 +24,8 @@ class HomeController extends Controller
     {
         $brand = Brand::get();
         $category = Category::get();
-        $list_product =  Product::with(['category', 'brand'])->orderBy('product_id', 'ASC')->paginate(1);
+        $list_product =  Product::with(['category', 'brand'])->orderBy('product_id', 'ASC')
+            ->paginate(3);
         return view('user.home')->with('products', $list_product)->with('brands', $brand)->with('categorys', $category);
     }
 
