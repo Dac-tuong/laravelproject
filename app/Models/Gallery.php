@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Gallery extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['id_sanpham	', 'gallery_path'];
+    protected $fillable = ['id_sanpham_gallery', 'gallery_path'];
     protected $primaryKey = 'id_gallery';
     protected $table = 'tbl_gallery';
 
     public function product()
     {
-        return $this->belongsTo(Product::class, 'id_sanpham', 'product_id');
+        return $this->belongsTo(Product::class, 'id_sanpham_gallery', 'product_id');
     }
 }

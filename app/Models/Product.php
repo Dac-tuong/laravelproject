@@ -23,6 +23,6 @@ class Product extends Model
     }
     public function galleries()
     {
-        return $this->hasMany(Gallery::class, 'id_sanpham', 'product_id');
+        return $this->hasMany(Gallery::class, 'id_sanpham_gallery', 'product_id');
     }
 }

@@ -16,7 +16,7 @@
         <div class="form-group">
             <label>Slug</label>
             <input type="text" name="slug_name_product" data-slug-target="product-edit" required class="form-control"
-                value="">
+                value="{{ $products->name_product_slug }}">
         </div>
         <div class="form-group">
             <label>Giá</label>
@@ -72,12 +72,18 @@
 
         <div class="form-group">
             <h4>Hình ảnh trưng bày</h4>
-
-            @foreach ($image_gallery as $gallery)
-            @if ($products->product_id == $gallery->id_sanpham)
-            <img src="{{ URL::to('uploads/product/' . $gallery->gallery_path) }}" style="height: 80px;">
+            @if($products && $products->galleries->count())
+            <div class="gallery">
+                @foreach($products->galleries as $gallery)
+                <img src=" {{ URL::to('uploads/product/' . $gallery->gallery_path) }}" style="height: 80px;"
+                    alt="Product Image">
+                @endforeach
+            </div>
+            @else
+            <p>No images available.</p>
             @endif
-            @endforeach
+
+
             <input type="file" name="gallery[]" multiple>
         </div>
     </div>

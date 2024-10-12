@@ -49,12 +49,16 @@ class ProductControll extends Controller
         $this->AuthLogin();
         $cate_product = Category::all();
         $brand_product = Brand::all();
-        $gallery_product = Gallery::all();
+        // $gallery_product = Gallery::where('');
 
-        $product = Product::find($product_id);
+        // $product = Product::find($product_id);
 
+        // return view('admin.edit_product')->with('products', $product)->with('cate_products', $cate_product)
+        //     ->with('brand_products', $brand_product)->with('image_gallery', $gallery_product);
+
+        $product = Product::with(['galleries'])->where('product_id', $product_id)->first();
         return view('admin.edit_product')->with('products', $product)->with('cate_products', $cate_product)
-            ->with('brand_products', $brand_product)->with('image_gallery', $gallery_product);
+            ->with('brand_products', $brand_product);
     }
 
     public function inactive_product($product_id)
@@ -135,8 +139,8 @@ class ProductControll extends Controller
         $product->product_name = $data['product_name'];
         $product->product_price = $data['product_price'];
         $product->product_quantity = $data['product_quantity'];
-        $product->categories_product = $data['categories_product'];
-        $product->brand_product = $data['brand_product'];
+        $product->categories_product_id  = $data['categories_product'];
+        $product->brand_product_id  = $data['brand_product'];
 
         $get_image = $request->file('product_image');
         $old_image = $product->product_image;
@@ -176,7 +180,7 @@ class ProductControll extends Controller
                 $gallery_image->move('uploads/product', $gallery_path);
 
                 $gallery = new Gallery();
-                $gallery->id_sanpham = $product_id;
+                $gallery->id_sanpham_gallery  = $product_id;
                 $gallery->gallery_path = $gallery_path;
                 $gallery->save();
             }
@@ -200,11 +204,11 @@ class ProductControll extends Controller
                 unlink($product_image_path);
             }
             // Xóa dữ liệu sản phẩm từ cơ sở dữ liệu
-            DB::table('tbl_product')->where('product_id', $product_id)->delete();
+            Product::where('product_id', $product_id)->delete();
             Session::put('message_success', 'Xóa thành công!');
         }
 
-        $gallery_images = Gallery::where('id_sanpham', $product_id)->get();
+        $gallery_images = Gallery::where('id_sanpham_gallery ', $product_id)->get();
 
         foreach ($gallery_images as $old_gallery_image) {
 
