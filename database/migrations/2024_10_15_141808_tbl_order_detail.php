@@ -13,17 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_order_details', function (Blueprint $table) {
+        Schema::create('tbl_order_detail', function (Blueprint $table) {
             $table->increments('id_order_detail');
             $table->string('order_code');
-            $table->integer('product_id_order')->unsigned();
+            $table->integer('order_phone_id')->unsigned();
             $table->string('product_name_order');
             $table->integer('product_price');
             $table->integer('product_sale_quantity');
             $table->timestamps();
 
-            $table->foreign('product_id_order')
-                ->references('product_id')->on('tbl_product')
+            $table->foreign('order_phone_id')
+                ->references('product_id')->on('tbl_phones')
                 ->onDelete('cascade');
             $table->foreign('order_code')->references('order_code')->on('tbl_order')->onDelete('cascade');
         });
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_order_details');
+        Schema::dropIfExists('tbl_order_detail');
     }
 };

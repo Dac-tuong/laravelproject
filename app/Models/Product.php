@@ -8,9 +8,40 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['product_code', 'product_name', 'name_product_slug', 'product_image', 'product_price', 'product_quantity', 'categories_product_id', 'brand_product_id', 'product_status'];
+    protected $fillable = [
+        'brand',
+        'model',
+        'release_date',
+        'operating_system',
+        'screen_type',
+        'screen_size',
+        'resolution',
+        'refresh_rate',
+        'ram',
+        'storage',
+        'expandable_storage',
+        'battery_capacity',
+        'fast_charging',
+        'wireless_charging',
+        'camera_main',
+        'camera_main_features',
+        'camera_front',
+        'camera_front_features',
+        'cpu',
+        'gpu',
+        'water_resistance',
+        'weight',
+        'dimensions',
+        'sim_type',
+        'connectivity',
+        'biometrics',
+        'color_options',
+        'stock_quantity',
+        'warranty_period'
+    ];
+
     protected $primaryKey = 'product_id';
-    protected $table = 'tbl_product';
+    protected $table = 'tbl_phones';
 
     public function category()
     {

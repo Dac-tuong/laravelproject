@@ -25,7 +25,7 @@
                         class="cart_product_name_{{ $product->product_id }}">
                     <input type="hidden" value="{{ $product->product_image }}"
                         class="cart_product_image_{{ $product->product_id }}">
-                    <input type="hidden" value="{{ $product->product_price }}"
+                    <input type="hidden" value="{{ $product->sale_price }}"
                         class="cart_product_price_{{ $product->product_id }}">
                     <input type="hidden" value="1" class="cart_product_qty_{{ $product->product_id }}">
 
@@ -37,7 +37,7 @@
                         <h5 class="productinfo__name">{{ $product->product_name }}</h5>
                         <div class=" productinfo__price">
                             <span class="productinfo__price-current">
-                                {{ number_format($product->product_price, 0, ',', '.') }}
+                                {{ number_format($product->sale_price, 0, ',', '.') }}
                             </span>
                         </div>
                         <div class=" productinfo__origin">

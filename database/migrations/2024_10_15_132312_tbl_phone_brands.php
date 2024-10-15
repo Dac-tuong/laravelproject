@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_slide', function (Blueprint $table) {
-            $table->increments('id_slide');
-            $table->string('name_slide');
-            $table->string('slide_image');
-            $table->integer('status_slide');
+        Schema::create('tbl_phone_brands', function (Blueprint $table) {
+            $table->increments('brand_id')->unsigned();
+            $table->string('brand_name');
+            $table->string('brand_name_slug');
+            $table->integer('brand_status');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_slide');
+        Schema::dropIfExists('tbl_phone_brands');
     }
 };

@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_notice', function (Blueprint $table) {
-            $table->increments('id_notice');
-            $table->integer('contact_id');
-            $table->string('order_code');
-            $table->string('message');
-            $table->integer('read');
+        Schema::create('tbl_gallery', function (Blueprint $table) {
+            $table->increments('id_gallery');
+            $table->integer('id_sanpham_gallery')->unsigned();
+            $table->string('gallery_path');
             $table->timestamps();
+
+            $table->foreign('id_sanpham_gallery')
+                ->references('product_id')->on('tbl_phones')
+                ->onDelete('cascade');
         });
     }
 
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_notice');
+        Schema::dropIfExists('tbl_gallery');
     }
 };

@@ -255,9 +255,10 @@
 .product-content {
     padding-block: 10px;
 }
-.product-info {
+.box-right {
     border: 1px solid black;
     background-color: #ffffff;
+    padding: 10px;
 }
 .home-product-img {
     height: 170px;
@@ -268,14 +269,15 @@
     margin-left: 0px;
     width: 100%;
     border: 1px solid rgb(230, 230, 230);
-    background: white;
-    padding: 5px;
 }
 
-.image-gallery {
+.box-gallery {
     padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background: white;
 }
-.product-detail-img {
+.box-gallery-img {
     width: 100%;
 }
 
@@ -290,6 +292,77 @@
     width: 120px;
     object-fit: cover;
 }
+
+/* ======================DETAIL PRODUCT====================== */
+.add-to-cart {
+    border: 1px solid blue;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+.buy-now {
+    border: 1px solid blue;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+.policy {
+    margin-top: 20px;
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.tabs {
+    background-color: #ffffff;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+.specifications {
+    background-color: #ffffff;
+}
+
+.specifications .box-specifi {
+    display: block;
+    overflow: hidden;
+    margin: 0 0 10px;
+}
+
+.box-specifi > a {
+    display: block;
+    overflow: hidden;
+    background: #f2f4f7;
+    padding: 15px 10px;
+    color: #000;
+    line-height: 20px;
+    font-weight: 600;
+    position: relative;
+    border-radius: 8px;
+}
+.text-specifi {
+    display: block;
+}
+.text-specifi li {
+    display: block;
+    overflow: hidden;
+    padding: 10px;
+    border-bottom: 1px solid #eaecf0;
+}
+
+.text-specifi li aside:first-child {
+    float: left;
+    width: 200px;
+    max-width: 30%;
+    margin-right: 30px;
+}
+
+.text-specifi li aside:last-child {
+    display: block;
+    overflow: hidden;
+}
+/* ======================DETAIL PRODUCT====================== */
 
 /*==========================HOME PRODUCT=====================*/
 

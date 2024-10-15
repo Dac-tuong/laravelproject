@@ -33,7 +33,7 @@ class HomeController extends Controller
     {
         $brand = Brand::get();
         $category = Category::get();
-        $detail_product = Product::with(['category', 'brand', 'galleries'])->where('tbl_product.product_id', $product_id)->get();
+        $detail_product = Product::with(['category', 'brand', 'galleries'])->where('tbl_phones.product_id', $product_id)->get();
 
         return view('user.product.detail_product')->with('product_detail', $detail_product)->with('brands', $brand)->with('categorys', $category);
     }

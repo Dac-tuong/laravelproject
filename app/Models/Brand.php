@@ -10,9 +10,9 @@ class Brand extends Model
     public $timestamps = false;
     protected $fillable = ['brand_name', 'brand_name_slug', 'brand_status'];
     protected $primaryKey = 'brand_id';
-    protected $table = 'tbl_brand';
+    protected $table = 'tbl_phone_brands';
     public function products()
     {
-        return $this->hasMany(Product::class, 'brand_product', 'brand_id');
+        return $this->hasMany(Product::class, 'brand_product_id', 'brand_id');
     }
 }

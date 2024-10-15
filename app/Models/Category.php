@@ -10,7 +10,7 @@ class Category extends Model
     public $timestamps = false;
     protected $fillable = ['category_name', 'category_name_slug',  'category_status'];
     protected $primaryKey = 'category_id';
-    protected $table = 'tbl_category';
+    protected $table = 'tbl_categories';
 
     public function products()
     {
