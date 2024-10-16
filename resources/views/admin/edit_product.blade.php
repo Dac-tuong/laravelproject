@@ -20,8 +20,7 @@
         </div>
         <div class="form-group">
             <label>Giá</label>
-            <input type="text" name="product_price" required class="form-control"
-                value="{{ $products->product_price }}">
+            <input type="text" name="sale_price" required class="form-control" value="{{ $products->sale_price }}">
         </div>
         <div class="form-group">
             <label>Số lượng</label>
@@ -31,7 +30,7 @@
 
         <div class="form-group">
             <label>Loại sản phẩm</label>
-            <select name="categories_product" class="form-control">
+            <select name="categories_product_id" class="form-control">
                 @foreach ($cate_products as $key => $cate)
                 @if ($cate->category_id == $products->categories_product)
                 <option value="{{ $cate->category_id }}" selected>
@@ -48,7 +47,7 @@
         <div class="form-group">
             <label for="exampleInputPassword1">Thương hiệu</label>
 
-            <select class="form-control" name="brand_product">
+            <select class="form-control" name="brand_product_id">
                 @foreach ($brand_products as $key => $brand)
                 @if ($brand->brand_id == $products->brand_product)
                 <option value="{{ $brand->brand_id }}" selected>{{ $brand->brand_name }}

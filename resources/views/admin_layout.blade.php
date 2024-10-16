@@ -309,7 +309,6 @@ $(document).ready(function() {
             }
         });
     });
-
 });
  </script>
 

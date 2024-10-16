@@ -34,8 +34,8 @@
                     <div class="icon1">
                         <i class="icondetail-doimoi"></i>
                     </div>
-                    <p>Sản phẩm sẽ được bảo hành và đổi mới trong vòng 13 tháng <a href="">Xem chi tiết</a></p>
-
+                    <p>Sản phẩm sẽ được bảo hành và đổi mới trong vòng {{$detail_pro->warranty_period}} tháng <a
+                            href="">Xem chi tiết</a></p>
                 </li>
                 <li>
                     <div class="icon2">
@@ -54,7 +54,7 @@
         <div class="specifications tab-content current">
             <div class="specification-item ">
                 <div class="box-specifi">
-                    <a href="#">Màn hình</a>
+                    <a href="#">Màn hình & Camera</a>
                     <ul class="text-specifi active">
                         <li>
                             <aside><strong>Công nghệ màn hình</strong></aside>
@@ -80,38 +80,28 @@
                                 <span>{{$detail_pro->refresh_rate}} hz</span>
                             </aside>
                         </li>
-                    </ul>
-                </div>
 
-                <div class="box-specifi">
-                    <a href="#">Camera sau</a>
-                    <ul class="text-specifi active">
                         <li>
-                            <aside><strong>Độ phân giải</strong></aside>
+                            <aside><strong>Độ phân giải camera sau</strong></aside>
                             <aside>
                                 <span>{{$detail_pro->camera_main}}</span>
                             </aside>
                         </li>
                         <li>
-                            <aside><strong>Tính năng</strong></aside>
+                            <aside><strong>Tính năng camera sau</strong></aside>
                             <aside>
                                 <span>{{$detail_pro->camera_main_features}}</span>
                             </aside>
                         </li>
-                    </ul>
-                </div>
 
-                <div class="box-specifi">
-                    <a href="#">Camera trước</a>
-                    <ul class="text-specifi active">
                         <li>
-                            <aside><strong>Độ phân giải</strong></aside>
+                            <aside><strong>Độ phân giải camera trước</strong></aside>
                             <aside>
                                 <span>{{$detail_pro->camera_front}}</span>
                             </aside>
                         </li>
                         <li>
-                            <aside><strong>Tính năng</strong></aside>
+                            <aside><strong>Tính năng camera trước</strong></aside>
                             <aside>
                                 <span>{{$detail_pro->camera_front_features}}</span>
                             </aside>
@@ -120,8 +110,8 @@
                 </div>
 
                 <div class="box-specifi">
-                    <a href="#">Hệ điều hành</a>
-                    <ul class="text-specifi active">
+                    <a href="#">Cấu hình & bộ nhớ</a>
+                    <ul class="text-specifi">
                         <li>
                             <aside><strong>Hệ điều hành</strong></aside>
                             <aside>
@@ -140,10 +130,128 @@
                                 <span>{{$detail_pro->gpu}}</span>
                             </aside>
                         </li>
+                        <li>
+                            <aside><strong>ram</strong></aside>
+                            <aside>
+                                <span>{{$detail_pro->ram}} GB</span>
+                            </aside>
+                        </li>
+                        <li>
+                            <aside><strong>Bộ nhớ trong</strong></aside>
+                            <aside>
+                                <span>{{$detail_pro->storage}} GB</span>
+                            </aside>
+                        </li>
+                        <li>
+                            <aside><strong>Hỗ trợ thể nhớ</strong></aside>
+                            <aside>
+                                <span>
+                                    @if ($detail_pro->expandable_storage == false)
+                                    Không hổ trợ thẻ nhớ
+                                    @else
+                                    Có hổ trợ thẻ nhớ
+                                    @endif
+                                </span>
+                            </aside>
+                        </li>
                     </ul>
                 </div>
 
+                <div class="box-specifi">
+                    <a href="#">Pin & sạc</a>
+                    <ul class="text-specifi">
+                        <li>
+                            <aside><strong>Dung lượng pin</strong></aside>
+                            <aside>
+                                <span>{{$detail_pro->battery_capacity}} mAh</span>
+                            </aside>
+                        </li>
+                        <li>
+                            <aside><strong>Hỗ trợ sạc nhanh</strong></aside>
+                            <aside>
+                                <span>
+                                    @if ($detail_pro->fast_charging == true)
+                                    Có hỗ trợ sạc nhanh
+                                    @else
+                                    Không hỗ trợ sạc nhanh
+                                    @endif
+                                </span>
+                            </aside>
+                        </li>
+                        <li>
+                            <aside><strong>Sạc không dây</strong></aside>
+                            <aside>
+                                <span>
+                                    @if ($detail_pro->wireless_charging == true)
+                                    Có hỗ trợ sạc không dây
+                                    @else
+                                    Không hỗ trợ sạc không dây
+                                    @endif
+                                </span>
+                            </aside>
+                        </li>
+                    </ul>
+                </div>
 
+                <div class="box-specifi">
+                    <a href="#">Tính năng</a>
+                    <ul class="text-specifi">
+                        <li>
+                            <aside><strong>Chống nước</strong></aside>
+                            <aside>
+                                <span>{{$detail_pro->water_resistance}}</span>
+                            </aside>
+                        </li>
+                        <li>
+                            <aside><strong>Bảo mật</strong></aside>
+                            <aside>
+                                <span>{{$detail_pro->biometrics}}</span>
+                            </aside>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="box-specifi">
+                    <a href="#">Kết nối</a>
+                    <ul class="text-specifi">
+                        <li>
+                            <aside><strong>Loại sim</strong></aside>
+                            <aside>
+                                <span>{{$detail_pro->sim_type}}</span>
+                            </aside>
+                        </li>
+                        <li>
+                            <aside><strong>Kết nối</strong></aside>
+                            <aside>
+                                <span>{{$detail_pro->connectivity}}</span>
+                            </aside>
+                        </li>
+                        <li>
+                            <aside><strong>Wifi</strong></aside>
+                            <aside>
+                                <span>{{$detail_pro->wifi_technology}}</span>
+                            </aside>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="box-specifi">
+                    <a href="#">Thiết kế</a>
+                    <ul class="text-specifi">
+                        <li>
+                            <aside><strong>Kích thước</strong></aside>
+                            <aside>
+                                <span>{{$detail_pro->dimensions}}</span>
+                            </aside>
+                        </li>
+                        <li>
+                            <aside><strong>Trọng lượng</strong></aside>
+                            <aside>
+                                <span>{{$detail_pro->weight}}</span>
+                            </aside>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 
