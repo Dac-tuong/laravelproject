@@ -237,52 +237,29 @@
      <script src="{{asset("user/js/toastr.js")}}"></script>
 
      <script>
-     // Mở sidebar
-     function openSidebar() {
-         // Hiển thị sidebar bằng cách đặt left về 0
-         document.getElementById('sidebar').style.right = '0';
-         // Hiển thị overlay bằng cách thay đổi display thành block
-         document.getElementById('overlay').style.display = 'block';
-     }
+         // Mở sidebar
+         function openSidebar() {
+             // Hiển thị sidebar bằng cách đặt left về 0
+             document.getElementById('sidebar').style.right = '0';
+             // Hiển thị overlay bằng cách thay đổi display thành block
+             document.getElementById('overlay').style.display = 'block';
+         }
 
-     function closeSidebar() {
-         // Hiển thị sidebar bằng cách đặt left về 0
-         document.getElementById('sidebar').style.right = '-300px';
-         //  document.getElementById('sidebar').style.display = 'none';
-         // Hiển thị overlay bằng cách thay đổi display thành block
-         document.getElementById('overlay').style.display = 'none';
-     }
+         function closeSidebar() {
+             // Hiển thị sidebar bằng cách đặt left về 0
+             document.getElementById('sidebar').style.right = '-300px';
 
-     document.querySelectorAll('.toggle-btn').forEach(function(link) {
-         link.addEventListener('click', function(event) {
-             event.preventDefault();
-             const ul = link.nextElementSibling;
-             ul.classList.toggle('active');
-         });
-     });
+             // Hiển thị overlay bằng cách thay đổi display thành block
+             document.getElementById('overlay').style.display = 'none';
+         }
 
-     document.addEventListener('DOMContentLoaded', function() {
-         const tabLinks = document.querySelectorAll('.tab-link');
-         const tabContents = document.querySelectorAll('.tab-content');
-
-         tabLinks.forEach(link => {
-             link.addEventListener('click', function() {
-                 const targetTab = this.getAttribute('data-tab');
-
-                 // Ẩn tất cả các tab nội dung
-                 tabContents.forEach(content => {
-                     content.style.display = 'none';
-                 });
-
-                 // Hiện tab nội dung được chọn
-                 document.getElementById(targetTab).style.display = 'block';
-
-                 // Cập nhật class "current" cho các tab link
-                 tabLinks.forEach(t => t.classList.remove('current'));
-                 this.classList.add('current');
+         document.querySelectorAll('.toggle-btn').forEach(function(link) {
+             link.addEventListener('click', function(event) {
+                 event.preventDefault();
+                 const ul = link.nextElementSibling;
+                 ul.classList.toggle('active');
              });
          });
-     });
      </script>
 
 
@@ -290,142 +267,142 @@
 
 
      <script>
-     $(document).ready(function() {
+         $(document).ready(function() {
 
-         //show quantity cart
-         show_cart_quantity();
+             //show quantity cart
+             show_cart_quantity();
 
-         function show_cart_quantity() {
-             $.ajax({
-                 url: "{{ url('/count-cart') }}", // Sử dụng URL helper để đảm bảo URL chính xác
-                 method: "GET",
-                 success: function(data) {
-                     $('#quantity-cart').html(data);
-                 }
-             });
-         }
-
-
-         $('.add-to-cart').click(function() {
-             var id = $(this).data('id_product');
-
-             // Lấy thông tin sản phẩm từ các input ẩn trong HTML
-             var productData = {
-                 cart_product_id: $('.cart_product_id_' + id).val(),
-                 cart_product_name: $('.cart_product_name_' + id).val(),
-                 cart_product_image: $('.cart_product_image_' + id).val(),
-                 cart_product_price: $('.cart_product_price_' + id).val(),
-                 cart_product_qty: $('.cart_product_qty_' + id).val(),
-                 _token: $('input[name="_token"]').val()
-             };
-
-             // Gửi yêu cầu Ajax để thêm sản phẩm vào giỏ hàng
-             $.ajax({
-                 url: '{{url("/add-cart")}}',
-                 method: 'POST',
-                 data: productData,
-                 success: function(response) {
-                     toastr.options = {
-                         "positionClass": "toast-bottom-right",
-                         "timeOut": "3000"
-                     };
-                     toastr.success('Đã thêm sản phẩm vào giỏ hàng', '');
-                     show_cart_quantity();
-
-                 },
-             });
-         });
-
-
-         $('.send-order').click(function() {
-             var allValid = true;
-             var formData = {};
-             var feeshipText = $('#feeship').text();
-             var feeshipInt = parseInt(feeshipText.replace(/\./g, ''));
-             var _token = $('input[name="_token"]').val();
-             var totalOrderText = $('#displayTotal').text();
-             var totalOrderInt = parseInt(totalOrderText.replace(/\./g, ''));
-             var discounValue = $('#id_coupon').val();
-             var note_order = $('#note_order').val();
-
-
-             $('[data-input-value]').each(function() {
-                 var sourceType = $(this).data('input-value');
-                 var inputValue = $(this).val();
-                 if (!checkErrorInput(sourceType, inputValue)) {
-                     allValid = false;
-                 }
-                 formData[sourceType] = inputValue;
-
-             })
-
-             if (allValid) {
-                 formData.feeship = feeshipInt;
-                 formData.totalOrder = totalOrderInt;
-                 formData.discount = discounValue;
-
-                 formData.note = note_order;
-
-                 formData._token = _token;
-                 console.log("FormData được thu thập:", formData);
+             function show_cart_quantity() {
                  $.ajax({
-                     url: '/order-product',
-                     method: 'POST',
-                     data: formData,
-                     success: function(response) {
-                         if (response.status === 'success') {
-                             alert(response.message + ' Giảm giá: ' + response
-                                 .discount_coupon);
-                         }
-                     },
-                     error: function(xhr, status, error) {
-                         alert('Có lỗi xảy ra khi gửi đơn hàng: ' + error);
+                     url: "{{ url('/count-cart') }}", // Sử dụng URL helper để đảm bảo URL chính xác
+                     method: "GET",
+                     success: function(data) {
+                         $('#quantity-cart').html(data);
                      }
                  });
              }
-         })
-     });
 
-     // Hàm kiểm tra giá trị của input và hiển thị lỗi
-     function checkErrorInput(sourceType, inputValue) {
-         var check_error = document.querySelector('[data-check-value="' + sourceType + '"]');
 
-         if (inputValue === "") {
-             showLabelError(check_error, 'Vui lòng điền thông tin');
-             return false;
-         }
+             $('.add-to-cart').click(function() {
+                 var id = $(this).data('id_product');
 
-         if (sourceType === "phonenumber") {
-             var phonePattern = /^(0[3|5|7|8|9])+([0-9]{8})$/;
-             if (!phonePattern.test(inputValue)) {
-                 showLabelError(check_error, 'Số điện thoại không hợp lệ');
+                 // Lấy thông tin sản phẩm từ các input ẩn trong HTML
+                 var productData = {
+                     cart_product_id: $('.cart_product_id_' + id).val(),
+                     cart_product_name: $('.cart_product_name_' + id).val(),
+                     cart_product_image: $('.cart_product_image_' + id).val(),
+                     cart_product_price: $('.cart_product_price_' + id).val(),
+                     cart_product_qty: $('.cart_product_qty_' + id).val(),
+                     _token: $('input[name="_token"]').val()
+                 };
+
+                 // Gửi yêu cầu Ajax để thêm sản phẩm vào giỏ hàng
+                 $.ajax({
+                     url: '{{url("/add-cart")}}',
+                     method: 'POST',
+                     data: productData,
+                     success: function(response) {
+                         toastr.options = {
+                             "positionClass": "toast-bottom-right",
+                             "timeOut": "3000"
+                         };
+                         toastr.success('Đã thêm sản phẩm vào giỏ hàng', '');
+                         show_cart_quantity();
+
+                     },
+                 });
+             });
+
+
+             $('.send-order').click(function() {
+                 var allValid = true;
+                 var formData = {};
+                 var feeshipText = $('#feeship').text();
+                 var feeshipInt = parseInt(feeshipText.replace(/\./g, ''));
+                 var _token = $('input[name="_token"]').val();
+                 var totalOrderText = $('#displayTotal').text();
+                 var totalOrderInt = parseInt(totalOrderText.replace(/\./g, ''));
+                 var discounValue = $('#id_coupon').val();
+                 var note_order = $('#note_order').val();
+
+
+                 $('[data-input-value]').each(function() {
+                     var sourceType = $(this).data('input-value');
+                     var inputValue = $(this).val();
+                     if (!checkErrorInput(sourceType, inputValue)) {
+                         allValid = false;
+                     }
+                     formData[sourceType] = inputValue;
+
+                 })
+
+                 if (allValid) {
+                     formData.feeship = feeshipInt;
+                     formData.totalOrder = totalOrderInt;
+                     formData.discount = discounValue;
+
+                     formData.note = note_order;
+
+                     formData._token = _token;
+                     console.log("FormData được thu thập:", formData);
+                     $.ajax({
+                         url: '/order-product',
+                         method: 'POST',
+                         data: formData,
+                         success: function(response) {
+                             if (response.status === 'success') {
+                                 alert(response.message + ' Giảm giá: ' + response
+                                     .discount_coupon);
+                             }
+                         },
+                         error: function(xhr, status, error) {
+                             alert('Có lỗi xảy ra khi gửi đơn hàng: ' + error);
+                         }
+                     });
+                 }
+             })
+         });
+
+         // Hàm kiểm tra giá trị của input và hiển thị lỗi
+         function checkErrorInput(sourceType, inputValue) {
+             var check_error = document.querySelector('[data-check-value="' + sourceType + '"]');
+
+             if (inputValue === "") {
+                 showLabelError(check_error, 'Vui lòng điền thông tin');
                  return false;
              }
+
+             if (sourceType === "phonenumber") {
+                 var phonePattern = /^(0[3|5|7|8|9])+([0-9]{8})$/;
+                 if (!phonePattern.test(inputValue)) {
+                     showLabelError(check_error, 'Số điện thoại không hợp lệ');
+                     return false;
+                 }
+             }
+
+             if (sourceType === 'email_order') {
+                 var validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                 if (!validateEmail.test(inputValue)) {
+                     showLabelError(check_error, 'Email không hợp lệ');
+                     return false;
+                 }
+             }
+
+             showLabelError(check_error, '', true);
+             return true;
+
          }
 
-         if (sourceType === 'email_order') {
-             var validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-             if (!validateEmail.test(inputValue)) {
-                 showLabelError(check_error, 'Email không hợp lệ');
-                 return false;
+         // Hàm gán nội dung thông báo lỗi vào thẻ label
+         function showLabelError(label, message, isValid = false) {
+             if (isValid) {
+                 label.style.display = 'none';
+             } else {
+                 label.style.display = 'block';
+                 label.textContent = message;
              }
          }
-
-         showLabelError(check_error, '', true);
-         return true;
-
-     }
-
-     // Hàm gán nội dung thông báo lỗi vào thẻ label
-     function showLabelError(label, message, isValid = false) {
-         if (isValid) {
-             label.style.display = 'none';
-         } else {
-             label.style.display = 'block';
-             label.textContent = message;
-         }
-     }
      </script>
      <!-- <script src="{{asset("user/js/bootstrap.bundle.min.js")}}"></script> -->
  </body>

@@ -12,13 +12,14 @@
 
     <h1>{{ $detail_pro->product_name}}</h1>
     <div class="col-lg-7 col-md-6 col-sm-12">
-        <div class="box-gallery">
-            <img src="{{ URL::to('uploads/product/' . $detail_pro->product_image) }}" class="box-gallery-img">
+        <div class="feature-img">
+            <div class="box-thumbnail">
+                <img src="{{ URL::to('uploads/product/' . $detail_pro->product_image) }}" class="box-gallery-img">
+            </div>
             <div class="gallery-product">
                 @if($detail_pro && $detail_pro->galleries->count())
                 @foreach($detail_pro->galleries as $gallery)
-                <img src="{{ URL::to('uploads/product/' . $gallery->gallery_path) }}" style="height: 80px;"
-                    alt="Product Image">
+                <img src="{{ URL::to('uploads/product/' . $gallery->gallery_path) }}" alt="Product Image">
                 @endforeach
                 @else
                 <p>No images available.</p>
@@ -36,22 +37,15 @@
                     <p>Sản phẩm sẽ được bảo hành và đổi mới trong vòng {{$detail_pro->warranty_period}} tháng <a
                             href="">Xem chi tiết</a></p>
                 </li>
-                <li>
-                    <div class="icon2">
-                        <i class="icondetail-doimoi"></i>
-                    </div>
-                    <p></p>
-                </li>
             </ul>
         </div>
 
         <div class="tabs">
-            <div class="tab-link current" data-tab="tab-1">Thông số kỹ thuật</div>
-            <div class="tab-link" data-tab="tab-2">Bài viết đánh giá</div>
+            <h2 class="tab-title">Thông số kỹ thuật</h2>
         </div>
 
-        <div class="specifications tab-content current" id="tab-1" style="display: block;">
-            <div class="specification-item ">
+        <div class="specifications">
+            <div class="specification-item">
                 <div class="box-specifi">
                     <a href="#" class="toggle-btn">Màn hình & Camera</a>
                     <ul class="text-specifi active">
@@ -253,11 +247,71 @@
                 </div>
             </div>
         </div>
-        <div class="tab-content" id="tab-2">
-            <h2>Nội dung Bài viết đánh giá</h2>
-            <p>Đây là nội dung bài viết đánh giá.</p>
-        </div>
 
+        <div class="product-review">
+            <div class="box-rate">
+                <h2 class="boxrate__title">Đánh giá về sản phẩm</h2>
+                <div class="box-start">
+                    <div class="point">
+                        <p>0.0</p>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star-half-stroke"></i>
+                    </div>
+                    <ul class="rate-list">
+                        <li>
+                            <div class="number-start">
+                                5 <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="timeline-start">
+                                <p class="timing" style="width: 20%;"></p>
+                            </div>
+                            <span class="number-percent">20%</span>
+                        </li>
+                        <li>
+                            <div class="number-start">
+                                4 <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="timeline-start">
+                                <p class="timing" style="width: 20%;"></p>
+                            </div>
+                            <span class="number-percent">20%</span>
+                        </li>
+                        <li>
+                            <div class="number-start">
+                                3 <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="timeline-start">
+                                <p class="timing" style="width: 20%;"></p>
+                            </div>
+                            <span class="number-percent">20%</span>
+                        </li>
+                        <li>
+                            <div class="number-start">
+                                2 <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="timeline-start">
+                                <p class="timing" style="width: 20%;"></p>
+                            </div>
+                            <span class="number-percent">20%</span>
+                        </li>
+                        <li>
+                            <div class="number-start">
+                                1 <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="timeline-start">
+                                <p class="timing" style="width: 20%;"></p>
+                            </div>
+                            <span class="number-percent">20%</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
 
     </div>
     <div class="col-lg-5 col-md-6 col-sm-12">
@@ -290,10 +344,7 @@
         </div>
     </div>
 
-    <div>
-        <h1>0.0</h1>
-        <li class="tab-link" data-tab="reviews">Đánh giá</li>
-    </div>
+
 
 
     @endforeach

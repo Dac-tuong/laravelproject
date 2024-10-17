@@ -135,7 +135,6 @@
 }
 
 .app_container {
-    min-height: 100vh;
     background-color: #f3f3f3;
 }
 
@@ -272,15 +271,14 @@
     border: 1px solid rgb(230, 230, 230);
 }
 
-.box-gallery {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid black;
-    background: white;
+.box-thumbnail {
+    display: flex;
+    justify-content: center;
+    background-color: #000;
 }
-.box-gallery-img {
+/* .box-gallery-img {
     width: 100%;
-}
+} */
 
 .gallery-product {
     display: flex;
@@ -289,7 +287,7 @@
     gap: 10px;
 }
 .gallery-product img {
-    height: 120px;
+    height: 80px;
     width: 120px;
     object-fit: cover;
 }
@@ -319,16 +317,26 @@
     background-color: #ffffff;
     margin-top: 10px;
     display: flex;
+    padding: 10px 0px 10px 0px;
     justify-content: center;
+}
+
+.tab-title {
+    border: 1px solid black;
+    margin: 0px;
+    padding: 5px;
+    border-radius: 2.5px;
 }
 .specifications {
     background-color: #ffffff;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 .specifications .box-specifi {
     display: block;
     overflow: hidden;
-    margin: 0 0 10px;
+    margin: 0px 10px;
 }
 
 .box-specifi > a {
@@ -370,6 +378,54 @@
 
 .text-specifi.active {
     display: block;
+}
+
+.product-review {
+    margin-top: 10px;
+    background-color: #ffffff;
+    border: 1px solid black;
+}
+.product-review .box-rate {
+    padding: 0px 10px;
+}
+.box-start {
+    width: 400px;
+}
+.boxrate__title {
+    font-size: 16px;
+}
+
+.point {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.point p {
+    margin: 0px 10px 0px 0px;
+}
+
+.rate-list {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+.rate-list li {
+    display: flex;
+    align-self: center;
+}
+.timeline-start {
+    width: calc(100% - 70px);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.timing {
+    background-color: #ff9f00;
+    border-radius: 20px;
+    margin: 0px;
+    padding: 0px;
+    height: 8px;
 }
 /* ======================DETAIL PRODUCT====================== */
 
