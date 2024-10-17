@@ -14,45 +14,48 @@
     <h3>SẢN PHẨM MỚI NHẤT</h3>
     <div class="row">
         @foreach ($products as $key => $product)
-        <div class="col-lg-2 col-md-4 col-sm-6 product-content col-6">
-            <form>
-                <div class="product-info">
-                    @csrf
-                    <!-- Input ẩn để lưu trữ thông tin sản phẩm -->
-                    <input type="hidden" value="{{ $product->product_id }}"
-                        class="cart_product_id_{{ $product->product_id }}">
-                    <input type="hidden" value="{{ $product->product_name }}"
-                        class="cart_product_name_{{ $product->product_id }}">
-                    <input type="hidden" value="{{ $product->product_image }}"
-                        class="cart_product_image_{{ $product->product_id }}">
-                    <input type="hidden" value="{{ $product->sale_price }}"
-                        class="cart_product_price_{{ $product->product_id }}">
-                    <input type="hidden" value="1" class="cart_product_qty_{{ $product->product_id }}">
+        <div class="col-lg-2 col-md-4 col-sm-6 col-6">
+            <div class="product-content">
+                <form>
+                    <div class="product-info">
+                        @csrf
+                        <!-- Input ẩn để lưu trữ thông tin sản phẩm -->
+                        <input type="hidden" value="{{ $product->product_id }}"
+                            class="cart_product_id_{{ $product->product_id }}">
+                        <input type="hidden" value="{{ $product->product_name }}"
+                            class="cart_product_name_{{ $product->product_id }}">
+                        <input type="hidden" value="{{ $product->product_image }}"
+                            class="cart_product_image_{{ $product->product_id }}">
+                        <input type="hidden" value="{{ $product->sale_price }}"
+                            class="cart_product_price_{{ $product->product_id }}">
+                        <input type="hidden" value="1" class="cart_product_qty_{{ $product->product_id }}">
 
-                    <!-- Link đến trang chi tiết sản phẩm -->
-                    <a href="{{ URL::to('/detail-product'.'/' . $product->product_id) }}">
-                        <img class="home-product-img" src="{{ URL::to('uploads/product/' . $product->product_image) }}"
-                            alt="{{ $product->product_name }}" />
+                        <!-- Link đến trang chi tiết sản phẩm -->
+                        <a href="{{ URL::to('/detail-product'.'/' . $product->product_id) }}">
+                            <img class="home-product-img"
+                                src="{{ URL::to('uploads/product/' . $product->product_image) }}"
+                                alt="{{ $product->product_name }}" />
 
-                        <h5 class="productinfo__name">{{ $product->product_name }}</h5>
-                        <div class=" productinfo__price">
-                            <span class="productinfo__price-current">
-                                {{ number_format($product->sale_price, 0, ',', '.') }}
-                            </span>
-                        </div>
-                        <div class=" productinfo__origin">
-                            <span class="productinfo__origin-brand">{{$product->brand_name}}</span>
+                            <h5 class="productinfo__name">{{ $product->product_name }}</h5>
+                            <div class=" productinfo__price">
+                                <span class="productinfo__price-current">
+                                    {{ number_format($product->sale_price, 0, ',', '.') }}
+                                </span>
+                            </div>
+                            <div class=" productinfo__origin">
+                                <span class="productinfo__origin-brand">{{$product->brand_name}}</span>
 
-                        </div>
-                    </a>
+                            </div>
+                        </a>
 
-                    <!-- Nút thêm vào giỏ hàng -->
-                    <button type="button" class="btn btn-default add-to-cart"
-                        data-id_product="{{ $product->product_id }}" name="add-to-cart">
-                        Thêm giỏ hàng
-                    </button>
-                </div>
-            </form>
+                        <!-- Nút thêm vào giỏ hàng -->
+                        <button type="button" class="btn btn-default add-to-cart"
+                            data-id_product="{{ $product->product_id }}" name="add-to-cart">
+                            Thêm giỏ hàng
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
         @endforeach
         <!-- Hiển thị liên kết phân trang tùy chỉnh -->

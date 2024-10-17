@@ -35,7 +35,7 @@ return new class extends Migration
             $table->integer('storage')->nullable(); // Bộ nhớ trong (storage INT)
             $table->boolean('expandable_storage')->default(false); // Hỗ trợ thẻ nhớ ngoài (expandable_storage BOOLEAN DEFAULT FALSE)
             $table->integer('battery_capacity')->nullable(); // Dung lượng pin (battery_capacity INT)
-            $table->boolean('fast_charging')->default(true); // Hỗ trợ sạc nhanh (fast_charging BOOLEAN DEFAULT TRUE)
+            $table->string('fast_charging')->nullable(); // Hỗ trợ sạc nhanh (fast_charging VARCHAR(60))
             $table->boolean('wireless_charging')->default(false); // Hỗ trợ sạc không dây (wireless_charging BOOLEAN DEFAULT FALSE)
             $table->string('camera_main', 100)->nullable(); // Camera chính (camera_main VARCHAR(100))
             $table->string('camera_main_features', 200)->nullable(); // Tính năng camera chính (camera_main_features VARCHAR(200))

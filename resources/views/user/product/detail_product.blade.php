@@ -20,7 +20,6 @@
                 <img src="{{ URL::to('uploads/product/' . $gallery->gallery_path) }}" style="height: 80px;"
                     alt="Product Image">
                 @endforeach
-
                 @else
                 <p>No images available.</p>
                 @endif
@@ -46,15 +45,15 @@
             </ul>
         </div>
 
-        <div id="tab-spec" class="tabs col2">
-            <h2 id="specification" class="tab-link current" data-tab="tab-1">Thông số kỹ thuật</h2>
-            <h2 class="tab-link " data-tab="tab-2">Bài viết đánh giá</h2>
+        <div class="tabs">
+            <div class="tab-link current" data-tab="tab-1">Thông số kỹ thuật</div>
+            <div class="tab-link" data-tab="tab-2">Bài viết đánh giá</div>
         </div>
 
-        <div class="specifications tab-content current">
+        <div class="specifications tab-content current" id="tab-1" style="display: block;">
             <div class="specification-item ">
                 <div class="box-specifi">
-                    <a href="#">Màn hình & Camera</a>
+                    <a href="#" class="toggle-btn">Màn hình & Camera</a>
                     <ul class="text-specifi active">
                         <li>
                             <aside><strong>Công nghệ màn hình</strong></aside>
@@ -110,7 +109,7 @@
                 </div>
 
                 <div class="box-specifi">
-                    <a href="#">Cấu hình & bộ nhớ</a>
+                    <a href="#" class="toggle-btn">Cấu hình & bộ nhớ</a>
                     <ul class="text-specifi">
                         <li>
                             <aside><strong>Hệ điều hành</strong></aside>
@@ -158,7 +157,7 @@
                 </div>
 
                 <div class="box-specifi">
-                    <a href="#">Pin & sạc</a>
+                    <a href="#" class="toggle-btn">Pin & sạc</a>
                     <ul class="text-specifi">
                         <li>
                             <aside><strong>Dung lượng pin</strong></aside>
@@ -194,7 +193,7 @@
                 </div>
 
                 <div class="box-specifi">
-                    <a href="#">Tính năng</a>
+                    <a href="#" class="toggle-btn">Tính năng</a>
                     <ul class="text-specifi">
                         <li>
                             <aside><strong>Chống nước</strong></aside>
@@ -212,7 +211,7 @@
                 </div>
 
                 <div class="box-specifi">
-                    <a href="#">Kết nối</a>
+                    <a href="#" class="toggle-btn">Kết nối</a>
                     <ul class="text-specifi">
                         <li>
                             <aside><strong>Loại sim</strong></aside>
@@ -236,7 +235,7 @@
                 </div>
 
                 <div class="box-specifi">
-                    <a href="#">Thiết kế</a>
+                    <a href="#" class="toggle-btn">Thiết kế</a>
                     <ul class="text-specifi">
                         <li>
                             <aside><strong>Kích thước</strong></aside>
@@ -254,6 +253,11 @@
                 </div>
             </div>
         </div>
+        <div class="tab-content" id="tab-2">
+            <h2>Nội dung Bài viết đánh giá</h2>
+            <p>Đây là nội dung bài viết đánh giá.</p>
+        </div>
+
 
     </div>
     <div class="col-lg-5 col-md-6 col-sm-12">
@@ -284,8 +288,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 
     <div>

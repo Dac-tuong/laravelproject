@@ -30,11 +30,6 @@ if ($message_success) {
         </div>
 
         <div class="form-group">
-            <label for="product_image">Hình Ảnh Sản Phẩm:</label>
-            <input type="file" class="form-control" id="product_image" name="product_image">
-        </div>
-
-        <div class="form-group">
             <label for="purchase_price">Giá Nhập Hàng:</label>
             <input type="number" class="form-control" id="purchase_price" name="purchase_price">
         </div>
@@ -132,10 +127,7 @@ if ($message_success) {
 
         <div class="form-group">
             <label for="fast_charging">Hỗ Trợ Sạc Nhanh:</label>
-            <select class="form-control" id="fast_charging" name="fast_charging">
-                <option value="0">Không</option>
-                <option value="1">Có</option>
-            </select>
+            <input type="text" class="form-control" id="fast_charging" name="fast_charging">
         </div>
 
         <div class="form-group">

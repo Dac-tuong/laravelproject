@@ -254,6 +254,7 @@
 /*==========================HOME PRODUCT=====================*/
 .product-content {
     padding-block: 10px;
+    background-color: #ffffff;
 }
 .box-right {
     border: 1px solid black;
@@ -361,6 +362,14 @@
 .text-specifi li aside:last-child {
     display: block;
     overflow: hidden;
+}
+
+.text-specifi {
+    display: none;
+}
+
+.text-specifi.active {
+    display: block;
 }
 /* ======================DETAIL PRODUCT====================== */
 

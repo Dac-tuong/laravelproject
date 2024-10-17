@@ -24,7 +24,9 @@ class HomeController extends Controller
     {
         $brand = Brand::get();
         $category = Category::get();
-        $list_product =  Product::with(['category', 'brand'])->orderBy('product_id', 'ASC')
+        $list_product =  Product::with(['category', 'brand'])
+            ->where('product_status', 1)
+            ->orderBy('product_id', 'ASC')
             ->paginate(3);
         return view('user.home')->with('products', $list_product)->with('brands', $brand)->with('categorys', $category);
     }
@@ -45,6 +47,7 @@ class HomeController extends Controller
         $keyword = $request->keywords_search;
 
         $search_product = Product::with(['category', 'brand'])->where('product_name', 'like', '%' . $keyword . '%')
+            ->where('product_status', 1)
             ->get();
 
         return view('user.product.search')
