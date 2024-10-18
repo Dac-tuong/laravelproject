@@ -310,7 +310,31 @@
                     </ul>
                 </div>
             </div>
+            <div class="box-comment">
+                <h2 class="boxcomment__title">
+                    Bình luận
+                </h2>
+                <div class="form-comment">
+                    <div>
+                        @if (Session::get('id_customer'))
+                        <!-- User is logged in -->
+                        <img class="avt-img-cmt" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
+                        @endif
+                        <img class="avt-img-cmt" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
+                    </div>
 
+                    <div>
+                        <form>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete="off">
+                            <input type="text" name="comment-text" class="comment-text">
+                            <div class="cmt-button">
+                                <button class="cancel-btn">Hủy</button>
+                                <button class="add-comment-btn">Bình luận</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -343,8 +367,6 @@
             </div>
         </div>
     </div>
-
-
 
 
     @endforeach

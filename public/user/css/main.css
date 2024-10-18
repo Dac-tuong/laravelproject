@@ -345,6 +345,7 @@
     background: #f2f4f7;
     padding: 15px 10px;
     color: #000;
+    text-decoration: none;
     line-height: 20px;
     font-weight: 600;
     position: relative;
@@ -427,6 +428,57 @@
     padding: 0px;
     height: 8px;
 }
+
+.box-comment {
+    margin-top: 5px;
+    padding: 0px 10px;
+}
+
+.boxcomment__title {
+    font-size: 16px;
+}
+
+.comment-text {
+    width: 100%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid blue; /* Chỉ giữ lại cạnh dưới */
+    outline: none; /* Xóa khung khi focus */
+}
+.cmt-button {
+    margin-top: 6px;
+    display: none;
+    justify-content: flex-end;
+}
+
+.cmt-button .cancel-btn {
+    margin-right: 20px;
+    background-color: transparent;
+    padding: 4px 8px;
+    border-radius: 25px;
+    border: none;
+}
+.cmt-button .cancel-btn:hover {
+    background-color: #f2f4f7;
+}
+.cmt-button .add-comment-btn {
+    margin-right: 20px;
+    background-color: #f2f4f7;
+    padding: 4px 6px;
+    border-radius: 25px;
+    border: none;
+}
+
+.cmt-button .add-comment-btn:hover {
+    background-color: blue;
+    color: white;
+}
+
+.avt-img-cmt {
+    height: 50px;
+}
+
 /* ======================DETAIL PRODUCT====================== */
 
 /*==========================HOME PRODUCT=====================*/
