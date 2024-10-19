@@ -72,6 +72,8 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/detail-product/{product_id}', [HomeController::class, 'detail_product']);
 
+Route::get('/review-product/{product_id}', [HomeController::class, 'review_product']);
+
 Route::post('/search', [HomeController::class, 'search']);
 
 
@@ -145,3 +147,8 @@ use App\Http\Controllers\FeeshipController;
 
 Route::get('/feeship', [FeeshipController::class, 'feeship']);
 Route::post('/add-feeship', [FeeshipController::class, 'add_feeship']);
+
+
+use App\Http\Controllers\CommentController;
+
+Route::post('/add-comment', [CommentController::class, 'add_comment']);

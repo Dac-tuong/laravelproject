@@ -33,8 +33,7 @@
                         <!-- Link đến trang chi tiết sản phẩm -->
                         <a href="{{ URL::to('/detail-product'.'/' . $product->product_id) }}">
                             <img class="home-product-img"
-                                src="{{ URL::to('uploads/product/' . $product->product_image) }}"
-                                alt="{{ $product->product_name }}" />
+                                src="{{ URL::to('uploads/product/' . $product->product_image) }}" alt="" />
 
                             <h5 class="productinfo__name">{{ $product->product_name }}</h5>
                             <div class=" productinfo__price">

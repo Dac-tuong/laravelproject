@@ -35,9 +35,15 @@ class HomeController extends Controller
     {
         $brand = Brand::get();
         $category = Category::get();
-        $detail_product = Product::with(['category', 'brand', 'galleries'])->where('tbl_phones.product_id', $product_id)->get();
+        $detail_product = Product::with(['category', 'brand', 'galleries'])->where('tbl_phones.product_id', $product_id)->first();
+        $product_price = $detail_product->sale_price;
+        $similar_product = Product::where('sale_price', $product_price)->get();
 
-        return view('user.product.detail_product')->with('product_detail', $detail_product)->with('brands', $brand)->with('categorys', $category);
+        return view('user.product.detail_product')
+            ->with('product_detail', $detail_product)
+            ->with('brands', $brand)
+            ->with('categorys', $category)
+            ->with('similars', $similar_product);
     }
 
     public function search(Request $request)
@@ -54,5 +60,19 @@ class HomeController extends Controller
             ->with('search_product', $search_product)
             ->with('brands', $brand)
             ->with('categorys', $category);
+    }
+    public function review_product($product_id)
+    {
+        $brand = Brand::get();
+        $category = Category::get();
+        $get_product = Product::with(['category', 'brand', 'galleries'])->where('tbl_phones.product_id', $product_id)->first();
+
+
+
+        return view('user.product.review_product')
+            ->with('product_infor', $get_product)
+            ->with('brands', $brand)
+            ->with('categorys', $category)
+        ;
     }
 }

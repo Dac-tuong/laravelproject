@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('tbl_comments', function (Blueprint $table) {
             $table->increments('id_comment')->unsigned();
-            $table->integer('id_phoen_comment')->unsigned();
+            $table->integer('id_phone_comment')->unsigned();
             $table->integer('id_user_comment')->unsigned();
             $table->text('comment_text');
+            $table->text('rep_comment');
             $table->timestamps();
         });
     }

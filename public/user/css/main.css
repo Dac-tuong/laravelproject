@@ -276,6 +276,9 @@
     justify-content: center;
     background-color: #000;
 }
+.box-thumbnail img {
+    width: 450px;
+}
 /* .box-gallery-img {
     width: 100%;
 } */
@@ -381,54 +384,59 @@
     display: block;
 }
 
-.product-review {
-    margin-top: 10px;
+.box-review {
     background-color: #ffffff;
     border: 1px solid black;
-}
-.product-review .box-rate {
-    padding: 0px 10px;
-}
-.box-start {
-    width: 400px;
-}
-.boxrate__title {
-    font-size: 16px;
-}
 
-.point {
+    padding: 10px;
+    margin-top: 10px;
+}
+.boxreview__title {
+    font-size: 20px;
+}
+.box-star {
     display: flex;
+}
+.star-product {
+    border: 1px solid black;
+    display: flex;
+    font-size: 25px;
     justify-content: left;
     align-items: center;
 }
 
-.point p {
+.star-product p {
+    color: #ff9f00;
     margin: 0px 10px 0px 0px;
 }
-
+.star-product i {
+    color: #ff9f00;
+}
 .rate-list {
-    list-style: none;
+    margin-top: 5px;
     padding: 0px;
-    margin: 0px;
 }
 .rate-list li {
+    list-style: none;
     display: flex;
-    align-self: center;
+    align-items: center;
+}
+.number-start {
+    color: #ff9f00;
 }
 .timeline-start {
-    width: calc(100% - 70px);
     display: flex;
-    justify-content: left;
-    align-items: center;
+    background-color: #eee;
+    border-radius: 20px;
+    height: 6px;
+    width: 150px;
 }
 .timing {
     background-color: #ff9f00;
     border-radius: 20px;
-    margin: 0px;
-    padding: 0px;
-    height: 8px;
+    left: 0;
+    height: 6px;
 }
-
 .box-comment {
     margin-top: 5px;
     padding: 0px 10px;
@@ -479,6 +487,9 @@
     height: 50px;
 }
 
+.similars {
+    border: 1px solid black;
+}
 /* ======================DETAIL PRODUCT====================== */
 
 /*==========================HOME PRODUCT=====================*/
