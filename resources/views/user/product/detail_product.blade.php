@@ -27,6 +27,7 @@
             </div>
         </div>
 
+
         <div class="policy">
             <b>Chính sách của shop</b>
             <ul class="policy__list">
@@ -40,7 +41,6 @@
             </ul>
         </div>
     </div>
-
     <div class="col-lg-5 col-md-6 col-sm-12">
         <div class="box-right">
             <div class="box-info">
@@ -71,11 +71,9 @@
         </div>
     </div>
 
-    <div class="similars row">
-        @foreach ($similars as $similar)
-        <div class="col-2">
-            câsd
-        </div>
+    <div class="similar-products" style="margin-top: 10px; margin-bottom: 10px;">
+        @foreach ($similars as $similar )
+
         @endforeach
     </div>
 
@@ -340,11 +338,8 @@
             </div>
         </div>
     </div>
-
-
-
 </div>
 
 
-</div>
+
 @endsection

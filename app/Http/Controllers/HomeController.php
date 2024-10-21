@@ -67,8 +67,6 @@ class HomeController extends Controller
         $category = Category::get();
         $get_product = Product::with(['category', 'brand', 'galleries'])->where('tbl_phones.product_id', $product_id)->first();
 
-
-
         return view('user.product.review_product')
             ->with('product_infor', $get_product)
             ->with('brands', $brand)

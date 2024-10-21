@@ -6,6 +6,7 @@
         <li class="breadcrumb-item"><a href="">Đánh giá sản phẩm</a></li>
     </ol>
 </nav>
+
 <div class="block-product-review">
 
     <img class="home-product-img" src="{{ URL::to('uploads/product/' . $product_infor->product_image) }}" alt="" />

@@ -273,21 +273,40 @@
 
 .box-thumbnail {
     display: flex;
-    justify-content: center;
+    position: relative;
     background-color: #000;
+    flex-direction: column;
+    align-items: center; /* Căn giữa box-thumbnail */
+    justify-content: center;
+    width: 100%;
+    height: 300px;
+    margin-bottom: 20px;
 }
 
-.box-thumbnail img {
+.box-thumbnail-img {
     width: 450px;
     transition: transform 0.5s ease, opacity 0.5s ease;
-    position: relative;
-    cursor: zoom-in;
+    position: absolute;
 }
+
+.slide-out-left {
+    transform: translateX(-100%);
+}
+
+.slide-in-right {
+    transform: translateX(0);
+}
+
+.off-screen-right {
+    transform: translateX(100%);
+}
+
 .mirror {
     width: 100px;
     height: 100px;
     position: fixed;
     transform: translate(-50%, -50%);
+    z-index: 1;
     pointer-events: none;
 }
 .hide {
@@ -302,14 +321,6 @@
     cursor: zoom-in; /* Thay đổi con trỏ chuột khi di chuột vào */
 }
 
-.slide-out-left {
-    transform: translateX(-100%);
-    opacity: 0;
-}
-.slide-in-right {
-    transform: translateX(100%);
-    opacity: 0;
-}
 .gallery-product {
     display: flex;
 
@@ -322,6 +333,9 @@
     object-fit: cover;
 }
 
+.gallery-product img:hover {
+    border: 2px solid black;
+}
 /* ======================DETAIL PRODUCT====================== */
 .add-to-cart {
     border: 1px solid blue;
@@ -383,12 +397,15 @@
 }
 .text-specifi {
     display: block;
+    margin: 0px;
+    padding: 0px;
 }
 .text-specifi li {
     display: block;
     overflow: hidden;
     padding: 10px;
     border-bottom: 1px solid #eaecf0;
+    background-color: #fff;
 }
 
 .text-specifi li aside:first-child {
@@ -414,7 +431,6 @@
 .box-review {
     background-color: #ffffff;
     border: 1px solid black;
-
     padding: 10px;
     margin-top: 10px;
 }
@@ -514,10 +530,9 @@
     height: 50px;
 }
 
-.similars {
+.similar-products {
     border: 1px solid black;
 }
-
 /* ======================DETAIL PRODUCT====================== */
 
 /*==========================HOME PRODUCT=====================*/
