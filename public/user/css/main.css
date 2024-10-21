@@ -287,6 +287,7 @@
     width: 450px;
     transition: transform 0.5s ease, opacity 0.5s ease;
     position: absolute;
+    cursor: zoom-in;
 }
 
 .slide-out-left {
@@ -331,11 +332,13 @@
     height: 80px;
     width: 120px;
     object-fit: cover;
+    cursor: pointer;
 }
 
-.gallery-product img:hover {
-    border: 2px solid black;
+.gallery-product img.selected {
+    border: 2px solid #007bff; /* Hiển thị viền khi ảnh được chọn */
 }
+
 /* ======================DETAIL PRODUCT====================== */
 .add-to-cart {
     border: 1px solid blue;
@@ -357,19 +360,17 @@
     border: 1px solid black;
     border-radius: 5px;
 }
-.tabs {
+
+.tab-title {
+    border: 1px solid black;
+    margin: 0px;
+
+    border-radius: 2.5px;
     background-color: #ffffff;
     margin-top: 10px;
     display: flex;
     padding: 10px 0px 10px 0px;
     justify-content: center;
-}
-
-.tab-title {
-    border: 1px solid black;
-    margin: 0px;
-    padding: 5px;
-    border-radius: 2.5px;
 }
 .specifications {
     background-color: #ffffff;
@@ -532,7 +533,73 @@
 
 .similar-products {
     border: 1px solid black;
+    display: flex;
 }
+
+.similar-product {
+    padding-block: 10px;
+    background-color: #ffffff;
+}
+
+.similar-product img {
+    height: 170px;
+    max-width: 100%;
+}
+
+.similar-product h5 {
+    font-size: 15px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    max-height: 36px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.similar-product-price {
+    font-size: 20px;
+    font-weight: 500;
+    color: #d70018;
+}
+
+.bottom-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.product__box-rating {
+    color: #f59e0b;
+    display: flex;
+    font-size: 16px;
+}
+.product__box-favorite {
+    display: flex;
+    font-size: 16px;
+    align-items: center;
+    justify-content: center;
+}
+.product__box-favorite span {
+    font-size: 14px;
+}
+.favorite-icon {
+    color: red; /* Màu sắc của hình trái tim */
+    display: inline-block;
+    font-size: 30px;
+    transition: color 0.3s; /* Hiệu ứng chuyển màu khi hover */
+    padding: 0px;
+    margin: 0px;
+}
+
+.favorite-icon:hover {
+    color: red; /* Giữ nguyên màu sắc khi hover */
+}
+
+.favorite-icon:before {
+    content: "\2661"; /* Mã Unicode cho trái tim rỗng */
+}
+
+.favorite-icon:hover:before {
+    content: "\2665"; /* Mã Unicode cho trái tim đầy */
+}
+
 /* ======================DETAIL PRODUCT====================== */
 
 /*==========================HOME PRODUCT=====================*/

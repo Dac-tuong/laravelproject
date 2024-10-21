@@ -37,7 +37,9 @@ class HomeController extends Controller
         $category = Category::get();
         $detail_product = Product::with(['category', 'brand', 'galleries'])->where('tbl_phones.product_id', $product_id)->first();
         $product_price = $detail_product->sale_price;
-        $similar_product = Product::where('sale_price', $product_price)->get();
+        $similar_product = Product::whereBetween('sale_price', [$product_price - 100, $product_price + 100, $product_price])
+            ->where('product_id', '!=', $product_id)
+            ->get();
 
         return view('user.product.detail_product')
             ->with('product_detail', $detail_product)

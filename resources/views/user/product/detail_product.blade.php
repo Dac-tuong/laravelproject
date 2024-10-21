@@ -71,9 +71,29 @@
         </div>
     </div>
 
-    <div class="similar-products" style="margin-top: 10px; margin-bottom: 10px;">
+    <div class="similar-products row" style="margin-top: 10px; margin-bottom: 10px;">
         @foreach ($similars as $similar )
+        <div class="col-lg-2 col-md-4 col-sm-6 col-6">
+            <div class="similar-product">
+                <img src="{{URL::to('uploads/product'.'/'.$similar->product_image)}}" alt="">
+                <h5>{{$similar->product_name}}</h5>
+                <span class="similar-product-price"> {{ number_format($similar->sale_price, 0, ',', '.') }}</span>
+                <div class="bottom-div">
+                    <div class="product__box-rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="product__box-favorite">
+                        <span>Yêu thích</span>
+                        <p class="favorite-icon"></p>
+                    </div>
 
+                </div>
+            </div>
+        </div>
         @endforeach
     </div>
 
@@ -130,9 +150,7 @@
 
 
         <div class="col-sm-4">
-            <div class="tabs">
-                <h2 class="tab-title">Thông số kỹ thuật</h2>
-            </div>
+            <h2 class="tab-title">Thông số kỹ thuật</h2>
             <div ss="specifications">
                 <div class="specification-item">
                     <div class="box-specifi">

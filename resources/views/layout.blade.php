@@ -19,7 +19,7 @@
      <link rel="stylesheet" href="{{asset("user/css/toastr.css")}}">
      <link rel="stylesheet" href="{{asset("user/css/bootstrap.css")}}">
 
-     <!-- <link rel="stylesheet" href="{{asset("user/css/bootstrap.min.css")}}"> -->
+
 
 
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -237,111 +237,127 @@
      <script src="{{asset("user/js/toastr.js")}}"></script>
 
      <script>
-         // Mở sidebar
-         function openSidebar() {
-             // Hiển thị sidebar bằng cách đặt left về 0
-             document.getElementById('sidebar').style.right = '0';
-             // Hiển thị overlay bằng cách thay đổi display thành block
-             document.getElementById('overlay').style.display = 'block';
-         }
+     // Mở sidebar
+     function openSidebar() {
+         // Hiển thị sidebar bằng cách đặt left về 0
+         document.getElementById('sidebar').style.right = '0';
+         // Hiển thị overlay bằng cách thay đổi display thành block
+         document.getElementById('overlay').style.display = 'block';
+     }
 
-         function closeSidebar() {
-             // Hiển thị sidebar bằng cách đặt left về 0
-             document.getElementById('sidebar').style.right = '-300px';
+     function closeSidebar() {
+         // Hiển thị sidebar bằng cách đặt left về 0
+         document.getElementById('sidebar').style.right = '-300px';
 
-             // Hiển thị overlay bằng cách thay đổi display thành block
-             document.getElementById('overlay').style.display = 'none';
-         }
+         // Hiển thị overlay bằng cách thay đổi display thành block
+         document.getElementById('overlay').style.display = 'none';
+     }
 
-         document.querySelectorAll('.toggle-btn').forEach(function(link) {
-             link.addEventListener('click', function(event) {
-                 event.preventDefault();
-                 const ul = link.nextElementSibling;
-                 ul.classList.toggle('active');
-             });
+     document.querySelectorAll('.toggle-btn').forEach(function(link) {
+         link.addEventListener('click', function(event) {
+             event.preventDefault();
+             const ul = link.nextElementSibling;
+             ul.classList.toggle('active');
+         });
+     });
+
+     document.querySelector('.comment-text').addEventListener('focus', function() {
+         document.querySelector('.cmt-button').style.display = 'flex';
+     })
+
+     document.querySelector('.cancel-btn').addEventListener('click', function(e) {
+         e.preventDefault();
+         document.querySelector('.cmt-button').style.display = 'none';
+         document.querySelector('.comment-text').value = '';
+     })
+
+
+     // Phóng to hình ảnh
+     function setupZoom(img) {
+         img.addEventListener("mousemove", function(e) {
+             mirror.style.top = `${e.clientY}px`;
+             mirror.style.left = `${e.clientX}px`;
+             mirror.style.backgroundSize = `400px 400px`;
+
+             var percentMouseOfWidth = (e.offsetX / this.offsetWidth) * 100;
+             var percentMouseOfHeight = (e.offsetY / this.offsetHeight) * 100;
+
+             mirror.style.backgroundPosition = `${percentMouseOfWidth}% ${percentMouseOfHeight}%`;
+
+             var imgSource = e.target.getAttribute("src");
+             mirror.style.backgroundImage = `url(${imgSource})`;
+             mirror.classList.remove("hide");
          });
 
-         document.querySelector('.comment-text').addEventListener('focus', function() {
-             document.querySelector('.cmt-button').style.display = 'flex';
-         })
+         img.addEventListener("mouseleave", function() {
+             mirror.classList.add("hide");
+         });
+     }
 
-         document.querySelector('.cancel-btn').addEventListener('click', function(e) {
-             e.preventDefault();
-             document.querySelector('.cmt-button').style.display = 'none';
-             document.querySelector('.comment-text').value = '';
-         })
+     let imgs = document.querySelectorAll(".box-thumbnail img");
+     let mirror = document.querySelector(".mirror");
+
+     imgs.forEach(function(img) {
+         setupZoom(img); // Thiết lập zoom cho các hình ảnh hiện tại
+     });
 
 
-         // Phóng to hình ảnh
-         function setupZoom(img) {
-             img.addEventListener("mousemove", function(e) {
-                 mirror.style.top = `${e.clientY}px`;
-                 mirror.style.left = `${e.clientX}px`;
-                 mirror.style.backgroundSize = `400px 400px`;
 
-                 var percentMouseOfWidth = (e.offsetX / this.offsetWidth) * 100;
-                 var percentMouseOfHeight = (e.offsetY / this.offsetHeight) * 100;
+     // Chuyển hình ảnh
+     document.addEventListener('DOMContentLoaded', function() {
+         let main_image = document.getElementById('image-target'); // Ảnh chính
+         let main_image_container = document.querySelector('.box-thumbnail'); // Khung chứa ảnh chính
+         let gallery_images = document.querySelectorAll('.gallery-product img'); // Tất cả ảnh trong gallery
+         let current_selected_image = null;
 
-                 mirror.style.backgroundPosition = `${percentMouseOfWidth}% ${percentMouseOfHeight}%`;
-
-                 var imgSource = e.target.getAttribute("src");
-                 mirror.style.backgroundImage = `url(${imgSource})`;
-                 mirror.classList.remove("hide");
-             });
-
-             img.addEventListener("mouseleave", function() {
-                 mirror.classList.add("hide");
-             });
+         function selectImage(image) {
+             if (current_selected_image) {
+                 current_selected_image.classList.remove('selected'); // Xóa viền của ảnh trước
+             }
+             image.classList.add('selected'); // Thêm viền cho ảnh được chọn
+             current_selected_image = image; // Cập nhật lại ảnh được chọn hiện tại
          }
 
-         let imgs = document.querySelectorAll(".box-thumbnail img");
-         let mirror = document.querySelector(".mirror");
+         if (gallery_images.length > 0) {
+             selectImage(gallery_images[0]); // Gán lớp 'selected' cho ảnh đầu tiên
+         }
+         gallery_images.forEach(function(img) {
+             img.addEventListener('click', function() {
+                 let newSrc = this.getAttribute('src'); // Lấy đường dẫn của ảnh mới
+                 let newImage = document.createElement('img'); // Tạo ảnh mới
+                 newImage.setAttribute('src', newSrc);
+                 newImage.classList.add('box-thumbnail-img',
+                     'off-screen-right'); // Đặt ảnh mới bên ngoài khung nhìn
 
-         imgs.forEach(function(img) {
-             setupZoom(img); // Thiết lập zoom cho các hình ảnh hiện tại
-         });
+                 // Thêm ảnh mới vào trong khung box-thumbnail
+                 main_image_container.appendChild(newImage);
 
-         // Chuyển hình ảnh
-         document.addEventListener('DOMContentLoaded', function() {
-             let main_image = document.getElementById('image-target'); // Ảnh chính
-             let main_image_container = document.querySelector('.box-thumbnail'); // Khung chứa ảnh chính
-             let gallery_images = document.querySelectorAll('.gallery-product img'); // Tất cả ảnh trong gallery
+                 // Thêm class để trượt ảnh cũ ra bên trái
+                 main_image.classList.add('slide-out-left');
 
-             gallery_images.forEach(function(img) {
-                 img.addEventListener('click', function() {
-                     let newSrc = this.getAttribute('src'); // Lấy đường dẫn của ảnh mới
-                     let newImage = document.createElement('img'); // Tạo ảnh mới
-                     newImage.setAttribute('src', newSrc);
-                     newImage.classList.add('box-thumbnail-img',
-                         'off-screen-right'); // Đặt ảnh mới bên ngoài khung nhìn
+                 // Trượt ảnh mới vào từ phải
+                 setTimeout(function() {
+                     newImage.classList.remove('off-screen-right');
+                     // newImage.classList.add('slide-in-right');
+                 }, 1);
 
-                     // Thêm ảnh mới vào trong khung box-thumbnail
-                     main_image_container.appendChild(newImage);
+                 // Loại bỏ ảnh cũ sau khi hiệu ứng kết thúc
+                 setTimeout(function() {
+                     main_image_container.removeChild(
+                         main_image); // Xóa ảnh cũ khỏi DOM
+                     main_image = newImage; // Cập nhật lại main_image thành ảnh mới
 
-                     // Thêm class để trượt ảnh cũ ra bên trái
-                     main_image.classList.add('slide-out-left');
+                     // Gán sự kiện zoom cho hình ảnh mới
+                     setupZoom(main_image);
+                 }, 1); // Thời gian khớp với transition (0.5s)
 
-                     // Trượt ảnh mới vào từ phải
-                     setTimeout(function() {
-                         newImage.classList.remove('off-screen-right');
-                         // newImage.classList.add('slide-in-right');
-                     }, 50);
-
-                     // Loại bỏ ảnh cũ sau khi hiệu ứng kết thúc
-                     setTimeout(function() {
-                         main_image_container.removeChild(
-                             main_image); // Xóa ảnh cũ khỏi DOM
-                         main_image = newImage; // Cập nhật lại main_image thành ảnh mới
-
-                         // Gán sự kiện zoom cho hình ảnh mới
-                         setupZoom(main_image);
-                     }, 500); // Thời gian khớp với transition (0.5s)
-                 });
+                 selectImage(this);
              });
          });
+     });
 
 
-         // chuyển hình ảnh
+     // chuyển hình ảnh
      </script>
 
 
@@ -349,143 +365,143 @@
 
 
      <script>
-         $(document).ready(function() {
+     $(document).ready(function() {
 
 
-             //show quantity cart
-             show_cart_quantity();
+         //show quantity cart
+         show_cart_quantity();
 
-             function show_cart_quantity() {
-                 $.ajax({
-                     url: "{{ url('/count-cart') }}", // Sử dụng URL helper để đảm bảo URL chính xác
-                     method: "GET",
-                     success: function(data) {
-                         $('#quantity-cart').html(data);
-                     }
-                 });
-             }
-
-
-             $('.add-to-cart').click(function() {
-                 var id = $(this).data('id_product');
-
-                 // Lấy thông tin sản phẩm từ các input ẩn trong HTML
-                 var productData = {
-                     cart_product_id: $('.cart_product_id_' + id).val(),
-                     cart_product_name: $('.cart_product_name_' + id).val(),
-                     cart_product_image: $('.cart_product_image_' + id).val(),
-                     cart_product_price: $('.cart_product_price_' + id).val(),
-                     cart_product_qty: $('.cart_product_qty_' + id).val(),
-                     _token: $('input[name="_token"]').val()
-                 };
-
-                 // Gửi yêu cầu Ajax để thêm sản phẩm vào giỏ hàng
-                 $.ajax({
-                     url: '{{url("/add-cart")}}',
-                     method: 'POST',
-                     data: productData,
-                     success: function(response) {
-                         toastr.options = {
-                             "positionClass": "toast-bottom-right",
-                             "timeOut": "3000"
-                         };
-                         toastr.success('Đã thêm sản phẩm vào giỏ hàng', '');
-                         show_cart_quantity();
-
-                     },
-                 });
-             });
-
-
-             $('.send-order').click(function() {
-                 var allValid = true;
-                 var formData = {};
-                 var feeshipText = $('#feeship').text();
-                 var feeshipInt = parseInt(feeshipText.replace(/\./g, ''));
-                 var _token = $('input[name="_token"]').val();
-                 var totalOrderText = $('#displayTotal').text();
-                 var totalOrderInt = parseInt(totalOrderText.replace(/\./g, ''));
-                 var discounValue = $('#id_coupon').val();
-                 var note_order = $('#note_order').val();
-
-
-                 $('[data-input-value]').each(function() {
-                     var sourceType = $(this).data('input-value');
-                     var inputValue = $(this).val();
-                     if (!checkErrorInput(sourceType, inputValue)) {
-                         allValid = false;
-                     }
-                     formData[sourceType] = inputValue;
-
-                 })
-
-                 if (allValid) {
-                     formData.feeship = feeshipInt;
-                     formData.totalOrder = totalOrderInt;
-                     formData.discount = discounValue;
-
-                     formData.note = note_order;
-
-                     formData._token = _token;
-                     console.log("FormData được thu thập:", formData);
-                     $.ajax({
-                         url: '/order-product',
-                         method: 'POST',
-                         data: formData,
-                         success: function(response) {
-                             if (response.status === 'success') {
-                                 alert(response.message + ' Giảm giá: ' + response
-                                     .discount_coupon);
-                             }
-                         },
-                         error: function(xhr, status, error) {
-                             alert('Có lỗi xảy ra khi gửi đơn hàng: ' + error);
-                         }
-                     });
+         function show_cart_quantity() {
+             $.ajax({
+                 url: "{{ url('/count-cart') }}", // Sử dụng URL helper để đảm bảo URL chính xác
+                 method: "GET",
+                 success: function(data) {
+                     $('#quantity-cart').html(data);
                  }
-             })
+             });
+         }
+
+
+         $('.add-to-cart').click(function() {
+             var id = $(this).data('id_product');
+
+             // Lấy thông tin sản phẩm từ các input ẩn trong HTML
+             var productData = {
+                 cart_product_id: $('.cart_product_id_' + id).val(),
+                 cart_product_name: $('.cart_product_name_' + id).val(),
+                 cart_product_image: $('.cart_product_image_' + id).val(),
+                 cart_product_price: $('.cart_product_price_' + id).val(),
+                 cart_product_qty: $('.cart_product_qty_' + id).val(),
+                 _token: $('input[name="_token"]').val()
+             };
+
+             // Gửi yêu cầu Ajax để thêm sản phẩm vào giỏ hàng
+             $.ajax({
+                 url: '{{url("/add-cart")}}',
+                 method: 'POST',
+                 data: productData,
+                 success: function(response) {
+                     toastr.options = {
+                         "positionClass": "toast-bottom-right",
+                         "timeOut": "3000"
+                     };
+                     toastr.success('Đã thêm sản phẩm vào giỏ hàng', '');
+                     show_cart_quantity();
+
+                 },
+             });
          });
 
-         // Hàm kiểm tra giá trị của input và hiển thị lỗi
-         function checkErrorInput(sourceType, inputValue) {
-             var check_error = document.querySelector('[data-check-value="' + sourceType + '"]');
 
-             if (inputValue === "") {
-                 showLabelError(check_error, 'Vui lòng điền thông tin');
+         $('.send-order').click(function() {
+             var allValid = true;
+             var formData = {};
+             var feeshipText = $('#feeship').text();
+             var feeshipInt = parseInt(feeshipText.replace(/\./g, ''));
+             var _token = $('input[name="_token"]').val();
+             var totalOrderText = $('#displayTotal').text();
+             var totalOrderInt = parseInt(totalOrderText.replace(/\./g, ''));
+             var discounValue = $('#id_coupon').val();
+             var note_order = $('#note_order').val();
+
+
+             $('[data-input-value]').each(function() {
+                 var sourceType = $(this).data('input-value');
+                 var inputValue = $(this).val();
+                 if (!checkErrorInput(sourceType, inputValue)) {
+                     allValid = false;
+                 }
+                 formData[sourceType] = inputValue;
+
+             })
+
+             if (allValid) {
+                 formData.feeship = feeshipInt;
+                 formData.totalOrder = totalOrderInt;
+                 formData.discount = discounValue;
+
+                 formData.note = note_order;
+
+                 formData._token = _token;
+                 console.log("FormData được thu thập:", formData);
+                 $.ajax({
+                     url: '/order-product',
+                     method: 'POST',
+                     data: formData,
+                     success: function(response) {
+                         if (response.status === 'success') {
+                             alert(response.message + ' Giảm giá: ' + response
+                                 .discount_coupon);
+                         }
+                     },
+                     error: function(xhr, status, error) {
+                         alert('Có lỗi xảy ra khi gửi đơn hàng: ' + error);
+                     }
+                 });
+             }
+         })
+     });
+
+     // Hàm kiểm tra giá trị của input và hiển thị lỗi
+     function checkErrorInput(sourceType, inputValue) {
+         var check_error = document.querySelector('[data-check-value="' + sourceType + '"]');
+
+         if (inputValue === "") {
+             showLabelError(check_error, 'Vui lòng điền thông tin');
+             return false;
+         }
+
+         if (sourceType === "phonenumber") {
+             var phonePattern = /^(0[3|5|7|8|9])+([0-9]{8})$/;
+             if (!phonePattern.test(inputValue)) {
+                 showLabelError(check_error, 'Số điện thoại không hợp lệ');
                  return false;
              }
-
-             if (sourceType === "phonenumber") {
-                 var phonePattern = /^(0[3|5|7|8|9])+([0-9]{8})$/;
-                 if (!phonePattern.test(inputValue)) {
-                     showLabelError(check_error, 'Số điện thoại không hợp lệ');
-                     return false;
-                 }
-             }
-
-             if (sourceType === 'email_order') {
-                 var validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-                 if (!validateEmail.test(inputValue)) {
-                     showLabelError(check_error, 'Email không hợp lệ');
-                     return false;
-                 }
-             }
-
-             showLabelError(check_error, '', true);
-             return true;
-
          }
 
-         // Hàm gán nội dung thông báo lỗi vào thẻ label
-         function showLabelError(label, message, isValid = false) {
-             if (isValid) {
-                 label.style.display = 'none';
-             } else {
-                 label.style.display = 'block';
-                 label.textContent = message;
+         if (sourceType === 'email_order') {
+             var validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+             if (!validateEmail.test(inputValue)) {
+                 showLabelError(check_error, 'Email không hợp lệ');
+                 return false;
              }
          }
+
+         showLabelError(check_error, '', true);
+         return true;
+
+     }
+
+     // Hàm gán nội dung thông báo lỗi vào thẻ label
+     function showLabelError(label, message, isValid = false) {
+         if (isValid) {
+             label.style.display = 'none';
+         } else {
+             label.style.display = 'block';
+             label.textContent = message;
+         }
+     }
      </script>
      <!-- <script src="{{asset("user/js/bootstrap.bundle.min.js")}}"></script> -->
  </body>
