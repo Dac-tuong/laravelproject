@@ -270,6 +270,61 @@
          document.querySelector('.cmt-button').style.display = 'none';
          document.querySelector('.comment-text').value = '';
      })
+
+     document.addEventListener('DOMContentLoaded', function() {
+         const list_image = document.getElementById('gallery-product');
+         const image_target = document.getElementById('image-target');
+         list_image.addEventListener('click', function(e) {
+             if (e.target.tagName === "IMG") {
+                 console.log(e.target.src);
+                 image_target.classList.add('slide-out-left');
+                 //  image_target.src = e.target.src;
+                 setTimeout(() => {
+                     // Đổi hình ảnh sau khi hình ảnh cũ đã trượt ra
+                     image_target.src = e.target.src;
+
+                     // Xóa lớp 'slide-out' và thêm lớp 'slide-in' để trượt vào
+                     image_target.classList.remove('slide-out-left');
+                     image_target.classList.add('slide-in-right');
+
+
+                     setTimeout(() => {
+                         image_target.classList.remove('slide-in-right');
+                     }, 300);
+                 }, 300);
+             }
+         });
+     });
+
+     let imgs = document.querySelectorAll(".box-thumbnail img");
+     let mirror = document.querySelector(".mirror");
+     let scope = 4;
+
+     imgs.forEach(function(img) {
+         img.addEventListener("mousemove", function(e) {
+             mirror.style.top = `${e.clientY}px`;
+             mirror.style.left = `${e.clientX}px`;
+
+             mirror.style.backgroundSize = `400px 400px`;
+
+             var percentMouseOfWidth = (e.offsetX / this.offsetWidth) * 100;
+             var percentMouseOfHeight = (e.offsetY / this.offsetHeight) * 100;
+
+             mirror.style.backgroundPosition = `${percentMouseOfWidth}% ${percentMouseOfHeight}%`;
+
+             var imgSource = e.target.getAttribute("src");
+             mirror.style.backgroundImage = `url(${imgSource})`;
+             mirror.classList.remove("hide");
+         });
+
+         img.addEventListener("mouseleave", function(e) {
+             mirror.classList.add("hide");
+         });
+         document.addEventListener("DOMContentLoaded", function() {
+             let imageContainer = document.querySelector(".mirrnor");
+             imageContainer.style.background = "url('" + imgs + "')";
+         });
+     });
      </script>
 
 

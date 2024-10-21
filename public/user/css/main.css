@@ -276,13 +276,40 @@
     justify-content: center;
     background-color: #000;
 }
+
 .box-thumbnail img {
     width: 450px;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    position: relative;
+    cursor: zoom-in;
 }
-/* .box-gallery-img {
-    width: 100%;
-} */
+.mirror {
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+.hide {
+    display: none;
+}
+.box-thumbnail:hover .mirror {
+    opacity: 1; /* Hiện thẻ mirror khi di chuột vào */
+}
 
+.box-thumbnail:hover .mirror {
+    transform: scale(2); /* Phóng to thẻ mirror */
+    cursor: zoom-in; /* Thay đổi con trỏ chuột khi di chuột vào */
+}
+
+.slide-out-left {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+.slide-in-right {
+    transform: translateX(100%);
+    opacity: 0;
+}
 .gallery-product {
     display: flex;
 
@@ -490,6 +517,7 @@
 .similars {
     border: 1px solid black;
 }
+
 /* ======================DETAIL PRODUCT====================== */
 
 /*==========================HOME PRODUCT=====================*/

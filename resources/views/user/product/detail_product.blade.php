@@ -12,9 +12,11 @@
     <div class="col-lg-7 col-md-6 col-sm-12">
         <div class="feature-img">
             <div class="box-thumbnail">
-                <img src="{{ URL::to('uploads/product/' . $product_detail->product_image) }}" class="box-gallery-img">
+                <img id="image-target" src="{{ URL::to('uploads/product/' . $product_detail->product_image) }}"
+                    class="box-thumbnail-img">
+                <div class="mirror"></div>
             </div>
-            <div class="gallery-product">
+            <div class="gallery-product" id="gallery-product">
                 @if($product_detail && $product_detail->galleries->count())
                 @foreach($product_detail->galleries as $gallery)
                 <img src="{{ URL::to('uploads/product/' . $gallery->gallery_path) }}" alt="Product Image">
