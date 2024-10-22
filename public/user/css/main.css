@@ -481,56 +481,70 @@
     left: 0;
     height: 6px;
 }
-.box-comment {
+.box-comments {
     margin-top: 5px;
     padding: 0px 10px;
+    background-color: #ccc;
+    border-radius: 5px;
+    box-shadow: #000;
 }
 
 .boxcomment__title {
     font-size: 16px;
 }
 
-.comment-text {
+.comment-box {
+    display: flex;
+}
+
+.comment-box form {
     width: 100%;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: 1px solid blue; /* Chỉ giữ lại cạnh dưới */
-    outline: none; /* Xóa khung khi focus */
 }
-.cmt-button {
-    margin-top: 6px;
-    display: none;
-    justify-content: flex-end;
+.textarea-cmt {
+    display: flex;
 }
 
-.cmt-button .cancel-btn {
-    margin-right: 20px;
-    background-color: transparent;
-    padding: 4px 8px;
-    border-radius: 25px;
+.add-comment-btn {
     border: none;
-}
-.cmt-button .cancel-btn:hover {
-    background-color: #f2f4f7;
-}
-.cmt-button .add-comment-btn {
-    margin-right: 20px;
-    background-color: #f2f4f7;
-    padding: 4px 6px;
-    border-radius: 25px;
-    border: none;
+    background-color: #d70018;
+    margin-left: 10px;
+    height: 40px;
+    font-size: 18px;
+    color: #f1f1f1;
+    border-radius: 10px;
+    padding: 0px 4px 0px 4px;
 }
 
-.cmt-button .add-comment-btn:hover {
-    background-color: blue;
-    color: white;
+.comment-text {
+    width: 90%;
+    border-radius: 5px;
+    height: 100px;
+    resize: none;
 }
 
-.avt-img-cmt {
+.avt-img-review {
     height: 50px;
 }
+.box-comments-item {
+    display: flex;
+    justify-content: space-between;
+}
 
+.box-cmt-infor {
+    display: flex;
+}
+
+.avt-cmt-info {
+    height: 24px;
+    margin-right: 10px;
+}
+
+.box-cmt-infor p {
+    margin: 0px;
+    padding: 0px;
+    font-size: 16px;
+    font-weight: 500;
+}
 .similar-products {
     border: 1px solid black;
     display: flex;

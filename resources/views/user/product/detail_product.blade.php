@@ -101,7 +101,7 @@
         <div class="col-sm-8">
             <div class="block-review">
                 <div class="customer-review">
-                    <img class="avt-img-cmt" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
+                    <img class="avt-img-review" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
                     <div>
                         <strong>
                             Tên khách hàng
@@ -121,33 +121,35 @@
 
             <a href="{{URL::to('/review-product'.'/'.$product_detail->product_id)}}">Xem thêm đánh giá</a>
 
-            <div class="box-comment">
+            <div class="box-comments">
                 <h2 class="boxcomment__title">
                     Bình luận
                 </h2>
-                <div class="form-comment">
+                <div class="comment-box">
+                    <form>
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete="off">
+                        <div class="textarea-cmt">
+                            <textarea name="comment-text" placeholder="Xin mời để lại bình luận" class="comment-text"
+                                id="comment-text"></textarea>
+                            <button class="add-comment-btn"><i class="fa-solid fa-paper-plane"></i> Gửi</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="box-comments-item">
+                    <div class="box-cmt-infor">
+                        <img class="avt-cmt-info" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
+                        <p>Tran Truong</p>
+                    </div>
                     <div>
-                        @if (Session::get('id_customer'))
-                        <!-- User is logged in -->
-                        <img class="avt-img-cmt" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
-                        @endif
-                        <img class="avt-img-cmt" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
+
                     </div>
                 </div>
+
             </div>
-            <div>
-                <form>
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete="off">
-                    <input type="text" name="comment-text" class="comment-text">
-                    <div class="cmt-button">
-                        <button class="cancel-btn">Hủy</button>
-                        <button class="add-comment-btn">Bình luận</button>
-                    </div>
-                </form>
-            </div>
+
+
         </div>
-
-
 
         <div class="col-sm-4">
             <h2 class="tab-title">Thông số kỹ thuật</h2>
