@@ -43,7 +43,7 @@
     </div>
     <div class="col-lg-5 col-md-6 col-sm-12">
         <div class="box-right">
-            <div class="box-info">
+            <div class="box-product-variants">
                 <a href="" class="box03__item">{{$product_detail->ram}}-{{$product_detail->storage}}</a>
                 <a href="" class="box03__item">{{$product_detail->ram}}-{{$product_detail->storage}}</a>
 
@@ -100,6 +100,70 @@
     <div class="block-content-product row">
         <div class="col-sm-8">
             <div class="block-review">
+                <h2>Đánh giá và nhận xét sản phẩm</h2>
+                <div class="boxReview-review">
+                    <div class="star-product">
+                        <span class="point">0.0</span>
+                        <div class="star">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star-half-stroke"></i>
+                        </div>
+                    </div>
+                    <div class="list-rate">
+                        <ul class="rate-list">
+                            <li>
+                                <div class="number-start">
+                                    5 <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="timeline-start">
+                                    <p class="timing" style="width: 20%;"></p>
+                                </div>
+                                <span class="number-percent">20%</span>
+                            </li>
+                            <li>
+                                <div class="number-start">
+                                    4 <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="timeline-start">
+                                    <p class="timing" style="width: 20%;"></p>
+                                </div>
+                                <span class="number-percent">20%</span>
+                            </li>
+                            <li>
+                                <div class="number-start">
+                                    3 <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="timeline-start">
+                                    <p class="timing" style="width: 20%;"></p>
+                                </div>
+                                <span class="number-percent">20%</span>
+                            </li>
+                            <li>
+                                <div class="number-start">
+                                    2 <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="timeline-start">
+                                    <p class="timing" style="width: 20%;"></p>
+                                </div>
+                                <span class="number-percent">20%</span>
+                            </li>
+                            <li>
+                                <div class="number-start">
+                                    1 <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="timeline-start">
+                                    <p class="timing" style="width: 20%;"></p>
+                                </div>
+                                <span class="number-percent">20%</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
                 <div class="customer-review">
                     <img class="avt-img-review" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
                     <div>
@@ -137,12 +201,45 @@
                 </div>
 
                 <div class="box-comments-item">
-                    <div class="box-cmt-infor">
-                        <img class="avt-cmt-info" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
-                        <p>Tran Truong</p>
-                    </div>
-                    <div>
+                    <div class="item-comment__box-cmt">
+                        <div class="box-cmt__box-info">
+                            <div class="box-info">
+                                <img class="avt-cmt-info" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
+                                <p>Tran Truong</p>
+                            </div>
+                            <div class="box-time-cmt">
+                                <p class="time">12:30pm</p>
+                            </div>
+                        </div>
+                        <div class="box-cmt__box-question">
+                            <div class="content">
+                                <p class="content-question">Tại sao lại không mua được</p>
+                            </div>
+                        </div>
 
+                        <div class="item-comment__box-rep-comment">
+                            <div class="item-rep-comment">
+                                <div class="box-info">
+                                    <img class="avt-cmt-info" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
+                                    <p>Tran Truong</p>
+                                </div>
+                                <div class="box-time-cmt">
+                                    <p class="time">12:30pm</p>
+                                </div>
+                            </div>
+
+                            <div class="box-cmt__box-question">
+                                <p>CellphoneS xin chào anh Phạm Nguyễn Hoàng Giang,
+                                    Dạ khi sản phẩm gặp vấn đề lỗi Anh có thể mang tới cửa hàng chi nhánh gần nhất bên
+                                    em. Các bạn ki thuật sẽ kiểm tra và báo lại với mình chính xác nhất nhé ạ.
+                                    TECNO SPARK 20 PRO PLUS 8GB 256GB VÀNG - Giá thời điểm hiện tại 4.890.000đ. Khu vực
+                                    miền Nam.
+                                    Không biết hiện tại mình đang ở quận nào của HCM/HN hay tỉnh thành nào để em kiểm
+                                    tra cửa hàng gần mình nhất có sẵn sản phẩm ạ.
+                                    Thông tin đến Anh.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

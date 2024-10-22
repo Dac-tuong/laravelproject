@@ -23,7 +23,7 @@
         <h2 class="boxreview__title">Đánh giá về sản phẩm</h2>
         <div class="box-star">
             <div class="star-product">
-                <p>0.0</p>
+                <span class="point">0.0</span>
                 <i class="fa-regular fa-star"></i>
                 <i class="fa-regular fa-star"></i>
                 <i class="fa-regular fa-star"></i>
