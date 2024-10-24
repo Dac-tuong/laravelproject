@@ -442,59 +442,109 @@
 .box-star {
     display: flex;
 }
+
 .star-product {
     border: 1px solid black;
     width: 100%;
     font-size: 25px;
-    justify-content: left;
-    align-items: center;
+    text-align: center; /* Căn giữa cả 2 phần tử con */
+    position: relative; /* Để sử dụng căn giữa theo chiều dọc */
+}
+.star-product .point {
+    color: #f59e0b;
+    font-size: 30px;
+    display: block;
 }
 .star {
-    display: flex;
+    display: inline-block;
+}
+.star i {
+    color: #f59e0b;
 }
 
 .list-rate {
     width: 100%;
-}
-.star-product .point {
-    color: #ff9f00;
-    font-size: 30px;
-    /* margin: 0px 10px 0px 0px; */
-}
-.star-product i {
-    color: #ff9f00;
+    font-size: 16px;
+    text-align: center;
 }
 .rate-list {
+    list-style: none;
     margin-top: 5px;
     padding: 0px;
 }
 .rate-list li {
-    list-style: none;
-    display: flex;
+    display: inline-block;
     align-items: center;
 }
 .number-start {
-    color: #ff9f00;
+    display: inline-block;
+    color: #f59e0b;
 }
 .timeline-start {
-    display: flex;
+    display: inline-block;
     background-color: #eee;
     border-radius: 20px;
-    height: 6px;
-    width: 150px;
+    height: 8px;
+    width: 180px;
 }
-.boxReview-review {
-    display: flex;
-    justify-content: space-around;
-}
-
-/* review sản phẩm */
 .timing {
-    background-color: #ff9f00;
+    background-color: #f59e0b;
     border-radius: 20px;
     left: 0;
     height: 6px;
 }
+
+.boxReview-review {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.boxReview-comment {
+    display: block;
+    border: 1px solid black;
+}
+
+.boxReview-comment-item {
+    padding: 10px 10px;
+}
+
+.boxReview-comment-item-title {
+    display: block;
+}
+
+.boxReview-comment-item-block {
+    display: inline-block;
+}
+
+.box-info-review {
+    display: inline-block;
+    font-size: 16px;
+}
+.avt-review-info {
+    height: 28px;
+    margin-right: 10px;
+}
+.box-time-review {
+    display: inline-block;
+    font-size: 16px;
+}
+.boxReview-comment-item-review {
+    margin-left: 30px;
+    display: block;
+}
+.start-rating__review {
+    display: block;
+    font-size: 25px;
+    color: #f59e0b;
+}
+
+.boxReview-comment-item__cmt {
+    display: block;
+    font-size: 16px;
+}
+
+/* block  comment  */
 .box-comments {
     margin-top: 5px;
     padding: 0px 10px;
@@ -552,6 +602,7 @@
 
 .box-cmt__box-info {
     display: flex;
+    font-size: 16px;
     justify-content: space-between;
 }
 
@@ -594,9 +645,8 @@
     margin: 0;
 }
 
-.content p {
+.content .content-question {
     padding-left: 4px;
-
     margin: 0px;
     font-size: 15px;
 }
@@ -620,6 +670,8 @@
     padding-left: 5px;
     font-size: 15px;
 }
+
+/* review sản phẩm */
 /*  sản phẩm cùng loại */
 .similar-products {
     border: 1px solid black;
@@ -666,7 +718,7 @@
     align-items: center;
     justify-content: center;
 }
-.product__box-favorite span {
+.product__box-favorite .favorite-title {
     font-size: 14px;
 }
 .favorite-icon {

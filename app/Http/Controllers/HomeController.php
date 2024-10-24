@@ -12,6 +12,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Gallery;
 use App\Models\Product;
+use App\Models\ReviewModel;
 
 
 session_start();
@@ -41,11 +42,13 @@ class HomeController extends Controller
             ->where('product_id', '!=', $product_id)
             ->get();
 
+        $get_review = ReviewModel::with(['name_customer'])->where('id_phone_review', $product_id)->get();
         return view('user.product.detail_product')
             ->with('product_detail', $detail_product)
             ->with('brands', $brand)
             ->with('categorys', $category)
-            ->with('similars', $similar_product);
+            ->with('similars', $similar_product)
+            ->with('reviews', $get_review);
     }
 
     public function search(Request $request)

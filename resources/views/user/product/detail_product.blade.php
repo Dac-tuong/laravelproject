@@ -87,8 +87,8 @@
                         <i class="fa-solid fa-star"></i>
                     </div>
                     <div class="product__box-favorite">
-                        <span>Yêu thích</span>
-                        <p class="favorite-icon"></p>
+                        <span class="favorite-title">Yêu thích</span>
+                        <span class="favorite-icon"></span>
                     </div>
 
                 </div>
@@ -164,22 +164,41 @@
                     </div>
                 </div>
 
-                <div class="customer-review">
-                    <img class="avt-img-review" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
-                    <div>
-                        <strong>
-                            Tên khách hàng
-                        </strong>
-                        <div class="">
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star-half-stroke"></i>
+                <div class="boxReview-comment">
+                    @foreach ($reviews as $review )
+                    <div class="boxReview-comment-item">
+                        <div class="boxReview-comment-item-title">
+                            <div class="boxReview-comment-item-block">
+                                <div class="box-info-review">
+                                    <img class="avt-review-info" src="{{ URL::to('user/image/avatar-user.png') }}"
+                                        alt="">
+                                    <strong>{{$review->name_customer->name_user}}</strong>
+                                </div>
+                                <div class="box-time-review">
+                                    <p class="time">12:30pm</p>
+                                </div>
+                            </div>
                         </div>
-                        <span>Text</span>
+                        <div class="boxReview-comment-item-review">
+                            <div class="start-rating__review">
+                                @for ($i =1; $i<=5 ;$i++) @if ($i<=$review->rating)
+                                    <span class="star">&#9733;</span>
+                                    @else
+                                    <span class="star">&#9734;</span>
+                                    @endif
+
+                                    @endfor
+
+                            </div>
+                            <div class="boxReview-comment-item__cmt">
+                                <span>chào shop</span>
+                            </div>
+                        </div>
+
+                        <hr>
                     </div>
+                    @endforeach
+
                 </div>
             </div>
 
@@ -205,7 +224,7 @@
                         <div class="box-cmt__box-info">
                             <div class="box-info">
                                 <img class="avt-cmt-info" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
-                                <p>Tran Truong</p>
+                                <strong>Tran Truong</strong>
                             </div>
                             <div class="box-time-cmt">
                                 <p class="time">12:30pm</p>
@@ -213,7 +232,7 @@
                         </div>
                         <div class="box-cmt__box-question">
                             <div class="content">
-                                <p class="content-question">Tại sao lại không mua được</p>
+                                <span class="content-question">Tại sao lại không mua được</span>
                             </div>
                         </div>
 
@@ -221,7 +240,7 @@
                             <div class="item-rep-comment">
                                 <div class="box-info">
                                     <img class="avt-cmt-info" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
-                                    <p>Tran Truong</p>
+                                    <strong>QTV</strong>
                                 </div>
                                 <div class="box-time-cmt">
                                     <p class="time">12:30pm</p>

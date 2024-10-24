@@ -11,4 +11,9 @@ class User extends Model
     protected $fillable = ['name_user', 'email_user', 'password_user', 'status_user', 'phone_user'];
     protected $primaryKey = 'id_user';
     protected $table = 'tbl_user';
+
+    public function reviews_name()
+    {
+        return $this->hasMany(ReviewModel::class, 'id_user_review', 'id_user');
+    }
 }
