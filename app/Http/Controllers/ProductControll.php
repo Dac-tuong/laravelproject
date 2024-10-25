@@ -285,8 +285,6 @@ class ProductControll extends Controller
             $old_gallery_image->delete();
         }
 
-
-
         return Redirect::to('list-product');
     }
 }

@@ -74,6 +74,8 @@ Route::get('/detail-product/{product_id}', [HomeController::class, 'detail_produ
 
 Route::get('/review-product/{product_id}', [HomeController::class, 'review_product']);
 
+Route::get('/get-review-cmt', [HomeController::class, 'get_review_cmt']);
+
 Route::post('/search', [HomeController::class, 'search']);
 
 

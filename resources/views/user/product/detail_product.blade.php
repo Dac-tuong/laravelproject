@@ -102,7 +102,7 @@
                 <div class="boxReview-review">
                     <div class="star-product">
                         <span class="point">0.0</span>
-                        <div class="star">
+                        <div class="list-star">
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
                             <i class="fa-regular fa-star"></i>
@@ -159,6 +159,27 @@
                                 <span class="number-percent">20%</span>
                             </li>
                         </ul>
+                    </div>
+                </div>
+
+                <div class="box-review-filter">
+                    <div class="title">Lọc theo</div>
+                    <div class="filter-container">
+                        <div class="filter-item active">
+                            Tất cả
+                        </div>
+                        <div class="filter-item">
+                            Đơn hàng đã mua
+                        </div>
+                    </div>
+
+                    <div class="filter-container">
+                        <div class="filter-item star">
+                            <p>5</p>
+                            <div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
 
