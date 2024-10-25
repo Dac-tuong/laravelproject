@@ -265,99 +265,62 @@
          document.querySelector('.cmt-button').style.display = 'flex';
      })
 
-     document.querySelector('.cancel-btn').addEventListener('click', function(e) {
-         e.preventDefault();
-         document.querySelector('.cmt-button').style.display = 'none';
-         document.querySelector('.comment-text').value = '';
-     })
 
+     document.addEventListener("DOMContentLoaded", function() {
+         var imageList = document.getElementById("gallery-product");
+         var displayedImage = document.getElementById("image-target");
 
-     // Phóng to hình ảnh
-     function setupZoom(img) {
-         img.addEventListener("mousemove", function(e) {
-             mirror.style.top = `${e.clientY}px`;
-             mirror.style.left = `${e.clientX}px`;
+         // Lấy tất cả hình ảnh trong gallery
+         var allImages = imageList.querySelectorAll("img");
+
+         // Kiểm tra xem có hình ảnh nào không và mặc định hiển thị hình ảnh đầu tiên
+         if (allImages.length > 0) {
+             var firstImage = allImages[0];
+             displayedImage.src = firstImage.src; // Hiển thị hình ảnh đầu tiên
+             firstImage.classList.add("selected"); // Thêm lớp 'selected' cho hình ảnh đầu tiên
+         }
+
+         // Lắng nghe sự kiện nhấp vào các mục trong danh sách ảnh
+         imageList.addEventListener("click", function(event) {
+             if (event.target.tagName === "IMG") {
+                 // Xóa lớp 'selected' khỏi tất cả hình ảnh
+                 allImages.forEach(function(img) {
+                     img.classList.remove("selected");
+                 });
+
+                 // Thêm lớp 'selected' cho hình ảnh được nhấp vào
+                 event.target.classList.add("selected");
+
+                 // Lấy đường dẫn của ảnh từ thuộc tính 'src' của hình ảnh được nhấp vào
+                 var imageURL = event.target.src;
+                 // Hiển thị ảnh được nhấp vào trong vùng hiển thị
+                 displayedImage.src = imageURL;
+             }
+         });
+
+         // Thiết lập các sự kiện cho hiệu ứng zoom ở đây (nếu cần)
+         const img = document.getElementById('image-target');
+         const mirror = document.querySelector('.mirror');
+
+         img.addEventListener('mousemove', (e) => {
+             const rect = img.getBoundingClientRect();
+             const x = e.clientX - rect.left;
+             const y = e.clientY - rect.top;
+             const xPercent = (x / rect.width) * 100;
+             const yPercent = (y / rect.height) * 100;
+
              mirror.style.backgroundSize = `400px 400px`;
-
-             var percentMouseOfWidth = (e.offsetX / this.offsetWidth) * 100;
-             var percentMouseOfHeight = (e.offsetY / this.offsetHeight) * 100;
-
-             mirror.style.backgroundPosition = `${percentMouseOfWidth}% ${percentMouseOfHeight}%`;
-
-             var imgSource = e.target.getAttribute("src");
-             mirror.style.backgroundImage = `url(${imgSource})`;
+             mirror.style.top = `${e.clientY - 50}px`;
+             mirror.style.left = `${e.clientX - 50}px`;
+             mirror.style.backgroundImage = `url(${img.src})`;
+             mirror.style.backgroundPosition = `${xPercent}% ${yPercent}%`;
              mirror.classList.remove("hide");
          });
 
-         img.addEventListener("mouseleave", function() {
+         img.addEventListener('mouseleave', () => {
              mirror.classList.add("hide");
          });
-     }
-
-     let imgs = document.querySelectorAll(".box-thumbnail img");
-     let mirror = document.querySelector(".mirror");
-
-     imgs.forEach(function(img) {
-         setupZoom(img); // Thiết lập zoom cho các hình ảnh hiện tại
      });
-
-
-
-     // Chuyển hình ảnh
-     document.addEventListener('DOMContentLoaded', function() {
-         let main_image = document.getElementById('image-target'); // Ảnh chính
-         let main_image_container = document.querySelector('.box-thumbnail'); // Khung chứa ảnh chính
-         let gallery_images = document.querySelectorAll('.gallery-product img'); // Tất cả ảnh trong gallery
-         let current_selected_image = null;
-
-         function selectImage(image) {
-             if (current_selected_image) {
-                 current_selected_image.classList.remove('selected'); // Xóa viền của ảnh trước
-             }
-             image.classList.add('selected'); // Thêm viền cho ảnh được chọn
-             current_selected_image = image; // Cập nhật lại ảnh được chọn hiện tại
-         }
-
-         if (gallery_images.length > 0) {
-             selectImage(gallery_images[0]); // Gán lớp 'selected' cho ảnh đầu tiên
-         }
-         gallery_images.forEach(function(img) {
-             img.addEventListener('click', function() {
-                 let newSrc = this.getAttribute('src'); // Lấy đường dẫn của ảnh mới
-                 let newImage = document.createElement('img'); // Tạo ảnh mới
-                 newImage.setAttribute('src', newSrc);
-                 newImage.classList.add('box-thumbnail-img',
-                     'off-screen-right'); // Đặt ảnh mới bên ngoài khung nhìn
-
-                 // Thêm ảnh mới vào trong khung box-thumbnail
-                 main_image_container.appendChild(newImage);
-
-                 // Thêm class để trượt ảnh cũ ra bên trái
-                 main_image.classList.add('slide-out-left');
-
-                 // Trượt ảnh mới vào từ phải
-                 setTimeout(function() {
-                     newImage.classList.remove('off-screen-right');
-                     // newImage.classList.add('slide-in-right');
-                 }, 1);
-
-                 // Loại bỏ ảnh cũ sau khi hiệu ứng kết thúc
-                 setTimeout(function() {
-                     main_image_container.removeChild(
-                         main_image); // Xóa ảnh cũ khỏi DOM
-                     main_image = newImage; // Cập nhật lại main_image thành ảnh mới
-
-                     // Gán sự kiện zoom cho hình ảnh mới
-                     setupZoom(main_image);
-                 }, 1); // Thời gian khớp với transition (0.5s)
-
-                 selectImage(this);
-             });
-         });
-     });
-
-
-     // chuyển hình ảnh
      </script>
 
 

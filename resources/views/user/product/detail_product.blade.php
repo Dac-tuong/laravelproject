@@ -70,7 +70,6 @@
             </div>
         </div>
     </div>
-
     <div class="similar-products row" style="margin-top: 10px; margin-bottom: 10px;">
         @foreach ($similars as $similar )
         <div class="col-lg-2 col-md-4 col-sm-6 col-6">
@@ -90,7 +89,6 @@
                         <span class="favorite-title">Yêu thích</span>
                         <span class="favorite-icon"></span>
                     </div>
-
                 </div>
             </div>
         </div>

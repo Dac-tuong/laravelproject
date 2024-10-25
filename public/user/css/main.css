@@ -284,22 +284,10 @@
 }
 
 .box-thumbnail-img {
-    width: 450px;
+    height: 300px;
     transition: transform 0.5s ease, opacity 0.5s ease;
     position: absolute;
     cursor: zoom-in;
-}
-
-.slide-out-left {
-    transform: translateX(-100%);
-}
-
-.slide-in-right {
-    transform: translateX(0);
-}
-
-.off-screen-right {
-    transform: translateX(100%);
 }
 
 .mirror {
@@ -330,7 +318,7 @@
 }
 .gallery-product img {
     height: 80px;
-    width: 120px;
+
     object-fit: cover;
     cursor: pointer;
 }
