@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_phones', function (Blueprint $table) {
+        Schema::create('tbl_testdataphone', function (Blueprint $table) {
             $table->increments('product_id')->unsigned();
             $table->string('product_code');
             $table->string('product_name');
@@ -57,7 +57,6 @@ return new class extends Migration
             $table->integer('product_status');
             $table->timestamps();
 
-
             // Foreign key constraints
             $table->foreign('categories_product_id')
                 ->references('category_id')->on('tbl_categories')
@@ -76,6 +75,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_phones');
+        Schema::dropIfExists('tbl_testdataphone');
     }
 };

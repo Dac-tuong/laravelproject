@@ -8,11 +8,12 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Brand;
 use App\Models\Coupons;
-use App\Models\Feeship;
+
 use App\Models\Category;
 use Illuminate\Support\Str;
 use App\Models\Province;
 use App\Models\District;
+use App\Models\FeeshipModel;
 use App\Models\OrderDetail;
 use App\Models\OrderProduct;
 use App\Models\Ward;
@@ -124,19 +125,11 @@ class CheckoutController extends Controller
         $district_id = $data['id_district'];
         $ward_id = $data['id_ward'];
 
-        $get_feeship = Feeship::where('matp', $city_id)
-            ->where('maqh', $district_id)
-            ->where('xaid', $ward_id)
+        $get_feeship = FeeshipModel::where('matp_feeship', $city_id)
+            ->where('maqh_feeship', $district_id)
+            ->where('xaid_feeship', $ward_id)
             ->first();
-
-
-        // $formatted_feeship = number_format($get_feeship->feeship, 0, ',', '.');
-        // return response()->json(['feeship' => $formatted_feeship]);
         $output = '';
-
-
-        // Nếu tìm thấy phí ship, hiển thị kết quả
-
         $output = number_format($get_feeship->feeship, 0, ',', '.');
 
         // Xuất kết quả
