@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Slide;
+use App\Models\SliderModel;
 use Illuminate\Http\Request;
 
 class SlideController extends Controller
@@ -14,7 +14,7 @@ class SlideController extends Controller
     public function save_slide(Request $request)
     {
         $data = $request->all();
-        $save_slide = new Slide();
+        $save_slide = new SliderModel();
         $save_slide->name_slide = $data['name_slide'];
         $save_slide->status_slide = 1;
 
