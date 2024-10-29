@@ -28,7 +28,7 @@ class HomeController extends Controller
         $list_product =  Product::with(['category', 'brand'])
             ->where('product_status', 1)
             ->orderBy('product_id', 'ASC')
-            ->paginate(3);
+            ->paginate(6);
         return view('user.home')->with('products', $list_product)->with('brands', $brand)->with('categorys', $category);
     }
 
@@ -42,7 +42,7 @@ class HomeController extends Controller
             ->where('product_id', '!=', $product_id)
             ->get();
 
-        $get_review = ReviewModel::with(['name_customer'])->where('id_phone_review', $product_id)->get();
+        $get_review = ReviewModel::with(['name_customer'])->where('id_phone_review', $product_id)->limit(5)->get();
         return view('user.product.detail_product')
             ->with('product_detail', $detail_product)
             ->with('brands', $brand)

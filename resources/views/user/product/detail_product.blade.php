@@ -194,23 +194,21 @@
                                     <strong>{{$review->name_customer->name_user}}</strong>
                                 </div>
                                 <div class="box-time-review">
-                                    <p class="time">12:30pm</p>
+                                    <span class="time">12:30pm</span>
                                 </div>
                             </div>
                         </div>
                         <div class="boxReview-comment-item-review">
-                            <div class="start-rating__review">
+                            <div class="star-rating__review">
                                 @for ($i =1; $i<=5 ;$i++) @if ($i<=$review->rating)
                                     <span class="star">&#9733;</span>
                                     @else
                                     <span class="star">&#9734;</span>
                                     @endif
-
                                     @endfor
-
                             </div>
                             <div class="boxReview-comment-item__cmt">
-                                <span>chào shop</span>
+                                <span>{{$review->review_text}}</span>
                             </div>
                         </div>
 
@@ -218,10 +216,16 @@
                     </div>
                     @endforeach
 
+                    <a class="button__view-more-review"
+                        href="{{URL::to('/review-product'.'/'.$product_detail->product_id)}}">
+                        Xem thêm
+                    </a>
+
+
+
                 </div>
             </div>
 
-            <a href="{{URL::to('/review-product'.'/'.$product_detail->product_id)}}">Xem thêm đánh giá</a>
 
             <div class="box-comments">
                 <h2 class="boxcomment__title">
@@ -246,7 +250,7 @@
                                 <strong>Tran Truong</strong>
                             </div>
                             <div class="box-time-cmt">
-                                <p class="time">12:30pm</p>
+                                <span class="time">12:30pm</span>
                             </div>
                         </div>
                         <div class="box-cmt__box-question">
@@ -262,7 +266,7 @@
                                     <strong>QTV</strong>
                                 </div>
                                 <div class="box-time-cmt">
-                                    <p class="time">12:30pm</p>
+                                    <span class="time">12:30pm</span>
                                 </div>
                             </div>
 
