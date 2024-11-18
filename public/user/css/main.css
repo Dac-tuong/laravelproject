@@ -161,7 +161,7 @@
 
 /* ==============================SIDEBAR============================ */
 
-#offcanvas {
+#sidebar {
     position: fixed;
     right: -300px; /* Ẩn sidebar khi không hiển thị */
     top: 0;
@@ -176,24 +176,24 @@
     z-index: 1;
 }
 
-.offcanvas-header {
+.sidebar-header {
     display: flex;
     justify-content: space-between;
 }
-.user-customer-offcanvas {
+.user-customer-sidebar {
     font-weight: 500;
     color: black;
     font-size: 20px;
     text-decoration: none;
 }
-.user-customer-offcanvas img {
+.user-customer-sidebar img {
     width: 40px;
     margin-right: 5px;
     border-radius: 50%;
     height: 40px;
     object-fit: cover;
 }
-.close-offcanvas {
+.close-sidebar {
     border: none;
     width: 30px;
     height: 30px;
@@ -206,28 +206,28 @@
     justify-content: center;
 }
 
-.close-offcanvas:hover {
+.close-sidebar:hover {
     color: red;
 }
 
-.offcanvas-body {
+.sidebar-body {
     margin-top: 10px;
 }
-.offcanvas-content {
+.sidebar-content {
     /* margin-left: 4px; */
     border: 1px solid black;
 }
-.offcanvas-content li {
+.sidebar-content li {
     list-style: none;
     padding: 5px 0px;
     transition: background-color 0.4s;
 }
 
-.offcanvas-content li:hover {
+.sidebar-content li:hover {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.offcanvas-content li a {
+.sidebar-content li a {
     text-align: center;
     font-weight: 500;
     color: black;
