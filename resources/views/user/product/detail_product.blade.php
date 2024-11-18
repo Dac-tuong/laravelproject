@@ -163,7 +163,7 @@
                 </div>
 
                 <div class="box-review-filter">
-                    <div class="title">Lọc theo</div>
+                    <div class="title-filter">Lọc theo</div>
                     <div class="filter-container">
                         <div class="filter-item active">
                             Tất cả

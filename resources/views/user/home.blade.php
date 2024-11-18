@@ -17,7 +17,6 @@
         <div class="col-lg-2 col-md-4 col-sm-6 col-6">
             <div class="product-content">
                 <form>
-
                     @csrf
                     <!-- Input ẩn để lưu trữ thông tin sản phẩm -->
                     <input type="hidden" value="{{ $product->product_id }}"

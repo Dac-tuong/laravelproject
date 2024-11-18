@@ -161,7 +161,7 @@
 
 /* ==============================SIDEBAR============================ */
 
-#sidebar {
+#offcanvas {
     position: fixed;
     right: -300px; /* Ẩn sidebar khi không hiển thị */
     top: 0;
@@ -176,24 +176,24 @@
     z-index: 1;
 }
 
-.sidebar-header {
+.offcanvas-header {
     display: flex;
     justify-content: space-between;
 }
-.user-customer-sidebar {
+.user-customer-offcanvas {
     font-weight: 500;
     color: black;
     font-size: 20px;
     text-decoration: none;
 }
-.user-customer-sidebar img {
+.user-customer-offcanvas img {
     width: 40px;
     margin-right: 5px;
     border-radius: 50%;
     height: 40px;
     object-fit: cover;
 }
-.close-sidebar {
+.close-offcanvas {
     border: none;
     width: 30px;
     height: 30px;
@@ -206,28 +206,28 @@
     justify-content: center;
 }
 
-.close-sidebar:hover {
+.close-offcanvas:hover {
     color: red;
 }
 
-.sidebar-body {
+.offcanvas-body {
     margin-top: 10px;
 }
-.sidebar-content {
+.offcanvas-content {
     /* margin-left: 4px; */
     border: 1px solid black;
 }
-.sidebar-content li {
+.offcanvas-content li {
     list-style: none;
     padding: 5px 0px;
     transition: background-color 0.4s;
 }
 
-.sidebar-content li:hover {
+.offcanvas-content li:hover {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.sidebar-content li a {
+.offcanvas-content li a {
     text-align: center;
     font-weight: 500;
     color: black;
@@ -490,7 +490,7 @@
     overflow: auto;
     width: 100%;
 }
-.title {
+.title-filter {
     display: block;
     font-size: 26px;
     font-weight: 500;
@@ -872,12 +872,17 @@
 /*==========================CART=====================*/
 
 /*==========================INFORMATION CUSTOMER=====================*/
-.frame-inforcustomer {
+.border-white {
     background-color: #ffffff;
     border: 1px solid black;
     padding: 20px 20px;
+    margin-bottom: 15px;
 }
-
+.title-top {
+    font-size: 25px;
+    color: #007bff;
+    font-weight: 500;
+}
 .image-customer {
     display: flex;
     align-items: center;
@@ -889,18 +894,32 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-}
-
-.position-relative {
-    position: relative !important;
+    font-size: 16px;
 }
 
 .avatar-customer {
-    height: 250px;
-    border-radius: 50%;
+    object-fit: cover;
+    height: 200px;
+    border: none;
+    margin: 0px;
+    border-radius: 10px;
 }
 .infomation-customer {
     margin-top: 4px;
+}
+
+.order-statistics {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
+}
+.col-stantistics {
+    display: block;
+}
+
+.table {
+    width: 100%;
 }
 /*==========================INFORMATION CUSTOMER=====================*/
 

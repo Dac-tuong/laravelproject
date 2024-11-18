@@ -54,7 +54,7 @@
      </ul> -->
      <div class="app">
          <header class="header">
-             <div class="container-xxl" style=" border: 1px solid black;">
+             <div class="container-xl" style=" border: 1px solid black;">
                  <!-- header with search -->
                  <div class="header-nav row" style="margin: 0">
                      <div class="col-lg-2 col-md-3 col-sm-5 col-xs-3">
@@ -110,23 +110,25 @@
          <div id="overlay" class="overlay"></div>
 
          <!-- sidebar -->
-         <div id="sidebar" class="sidebar">
+         <div id="offcanvas">
              <!-- Nội dung sidebar -->
 
-             <div class="sidebar-header">
-                 <a href="#" class="user-customer-sidebar" onclick="openSidebar()">
+             <div class="offcanvas-header">
+                 <a href="#" class="user-customer-offcanvas" onclick="openCanvas()">
                      <img src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
                      {{Session::get('name_customer')}}
                  </a>
-                 <button class="close-sidebar" onclick="closeSidebar()">X</button>
+                 <button class="close-offcanvas" onclick="closeCanvas()">X</button>
              </div>
 
-             <div class="sidebar-body">
-                 <ul class="sidebar-content">
+             <div class="offcanvas-body">
+                 <ul class="offcanvas-content">
                      <li> <a href="{{ URL::to('/thong-tin-ca-nhan') }}">Thông tin khách hàng</a></li>
                      <li> <a href="{{URL::to('/cart')}}">Giỏ hàng</a></li>
                      <li> <a href="{{URL::to('/checkout')}}">Thanh toán</a></li>
-                     <li> <a href="{{ URL::to('/logout') }}">Đăng xuất</a></li>
+                     <li> <a href="{{ URL::to('') }}">Danh sách yêu thích</a></li>
+                     <li> <a href="{{ URL::to('') }}">Lịch sử mua hàng</a></li>
+                     <li> <a href="{{ URL::to('') }}">Cài đặt</a></li>
                      <li> <a href="{{ URL::to('/logout') }}">Đăng xuất</a></li>
                  </ul>
              </div>
@@ -134,8 +136,8 @@
          </div>
          <!-- sidebar -->
 
-         <section class="app_container">
-             <div class="container-xxl" style=" border: 1px solid black;">
+         <div class="app_container">
+             <div class="container-xl" style=" border: 1px solid black;">
                  <div class="nav-sidebar">
                      <ul class="menu">
                          <li class="megamenu"><a href="{{URL::to('/')}}">TRANG CHỦ</a></li>
@@ -159,17 +161,15 @@
                  </div>
 
                  <div class="content">
-
                      <div class="home-product">
                          @yield('content')
                      </div>
                  </div>
              </div>
-
-         </section>
+         </div>
 
          <footer class="footer">
-             <div class="container-xxl">
+             <div class="container-xl">
                  <div class="row">
                      <div class="col-sm-3">
                          <h3 class="footer__heading">Chăm sóc khách hàng</h3>
@@ -238,20 +238,35 @@
 
      <script>
      // Mở sidebar
-     function openSidebar() {
+     function openCanvas() {
          // Hiển thị sidebar bằng cách đặt left về 0
-         document.getElementById('sidebar').style.right = '0';
+         document.getElementById('offcanvas').style.right = '0';
          // Hiển thị overlay bằng cách thay đổi display thành block
          document.getElementById('overlay').style.display = 'block';
      }
 
-     function closeSidebar() {
+     function closeCanvas() {
          // Hiển thị sidebar bằng cách đặt left về 0
-         document.getElementById('sidebar').style.right = '-300px';
+         document.getElementById('offcanvas').style.right = '-300px';
 
          // Hiển thị overlay bằng cách thay đổi display thành block
          document.getElementById('overlay').style.display = 'none';
      }
+
+     //  function openCanvas() {
+     //      // Hiển thị sidebar bằng cách đặt left về 0
+     //      document.getElementById('offcanvas').style.right = '0';
+     //      // Hiển thị overlay bằng cách thay đổi display thành block
+     //      document.getElementById('overlay').style.display = 'block';
+     //  }
+
+     //  function closeOffcanvas() {
+     //      // Hiển thị sidebar bằng cách đặt left về 0
+     //      document.getElementById('offcanvas').style.right = '-300px';
+
+     //      // Hiển thị overlay bằng cách thay đổi display thành block
+     //      document.getElementById('overlay').style.display = 'none';
+     //  }
 
      document.querySelectorAll('.toggle-btn').forEach(function(link) {
          link.addEventListener('click', function(event) {
