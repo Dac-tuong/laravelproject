@@ -945,7 +945,20 @@
 .table-list-order {
     width: 100%;
     text-align: center;
+    /* display: none; */
 }
+
+.show-view {
+    display: block;
+}
+
+.card-view {
+    border: 1px solid #0e0e0e79;
+    padding: 10px 10px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
 /* HISTORY ORDER */
 
 /*==========================INFORMATION CUSTOMER=====================*/

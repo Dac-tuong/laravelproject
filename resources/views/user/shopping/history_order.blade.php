@@ -40,7 +40,7 @@
     </div>
 
     <div class="list-history-order">
-        <div class="table-view">
+        <div class="table-view show-view">
             <table class="table-list-order">
                 <thead>
                     <tr>
@@ -54,7 +54,16 @@
                             Tên khách hàng
                         </th>
                         <th>
+                            Số lượng
+                        </th>
+                        <th>
+                            Chi phí
+                        </th>
+                        <th>
                             Thời gian mua
+                        </th>
+                        <th>
+                            Trạng thái
                         </th>
                         <th>
                             Tác vụ
@@ -73,7 +82,16 @@
                             Nguyễn Văn A
                         </td>
                         <td>
+                            Số lượng
+                        </td>
+                        <td>
+                            Chi phí
+                        </td>
+                        <td>
                             11/11/1111
+                        </td>
+                        <td>
+                            Trạng thái
                         </td>
                         <td>
                             <a href="">Xem</a>
@@ -85,12 +103,22 @@
 
         <div class="grid-view">
             <div class="row">
-                <div class="col-lg-2 col-md-4 col-sm-6 col-6">
-                    <div class="border-white"></div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                    <div class="card-view">
+                        <div class="card-header">
+                            <div class="pull-right"><label class="">Chờ xữ lý</label></div>
+                            <span>Mã đơn hàng <a href=""> 0921asewssd</a></span>
+                            <br>
+                            <span><strong>Nguyễn Văn A</strong></span><br />
+                            Quantity : 4, cost: $523.13<br />
+                            <div>order made on: 06/20/2014 by <a href="#">Jane Doe</a></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
+
+
+            </div>
         </div>
     </div>
-</div>
-@endsection
+    @endsection
