@@ -81,13 +81,14 @@
 
 .customer {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .user-customer {
     font-weight: 500;
     color: white;
-    font-size: 20px;
+    font-size: 15px;
     text-decoration: none;
 }
 .user-customer img {
@@ -100,7 +101,7 @@
 
 .sign-up {
     font-weight: 500;
-    font-size: 20px;
+    font-size: 18px;
     color: white;
     text-decoration: none;
     border: 1px solid white;
@@ -111,7 +112,7 @@
 .sign-in {
     font-weight: 500;
     color: white;
-    font-size: 20px;
+    font-size: 18px;
     text-decoration: none;
 }
 
@@ -135,7 +136,7 @@
 }
 
 .app_container {
-    background-color: #f3f3f3;
+    background: #f5f5f5;
 }
 
 .header-content {
@@ -873,7 +874,7 @@
 
 /*==========================INFORMATION CUSTOMER=====================*/
 .border-white {
-    background-color: #ffffff;
+    background: white;
     border: 1px solid black;
     padding: 20px 20px;
     margin-bottom: 15px;
@@ -921,6 +922,32 @@
 .table {
     width: 100%;
 }
+
+.view-order-history {
+    text-decoration: none;
+    color: #367517;
+    font-weight: 500;
+}
+
+/* HISTORY ORDER */
+.history-order-content {
+    background: white;
+    border: 1px solid black;
+    padding: 20px 20px;
+    margin-bottom: 15px;
+}
+.history-order-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-list-order {
+    width: 100%;
+    text-align: center;
+}
+/* HISTORY ORDER */
+
 /*==========================INFORMATION CUSTOMER=====================*/
 
 /*==========================CHECK OUT=====================*/

@@ -185,12 +185,13 @@ class CheckoutController extends Controller
         $add_order->order_status = 1;
         $add_order->order_note = $note;
         $add_order->save();
+        $code_order_detail =  $add_order->order_code;
 
         if ($variable_Cart) {
             foreach ($variable_Cart as $item) {
                 $add_detail_order = new OrderDetail();
-                $add_detail_order->order_code = $code_order;
-                $add_detail_order->product_id_order = $item['masp'];
+                $add_detail_order->order_code = $code_order_detail;
+                $add_detail_order->order_phone_id = $item['masp'];
                 $add_detail_order->product_name_order = $item['tensp'];
                 $add_detail_order->product_price = $item['gia'];
                 $add_detail_order->product_sale_quantity = $item['soluong'];

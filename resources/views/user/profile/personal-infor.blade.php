@@ -76,7 +76,29 @@
                         <th>Tác vụ</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    <tr>
+                        <td>
+                            01
+                        </td>
+                        <td>
+                            #0723213sss
+                        </td>
+                        <td>
+                            Đang chờ
+                        </td>
+                        <td>
+                            0đ
+                        </td>
+                        <td>
+                            time
+                        </td>
+                        <td>
+                            <a class="view-order-history" href="">Xem</a>
+                        </td>
+
+                    </tr>
+                </tbody>
             </table>
         </div>
 

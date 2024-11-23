@@ -57,12 +57,12 @@
              <div class="container-xl" style=" border: 1px solid black;">
                  <!-- header with search -->
                  <div class="header-nav row" style="margin: 0">
-                     <div class="col-lg-2 col-md-3 col-sm-5 col-xs-3">
+                     <div class="col-lg-2 col-md-3 col-sm-5 col-5">
                          <a href="{{URL::to('/')}}" class="header__logo-home">
                              <img class="img-style" src="{{ URL::to('/user/image/logo.png') }}" alt="">
                          </a>
                      </div>
-                     <div class="col-lg-8 col-md-6 col-sm-9">
+                     <div class="col-lg-8 col-md-5 col-sm-7 col-7">
                          <div class="row d-flex justify-content-between align-items-center">
                              <div class="header__search col-lg-11 col-md-9 col-sm-9 ">
                                  <form action="{{URL::to('/search')}}" method="POST">
@@ -85,7 +85,7 @@
                              </div>
                          </div>
                      </div>
-                     <div class="col-lg-2 col-md-3 col-sm-4 p-0">
+                     <div class="col-lg-2 col-md-4 col-sm-5 p-0">
                          <div class="customer">
                              @if (Session::get('id_customer'))
                              <!-- User is logged in -->
@@ -127,7 +127,7 @@
                      <li> <a href="{{URL::to('/cart')}}">Giỏ hàng</a></li>
                      <li> <a href="{{URL::to('/checkout')}}">Thanh toán</a></li>
                      <li> <a href="{{ URL::to('') }}">Danh sách yêu thích</a></li>
-                     <li> <a href="{{ URL::to('') }}">Lịch sử mua hàng</a></li>
+                     <li> <a href="{{ URL::to('/history-order') }}">Lịch sử mua hàng</a></li>
                      <li> <a href="{{ URL::to('') }}">Cài đặt</a></li>
                      <li> <a href="{{ URL::to('/logout') }}">Đăng xuất</a></li>
                  </ul>
@@ -253,21 +253,6 @@
              document.getElementById('overlay').style.display = 'none';
          }
 
-         //  function openCanvas() {
-         //      // Hiển thị sidebar bằng cách đặt left về 0
-         //      document.getElementById('offcanvas').style.right = '0';
-         //      // Hiển thị overlay bằng cách thay đổi display thành block
-         //      document.getElementById('overlay').style.display = 'block';
-         //  }
-
-         //  function closeOffcanvas() {
-         //      // Hiển thị sidebar bằng cách đặt left về 0
-         //      document.getElementById('offcanvas').style.right = '-300px';
-
-         //      // Hiển thị overlay bằng cách thay đổi display thành block
-         //      document.getElementById('overlay').style.display = 'none';
-         //  }
-
          document.querySelectorAll('.toggle-btn').forEach(function(link) {
              link.addEventListener('click', function(event) {
                  event.preventDefault();
@@ -344,8 +329,6 @@
 
      <script>
          $(document).ready(function() {
-
-
              //show quantity cart
              show_cart_quantity();
 
@@ -428,8 +411,7 @@
                          data: formData,
                          success: function(response) {
                              if (response.status === 'success') {
-                                 alert(response.message + ' Giảm giá: ' + response
-                                     .discount_coupon);
+                                 alert(response.message);
                              }
                          },
                          error: function(xhr, status, error) {

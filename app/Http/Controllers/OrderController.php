@@ -43,7 +43,11 @@ class OrderController extends Controller
         }
 
         // Lấy thông tin vận chuyển của đơn hàng
-        $order_ship = OrderProduct::with(['shippingAddress'])->where('order_code', $order_code)->first();
+        $order_ship = OrderProduct::with([
+            'shippingAddress.province',
+            'shippingAddress.districts',
+            'shippingAddress.wards'
+        ])->where('order_code', $order_code)->first();
         $order_ship->order_status;
 
         if ($order_ship->order_status == 1) {
@@ -101,7 +105,13 @@ class OrderController extends Controller
             $order_count_quantity += $detailOrder['product_sale_quantity'];
         }
 
-        $order_ship = OrderProduct::with(['shippingAddress'])->where('order_code', $order_code)->first();
+        $order_ship = OrderProduct::with([
+            'shippingAddress.province',
+            'shippingAddress.districts',
+            'shippingAddress.wards'
+
+        ])
+            ->where('order_code', $order_code)->first();
 
         $find_coupon =  $order_ship->discount_coupon_id;
 

@@ -78,16 +78,16 @@ Route::get('/get-review-cmt', [HomeController::class, 'get_review_cmt']);
 
 Route::post('/search', [HomeController::class, 'search']);
 
-
+// SIDEBAR CONTROLL
 use App\Http\Controllers\SidebarController;
 
 Route::get('/thong-tin-ca-nhan', [SidebarController::class, 'thong_tin_ca_nhan']);
+Route::get('/history-order', [SidebarController::class, 'history_order']);
 
 // Users account
 use App\Http\Controllers\CheckoutController;
-// Users account
-Route::get('/login-index', [CheckoutController::class, 'login_index']);
 
+Route::get('/login-index', [CheckoutController::class, 'login_index']);
 Route::get('/register-index', [CheckoutController::class, 'register_index']);
 Route::post('/add-customer', [CheckoutController::class, 'add_customer']);
 Route::post('/login-customer', [CheckoutController::class, 'login_customer']);
@@ -137,6 +137,8 @@ Route::get('/view-detail/{order_code}', [OrderController::class, 'view_detail'])
 
 Route::get('/print-order/{order_code}', [OrderController::class, 'print_order']);
 Route::post('/update-status-order', [OrderController::class, 'update_status_order']);
+
+// SLIDE CONTROLL
 
 use App\Http\Controllers\SlideController;
 
