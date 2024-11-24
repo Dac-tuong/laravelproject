@@ -197,6 +197,8 @@ class CheckoutController extends Controller
                 $add_detail_order->product_sale_quantity = $item['soluong'];
                 $add_detail_order->save();
             }
+            Session::forget('cart');
+            Session::forget('total_price');
         }
 
         return response()->json([

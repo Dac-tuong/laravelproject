@@ -953,6 +953,7 @@
 }
 
 .card-view {
+    display: none;
     border: 1px solid #0e0e0e79;
     padding: 10px 10px;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
@@ -967,6 +968,7 @@
 
 .check-out {
     padding: 20px;
+    border-radius: 10px;
     background-color: #ffffff;
 }
 
@@ -977,6 +979,7 @@
 .cart-info {
     background-color: #ffffff;
     padding: 20px;
+    border-radius: 10px;
 }
 .note-user {
     resize: none;
@@ -993,8 +996,9 @@
     border-radius: 4px;
 }
 
-.img-style {
-    height: 65px;
+.avatar-lg {
+    height: 80px;
+    width: 80px;
 }
 /*==========================CHECK OUT=====================*/
 .footer {

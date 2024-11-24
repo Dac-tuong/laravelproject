@@ -385,7 +385,6 @@
                  var discounValue = $('#id_coupon').val();
                  var note_order = $('#note_order').val();
 
-
                  $('[data-input-value]').each(function() {
                      var sourceType = $(this).data('input-value');
                      var inputValue = $(this).val();
@@ -393,33 +392,46 @@
                          allValid = false;
                      }
                      formData[sourceType] = inputValue;
-
-                 })
+                 });
 
                  if (allValid) {
                      formData.feeship = feeshipInt;
                      formData.totalOrder = totalOrderInt;
                      formData.discount = discounValue;
-
                      formData.note = note_order;
-
                      formData._token = _token;
-                     console.log("FormData được thu thập:", formData);
-                     $.ajax({
-                         url: '/order-product',
-                         method: 'POST',
-                         data: formData,
-                         success: function(response) {
-                             if (response.status === 'success') {
-                                 alert(response.message);
-                             }
-                         },
-                         error: function(xhr, status, error) {
-                             alert('Có lỗi xảy ra khi gửi đơn hàng: ' + error);
+
+                     // Hiển thị popup xác nhận
+                     Swal.fire({
+                         title: 'Xác nhận thanh toán',
+                         text: 'Bạn có chắc chắn muốn gửi đơn hàng?',
+                         icon: 'warning',
+                         showCancelButton: true,
+                         confirmButtonText: 'Đồng ý',
+                         cancelButtonText: 'Hủy'
+                     }).then((result) => {
+                         if (result.isConfirmed) {
+                             // Gửi dữ liệu nếu người dùng xác nhận
+                             $.ajax({
+                                 url: '/order-product',
+                                 method: 'POST',
+                                 data: formData,
+                                 success: function(response) {
+                                     if (response.status === 'success') {
+                                         Swal.fire('Thành công', response.message,
+                                             'success');
+                                     }
+                                 },
+                                 error: function(xhr, status, error) {
+                                     Swal.fire('Lỗi',
+                                         'Có lỗi xảy ra khi gửi đơn hàng: ' + error,
+                                         'error');
+                                 }
+                             });
                          }
                      });
                  }
-             })
+             });
          });
 
          // Hàm kiểm tra giá trị của input và hiển thị lỗi
@@ -463,7 +475,6 @@
              }
          }
      </script>
-     <!-- <script src="{{asset("user/js/bootstrap.bundle.min.js")}}"></script> -->
  </body>
 
  </html>

@@ -88,30 +88,40 @@ $coupon_session = Session::get('coupon');
     </div>
     <div class="col-sm-4">
         <div class="cart-info">
-            <h3>Thông tin giao hàng</h3>
+            <h3>Thông tin đơn hàng</h3>
             @if($cart && count($cart) > 0)
             <table class="table-cart">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Tên sản phẩm</th>
                         <th>Hình ảnh</th>
-                        <th>Giá</th>
-                        <th>Số lượng</th>
+                        <th>Mô tả sản phẩm</th>
                         <th>Thành tiền</th>
-
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($cart as $item)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item['tensp'] }}</td>
-                        <td>hình ảnh</td>
-                        <td>{{ number_format($item['gia'], 0, ',', '.') }} VND</td>
+                        <th scope="row">
+                            <img class="avatar-lg"
+                                src="https://cdn.tgdd.vn/Products/Images/42/226316/samsung-galaxy-s21-ultra-bac-600x600-1-600x600.jpg"
+                                alt="">
+                        </th>
                         <td>
-                            {{ $item['soluong'] }}
+                            <h6>{{ $item['tensp'] }}</h6>
+                            <p class="">
+                                <span class="star">&#9733;</span>
+                                <span class="star">&#9733;</span>
+                                <span class="star">&#9733;</span>
+                                <span class="star">&#9733;</span>
+                            </p>
+                            <p class="text-muted mb-0 mt-1">
+                                {{ number_format($item['gia'], 0, ',', '.') }} x
+                                {{ $item['soluong'] }}
+                            </p>
                         </td>
+
+
+
                         <td>{{ number_format($item['total'], 0, ',', '.') }} VND</td>
                     </tr>
                     @endforeach
@@ -176,7 +186,13 @@ $coupon_session = Session::get('coupon');
                 <input type="hidden" id="id_coupon" value="">
                 <span> Phí vận chuyển <strong id="feeship">0</strong> VND</span>
                 <hr>
-                <p>Tổng giá trị:<strong id="displayTotal">{{$total_price}}</strong> VND</p>
+                <p>Tổng giá trị:<strong id="displayTotal">
+                        @if ($total_price)
+                        {{ number_format($total_price, 0, ',', '.') }}
+                        @else
+                        0
+                        @endif
+                    </strong> VND</p>
             </div>
         </div>
     </div>

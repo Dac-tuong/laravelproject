@@ -40,7 +40,7 @@
     </div>
 
     <div class="list-history-order">
-        <div class="table-view show-view">
+        <div class="table-view">
             <table class="table-list-order">
                 <thead>
                     <tr>
@@ -115,9 +115,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     </div>
