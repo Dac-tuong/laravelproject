@@ -68,7 +68,7 @@ Route::post('/update-product/{product_id}', [ProductControll::class, 'update_pro
 // Home controller
 use App\Http\Controllers\HomeController;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index']);
 
 Route::get('/detail-product/{product_id}', [HomeController::class, 'detail_product']);
 
@@ -83,6 +83,7 @@ use App\Http\Controllers\SidebarController;
 
 Route::get('/thong-tin-ca-nhan', [SidebarController::class, 'thong_tin_ca_nhan']);
 Route::get('/history-order', [SidebarController::class, 'history_order']);
+Route::get('/favorite-product', [SidebarController::class, 'favorite_product']);
 
 // Users account
 use App\Http\Controllers\CheckoutController;

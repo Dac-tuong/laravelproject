@@ -11,9 +11,7 @@
                 <div class="flex-inline"><strong>Email:</strong><span>{{$infocustomer->email_user}}</span></div>
                 <div class="flex-inline"><strong>Số điện thoại:</strong><span>{{$infocustomer->phone_user}}</span></div>
                 <div class="flex-inline"><strong>Địa chỉ:</strong>
-                    <span>
-                        {{$address}}
-                    </span>
+
                 </div>
             </div>
         </div>

@@ -1,7 +1,10 @@
 @extends('layout')
 @section('content')
 <div class="border-white">
-    Trang chủ/ thông tin cá nhân/ Lịch sử đơn hàng
+    <div class="breadcrumb">
+        <a href="{{ URL::to('/home') }}">Trang chủ </a>/
+        <a href="{{ URL::to('/history-order') }}">Lịch sử mua hàng</a>
+    </div>
 </div>
 
 <div class="history-order-content">
@@ -19,21 +22,24 @@
     <div class="filler-order">
         <form action="" class="filler-order-form">
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-3 mb-2">
+                <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
                     <input type="text" placeholder="Mã đơn hàng" class="form-control">
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 mb-2">
+                <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
                     <input type="date" placeholder="Ngày mua hàng" class="form-control">
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 mb-2">
+                <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
                     <select name="" id="" class="form-control">
                         <option value="">Chờ xữ lý</option>
                         <option value="">Đã xữ lý</option>
                         <option value="">Đã hủy</option>
                     </select>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 mb-2">
-                    <a href="" class="form-control">Tải lại</a>
+                <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
+                    <a href="#" class="btn btn-primary w-100">Lọc</a>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
+                    <a href="#" class="btn btn-secondary w-100">Tải lại</a>
                 </div>
             </div>
         </form>
@@ -101,10 +107,10 @@
             </table>
         </div>
 
-        <div class="grid-view" id="grid-view">
+        <div class="card-view" id="card-view">
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                    <div class="card-view">
+                    <div class="border-card ">
                         <div class="card-header">
                             <div class="pull-right"><label class="">Chờ xữ lý</label></div>
                             <span>Mã đơn hàng <a href=""> 0921asewssd</a></span>

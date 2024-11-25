@@ -21,10 +21,11 @@
 
 
 
-
+     <!-- Link font-awesome -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
          crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <!-- Link font-awesome -->
  </head>
 
  <body>
@@ -126,7 +127,7 @@
                      <li> <a href="{{ URL::to('/thong-tin-ca-nhan') }}">Thông tin khách hàng</a></li>
                      <li> <a href="{{URL::to('/cart')}}">Giỏ hàng</a></li>
                      <li> <a href="{{URL::to('/checkout')}}">Thanh toán</a></li>
-                     <li> <a href="{{ URL::to('') }}">Danh sách yêu thích</a></li>
+                     <li> <a href="{{ URL::to('/favorite-product') }}">Danh sách yêu thích</a></li>
                      <li> <a href="{{ URL::to('/history-order') }}">Lịch sử mua hàng</a></li>
                      <li> <a href="{{ URL::to('') }}">Cài đặt</a></li>
                      <li> <a href="{{ URL::to('/logout') }}">Đăng xuất</a></li>
@@ -140,7 +141,7 @@
              <div class="container-xl" style=" border: 1px solid black;">
                  <div class="nav-sidebar">
                      <ul class="menu">
-                         <li class="megamenu"><a href="{{URL::to('/')}}">TRANG CHỦ</a></li>
+                         <li class="megamenu"><a href="{{URL::to('/home')}}">TRANG CHỦ</a></li>
                          <li class="megamenu">
                              <a href="">ĐIỆN THOẠI</a>
                              <ul class="sub-megamenu">
@@ -254,9 +255,18 @@
          }
 
          function toggleView() {
-             document.getElementById('table-view').style.display = 'none';
+             const tableView = document.getElementById('table-view');
+             const cardView = document.getElementById('card-view');
 
-             document.getElementById('grid-view').style.display = 'block';
+             if (getComputedStyle(tableView).display === 'none') {
+                 // Hiển thị table-view và ẩn card-view
+                 tableView.style.display = 'block';
+                 cardView.style.display = 'none';
+             } else {
+                 // Ẩn table-view và hiển thị card-view
+                 tableView.style.display = 'none';
+                 cardView.style.display = 'block';
+             }
 
          }
 

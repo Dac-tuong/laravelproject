@@ -953,20 +953,22 @@
     justify-content: space-between;
     align-items: center;
 }
-
+.toggle-view {
+    cursor: pointer;
+}
+#table-view {
+    display: block;
+}
 .table-list-order {
     width: 100%;
     text-align: center;
     /* display: none; */
 }
 
-.show-view {
-    display: block;
-}
-.grid-view {
+#card-view {
     display: none;
 }
-.card-view {
+.border-card {
     border: 1px solid #0e0e0e79;
     padding: 10px 10px;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
