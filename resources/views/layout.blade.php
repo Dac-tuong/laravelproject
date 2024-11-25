@@ -89,10 +89,10 @@
                          <div class="customer">
                              @if (Session::get('id_customer'))
                              <!-- User is logged in -->
-                             <a href="#" class="user-customer" onclick="openSidebar()">
+                             <p href="" class="user-customer" onclick="openSidebar()">
                                  <img src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
                                  {{Session::get('name_customer')}}
-                             </a>
+                             </p>
 
                              @else
                              <!-- User is not logged in -->
@@ -114,7 +114,7 @@
              <!-- Nội dung sidebar -->
 
              <div class="sidebar-header">
-                 <a href="#" class="user-customer-sidebar" onclick="openSidebar()">
+                 <a href="" class="user-customer-sidebar" onclick="openSidebar()">
                      <img src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
                      {{Session::get('name_customer')}}
                  </a>
@@ -251,6 +251,13 @@
 
              // Hiển thị overlay bằng cách thay đổi display thành block
              document.getElementById('overlay').style.display = 'none';
+         }
+
+         function toggleView() {
+             document.getElementById('table-view').style.display = 'none';
+
+             document.getElementById('grid-view').style.display = 'block';
+
          }
 
          document.querySelectorAll('.toggle-btn').forEach(function(link) {

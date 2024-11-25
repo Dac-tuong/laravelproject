@@ -9,7 +9,7 @@
         <h4 class="title-history">
             LỊCH SỬ MUA HÀNG CỦA BẠN
         </h4>
-        <div class="toggle-view">
+        <div class="toggle-view" onclick="toggleView()">
             <span class="toggle-title">Hiển thị theo</span>
             <img src="" alt="">
             <span class="type-view">Dạng thẻ</span>
@@ -40,7 +40,7 @@
     </div>
 
     <div class="list-history-order">
-        <div class="table-view">
+        <div class="table-view" id="table-view">
             <table class="table-list-order">
                 <thead>
                     <tr>
@@ -101,7 +101,7 @@
             </table>
         </div>
 
-        <div class="grid-view">
+        <div class="grid-view" id="grid-view">
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                     <div class="card-view">
