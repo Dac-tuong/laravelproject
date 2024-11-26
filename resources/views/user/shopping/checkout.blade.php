@@ -25,21 +25,21 @@ $coupon_session = Session::get('coupon');
                         <input class="form-control" type="text" data-input-value="fullname" name="fullname"
                             id="fullname" placeholder="Họ và tên">
                         <label for="" data-check-value="fullname" style="display: none; color: red;">Vui lòng điền thông
-                            tin</label>
+                            tin!</label>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <input class="form-control" type="text" data-input-value="phonenumber" name="phonenumber"
                             id="phonenumber" placeholder="Số điện thoại">
                         <label for="" data-check-value="phonenumber" style="display: none; color: red;">Vui lòng điền
-                            thông tin</label>
+                            thông tin!</label>
                     </div>
                 </div>
                 <div class="mb-3">
                     <input class="form-control" type="text" data-input-value="email_order" name="email_order"
                         id="email_order" placeholder="Email người nhận">
                     <label for="" data-check-value="email_order" style="display: none; color: red;">Vui lòng điền thông
-                        tin</label>
+                        tin!</label>
                 </div>
 
                 <div class="mb-3 row">
@@ -51,7 +51,7 @@ $coupon_session = Session::get('coupon');
                             @endforeach
                         </select>
                         <label for="" data-check-value="city" style="display: none; color: red;">Vui lòng điền thông
-                            tin</label>
+                            tin!</label>
                     </div>
 
                     <div class="col-md-4">
@@ -59,20 +59,20 @@ $coupon_session = Session::get('coupon');
                             <option value="">Chọn Quận/Huyện</option>
                         </select>
                         <label for="" data-check-value="district" style="display: none; color: red;">Vui lòng điền thông
-                            tin</label>
+                            tin!</label>
                     </div>
                     <div class="col-md-4">
                         <select id="wards" name="wards" data-input-value="wards" class="form-control">
                             <option value="">Chọn Xã/Phường</option>
                         </select>
                         <label for="" data-check-value="wards" style="display: none; color: red;">Vui lòng điền thông
-                            tin</label>
+                            tin!</label>
                     </div>
                 </div>
                 <div class="mb-3">
                     <input type="text" name="address" data-input-value="address" id="address" class="form-control">
                     <label for="" data-check-value="address" style="display: none; color: red;">Vui lòng điền thông
-                        tin</label>
+                        tin!</label>
                 </div>
                 <div class="mb-3">
                     <textarea class="form-control" name="note_order" id="note_order" placeholder="Ghi chú"></textarea>
@@ -88,7 +88,7 @@ $coupon_session = Session::get('coupon');
     </div>
     <div class="col-sm-4">
         <div class="cart-info">
-            <h3>Thông tin đơn hàng</h3>
+            <h3>Thông tin! đơn hàng</h3>
             @if($cart && count($cart) > 0)
             <table class="table-cart">
                 <thead>

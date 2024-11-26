@@ -141,7 +141,7 @@
              <div class="container-xl" style=" border: 1px solid black;">
                  <div class="nav-sidebar">
                      <ul class="menu">
-                         <li class="megamenu"><a href="{{URL::to('/home')}}">TRANG CHỦ</a></li>
+                         <li class="megamenu"><a href="{{URL::to('/')}}">TRANG CHỦ</a></li>
                          <li class="megamenu">
                              <a href="">ĐIỆN THOẠI</a>
                              <ul class="sub-megamenu">
@@ -238,106 +238,106 @@
      <script src="{{asset("user/js/toastr.js")}}"></script>
 
      <script>
-         // Mở sidebar
-         function openSidebar() {
-             // Hiển thị sidebar bằng cách đặt left về 0
-             document.getElementById('sidebar').style.right = '0';
-             // Hiển thị overlay bằng cách thay đổi display thành block
-             document.getElementById('overlay').style.display = 'block';
+     // Mở sidebar
+     function openSidebar() {
+         // Hiển thị sidebar bằng cách đặt left về 0
+         document.getElementById('sidebar').style.right = '0';
+         // Hiển thị overlay bằng cách thay đổi display thành block
+         document.getElementById('overlay').style.display = 'block';
+     }
+     // Đóng sidebar
+     function closeSidebar() {
+         // Hiển thị sidebar bằng cách đặt left về 0
+         document.getElementById('sidebar').style.right = '-300px';
+
+         // Hiển thị overlay bằng cách thay đổi display thành block
+         document.getElementById('overlay').style.display = 'none';
+     }
+
+     function toggleView() {
+         const tableView = document.getElementById('table-view');
+         const cardView = document.getElementById('card-view');
+         if (getComputedStyle(tableView).display === 'none') {
+             // Hiển thị table-view và ẩn card-view
+             tableView.style.display = 'block';
+             cardView.style.display = 'none';
+         } else {
+             // Ẩn table-view và hiển thị card-view
+             tableView.style.display = 'none';
+             cardView.style.display = 'block';
+         }
+     }
+
+
+
+     document.querySelectorAll('.toggle-btn').forEach(function(link) {
+         link.addEventListener('click', function(event) {
+             event.preventDefault();
+             const ul = link.nextElementSibling;
+             ul.classList.toggle('active');
+         });
+     });
+
+     document.querySelector('.comment-text').addEventListener('focus', function() {
+         document.querySelector('.cmt-button').style.display = 'flex';
+     })
+
+
+     document.addEventListener("DOMContentLoaded", function() {
+         var imageList = document.getElementById("gallery-product");
+         var displayedImage = document.getElementById("image-target");
+
+         // Lấy tất cả hình ảnh trong gallery
+         var allImages = imageList.querySelectorAll("img");
+
+         // Kiểm tra xem có hình ảnh nào không và mặc định hiển thị hình ảnh đầu tiên
+         if (allImages.length > 0) {
+             var firstImage = allImages[0];
+             displayedImage.src = firstImage.src; // Hiển thị hình ảnh đầu tiên
+             firstImage.classList.add("selected"); // Thêm lớp 'selected' cho hình ảnh đầu tiên
          }
 
-         function closeSidebar() {
-             // Hiển thị sidebar bằng cách đặt left về 0
-             document.getElementById('sidebar').style.right = '-300px';
+         // Lắng nghe sự kiện nhấp vào các mục trong danh sách ảnh
+         imageList.addEventListener("click", function(event) {
+             if (event.target.tagName === "IMG") {
+                 // Xóa lớp 'selected' khỏi tất cả hình ảnh
+                 allImages.forEach(function(img) {
+                     img.classList.remove("selected");
+                 });
 
-             // Hiển thị overlay bằng cách thay đổi display thành block
-             document.getElementById('overlay').style.display = 'none';
-         }
+                 // Thêm lớp 'selected' cho hình ảnh được nhấp vào
+                 event.target.classList.add("selected");
 
-         function toggleView() {
-             const tableView = document.getElementById('table-view');
-             const cardView = document.getElementById('card-view');
-
-             if (getComputedStyle(tableView).display === 'none') {
-                 // Hiển thị table-view và ẩn card-view
-                 tableView.style.display = 'block';
-                 cardView.style.display = 'none';
-             } else {
-                 // Ẩn table-view và hiển thị card-view
-                 tableView.style.display = 'none';
-                 cardView.style.display = 'block';
+                 // Lấy đường dẫn của ảnh từ thuộc tính 'src' của hình ảnh được nhấp vào
+                 var imageURL = event.target.src;
+                 // Hiển thị ảnh được nhấp vào trong vùng hiển thị
+                 displayedImage.src = imageURL;
              }
-
-         }
-
-         document.querySelectorAll('.toggle-btn').forEach(function(link) {
-             link.addEventListener('click', function(event) {
-                 event.preventDefault();
-                 const ul = link.nextElementSibling;
-                 ul.classList.toggle('active');
-             });
          });
 
-         document.querySelector('.comment-text').addEventListener('focus', function() {
-             document.querySelector('.cmt-button').style.display = 'flex';
-         })
+         // Thiết lập các sự kiện cho hiệu ứng zoom ở đây (nếu cần)
+         const img = document.getElementById('image-target');
+         const mirror = document.querySelector('.mirror');
 
+         img.addEventListener('mousemove', (e) => {
+             const rect = img.getBoundingClientRect();
+             const x = e.clientX - rect.left;
+             const y = e.clientY - rect.top;
+             const xPercent = (x / rect.width) * 100;
+             const yPercent = (y / rect.height) * 100;
 
-         document.addEventListener("DOMContentLoaded", function() {
-             var imageList = document.getElementById("gallery-product");
-             var displayedImage = document.getElementById("image-target");
-
-             // Lấy tất cả hình ảnh trong gallery
-             var allImages = imageList.querySelectorAll("img");
-
-             // Kiểm tra xem có hình ảnh nào không và mặc định hiển thị hình ảnh đầu tiên
-             if (allImages.length > 0) {
-                 var firstImage = allImages[0];
-                 displayedImage.src = firstImage.src; // Hiển thị hình ảnh đầu tiên
-                 firstImage.classList.add("selected"); // Thêm lớp 'selected' cho hình ảnh đầu tiên
-             }
-
-             // Lắng nghe sự kiện nhấp vào các mục trong danh sách ảnh
-             imageList.addEventListener("click", function(event) {
-                 if (event.target.tagName === "IMG") {
-                     // Xóa lớp 'selected' khỏi tất cả hình ảnh
-                     allImages.forEach(function(img) {
-                         img.classList.remove("selected");
-                     });
-
-                     // Thêm lớp 'selected' cho hình ảnh được nhấp vào
-                     event.target.classList.add("selected");
-
-                     // Lấy đường dẫn của ảnh từ thuộc tính 'src' của hình ảnh được nhấp vào
-                     var imageURL = event.target.src;
-                     // Hiển thị ảnh được nhấp vào trong vùng hiển thị
-                     displayedImage.src = imageURL;
-                 }
-             });
-
-             // Thiết lập các sự kiện cho hiệu ứng zoom ở đây (nếu cần)
-             const img = document.getElementById('image-target');
-             const mirror = document.querySelector('.mirror');
-
-             img.addEventListener('mousemove', (e) => {
-                 const rect = img.getBoundingClientRect();
-                 const x = e.clientX - rect.left;
-                 const y = e.clientY - rect.top;
-                 const xPercent = (x / rect.width) * 100;
-                 const yPercent = (y / rect.height) * 100;
-
-                 mirror.style.backgroundSize = `400px 400px`;
-                 mirror.style.top = `${e.clientY - 50}px`;
-                 mirror.style.left = `${e.clientX - 50}px`;
-                 mirror.style.backgroundImage = `url(${img.src})`;
-                 mirror.style.backgroundPosition = `${xPercent}% ${yPercent}%`;
-                 mirror.classList.remove("hide");
-             });
-
-             img.addEventListener('mouseleave', () => {
-                 mirror.classList.add("hide");
-             });
+             mirror.style.backgroundSize = `400px 400px`;
+             mirror.style.top = `${e.clientY - 50}px`;
+             mirror.style.left = `${e.clientX - 50}px`;
+             mirror.style.backgroundImage = `url(${img.src})`;
+             mirror.style.backgroundPosition = `${xPercent}% ${yPercent}%`;
+             mirror.classList.remove("hide");
          });
+
+         img.addEventListener('mouseleave', () => {
+             mirror.classList.add("hide");
+         });
+     });
      </script>
 
 
@@ -345,152 +345,152 @@
 
 
      <script>
-         $(document).ready(function() {
-             //show quantity cart
-             show_cart_quantity();
+     $(document).ready(function() {
+         //show quantity cart
+         show_cart_quantity();
 
-             function show_cart_quantity() {
-                 $.ajax({
-                     url: "{{ url('/count-cart') }}", // Sử dụng URL helper để đảm bảo URL chính xác
-                     method: "GET",
-                     success: function(data) {
-                         $('#quantity-cart').html(data);
-                     }
-                 });
-             }
-
-
-             $('.add-to-cart').click(function() {
-                 var id = $(this).data('id_product');
-
-                 // Lấy thông tin sản phẩm từ các input ẩn trong HTML
-                 var productData = {
-                     cart_product_id: $('.cart_product_id_' + id).val(),
-                     cart_product_name: $('.cart_product_name_' + id).val(),
-                     cart_product_image: $('.cart_product_image_' + id).val(),
-                     cart_product_price: $('.cart_product_price_' + id).val(),
-                     cart_product_qty: $('.cart_product_qty_' + id).val(),
-                     _token: $('input[name="_token"]').val()
-                 };
-
-                 // Gửi yêu cầu Ajax để thêm sản phẩm vào giỏ hàng
-                 $.ajax({
-                     url: '{{url("/add-cart")}}',
-                     method: 'POST',
-                     data: productData,
-                     success: function(response) {
-                         toastr.options = {
-                             "positionClass": "toast-bottom-right",
-                             "timeOut": "3000"
-                         };
-                         toastr.success('Đã thêm sản phẩm vào giỏ hàng', '');
-                         show_cart_quantity();
-
-                     },
-                 });
-             });
-
-
-             $('.send-order').click(function() {
-                 var allValid = true;
-                 var formData = {};
-                 var feeshipText = $('#feeship').text();
-                 var feeshipInt = parseInt(feeshipText.replace(/\./g, ''));
-                 var _token = $('input[name="_token"]').val();
-                 var totalOrderText = $('#displayTotal').text();
-                 var totalOrderInt = parseInt(totalOrderText.replace(/\./g, ''));
-                 var discounValue = $('#id_coupon').val();
-                 var note_order = $('#note_order').val();
-
-                 $('[data-input-value]').each(function() {
-                     var sourceType = $(this).data('input-value');
-                     var inputValue = $(this).val();
-                     if (!checkErrorInput(sourceType, inputValue)) {
-                         allValid = false;
-                     }
-                     formData[sourceType] = inputValue;
-                 });
-
-                 if (allValid) {
-                     formData.feeship = feeshipInt;
-                     formData.totalOrder = totalOrderInt;
-                     formData.discount = discounValue;
-                     formData.note = note_order;
-                     formData._token = _token;
-
-                     // Hiển thị popup xác nhận
-                     Swal.fire({
-                         title: 'Xác nhận thanh toán',
-                         text: 'Bạn có chắc chắn muốn gửi đơn hàng?',
-                         icon: 'warning',
-                         showCancelButton: true,
-                         confirmButtonText: 'Đồng ý',
-                         cancelButtonText: 'Hủy'
-                     }).then((result) => {
-                         if (result.isConfirmed) {
-                             // Gửi dữ liệu nếu người dùng xác nhận
-                             $.ajax({
-                                 url: '/order-product',
-                                 method: 'POST',
-                                 data: formData,
-                                 success: function(response) {
-                                     if (response.status === 'success') {
-                                         Swal.fire('Thành công', response.message,
-                                             'success');
-                                     }
-                                 },
-                                 error: function(xhr, status, error) {
-                                     Swal.fire('Lỗi',
-                                         'Có lỗi xảy ra khi gửi đơn hàng: ' + error,
-                                         'error');
-                                 }
-                             });
-                         }
-                     });
+         function show_cart_quantity() {
+             $.ajax({
+                 url: "{{ url('/count-cart') }}", // Sử dụng URL helper để đảm bảo URL chính xác
+                 method: "GET",
+                 success: function(data) {
+                     $('#quantity-cart').html(data);
                  }
+             });
+         }
+
+
+         $('.add-to-cart').click(function() {
+             var id = $(this).data('id_product');
+
+             // Lấy thông tin sản phẩm từ các input ẩn trong HTML
+             var productData = {
+                 cart_product_id: $('.cart_product_id_' + id).val(),
+                 cart_product_name: $('.cart_product_name_' + id).val(),
+                 cart_product_image: $('.cart_product_image_' + id).val(),
+                 cart_product_price: $('.cart_product_price_' + id).val(),
+                 cart_product_qty: $('.cart_product_qty_' + id).val(),
+                 _token: $('input[name="_token"]').val()
+             };
+
+             // Gửi yêu cầu Ajax để thêm sản phẩm vào giỏ hàng
+             $.ajax({
+                 url: '{{url("/add-cart")}}',
+                 method: 'POST',
+                 data: productData,
+                 success: function(response) {
+                     toastr.options = {
+                         "positionClass": "toast-bottom-right",
+                         "timeOut": "3000"
+                     };
+                     toastr.success('Đã thêm sản phẩm vào giỏ hàng', '');
+                     show_cart_quantity();
+
+                 },
              });
          });
 
-         // Hàm kiểm tra giá trị của input và hiển thị lỗi
-         function checkErrorInput(sourceType, inputValue) {
-             var check_error = document.querySelector('[data-check-value="' + sourceType + '"]');
 
-             if (inputValue === "") {
-                 showLabelError(check_error, 'Vui lòng điền thông tin');
+         $('.send-order').click(function() {
+             var allValid = true;
+             var formData = {};
+             var feeshipText = $('#feeship').text();
+             var feeshipInt = parseInt(feeshipText.replace(/\./g, ''));
+             var _token = $('input[name="_token"]').val();
+             var totalOrderText = $('#displayTotal').text();
+             var totalOrderInt = parseInt(totalOrderText.replace(/\./g, ''));
+             var discounValue = $('#id_coupon').val();
+             var note_order = $('#note_order').val();
+
+             $('[data-input-value]').each(function() {
+                 var sourceType = $(this).data('input-value');
+                 var inputValue = $(this).val();
+                 if (!checkErrorInput(sourceType, inputValue)) {
+                     allValid = false;
+                 }
+                 formData[sourceType] = inputValue;
+             });
+
+             if (allValid) {
+                 formData.feeship = feeshipInt;
+                 formData.totalOrder = totalOrderInt;
+                 formData.discount = discounValue;
+                 formData.note = note_order;
+                 formData._token = _token;
+
+                 // Hiển thị popup xác nhận
+                 Swal.fire({
+                     title: 'Xác nhận thanh toán',
+                     text: 'Bạn có chắc chắn muốn gửi đơn hàng?',
+                     icon: 'warning',
+                     showCancelButton: true,
+                     confirmButtonText: 'Đồng ý',
+                     cancelButtonText: 'Hủy'
+                 }).then((result) => {
+                     if (result.isConfirmed) {
+                         // Gửi dữ liệu nếu người dùng xác nhận
+                         $.ajax({
+                             url: '/order-product',
+                             method: 'POST',
+                             data: formData,
+                             success: function(response) {
+                                 if (response.status === 'success') {
+                                     Swal.fire('Thành công', response.message,
+                                         'success');
+                                 }
+                             },
+                             error: function(xhr, status, error) {
+                                 Swal.fire('Lỗi',
+                                     'Có lỗi xảy ra khi gửi đơn hàng: ' + error,
+                                     'error');
+                             }
+                         });
+                     }
+                 });
+             }
+         });
+     });
+
+     // Hàm kiểm tra giá trị của input và hiển thị lỗi
+     function checkErrorInput(sourceType, inputValue) {
+         var check_error = document.querySelector('[data-check-value="' + sourceType + '"]');
+
+         if (inputValue === "") {
+             showLabelError(check_error, 'Vui lòng điền thông tin');
+             return false;
+         }
+
+         if (sourceType === "phonenumber") {
+             var phonePattern = /^(0[3|5|7|8|9])+([0-9]{8})$/;
+             if (!phonePattern.test(inputValue)) {
+                 showLabelError(check_error, 'Số điện thoại không hợp lệ');
                  return false;
              }
-
-             if (sourceType === "phonenumber") {
-                 var phonePattern = /^(0[3|5|7|8|9])+([0-9]{8})$/;
-                 if (!phonePattern.test(inputValue)) {
-                     showLabelError(check_error, 'Số điện thoại không hợp lệ');
-                     return false;
-                 }
-             }
-
-             if (sourceType === 'email_order') {
-                 var validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-                 if (!validateEmail.test(inputValue)) {
-                     showLabelError(check_error, 'Email không hợp lệ');
-                     return false;
-                 }
-             }
-
-             showLabelError(check_error, '', true);
-             return true;
-
          }
 
-         // Hàm gán nội dung thông báo lỗi vào thẻ label
-         function showLabelError(label, message, isValid = false) {
-             if (isValid) {
-                 label.style.display = 'none';
-             } else {
-                 label.style.display = 'block';
-                 label.textContent = message;
+         if (sourceType === 'email_order') {
+             var validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+             if (!validateEmail.test(inputValue)) {
+                 showLabelError(check_error, 'Email không hợp lệ');
+                 return false;
              }
          }
+
+         showLabelError(check_error, '', true);
+         return true;
+
+     }
+
+     // Hàm gán nội dung thông báo lỗi vào thẻ label
+     function showLabelError(label, message, isValid = false) {
+         if (isValid) {
+             label.style.display = 'none';
+         } else {
+             label.style.display = 'block';
+             label.textContent = message;
+         }
+     }
      </script>
  </body>
 

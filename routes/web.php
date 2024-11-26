@@ -68,7 +68,7 @@ Route::post('/update-product/{product_id}', [ProductControll::class, 'update_pro
 // Home controller
 use App\Http\Controllers\HomeController;
 
-Route::get('/home', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/detail-product/{product_id}', [HomeController::class, 'detail_product']);
 

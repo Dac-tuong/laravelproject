@@ -30,13 +30,16 @@ $message = Session::get('message');
             <div class="row row-form">
                 <label>Email</label>
                 <br>
-                <input class="input-form" placeholder="Nhập Email" type="text" name="user_email" required>
+                <input class="input-form" placeholder="Nhập Email" type="email" name="user_email" required>
             </div>
-            <div class=" row row-form">
+            <div class="row row-form">
                 <label>Mật khẩu</label>
                 <br>
-                <input class="input-form" placeholder="Nhập mật khẩu" type="password" name="user_password" required>
+                <input id="password" class="input-form" placeholder="Nhập mật khẩu" type="password" name="user_password"
+                    maxlength="20" required>
+                <button type="button" id="toggle-password" class="toggle-password">Hiện</button>
             </div>
+
             <div class="row row-form">
                 <input class="submit-btn" type="submit" name="dangnhap" id="" value="Đăng nhập">
 
@@ -44,9 +47,23 @@ $message = Session::get('message');
                         tài khoản</a>
                 </div>
             </div>
-
         </form>
     </div>
 </body>
+
+<script>
+document.getElementById('toggle-password').addEventListener('click', function() {
+    const passwordInput = document.getElementById('password');
+    const button = this;
+
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        button.textContent = 'Ẩn';
+    } else {
+        passwordInput.type = 'password';
+        button.textContent = 'Hiện';
+    }
+});
+</script>
 
 </html>

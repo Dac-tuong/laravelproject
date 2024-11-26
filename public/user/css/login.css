@@ -30,6 +30,7 @@ body {
 .row-form {
     height: 40px;
     margin-bottom: 35px;
+    position: relative;
 }
 
 .row-form label {
