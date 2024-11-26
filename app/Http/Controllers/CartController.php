@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Coupons;
+use App\Models\ShoppingCartModel;
 use Illuminate\Support\Facades\Redirect;
 
 session_start();
@@ -16,11 +17,11 @@ class CartController extends Controller
 
     public function index()
     {
-        $shipping_fee = 25000;
+        // $shipping_fee = 25000;
         $brand = Brand::get();
         $category = Category::get();
         // Truyền dữ liệu vào view bằng mảng
-        Session::put('fee_ship', $shipping_fee);
+        // Session::put('fee_ship', $shipping_fee);
         return view('user.shopping.cart')->with('brands', $brand)->with('categorys', $category);
     }
 

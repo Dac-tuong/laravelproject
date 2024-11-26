@@ -21,7 +21,6 @@ return new class extends Migration
             $table->integer('maqh_feeship');
             $table->integer('xaid_feeship');
             $table->integer('feeship');
-
             $table->timestamps();
         });
     }

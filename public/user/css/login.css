@@ -32,7 +32,15 @@ body {
     margin-bottom: 35px;
     position: relative;
 }
-
+.toggle-password {
+    right: -4px;
+    position: absolute;
+    height: 40px;
+    background-color: transparent;
+    top: 23px;
+    width: 40px;
+    border: none;
+}
 .row-form label {
     font-size: 18px;
 }

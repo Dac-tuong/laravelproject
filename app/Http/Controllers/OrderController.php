@@ -158,8 +158,6 @@ class OrderController extends Controller
         $order_update->order_status = $orderStatus;
         $order_update->order_cancellation_reason = $orderReason;
         $order_update->save();
-
-
         $orderStatusText = '';
 
         if ($order_update->order_status == 0) {

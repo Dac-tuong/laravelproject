@@ -137,7 +137,6 @@ class CheckoutController extends Controller
     }
 
 
-
     public function order_product(Request $request)
     {
 

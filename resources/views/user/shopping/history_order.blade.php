@@ -57,7 +57,7 @@
                             Mã đơn hàng
                         </th>
                         <th>
-                            Tên khách hàng
+                            Tên người mua
                         </th>
                         <th>
                             Số lượng
@@ -77,32 +77,36 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($historys as $history )
                     <tr>
                         <td>
                             1
                         </td>
                         <td>
-                            0921asewssd
+                            {{$history->order_code }}
                         </td>
                         <td>
-                            Nguyễn Văn A
+                            {{$history->shippingAddress->fullname}}
                         </td>
                         <td>
-                            Số lượng
+
+                            {{$history->orderDetail->sum('product_sale_quantity')}}
+
                         </td>
                         <td>
-                            Chi phí
+                            {{ number_format($history->order_total, 0, ',', '.') }} đ
                         </td>
                         <td>
-                            11/11/1111
+                            {{$history->create_at}}
                         </td>
                         <td>
-                            Trạng thái
+                            {{$history->order_status}}
                         </td>
                         <td>
                             <a href="">Xem</a>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
