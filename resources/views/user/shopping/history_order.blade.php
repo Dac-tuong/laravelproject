@@ -1,11 +1,11 @@
 @extends('layout')
 @section('content')
-<div class="border-white">
-    <div class="breadcrumb">
-        <a href="{{ URL::to('/home') }}">Trang chủ </a>/
-        <a href="{{ URL::to('/history-order') }}">Lịch sử mua hàng</a>
-    </div>
+
+<div class="breadcrumb">
+    <a href="{{ URL::to('/') }}">Trang chủ </a>/
+    <a href="{{ URL::to('/history-order') }}">Lịch sử mua hàng</a>
 </div>
+
 
 <div class="history-order-content">
     <div class="history-order-title mb-3">
@@ -80,7 +80,7 @@
                     @foreach ($historys as $history )
                     <tr>
                         <td>
-                            1
+                            {{ $loop->iteration }}
                         </td>
                         <td>
                             {{$history->order_code }}

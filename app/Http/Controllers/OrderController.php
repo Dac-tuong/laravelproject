@@ -196,23 +196,21 @@ class OrderController extends Controller
     {
         $brand = Brand::get();
         $category = Category::get();
-        $order_update = OrderProduct::where('order_code', $order_code)->first();
         $order_count_quantity = 0;
-        $data_detailOrder = OrderDetail::where('order_code', $order_code)->get();
+        $order_infomation = OrderDetail::where('order_code', $order_code)->get();
 
-        foreach ($data_detailOrder as $detailOrder) {
+        foreach ($order_infomation as $detailOrder) {
             $order_count_quantity += $detailOrder['product_sale_quantity'];
         }
 
-        $order_ship = OrderProduct::with([
+        $order_history = OrderProduct::with([
             'shippingAddress.province',
             'shippingAddress.districts',
             'shippingAddress.wards'
-
         ])
             ->where('order_code', $order_code)->first();
 
-        $find_coupon =  $order_ship->discount_coupon_id;
+        $find_coupon =  $order_history->discount_coupon_id;
 
         $check_coupon = Coupons::where('id_coupon', $find_coupon)->first();
 
@@ -229,23 +227,21 @@ class OrderController extends Controller
         // Nếu không tìm thấy coupon
         $discount_amount = 0 . ' VNĐ'; // Không có giảm giá
 
-        if ($order_ship->order_status == 0) {
+        if ($order_history->order_status == 0) {
             $order_status = 'Đã hủy';
-        } elseif ($order_ship->order_status == 2) {
+        } elseif ($order_history->order_status == 2) {
             $order_status = 'Đã xác nhận';
         } else {
             $order_status = 'Đơn hàng mới';
         }
 
-        // return view('admin.order.order_detail')
-        //     ->with('detailOrder', $data_detailOrder)
-        //     ->with('orderShip', $order_ship)
-        //     ->with('orderCount', $order_count_quantity)
-        //     ->with('orderStatus', $order_status)
-        //     ->with('discountAmount', $discount_amount);
+
         return view('user.shopping.view_history_order')
             ->with('brands', $brand)
             ->with("categorys", $category)
+            ->with("order_historys", $order_history)
+            ->with("order_infomations", $order_infomation)
+            ->with("discount_num", $discount_amount)
         ;
     }
 }

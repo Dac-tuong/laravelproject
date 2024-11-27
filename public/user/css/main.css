@@ -105,7 +105,7 @@
     object-fit: cover;
 }
 
-.sign-up {
+.sign-up-btn {
     font-weight: 500;
     font-size: 18px;
     color: white;
@@ -115,13 +115,12 @@
     border-radius: 4px;
 }
 
-.sign-in {
+.sign-in-btn {
     font-weight: 500;
     color: white;
     font-size: 18px;
     text-decoration: none;
 }
-
 .menu {
     display: flex;
     justify-content: space-between;
@@ -142,7 +141,7 @@
 }
 
 .app_container {
-    background: #f5f5f5;
+    background: #e0e0e0;
 }
 
 .header-content {
@@ -167,6 +166,12 @@
 .brand-item a {
     text-decoration: none;
     font-weight: 500;
+}
+
+.breadcrumbs {
+    background: white;
+    padding: 10px 10px;
+    margin-bottom: 10px;
 }
 
 /* ==============================SIDEBAR============================ */
@@ -888,9 +893,10 @@
 .border-white {
     background: white;
     border: 1px solid black;
-    padding: 20px 20px;
+    padding: 10px 20px;
     margin-bottom: 15px;
 }
+
 .title-top {
     font-size: 25px;
     color: #007bff;

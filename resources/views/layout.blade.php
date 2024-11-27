@@ -97,8 +97,8 @@
 
                              @else
                              <!-- User is not logged in -->
-                             <a href="{{ URL::to('/login-index') }}" class="sign-in">Đăng nhập</a>
-                             <a href="{{ URL::to('/register-index') }}" class="sign-up">Đăng ký</a>
+                             <a href="{{ URL::to('/login-index') }}" class="sign-in-btn">Đăng nhập</a>
+                             <a href="{{ URL::to('/register-index') }}" class="sign-up-btn">Đăng ký</a>
                              @endif
 
                          </div>

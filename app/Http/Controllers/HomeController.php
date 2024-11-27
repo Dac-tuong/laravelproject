@@ -29,7 +29,9 @@ class HomeController extends Controller
             ->where('product_status', 1)
             ->orderBy('product_id', 'ASC')
             ->paginate(6);
-        return view('user.home')->with('products', $list_product)->with('brands', $brand)->with('categorys', $category);
+
+        return view('user.home')->with('products', $list_product)
+            ->with('brands', $brand)->with('categorys', $category);
     }
 
     public function detail_product($product_id)
@@ -70,7 +72,8 @@ class HomeController extends Controller
     {
         $brand = Brand::get();
         $category = Category::get();
-        $get_product = Product::with(['category', 'brand', 'galleries'])->where('tbl_phones.product_id', $product_id)->first();
+        $get_product = Product::with(['category', 'brand', 'galleries'])
+            ->where('tbl_phones.product_id', $product_id)->first();
 
         return view('user.product.review_product')
             ->with('product_infor', $get_product)
