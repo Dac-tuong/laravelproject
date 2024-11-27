@@ -82,7 +82,7 @@ Route::post('/search', [HomeController::class, 'search']);
 use App\Http\Controllers\SidebarController;
 
 Route::get('/thong-tin-ca-nhan', [SidebarController::class, 'thong_tin_ca_nhan']);
-Route::get('/history-order', [SidebarController::class, 'history_order']);
+
 Route::get('/favorite-product', [SidebarController::class, 'favorite_product']);
 
 // Users account
@@ -118,8 +118,6 @@ Route::get('/delete-all', [CartController::class, 'delete_all_cart']);
 Route::get('/delete-coupon', [CartController::class, 'delete_coupon']);
 
 Route::get('count-cart', [CartController::class, 'count_cart']);
-
-
 Route::post('/check-coupon', [CartController::class, 'check_coupon']);
 
 // Coupons
@@ -139,6 +137,8 @@ Route::get('/view-detail/{order_code}', [OrderController::class, 'view_detail'])
 Route::get('/print-order/{order_code}', [OrderController::class, 'print_order']);
 Route::post('/update-status-order', [OrderController::class, 'update_status_order']);
 
+Route::get('/history-order', [OrderController::class, 'history_order']);
+Route::get('/view-history-order/{order_code}', [OrderController::class, 'view_history']);
 // SLIDE CONTROLL
 
 use App\Http\Controllers\SlideController;

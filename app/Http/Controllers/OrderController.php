@@ -5,17 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Coupons;
 use App\Models\OrderDetail;
 use App\Models\OrderProduct;
-use App\Models\Product;
-use App\Models\SalesProduct;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use PHPUnit\Framework\Constraint\Count;
 use Illuminate\Support\Facades\App;
+use App\Models\Brand;
+use App\Models\Category;
+use Illuminate\Support\Facades\Session;
 
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends Controller
 {
+    // ADMIN
 
     public function print_order($order_code)
     {
@@ -26,7 +25,6 @@ class OrderController extends Controller
 
     public function print_order_convert($order_code)
     {
-
         // Khởi tạo biến đếm số lượng sản phẩm
         $order_count_quantity = 0;
         $summary_product = 0;
@@ -79,7 +77,6 @@ class OrderController extends Controller
                 }
             }
         }
-
 
         return view('admin.order.view_pdf')
             ->with('detailOrder', $data_detailOrder)
@@ -175,5 +172,80 @@ class OrderController extends Controller
             'orderStatusText' => $orderStatusText // Trả về tên trạng thái
 
         ]);
+    }
+
+
+    // USER
+
+
+    public function history_order()
+    {
+        $brand = Brand::get();
+        $category = Category::get();
+
+        $id_user = Session::get('id_customer');
+        $history_order = OrderProduct::where('id_customer', $id_user)->with(['shippingAddress', 'orderDetail'])->get();
+
+        return view('user.shopping.history_order')
+            ->with('brands', $brand)
+            ->with("categorys", $category)
+            ->with("historys", $history_order);
+    }
+
+    public function view_history($order_code)
+    {
+        $brand = Brand::get();
+        $category = Category::get();
+        $order_update = OrderProduct::where('order_code', $order_code)->first();
+        $order_count_quantity = 0;
+        $data_detailOrder = OrderDetail::where('order_code', $order_code)->get();
+
+        foreach ($data_detailOrder as $detailOrder) {
+            $order_count_quantity += $detailOrder['product_sale_quantity'];
+        }
+
+        $order_ship = OrderProduct::with([
+            'shippingAddress.province',
+            'shippingAddress.districts',
+            'shippingAddress.wards'
+
+        ])
+            ->where('order_code', $order_code)->first();
+
+        $find_coupon =  $order_ship->discount_coupon_id;
+
+        $check_coupon = Coupons::where('id_coupon', $find_coupon)->first();
+
+        if ($check_coupon) {
+            if ($check_coupon->coupon_type == 'fixed') {
+                // Giảm giá theo số tiền cố định
+                $discount_amount =
+                    number_format($check_coupon->discount, 0, ',', '.') . ' VNĐ';
+            } else {
+                // Giảm giá theo phần trăm
+                $discount_amount = $check_coupon->discount . ' %';
+            }
+        }
+        // Nếu không tìm thấy coupon
+        $discount_amount = 0 . ' VNĐ'; // Không có giảm giá
+
+        if ($order_ship->order_status == 0) {
+            $order_status = 'Đã hủy';
+        } elseif ($order_ship->order_status == 2) {
+            $order_status = 'Đã xác nhận';
+        } else {
+            $order_status = 'Đơn hàng mới';
+        }
+
+        // return view('admin.order.order_detail')
+        //     ->with('detailOrder', $data_detailOrder)
+        //     ->with('orderShip', $order_ship)
+        //     ->with('orderCount', $order_count_quantity)
+        //     ->with('orderStatus', $order_status)
+        //     ->with('discountAmount', $discount_amount);
+        return view('user.shopping.view_history_order')
+            ->with('brands', $brand)
+            ->with("categorys", $category)
+        ;
     }
 }

@@ -31,19 +31,6 @@ class SidebarController extends Controller
         ;
     }
 
-    public function history_order()
-    {
-        $brand = Brand::get();
-        $category = Category::get();
-
-        $id_user = Session::get('id_customer');
-        $history_order = OrderProduct::where('id_customer', $id_user)->with(['shippingAddress', 'orderDetail'])->get();
-
-        return view('user.shopping.history_order')
-            ->with('brands', $brand)
-            ->with("categorys", $category)
-            ->with("historys", $history_order);
-    }
 
     function favorite_product()
     {

@@ -103,7 +103,7 @@
                             {{$history->order_status}}
                         </td>
                         <td>
-                            <a href="">Xem</a>
+                            <a href="{{URL::to('/view-history-order'.'/'.$history->order_code)}}">Xem</a>
                         </td>
                     </tr>
                     @endforeach
