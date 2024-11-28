@@ -99,7 +99,6 @@ class OrderController extends Controller
         $data_detailOrder = OrderDetail::where('order_code', $order_code)->get();
 
         foreach ($data_detailOrder as $detailOrder) {
-            $order_count_quantity += $detailOrder['product_sale_quantity'];
         }
 
         $order_ship = OrderProduct::with([
@@ -127,7 +126,6 @@ class OrderController extends Controller
         return view('admin.order.order_detail')
             ->with('detailOrder', $data_detailOrder)
             ->with('orderShip', $order_ship)
-            ->with('orderCount', $order_count_quantity)
             ->with('orderStatus', $order_status)
             ->with('discountAmount', $check_coupon);
     }
