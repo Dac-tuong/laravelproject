@@ -103,8 +103,6 @@ $coupon_session = Session::get('coupon');
                     {{ number_format($price_cart, 0, ',', '.') }} VNĐ
                 </span>
             </div>
-
-
             @elseif($coupon['coupon_type'] == 'fixed')
             <div>
                 <span>

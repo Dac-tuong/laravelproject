@@ -16,7 +16,7 @@ $coupon_session = Session::get('coupon');
 
 
 <div class="row">
-    <div class="col-sm-8">
+    <div class="col-sm-7">
         <div class="check-out">
             <form class="form-group">
                 @csrf
@@ -86,9 +86,9 @@ $coupon_session = Session::get('coupon');
             </form>
         </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-5">
         <div class="cart-info">
-            <h3>Thông tin! đơn hàng</h3>
+            <h3>Thông tin đơn hàng</h3>
             @if($cart && count($cart) > 0)
             <table class="table-cart">
                 <thead>
@@ -105,8 +105,8 @@ $coupon_session = Session::get('coupon');
                             <img class="avatar-lg" src="{{ URL::to('uploads/product/' .$item['image'] ) }}" alt="">
                         </th>
                         <td>
-                            <h6>{{ $item['tensp'] }}</h6>
-                            <p class="">
+                            <strong>{{ $item['tensp'] }}</strong>
+                            <p class="star_review">
                                 <span class="star">&#9733;</span>
                                 <span class="star">&#9733;</span>
                                 <span class="star">&#9733;</span>
@@ -120,9 +120,6 @@ $coupon_session = Session::get('coupon');
                                 Color: {{$item['color']}}
                             </p>
                         </td>
-
-
-
                         <td>{{ number_format($item['total'], 0, ',', '.') }} VND</td>
                     </tr>
                     @endforeach
@@ -160,10 +157,13 @@ $coupon_session = Session::get('coupon');
                 $price_cart = ($total_price - $price_discount);
                 Session::put('final_total_cart',$price_cart)
                 @endphp
-                <span>Tổng đơn hàng: <strong id="price_cart">{{ number_format($price_cart, 0, ',', '.') }}</strong>
-                    span VNĐ</span>
+                <span>
+                    Tổng đơn hàng: <strong id="price_cart">{{ number_format($price_cart, 0, ',', '.') }}</strong> VNĐ
+                </span>
+                <br>
                 <span> Giảm giá :<strong id="discount">{{ number_format($coupon['discount'], 0, ',', '.') }}</strong>
                     VNĐ</span>
+                <br>
                 @endif
                 @endforeach
                 <!-- KẾT THÚC VÒNG LẶP FOREACH -->
@@ -175,19 +175,18 @@ $coupon_session = Session::get('coupon');
                 @endphp
                 <input type="hidden" id="id_coupon" value="">
                 <span>
-                    Tổng đơn hàng <strong id="price_cart">{{ number_format($price_cart, 0, ',', '.') }}</strong> VNĐ
+                    Tổng đơn hàng: <strong id="price_cart">{{ number_format($price_cart, 0, ',', '.') }}</strong> VNĐ
                 </span>
                 <br>
-                <span> Giảm giá :<strong id="discount">0</strong>VND
-                    VNĐ</span>
+                <span> Giảm giá: <strong id="discount">0</strong> VND
+                </span>
                 <br>
                 @endif
-
                 @endif
                 <input type="hidden" id="id_coupon" value="">
-                <span> Phí vận chuyển <strong id="feeship">0</strong> VND</span>
+                <span> Phí vận chuyển: <strong id="feeship">0</strong> VND</span>
                 <hr>
-                <p>Tổng giá trị:<strong id="displayTotal">
+                <p>Tổng giá trị: <strong id="displayTotal">
                         @if ($total_price)
                         {{ number_format($total_price, 0, ',', '.') }}
                         @else

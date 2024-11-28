@@ -1018,8 +1018,17 @@
 }
 
 .avatar-lg {
-    height: 80px;
-    width: 80px;
+    height: 60px;
+    width: 60px;
+}
+.star_review {
+    padding: 0px;
+    margin: 0px;
+    color: #f59e0b;
+}
+
+tbody tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 /*==========================CHECK OUT=====================*/
 .footer {

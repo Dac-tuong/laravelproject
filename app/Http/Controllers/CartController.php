@@ -202,7 +202,7 @@ class CartController extends Controller
                                 'coupon_id' => $coupon->id_coupon,
                                 'coupon_code' => $coupon->coupon_code,
                                 'coupon_type' => $coupon->coupon_type,
-                                'discount' => $coupon->discount,
+                                'discount' => $coupon->discount_amount,
                             );
                             Session::put('coupon', $cou);
                         }
@@ -211,7 +211,7 @@ class CartController extends Controller
                             'coupon_id' => $coupon->id_coupon,
                             'coupon_code' => $coupon->coupon_code,
                             'coupon_type' => $coupon->coupon_type,
-                            'discount' => $coupon->discount,
+                            'discount' => $coupon->discount_amount,
                         );
                         Session::put('coupon', $cou);
                     }
@@ -239,16 +239,37 @@ class CartController extends Controller
             echo 'Bạn chưa đăng nhập';
         }
 
-        // Session::forget('coupon');
         return Redirect::to('cart');
     }
 
     public function delete_coupon()
     {
-        $coupon = Session::get('coupon');
-        if ($coupon == true) {
+        // Lấy thông tin mã giảm giá từ session
+        $coupon_session = Session::get('coupon');
+        $id_customer = Session::get('id_customer');
+
+        if ($coupon_session && $id_customer) {
+            foreach ($coupon_session as $coupon) {
+                // Truy vấn mã giảm giá từ cơ sở dữ liệu theo coupon_code
+                $coupon_data = Coupons::where('coupon_code', $coupon['coupon_code'])->first();
+
+                if ($coupon_data) {
+                    // Lấy danh sách ID khách hàng hiện tại
+                    $exist_ids = explode(',', $coupon_data->customer_id);
+
+                    // Xóa id_customer khỏi danh sách
+                    $updated_ids = array_diff($exist_ids, [$id_customer]);
+                    $coupon_data->customer_id = implode(',', $updated_ids);
+                    $coupon_data->coupon_qty = $coupon_data->coupon_qty + 1;
+                    // Lưu lại thay đổi vào cơ sở dữ liệu
+                    $coupon_data->save();
+                }
+            }
+            // Xóa toàn bộ session coupon
             Session::forget('coupon');
         }
+
+        // Chuyển hướng lại giỏ hàng
         return Redirect::to('cart');
     }
 }
