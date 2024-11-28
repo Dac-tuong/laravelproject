@@ -116,21 +116,6 @@ class OrderController extends Controller
         }
 
 
-
-
-        // if ($check_coupon) {
-        //     if ($check_coupon->coupon_type == 'fixed') {
-        //         // Giảm giá theo số tiền cố định
-        //         $discount_amount =
-        //             number_format($check_coupon->discount, 0, ',', '.') . ' VNĐ';
-        //     } else {
-        //         // Giảm giá theo phần trăm
-        //         $discount_amount = $check_coupon->discount . ' %';
-        //     }
-        // }
-        // // Nếu không tìm thấy coupon
-        // $discount_amount = 0 . ' VNĐ'; // Không có giảm giá
-
         if ($order_ship->order_status == 0) {
             $order_status = 'Đã hủy';
         } elseif ($order_ship->order_status == 2) {
