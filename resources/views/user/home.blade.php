@@ -27,6 +27,8 @@
                         class="cart_product_image_{{ $product->product_id }}">
                     <input type="hidden" value="{{ $product->sale_price }}"
                         class="cart_product_price_{{ $product->product_id }}">
+                    <input type="hidden" value="{{ $product->color }}"
+                        class="cart_product_color_{{ $product->product_id }}">
                     <input type="hidden" value="1" class="cart_product_qty_{{ $product->product_id }}">
 
                     <!-- Link đến trang chi tiết sản phẩm -->

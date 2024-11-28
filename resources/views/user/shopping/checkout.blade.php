@@ -102,9 +102,7 @@ $coupon_session = Session::get('coupon');
                     @foreach($cart as $item)
                     <tr>
                         <th scope="row">
-                            <img class="avatar-lg"
-                                src="https://cdn.tgdd.vn/Products/Images/42/226316/samsung-galaxy-s21-ultra-bac-600x600-1-600x600.jpg"
-                                alt="">
+                            <img class="avatar-lg" src="{{ URL::to('uploads/product/' .$item['image'] ) }}" alt="">
                         </th>
                         <td>
                             <h6>{{ $item['tensp'] }}</h6>
@@ -117,6 +115,9 @@ $coupon_session = Session::get('coupon');
                             <p class="text-muted mb-0 mt-1">
                                 {{ number_format($item['gia'], 0, ',', '.') }} x
                                 {{ $item['soluong'] }}
+                            </p>
+                            <p class="text-muted mb-0 mt-1">
+                                Color: {{$item['color']}}
                             </p>
                         </td>
 

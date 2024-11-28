@@ -10,7 +10,7 @@
     <div class="form-group">
         <label>Slug</label>
         <input type="text" class="form-control" data-slug-target="brand-edit" name="brand_slug"
-            value="{{ $edit_brand->brand_name}}">
+            value="{{ $edit_brand->brand_name_slug}}">
     </div>
     <button type="submit" name="update" class="btn btn-primary">Cập nhật</button>
 </form>

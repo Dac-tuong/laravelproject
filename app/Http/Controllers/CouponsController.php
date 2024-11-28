@@ -40,4 +40,9 @@ class CouponsController extends Controller
         $coupon->delete();
         return Redirect::to('/list-coupons');
     }
+    public function update_coupon($id_coupon)
+    {
+        $coupon = Coupons::find($id_coupon);
+        return view('admin.coupon.update_coupon')->with('coupon_update',  $coupon);
+    }
 }

@@ -111,21 +111,25 @@ class OrderController extends Controller
             ->where('order_code', $order_code)->first();
 
         $find_coupon =  $order_ship->discount_coupon_id;
-
-        $check_coupon = Coupons::where('id_coupon', $find_coupon)->first();
-
-        if ($check_coupon) {
-            if ($check_coupon->coupon_type == 'fixed') {
-                // Giảm giá theo số tiền cố định
-                $discount_amount =
-                    number_format($check_coupon->discount, 0, ',', '.') . ' VNĐ';
-            } else {
-                // Giảm giá theo phần trăm
-                $discount_amount = $check_coupon->discount . ' %';
-            }
+        if ($find_coupon) {
+            $check_coupon = Coupons::where('id_coupon', $find_coupon)->first();
         }
-        // Nếu không tìm thấy coupon
-        $discount_amount = 0 . ' VNĐ'; // Không có giảm giá
+
+
+
+
+        // if ($check_coupon) {
+        //     if ($check_coupon->coupon_type == 'fixed') {
+        //         // Giảm giá theo số tiền cố định
+        //         $discount_amount =
+        //             number_format($check_coupon->discount, 0, ',', '.') . ' VNĐ';
+        //     } else {
+        //         // Giảm giá theo phần trăm
+        //         $discount_amount = $check_coupon->discount . ' %';
+        //     }
+        // }
+        // // Nếu không tìm thấy coupon
+        // $discount_amount = 0 . ' VNĐ'; // Không có giảm giá
 
         if ($order_ship->order_status == 0) {
             $order_status = 'Đã hủy';
@@ -140,7 +144,7 @@ class OrderController extends Controller
             ->with('orderShip', $order_ship)
             ->with('orderCount', $order_count_quantity)
             ->with('orderStatus', $order_status)
-            ->with('discountAmount', $discount_amount);
+            ->with('discountAmount', $check_coupon);
     }
 
 

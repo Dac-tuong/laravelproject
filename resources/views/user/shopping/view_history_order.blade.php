@@ -42,7 +42,7 @@
                         <td colspan="2">
                             Tổng đơn hàng
                         </td>
-                        <td class="text-end">{{}}</td>
+                        <td class="text-end"></td>
                     </tr>
                     <tr>
                         <td colspan="2">

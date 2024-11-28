@@ -82,6 +82,7 @@ class BrandController extends Controller
         $this->AuthLogin();
         $brand = Brand::find($brand_id);
         $brand->brand_name = $request->brand_name;
+        $brand->brand_name_slug = $request->brand_slug;
         $brand->save();
         Session::put('message_success', 'Cập nhật thành công!');
         return Redirect::to('list-brand');

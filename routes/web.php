@@ -127,6 +127,7 @@ use App\Http\Controllers\CouponsController;
 Route::get('/add-discount-code', [CouponsController::class, 'add_discount']);
 Route::post('/save-coupon', [CouponsController::class, 'save_coupons']);
 Route::get('/list-coupons', [CouponsController::class, 'list_coupons']);
+Route::get('/update-coupon/{id_coupon}', [CouponsController::class, 'update_coupon']);
 Route::get('/delete-coupon/{id_coupon}', [CouponsController::class, 'delete_coupon']);
 
 use App\Http\Controllers\OrderController;

@@ -38,6 +38,8 @@ $coupon_session = Session::get('coupon');
                                 <img src="{{ URL::to('uploads/product/' .$item['image'] ) }}" alt="Tên sản phẩm"
                                     style="width: 50px; height: 50px; margin-right: 10px;">
                                 <span> {{ $item['tensp'] }}</span>
+                                <br>
+                                <span>Color: {{$item['color']}}</span>
                             </div>
                         </td>
 

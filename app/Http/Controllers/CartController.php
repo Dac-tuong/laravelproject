@@ -32,6 +32,7 @@ class CartController extends Controller
         $product_price = $productData['cart_product_price'];
         $id_product = $productData['cart_product_id'];
         $product_image = $productData['cart_product_image'];
+        $product_color = $productData['cart_product_color'];
 
         $session_id = substr(md5(microtime()), rand(0, 26), 5);
         $cart = Session::get('cart');
@@ -59,6 +60,7 @@ class CartController extends Controller
                 'soluong' => $soluong,
                 'tensp' => $product_name,
                 'gia' => $product_price,
+                'color' => $product_color,
                 'total' => $soluong * $product_price,
             );
         }
