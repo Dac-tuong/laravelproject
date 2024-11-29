@@ -32,11 +32,11 @@ class SidebarController extends Controller
     }
 
 
-    function favorite_product()
+    function Wishlist()
     {
         $brand = Brand::get();
         $category = Category::get();
-        return view('user.product.favorite_product')
+        return view('user.product.wishlist')
             ->with('brands', $brand)
             ->with("categorys", $category);
     }

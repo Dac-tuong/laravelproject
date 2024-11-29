@@ -9,7 +9,7 @@ class OrderDetail extends Model
 {
     // use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['order_code', 'order_phone_id', 'product_name_order', 'product_price', 'feeship', 'product_sale_quantity'];
+    protected $fillable = ['order_code', 'order_phone_id', 'image', 'product_name_order', 'color', 'product_price', 'feeship', 'product_sale_quantity'];
     protected $primaryKey = 'id_order_detail';
     protected $table = 'tbl_order_detail';
 

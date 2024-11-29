@@ -54,7 +54,7 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
             {{$orderCount}}
         </p>
         <p><strong>Tổng tiền sản phẩm:</strong>{{ number_format($totalCart, 0, ',', '.') }} VNĐ</p>
-        <p><strong>Giảm giá:</strong> </p>
+        <p><strong>Giảm giá:</strong> {{$discount_price}}</p>
         <p><strong>Mã giảm giá:</strong> {{$code_coupon->coupon_code ?? ""}} </p>
         <p><strong>Phí vận chuyển:</strong> {{ number_format($order_historys->feeship, 0, ',', '.') }}VNĐ</p>
         <p><strong>Tổng cộng:</strong> {{ number_format($order_historys->order_total, 0, ',', '.') }} VNĐ</p>

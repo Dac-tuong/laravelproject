@@ -22,8 +22,4 @@ class OrderProduct extends Model
     {
         return $this->hasMany(OrderDetail::class, 'order_code', 'order_code');
     }
-    public function Coupon()
-    {
-        return $this->hasMany(OrderDetail::class, 'discount_coupon_id', 'id_coupon');
-    }
 }

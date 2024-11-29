@@ -20,15 +20,14 @@
                     @csrf
                     <!-- Input ẩn để lưu trữ thông tin sản phẩm -->
                     <input type="hidden" value="{{ $product->product_id }}"
-                        class="cart_product_id_{{ $product->product_id }}">
+                        class="product_id_{{ $product->product_id }}">
                     <input type="hidden" value="{{ $product->product_name }}"
-                        class="cart_product_name_{{ $product->product_id }}">
+                        class="product_name_{{ $product->product_id }}">
                     <input type="hidden" value="{{ $product->product_image }}"
-                        class="cart_product_image_{{ $product->product_id }}">
+                        class="product_image_{{ $product->product_id }}">
                     <input type="hidden" value="{{ $product->sale_price }}"
-                        class="cart_product_price_{{ $product->product_id }}">
-                    <input type="hidden" value="{{ $product->color }}"
-                        class="cart_product_color_{{ $product->product_id }}">
+                        class="product_price_{{ $product->product_id }}">
+                    <input type="hidden" value="{{ $product->color }}" class="product_color_{{ $product->product_id }}">
                     <input type="hidden" value="1" class="cart_product_qty_{{ $product->product_id }}">
 
                     <!-- Link đến trang chi tiết sản phẩm -->
@@ -53,7 +52,9 @@
                         data-id_product="{{ $product->product_id }}" name="add-to-cart">
                         Thêm giỏ hàng
                     </button>
-
+                    <b class="btn-favorite" data-id_product="{{ $product->product_id }}">
+                        ❤️
+                    </b>
                 </form>
             </div>
         </div>

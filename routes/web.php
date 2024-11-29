@@ -78,12 +78,14 @@ Route::get('/get-review-cmt', [HomeController::class, 'get_review_cmt']);
 
 Route::post('/search', [HomeController::class, 'search']);
 
+
+Route::post('/favorite', [HomeController::class, 'search']);
 // SIDEBAR CONTROLL
 use App\Http\Controllers\SidebarController;
 
 Route::get('/thong-tin-ca-nhan', [SidebarController::class, 'thong_tin_ca_nhan']);
 
-Route::get('/favorite-product', [SidebarController::class, 'favorite_product']);
+Route::get('/wishlist', [SidebarController::class, 'wishlist']);
 
 // Users account
 use App\Http\Controllers\CheckoutController;
@@ -146,7 +148,6 @@ use App\Http\Controllers\SlideController;
 
 Route::get('/add-slide', [SlideController::class, 'new_slide']);
 Route::post('/save-slide', [SlideController::class, 'save_slide']);
-
 
 
 use App\Http\Controllers\FeeshipController;

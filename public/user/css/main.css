@@ -892,11 +892,13 @@
 /*==========================INFORMATION CUSTOMER=====================*/
 .border-white {
     background: white;
-    border: 1px solid black;
+    border-radius: 10px;
     padding: 10px 20px;
     margin-bottom: 15px;
 }
-
+p {
+    margin: 0px;
+}
 .title-top {
     font-size: 25px;
     color: #007bff;
@@ -1026,7 +1028,11 @@
     margin: 0px;
     color: #f59e0b;
 }
-
+.favorite {
+    color: red;
+    border: none;
+    background-color: transparent;
+}
 tbody tr {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }

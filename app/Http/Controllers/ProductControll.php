@@ -287,4 +287,9 @@ class ProductControll extends Controller
 
         return Redirect::to('list-product');
     }
+
+
+
+    // USER FAVORITE
+
 }

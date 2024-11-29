@@ -95,8 +95,6 @@ class OrderController extends Controller
     }
     public function view_detail($order_code)
     {
-        $brand = Brand::get();
-        $category = Category::get();
         $order_count_quantity = 0;
 
         // Lấy thông tin ở bảng order detail
@@ -117,8 +115,19 @@ class OrderController extends Controller
 
         // Lấy giá trị của discount_coupon_id, mặc định là 0 nếu null
         $find_coupon = $order_history->discount_coupon_id;
-        if ($find_coupon !== 0) {
-            $coupon = Coupons::where('id_coupon', $find_coupon)->first();
+        $coupon = Coupons::where('id_coupon', $find_coupon)->first();
+        if ($coupon) {
+            if ($coupon->coupon_type == 'fixed') {
+                // Giảm giá theo số tiền cố định
+                $discount =
+                    number_format($coupon->discount_amount, 0, ',', '.') . ' VNĐ';
+            } else {
+                // Giảm giá theo phần trăm
+                $discount = $coupon->discount_amount . ' %';
+            }
+        } else {
+            // Nếu không tìm thấy coupon
+            $discount = 0 . ' VNĐ'; // Không có giảm giá
         }
 
 
@@ -133,14 +142,12 @@ class OrderController extends Controller
 
 
         return view('admin.order.order_detail')
-            ->with('brands', $brand)
-            ->with("categorys", $category)
             ->with("order_historys", $order_history) //Thông tin ở bảng order
             ->with('orderCount', $order_count_quantity)
             ->with("order_infomations", $order_infomation)   // Thông tin ở bảng order detail
             ->with("orderStatus", $order_status)
             ->with("code_coupon", $coupon)
-
+            ->with("discount_price", $discount)
         ;
     }
 
@@ -194,36 +201,44 @@ class OrderController extends Controller
     {
         $brand = Brand::get();
         $category = Category::get();
+
         $order_count_quantity = 0;
+        $grand_total = 0;
+
+        // Lấy thông tin ở bảng order detail
         $order_infomation = OrderDetail::where('order_code', $order_code)->get();
+        // Lấy thông tin ở bảng order detail
 
         foreach ($order_infomation as $detailOrder) {
             $order_count_quantity += $detailOrder['product_sale_quantity'];
+            $total_price_product = $detailOrder['product_sale_quantity'] * $detailOrder['product_price'];
+            $grand_total += $total_price_product;
         }
-
+        // Lấy thông tin ở bảng order
         $order_history = OrderProduct::with([
             'shippingAddress.province',
             'shippingAddress.districts',
-            'shippingAddress.wards'
+            'shippingAddress.wards',
         ])
             ->where('order_code', $order_code)->first();
+        // Lấy thông tin ở bảng order detail
 
-        $find_coupon =  $order_history->discount_coupon_id;
-
-        $check_coupon = Coupons::where('id_coupon', $find_coupon)->first();
-
-        if ($check_coupon) {
-            if ($check_coupon->coupon_type == 'fixed') {
+        // Lấy giá trị của discount_coupon_id, mặc định là 0 nếu null
+        $find_coupon = $order_history->discount_coupon_id;
+        $coupon = Coupons::where('id_coupon', $find_coupon)->first();
+        if ($coupon) {
+            if ($coupon->coupon_type == 'fixed') {
                 // Giảm giá theo số tiền cố định
-                $discount_amount =
-                    number_format($check_coupon->discount, 0, ',', '.') . ' VNĐ';
+                $discount =
+                    number_format($coupon->discount_amount, 0, ',', '.') . ' VNĐ';
             } else {
                 // Giảm giá theo phần trăm
-                $discount_amount = $check_coupon->discount . ' %';
+                $discount = $coupon->discount_amount . ' %';
             }
+        } else {
+            // Nếu không tìm thấy coupon
+            $discount = 0 . ' VNĐ'; // Không có giảm giá
         }
-        // Nếu không tìm thấy coupon
-        $discount_amount = 0 . ' VNĐ'; // Không có giảm giá
 
         if ($order_history->order_status == 0) {
             $order_status = 'Đã hủy';
@@ -237,9 +252,13 @@ class OrderController extends Controller
         return view('user.shopping.view_history_order')
             ->with('brands', $brand)
             ->with("categorys", $category)
-            ->with("order_historys", $order_history)
-            ->with("order_infomations", $order_infomation)
-            ->with("discount_num", $discount_amount)
+            ->with("order_historys", $order_history) //Thông tin ở bảng order
+            ->with('orderCount', $order_count_quantity)
+            ->with("order_infomations", $order_infomation)   // Thông tin ở bảng order detail
+            ->with("orderStatus", $order_status)
+            ->with("code_coupon", $coupon)
+            ->with("discount_price", $discount)
+            ->with("grandTotal", $grand_total)
         ;
     }
 }

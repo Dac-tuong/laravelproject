@@ -127,7 +127,7 @@
                      <li> <a href="{{ URL::to('/thong-tin-ca-nhan') }}">Thông tin khách hàng</a></li>
                      <li> <a href="{{URL::to('/cart')}}">Giỏ hàng</a></li>
                      <li> <a href="{{URL::to('/checkout')}}">Thanh toán</a></li>
-                     <li> <a href="{{ URL::to('/favorite-product') }}">Danh sách yêu thích</a></li>
+                     <li> <a href="{{ URL::to('/wishlist') }}">Danh sách yêu thích</a></li>
                      <li> <a href="{{ URL::to('/history-order') }}">Lịch sử mua hàng</a></li>
                      <li> <a href="{{ URL::to('') }}">Cài đặt</a></li>
                      <li> <a href="{{ URL::to('/logout') }}">Đăng xuất</a></li>
@@ -267,77 +267,6 @@
                  cardView.style.display = 'block';
              }
          }
-
-
-
-         document.querySelectorAll('.toggle-btn').forEach(function(link) {
-             link.addEventListener('click', function(event) {
-                 event.preventDefault();
-                 const ul = link.nextElementSibling;
-                 ul.classList.toggle('active');
-             });
-         });
-
-         document.querySelector('.comment-text').addEventListener('focus', function() {
-             document.querySelector('.cmt-button').style.display = 'flex';
-         })
-
-
-         document.addEventListener("DOMContentLoaded", function() {
-             var imageList = document.getElementById("gallery-product");
-             var displayedImage = document.getElementById("image-target");
-
-             // Lấy tất cả hình ảnh trong gallery
-             var allImages = imageList.querySelectorAll("img");
-
-             // Kiểm tra xem có hình ảnh nào không và mặc định hiển thị hình ảnh đầu tiên
-             if (allImages.length > 0) {
-                 var firstImage = allImages[0];
-                 displayedImage.src = firstImage.src; // Hiển thị hình ảnh đầu tiên
-                 firstImage.classList.add("selected"); // Thêm lớp 'selected' cho hình ảnh đầu tiên
-             }
-
-             // Lắng nghe sự kiện nhấp vào các mục trong danh sách ảnh
-             imageList.addEventListener("click", function(event) {
-                 if (event.target.tagName === "IMG") {
-                     // Xóa lớp 'selected' khỏi tất cả hình ảnh
-                     allImages.forEach(function(img) {
-                         img.classList.remove("selected");
-                     });
-
-                     // Thêm lớp 'selected' cho hình ảnh được nhấp vào
-                     event.target.classList.add("selected");
-
-                     // Lấy đường dẫn của ảnh từ thuộc tính 'src' của hình ảnh được nhấp vào
-                     var imageURL = event.target.src;
-                     // Hiển thị ảnh được nhấp vào trong vùng hiển thị
-                     displayedImage.src = imageURL;
-                 }
-             });
-
-             // Thiết lập các sự kiện cho hiệu ứng zoom ở đây (nếu cần)
-             const img = document.getElementById('image-target');
-             const mirror = document.querySelector('.mirror');
-
-             img.addEventListener('mousemove', (e) => {
-                 const rect = img.getBoundingClientRect();
-                 const x = e.clientX - rect.left;
-                 const y = e.clientY - rect.top;
-                 const xPercent = (x / rect.width) * 100;
-                 const yPercent = (y / rect.height) * 100;
-
-                 mirror.style.backgroundSize = `400px 400px`;
-                 mirror.style.top = `${e.clientY - 50}px`;
-                 mirror.style.left = `${e.clientX - 50}px`;
-                 mirror.style.backgroundImage = `url(${img.src})`;
-                 mirror.style.backgroundPosition = `${xPercent}% ${yPercent}%`;
-                 mirror.classList.remove("hide");
-             });
-
-             img.addEventListener('mouseleave', () => {
-                 mirror.classList.add("hide");
-             });
-         });
      </script>
 
 
@@ -359,18 +288,18 @@
                  });
              }
 
-
+             // thực hiện thêm sản phẩm vào giỏ hàng
              $('.add-to-cart').click(function() {
                  var id = $(this).data('id_product');
 
                  // Lấy thông tin sản phẩm từ các input ẩn trong HTML
                  var productData = {
-                     cart_product_id: $('.cart_product_id_' + id).val(),
-                     cart_product_name: $('.cart_product_name_' + id).val(),
-                     cart_product_image: $('.cart_product_image_' + id).val(),
-                     cart_product_price: $('.cart_product_price_' + id).val(),
-                     cart_product_qty: $('.cart_product_qty_' + id).val(),
-                     cart_product_color: $('.cart_product_color_' + id).val(),
+                     cart_product_id: $('.product_id_' + id).val(),
+                     cart_product_name: $('.product_name_' + id).val(),
+                     cart_product_image: $('.product_image_' + id).val(),
+                     cart_product_price: $('.product_price_' + id).val(),
+                     cart_product_qty: $('.product_qty_' + id).val(),
+                     cart_product_color: $('.product_color_' + id).val(),
                      _token: $('input[name="_token"]').val()
                  };
 
@@ -391,7 +320,27 @@
                  });
              });
 
+             // Lắng nghe sự kiện nhấn nút yêu thích
+             $('.btn-favorite').click(function(event) {
+                 event.preventDefault();
+                 var id = $(this).data('id_product');
 
+                 // Lấy thông tin sản phẩm từ các input ẩn trong HTML
+                 var productFavorite = {
+                     product_id: $('.product_id_' + id).val(),
+                     _token: $('input[name="_token"]').val()
+                 };
+
+                 // Hiển thị thông tin productFavorite trong console
+                 //  console.log('product_id:', productFavorite.product_id);
+                 //  console.log('_token:', productFavorite._token);
+                 $.ajax({
+
+                 });
+             });
+
+
+             // Gửi đơn hàng 
              $('.send-order').click(function() {
                  var allValid = true;
                  var formData = {};
@@ -492,6 +441,10 @@
                  label.textContent = message;
              }
          }
+
+
+
+         //  Nút yêu thích sản phẩm
      </script>
  </body>
 

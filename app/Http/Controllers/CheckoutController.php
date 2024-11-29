@@ -193,6 +193,8 @@ class CheckoutController extends Controller
                 $add_detail_order->order_phone_id = $item['masp'];
                 $add_detail_order->product_name_order = $item['tensp'];
                 $add_detail_order->product_price = $item['gia'];
+                $add_detail_order->image = $item['image'];
+                $add_detail_order->color = $item['color'];
                 $add_detail_order->product_sale_quantity = $item['soluong'];
                 $add_detail_order->save();
             }
