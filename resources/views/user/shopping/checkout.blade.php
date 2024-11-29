@@ -130,69 +130,88 @@ $coupon_session = Session::get('coupon');
             @endif
             <hr>
             <div class="flex-center-between row-summary">
-                @if ($cart)
-                <!-- MỞ ĐẦU CỦA CÂU LỆNH IF CÓ SESSION COUPON -->
+
+                <div>
+                    <span>Tổng cộng :</span>
+                    <span>
+                        {{ number_format($total_price, 0, ',', '.') }} VNĐ
+                    </span>
+                </div>
+
                 @if ($coupon_session)
 
-                <!-- DÒNG LỆNH LẶP CÁC THÀNH PHẦN TRONG COUPON  -->
                 @foreach ($coupon_session as $coupon )
 
-                <input type="hidden" id="id_coupon" value="{{$coupon['coupon_id']}}">
-                <!-- NẾU ĐIỀU KIỆN BẰNG PERCENT  -->
                 @if ($coupon['coupon_type'] == 'percent')
-                <span>
-                    Giảm giá: - <strong id="discount">{{$coupon['discount']}}</strong>%
-                </span>
+                <div>
+                    <span>Mã giảm giá: {{$coupon['coupon_code']}}</span>
+                    <br>
+                    <span>
+                        Áp dụng giảm:
+                    </span>
+                    <span>
+                        -{{$coupon['discount']}}%
+                    </span>
+                </div>
                 @php
                 $price_discount = ($total_price * $coupon['discount'])/100;
-                $price_cart = ($total_price - $price_discount) ;
-                Session::put('final_total_cart',$price_cart)
+                $price_cart = $total_price - $price_discount;
                 @endphp
-                <span>Tổng đơn hàng: <strong id="price_cart">{{ number_format($price_cart, 0, ',', '.') }}</strong>
-                    VNĐ</span>
-                <!-- NẾU ĐIỀU KIỆN BẰNG FIXED  -->
+                <div>
+                    <span>
+                        Số tiền sau khi giảm:
+                    </span>
+                    <span>
+                        {{ number_format($price_cart, 0, ',', '.') }} VNĐ
+                    </span>
+                </div>
                 @elseif($coupon['coupon_type'] == 'fixed')
+                <div>
+                    <span>Mã giảm giá: {{$coupon['coupon_code']}}</span>
+                    <br>
+                    <span>
+                        Giảm giá :
+                    </span>
+                    <span> {{ number_format($coupon['discount'], 0, ',', '.') }} VNĐ</span>
+                </div>
                 @php
                 $price_discount = $coupon['discount'];
-                $price_cart = ($total_price - $price_discount);
-                Session::put('final_total_cart',$price_cart)
+                $price_cart = $total_price - $price_discount;
                 @endphp
-                <span>
-                    Tổng đơn hàng: <strong id="price_cart">{{ number_format($price_cart, 0, ',', '.') }}</strong> VNĐ
-                </span>
-                <br>
-                <span> Giảm giá :<strong id="discount">{{ number_format($coupon['discount'], 0, ',', '.') }}</strong>
-                    VNĐ</span>
-                <br>
+                <div>
+                    <span>
+                        Số tiền sau khi giảm:
+                    </span>
+                    <span id="price_cart"> {{ number_format($price_cart, 0, ',', '.') }}</span>
+                </div>
                 @endif
                 @endforeach
-                <!-- KẾT THÚC VÒNG LẶP FOREACH -->
-                <!-- NẾU KHÔNG CÓ SESSION COUPON  -->
                 @else
-                @php
-                $price_cart = $total_price;
-                Session::put('final_total_cart',$price_cart)
-                @endphp
-                <input type="hidden" id="id_coupon" value="">
-                <span>
-                    Tổng đơn hàng: <strong id="price_cart">{{ number_format($price_cart, 0, ',', '.') }}</strong> VNĐ
-                </span>
-                <br>
-                <span> Giảm giá: <strong id="discount">0</strong> VND
-                </span>
-                <br>
+                <div>
+                    <span>Số tiền giảm:</span>
+                    <span>
+                        0đ
+                    </span>
+                </div>
+
+                <div>
+                    <span>
+                        Thành tiền:
+                    </span>
+                    <span id="price_cart"> {{ number_format($total_price, 0, ',', '.') }}</span>
+                </div>
                 @endif
-                @endif
+
                 <input type="hidden" id="id_coupon" value="">
                 <span> Phí vận chuyển: <strong id="feeship">0</strong> VND</span>
                 <hr>
                 <p>Tổng giá trị: <strong id="displayTotal">
                         @if ($total_price)
-                        {{ number_format($total_price, 0, ',', '.') }}
+                        {{ number_format($total_price, 0, ',', '.') }} VNĐ
                         @else
-                        0
+                        0 VNĐ
                         @endif
-                    </strong> VND</p>
+                    </strong> </p>
             </div>
         </div>
     </div>

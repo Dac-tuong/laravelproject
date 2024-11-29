@@ -95,39 +95,53 @@ class OrderController extends Controller
     }
     public function view_detail($order_code)
     {
+        $brand = Brand::get();
+        $category = Category::get();
         $order_count_quantity = 0;
-        $data_detailOrder = OrderDetail::where('order_code', $order_code)->get();
 
-        foreach ($data_detailOrder as $detailOrder) {
+        // Lấy thông tin ở bảng order detail
+        $order_infomation = OrderDetail::where('order_code', $order_code)->get();
+        // Lấy thông tin ở bảng order detail
+
+        foreach ($order_infomation as $detailOrder) {
+            $order_count_quantity += $detailOrder['product_sale_quantity'];
         }
-
-        $order_ship = OrderProduct::with([
+        // Lấy thông tin ở bảng order
+        $order_history = OrderProduct::with([
             'shippingAddress.province',
             'shippingAddress.districts',
-            'shippingAddress.wards'
-
+            'shippingAddress.wards',
         ])
             ->where('order_code', $order_code)->first();
+        // Lấy thông tin ở bảng order detail
 
-        $find_coupon =  $order_ship->discount_coupon_id;
-        if ($find_coupon) {
-            $check_coupon = Coupons::where('id_coupon', $find_coupon)->first();
+        // Lấy giá trị của discount_coupon_id, mặc định là 0 nếu null
+        $find_coupon = $order_history->discount_coupon_id;
+        if ($find_coupon !== 0) {
+            $coupon = Coupons::where('id_coupon', $find_coupon)->first();
         }
 
 
-        if ($order_ship->order_status == 0) {
+
+        if ($order_history->order_status == 0) {
             $order_status = 'Đã hủy';
-        } elseif ($order_ship->order_status == 2) {
+        } elseif ($order_history->order_status == 2) {
             $order_status = 'Đã xác nhận';
         } else {
             $order_status = 'Đơn hàng mới';
         }
 
+
         return view('admin.order.order_detail')
-            ->with('detailOrder', $data_detailOrder)
-            ->with('orderShip', $order_ship)
-            ->with('orderStatus', $order_status)
-            ->with('discountAmount', $check_coupon);
+            ->with('brands', $brand)
+            ->with("categorys", $category)
+            ->with("order_historys", $order_history) //Thông tin ở bảng order
+            ->with('orderCount', $order_count_quantity)
+            ->with("order_infomations", $order_infomation)   // Thông tin ở bảng order detail
+            ->with("orderStatus", $order_status)
+            ->with("code_coupon", $coupon)
+
+        ;
     }
 
 
@@ -151,8 +165,6 @@ class OrderController extends Controller
         } else {
             $orderStatusText = 'Đơn hàng mới';
         }
-
-
         // Trả về phản hồi JSON mà không lưu vào CSDL
         return response()->json([
             'message' => 'Đơn hàng đã được cập nhật.',
@@ -163,7 +175,6 @@ class OrderController extends Controller
 
 
     // USER
-
 
     public function history_order()
     {

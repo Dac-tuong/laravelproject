@@ -55,8 +55,15 @@ $(document).ready(function () {
                 var priceFeeshipInt = parseInt(feeshipValue.replace(/\./g, ""));
 
                 var totalOrder = priceCartInt + priceFeeshipInt;
+                // Hàm định dạng số theo kiểu "1.234.567"
+                function formatNumber(number) {
+                    return number
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                }
 
-                $("#displayTotal").html(totalOrder);
+                // Hiển thị tổng số tiền đã được định dạng
+                $("#displayTotal").html(formatNumber(totalOrder) + " VNĐ");
             },
         });
     });

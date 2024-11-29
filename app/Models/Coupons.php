@@ -11,4 +11,8 @@ class Coupons extends Model
     protected $fillable = ['name_coupon', 'coupon_code', 'coupon_qty', 'coupon_type', 'discount', 'customer_id', 'start_date', 'end_date'];
     protected $primaryKey = 'id_coupon';
     protected $table = 'tbl_coupons';
+    public function Coupon()
+    {
+        return $this->belongsTo(OrderDetail::class, 'discount_coupon_id', 'id_coupon');
+    }
 }
