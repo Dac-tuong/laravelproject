@@ -92,6 +92,7 @@ class ProductControll extends Controller
         $product->name_product_slug =  $data['name_product_slug'];
         $product->sale_price = $data['sale_price'];
         $product->purchase_price = $data['purchase_price'];
+        $product->old_price = $data['old_price'];
         $product->product_quantity =  $data['product_quantity'];
         $product->categories_product_id = $data['categories_product_id'];
         $product->brand_product_id = $data['brand_product'];
@@ -173,6 +174,7 @@ class ProductControll extends Controller
         $product->name_product_slug =  $data['name_product_slug'];
         $product->sale_price = $data['sale_price'];
         $product->purchase_price = $data['purchase_price'];
+        $product->old_price = $data['old_price'];
         $product->product_quantity =  $data['product_quantity'];
         $product->categories_product_id = $data['categories_product_id'];
         $product->brand_product_id = $data['brand_product'];

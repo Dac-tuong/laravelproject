@@ -321,21 +321,29 @@
              });
 
              // Lắng nghe sự kiện nhấn nút yêu thích
-             $('.btn-favorite').click(function(event) {
-                 event.preventDefault();
-                 var id = $(this).data('id_product');
+             $('.add-favorite').click(function() {
+                 var product_id = $(this).data('id_product');
 
-                 // Lấy thông tin sản phẩm từ các input ẩn trong HTML
-                 var productFavorite = {
-                     product_id: $('.product_id_' + id).val(),
-                     _token: $('input[name="_token"]').val()
-                 };
-
-                 // Hiển thị thông tin productFavorite trong console
-                 //  console.log('product_id:', productFavorite.product_id);
-                 //  console.log('_token:', productFavorite._token);
                  $.ajax({
-
+                     url: '{{url("/add-favorite")}}', // Đường dẫn đến route xử lý yêu thích
+                     method: 'POST',
+                     data: {
+                         _token: '{{ csrf_token() }}', // CSRF token để bảo vệ yêu cầu
+                         product_id: product_id
+                     },
+                     success: function(response) {
+                         if (response.status == 'success') {
+                             // Thay đổi biểu tượng từ 🤍 thành ❤️
+                             $('#add-favorite[data-id_product="' + product_id + '"]').html(
+                                 '❤️');
+                             alert('Đã thêm vào yêu thích!');
+                         } else {
+                             alert('Sản phẩm đã có trong yêu thích!');
+                         }
+                     },
+                     error: function() {
+                         alert('Không thể thực hiện yêu cầu!');
+                     }
                  });
              });
 

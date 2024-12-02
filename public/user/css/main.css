@@ -272,15 +272,51 @@
 .product-content {
     padding-block: 10px;
     background-color: #ffffff;
+    position: relative;
+    border-radius: 5px;
+}
+.product-content a {
+    text-decoration: none;
 }
 .box-right {
     border: 1px solid black;
     background-color: #ffffff;
     padding: 10px;
 }
+.productinfo__price-old {
+    text-decoration: line-through;
+}
 .home-product-img {
     height: 170px;
     max-width: 100%;
+}
+.product__price--percent {
+    position: absolute;
+    top: 0px;
+    background-color: #d70018;
+    width: 40px;
+    color: white;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.product__price--percent-detail {
+    margin: 0px;
+    font-size: 16px;
+}
+.action-buttons {
+    width: 20px;
+    top: 0px;
+    right: 0px;
+    position: absolute;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Căn trái, bạn có thể chỉnh thành center hoặc flex-end nếu cần */
+    gap: 10px; /* Khoảng cách giữa các phần tử */
+}
+.btn-cart {
+    width: 14px;
 }
 .product-detail {
     overflow: hidden;

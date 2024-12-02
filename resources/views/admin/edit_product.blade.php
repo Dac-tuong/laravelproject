@@ -27,7 +27,10 @@
             <input type="number" class="form-control" id="purchase_price" name="purchase_price"
                 value="{{$products->purchase_price}}">
         </div>
-
+        <div class="form-group">
+            <label for="sale_price">Giá Bán Củ:</label>
+            <input type="number" class="form-control" id="old_price" name="old_price" value="{{$products->old_price}}">
+        </div>
         <div class="form-group">
             <label for="sale_price">Giá Bán:</label>
             <input type="number" class="form-control" id="sale_price" name="sale_price"

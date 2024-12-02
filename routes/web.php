@@ -79,13 +79,13 @@ Route::get('/get-review-cmt', [HomeController::class, 'get_review_cmt']);
 Route::post('/search', [HomeController::class, 'search']);
 
 
-Route::post('/favorite', [HomeController::class, 'search']);
+Route::post('/add-favorite', [HomeController::class, 'add_favorite']);
 // SIDEBAR CONTROLL
 use App\Http\Controllers\SidebarController;
 
 Route::get('/thong-tin-ca-nhan', [SidebarController::class, 'thong_tin_ca_nhan']);
 
-Route::get('/wishlist', [SidebarController::class, 'wishlist']);
+Route::get('/wishlist', [SidebarController::class, 'all_wishlist']);
 
 // Users account
 use App\Http\Controllers\CheckoutController;

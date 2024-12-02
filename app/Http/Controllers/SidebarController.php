@@ -32,7 +32,7 @@ class SidebarController extends Controller
     }
 
 
-    function Wishlist()
+    function all_wishlist()
     {
         $brand = Brand::get();
         $category = Category::get();

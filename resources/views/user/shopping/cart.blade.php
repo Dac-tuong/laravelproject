@@ -113,7 +113,6 @@ $coupon_session = Session::get('coupon');
             @php
             $price_discount = $coupon['discount'];
             $price_cart = $total_price - $price_discount;
-
             @endphp
             <div>
                 <span>

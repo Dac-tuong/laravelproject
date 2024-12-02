@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\FavoriteModel;
 use App\Models\Gallery;
 use App\Models\Product;
 use App\Models\ReviewModel;
@@ -80,5 +81,24 @@ class HomeController extends Controller
             ->with('brands', $brand)
             ->with('categorys', $category)
         ;
+    }
+
+    public function add_favorite(Request $request)
+    {
+        $product_favorite = $request->all();
+        $id_user = Session::get('id_customer');
+        $product_favorite_id = $product_favorite['product_id'];
+        $favorite = FavoriteModel::where("favorite_phone_id", $product_favorite_id)
+            ->where("favorite_user_id", $id_user)->first();
+        if (!$favorite) {
+            $new_favorite = new FavoriteModel();
+            $new_favorite->favorite_phone_id = $product_favorite_id;
+            $new_favorite->favorite_user_id = $id_user;
+            $new_favorite->save();
+            return response()->json(['status' => 'success']);
+        }
+        $favorite->delete();
+
+        return response()->json(['status' => 'exists']);
     }
 }

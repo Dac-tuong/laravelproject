@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('name_product_slug');
             $table->string('product_image');
             $table->integer('purchase_price'); // Giá nhập hàng
+            $table->integer('old_price')->nullable(); // Giá bán củ
             $table->integer('sale_price'); // Giá bán
             $table->integer('product_quantity');
             $table->integer('categories_product_id')->unsigned(); // Foreign key must be unsigned

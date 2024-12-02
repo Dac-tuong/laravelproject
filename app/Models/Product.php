@@ -15,6 +15,7 @@ class Product extends Model
         'name_product_slug', // Slug của sản phẩm (SEO friendly URL)
         'product_image', // Hình ảnh sản phẩm
         'purchase_price', // Giá nhập hàng
+        'old_price', // Giá bán củ
         'sale_price', // Giá bán
         'product_quantity', // Số lượng sản phẩm trong kho
         'categories_product_id', // ID của danh mục sản phẩm
