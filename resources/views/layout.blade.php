@@ -238,35 +238,35 @@
      <script src="{{asset("user/js/toastr.js")}}"></script>
 
      <script>
-         // Mở sidebar
-         function openSidebar() {
-             // Hiển thị sidebar bằng cách đặt left về 0
-             document.getElementById('sidebar').style.right = '0';
-             // Hiển thị overlay bằng cách thay đổi display thành block
-             document.getElementById('overlay').style.display = 'block';
-         }
-         // Đóng sidebar
-         function closeSidebar() {
-             // Hiển thị sidebar bằng cách đặt left về 0
-             document.getElementById('sidebar').style.right = '-300px';
+     // Mở sidebar
+     function openSidebar() {
+         // Hiển thị sidebar bằng cách đặt left về 0
+         document.getElementById('sidebar').style.right = '0';
+         // Hiển thị overlay bằng cách thay đổi display thành block
+         document.getElementById('overlay').style.display = 'block';
+     }
+     // Đóng sidebar
+     function closeSidebar() {
+         // Hiển thị sidebar bằng cách đặt left về 0
+         document.getElementById('sidebar').style.right = '-300px';
 
-             // Hiển thị overlay bằng cách thay đổi display thành block
-             document.getElementById('overlay').style.display = 'none';
-         }
+         // Hiển thị overlay bằng cách thay đổi display thành block
+         document.getElementById('overlay').style.display = 'none';
+     }
 
-         function toggleView() {
-             const tableView = document.getElementById('table-view');
-             const cardView = document.getElementById('card-view');
-             if (getComputedStyle(tableView).display === 'none') {
-                 // Hiển thị table-view và ẩn card-view
-                 tableView.style.display = 'block';
-                 cardView.style.display = 'none';
-             } else {
-                 // Ẩn table-view và hiển thị card-view
-                 tableView.style.display = 'none';
-                 cardView.style.display = 'block';
-             }
+     function toggleView() {
+         const tableView = document.getElementById('table-view');
+         const cardView = document.getElementById('card-view');
+         if (getComputedStyle(tableView).display === 'none') {
+             // Hiển thị table-view và ẩn card-view
+             tableView.style.display = 'block';
+             cardView.style.display = 'none';
+         } else {
+             // Ẩn table-view và hiển thị card-view
+             tableView.style.display = 'none';
+             cardView.style.display = 'block';
          }
+     }
      </script>
 
 
@@ -274,140 +274,162 @@
 
 
      <script>
-         $(document).ready(function() {
-             //show quantity cart
-             show_cart_quantity();
+     $(document).ready(function() {
+         //show quantity cart
+         show_cart_quantity();
 
-             function show_cart_quantity() {
-                 $.ajax({
-                     url: "{{ url('/count-cart') }}", // Sử dụng URL helper để đảm bảo URL chính xác
-                     method: "GET",
-                     success: function(data) {
-                         $('#quantity-cart').html(data);
-                     }
-                 });
-             }
-
-             // thực hiện thêm sản phẩm vào giỏ hàng
-             $('.add-to-cart').click(function() {
-                 var id = $(this).data('id_product');
-
-                 // Lấy thông tin sản phẩm từ các input ẩn trong HTML
-                 var productData = {
-                     cart_product_id: $('.product_id_' + id).val(),
-                     cart_product_name: $('.product_name_' + id).val(),
-                     cart_product_image: $('.product_image_' + id).val(),
-                     cart_product_price: $('.product_price_' + id).val(),
-                     cart_product_qty: $('.product_qty_' + id).val(),
-                     cart_product_color: $('.product_color_' + id).val(),
-                     _token: $('input[name="_token"]').val()
-                 };
-
-                 // Gửi yêu cầu Ajax để thêm sản phẩm vào giỏ hàng
-                 $.ajax({
-                     url: '{{url("/add-cart")}}',
-                     method: 'POST',
-                     data: productData,
-                     success: function(response) {
-                         toastr.options = {
-                             "positionClass": "toast-bottom-right",
-                             "timeOut": "3000"
-                         };
-                         toastr.success('Đã thêm sản phẩm vào giỏ hàng', '');
-                         show_cart_quantity();
-
-                     },
-                 });
+         function show_cart_quantity() {
+             $.ajax({
+                 url: "{{ url('/count-cart') }}", // Sử dụng URL helper để đảm bảo URL chính xác
+                 method: "GET",
+                 success: function(data) {
+                     $('#quantity-cart').html(data);
+                 }
              });
+         }
 
-             // Lắng nghe sự kiện nhấn nút yêu thích
-             $('.add-favorite').click(function() {
-                 var product_id = $(this).data('id_product');
-
-                 $.ajax({
-                     url: '{{url("/add-favorite")}}', // Đường dẫn đến route xử lý yêu thích
-                     method: 'POST',
-                     data: {
-                         _token: '{{ csrf_token() }}', // CSRF token để bảo vệ yêu cầu
-                         product_id: product_id
-                     },
-                     success: function(response) {
-                         if (response.status == 'success') {
-                             // Thay đổi biểu tượng từ 🤍 thành ❤️
-                             $('#add-favorite[data-id_product="' + product_id + '"]').html(
-                                 '❤️');
-                             alert('Đã thêm vào yêu thích!');
-                         } else {
-                             alert('Sản phẩm đã có trong yêu thích!');
-                         }
-                     },
-                     error: function() {
-                         alert('Không thể thực hiện yêu cầu!');
-                     }
-                 });
+         function show_cart_quantity() {
+             $.ajax({
+                 url: "{{ url('/check-favorite') }}", // Sử dụng URL helper để đảm bảo URL chính xác
+                 method: "GET",
+                 success: function(data) {
+                     //  $('#quantity-cart').html(data);
+                 }
              });
+         }
 
+         // thực hiện thêm sản phẩm vào giỏ hàng
+         $('.add-to-cart').click(function() {
+             var id = $(this).data('id_product');
 
-             // Gửi đơn hàng 
-             $('.send-order').click(function() {
-                 var allValid = true;
-                 var formData = {};
-                 var feeshipText = $('#feeship').text();
-                 var feeshipInt = parseInt(feeshipText.replace(/\./g, ''));
-                 var _token = $('input[name="_token"]').val();
-                 var totalOrderText = $('#displayTotal').text();
-                 var totalOrderInt = parseInt(totalOrderText.replace(/\./g, ''));
-                 var discounValue = $('#id_coupon').val();
-                 var note_order = $('#note_order').val();
+             // Lấy thông tin sản phẩm từ các input ẩn trong HTML
+             var productData = {
+                 cart_product_id: $('.product_id_' + id).val(),
+                 cart_product_name: $('.product_name_' + id).val(),
+                 cart_product_image: $('.product_image_' + id).val(),
+                 cart_product_price: $('.product_price_' + id).val(),
+                 cart_product_qty: $('.product_qty_' + id).val(),
+                 cart_product_color: $('.product_color_' + id).val(),
+                 _token: $('input[name="_token"]').val()
+             };
 
-                 $('[data-input-value]').each(function() {
-                     var sourceType = $(this).data('input-value');
-                     var inputValue = $(this).val();
-                     if (!checkErrorInput(sourceType, inputValue)) {
-                         allValid = false;
+             // Gửi yêu cầu Ajax để thêm sản phẩm vào giỏ hàng
+             $.ajax({
+                 url: '{{url("/add-cart")}}',
+                 method: 'POST',
+                 data: productData,
+                 success: function(response) {
+                     toastr.options = {
+                         "positionClass": "toast-bottom-right",
+                         "timeOut": "3000"
+                     };
+                     toastr.success('Đã thêm sản phẩm vào giỏ hàng', '');
+                     show_cart_quantity();
+
+                 },
+             });
+         });
+
+         // Lắng nghe sự kiện nhấn nút yêu thích
+         $('.toggle-favorite').click(function() {
+             var button = $(this);
+             var product_id = button.data('id_product')
+             //  var favoriteIcon = this.querySelector(".favorite-icon");
+             var favoriteIcon = button.find(".favorite-icon"); // Tìm icon trong button hiện tại
+             let _token = $('input[name="_token"]').val()
+
+             //  if (favoriteIcon.textContent === "🤍") {
+             //      favoriteIcon.textContent = "❤️"; // Trái tim đầy
+             //  } else {
+             //      favoriteIcon.textContent = "🤍"; // Trái tim rỗng
+             //  }
+             $.ajax({
+                 url: '/favorite-toggle', // Đường dẫn đến route xử lý yêu thích
+                 method: 'POST',
+                 data: {
+                     _token: _token, // CSRF token để bảo vệ yêu cầu
+                     product_id: product_id,
+                 },
+                 success: function(response) {
+                     if (response.status === "add") {
+                         //  alert("them vao yeu thich");
+                         //  var favoriteIcon = this.querySelector(".favorite-icon");
+                         //  $('#favorite-icon').html('❤️')
+                         favoriteIcon.html('❤️')
+                     } else if (response.status === "remove") {
+                         //  alert("xoa khoi yeu thich");
+                         //  var favoriteIcon = this.querySelector(".favorite-icon");
+                         //  $('#favorite-icon').html('🤍')
+                         favoriteIcon.html('🤍')
                      }
-                     formData[sourceType] = inputValue;
-                 });
-
-                 if (allValid) {
-                     formData.feeship = feeshipInt;
-                     formData.totalOrder = totalOrderInt;
-                     formData.discount = discounValue;
-                     formData.note = note_order;
-                     formData._token = _token;
-
-                     // Hiển thị popup xác nhận
-                     Swal.fire({
-                         title: 'Xác nhận thanh toán',
-                         text: 'Bạn có chắc chắn muốn gửi đơn hàng?',
-                         icon: 'warning',
-                         showCancelButton: true,
-                         confirmButtonText: 'Đồng ý',
-                         cancelButtonText: 'Hủy'
-                     }).then((result) => {
-                         if (result.isConfirmed) {
-                             // Gửi dữ liệu nếu người dùng xác nhận
-                             $.ajax({
-                                 url: '/order-product',
-                                 method: 'POST',
-                                 data: formData,
-                                 success: function(response) {
-                                     if (response.status === 'success') {
-                                         Swal.fire('Thành công', response.message,
-                                             'success');
-                                     }
-                                 },
-                                 error: function(xhr, status, error) {
-                                     Swal.fire('Lỗi',
-                                         'Có lỗi xảy ra khi gửi đơn hàng: ' + error,
-                                         'error');
-                                 }
-                             });
-                         }
-                     });
+                 },
+                 error: function() {
+                     alert('Không thể thực hiện yêu cầu!');
                  }
              });
          });
+
+
+         // Gửi đơn hàng 
+         $('.send-order').click(function() {
+             var allValid = true;
+             var formData = {};
+             var feeshipText = $('#feeship').text();
+             var feeshipInt = parseInt(feeshipText.replace(/\./g, ''));
+             var _token = $('input[name="_token"]').val();
+             var totalOrderText = $('#displayTotal').text();
+             var totalOrderInt = parseInt(totalOrderText.replace(/\./g, ''));
+             var discounValue = $('#id_coupon').val();
+             var note_order = $('#note_order').val();
+
+             $('[data-input-value]').each(function() {
+                 var sourceType = $(this).data('input-value');
+                 var inputValue = $(this).val();
+                 if (!checkErrorInput(sourceType, inputValue)) {
+                     allValid = false;
+                 }
+                 formData[sourceType] = inputValue;
+             });
+
+             if (allValid) {
+                 formData.feeship = feeshipInt;
+                 formData.totalOrder = totalOrderInt;
+                 formData.discount = discounValue;
+                 formData.note = note_order;
+                 formData._token = _token;
+
+                 // Hiển thị popup xác nhận
+                 Swal.fire({
+                     title: 'Xác nhận thanh toán',
+                     text: 'Bạn có chắc chắn muốn gửi đơn hàng?',
+                     icon: 'warning',
+                     showCancelButton: true,
+                     confirmButtonText: 'Đồng ý',
+                     cancelButtonText: 'Hủy'
+                 }).then((result) => {
+                     if (result.isConfirmed) {
+                         // Gửi dữ liệu nếu người dùng xác nhận
+                         $.ajax({
+                             url: '/order-product',
+                             method: 'POST',
+                             data: formData,
+                             success: function(response) {
+                                 if (response.status === 'success') {
+                                     Swal.fire('Thành công', response.message,
+                                         'success');
+                                 }
+                             },
+                             error: function(xhr, status, error) {
+                                 Swal.fire('Lỗi',
+                                     'Có lỗi xảy ra khi gửi đơn hàng: ' + error,
+                                     'error');
+                             }
+                         });
+                     }
+                 });
+             }
+         });
+
 
          // Hàm kiểm tra giá trị của input và hiển thị lỗi
          function checkErrorInput(sourceType, inputValue) {
@@ -449,10 +471,7 @@
                  label.textContent = message;
              }
          }
-
-
-
-         //  Nút yêu thích sản phẩm
+     });
      </script>
  </body>
 

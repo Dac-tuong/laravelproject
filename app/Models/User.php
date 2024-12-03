@@ -16,4 +16,8 @@ class User extends Model
     {
         return $this->hasMany(ReviewModel::class, 'id_user_review', 'id_user');
     }
+    public function user_favorite()
+    {
+        return $this->hasMany(User::class, 'favorite_user_id', 'id_user');
+    }
 }

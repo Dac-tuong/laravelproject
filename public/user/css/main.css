@@ -271,6 +271,7 @@
 /*==========================HOME PRODUCT=====================*/
 .product-content {
     padding-block: 10px;
+    /* padding-bottom: 12px; */
     background-color: #ffffff;
     position: relative;
     border-radius: 5px;
@@ -831,21 +832,9 @@
     color: red; /* Màu sắc của hình trái tim */
     display: inline-block;
     font-size: 30px;
-    transition: color 0.3s; /* Hiệu ứng chuyển màu khi hover */
+    transition: color 0.3s;
     padding: 0px;
     margin: 0px;
-}
-
-.favorite-icon:hover {
-    color: red; /* Giữ nguyên màu sắc khi hover */
-}
-
-.favorite-icon:before {
-    content: "\2661"; /* Mã Unicode cho trái tim rỗng */
-}
-
-.favorite-icon:hover:before {
-    content: "\2665"; /* Mã Unicode cho trái tim đầy */
 }
 
 /*  sản phẩm cùng loại */

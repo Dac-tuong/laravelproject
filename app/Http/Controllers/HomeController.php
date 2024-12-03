@@ -29,7 +29,7 @@ class HomeController extends Controller
         $list_product =  Product::with(['category', 'brand'])
             ->where('product_status', 1)
             ->orderBy('product_id', 'ASC')
-            ->paginate(6);
+            ->paginate(10);
 
         return view('user.home')->with('products', $list_product)
             ->with('brands', $brand)->with('categorys', $category);
@@ -83,22 +83,22 @@ class HomeController extends Controller
         ;
     }
 
-    public function add_favorite(Request $request)
+    public function favorite_toggle(Request $request)
     {
         $product_favorite = $request->all();
         $id_user = Session::get('id_customer');
         $product_favorite_id = $product_favorite['product_id'];
         $favorite = FavoriteModel::where("favorite_phone_id", $product_favorite_id)
             ->where("favorite_user_id", $id_user)->first();
-        if (!$favorite) {
+        if ($favorite) {
+            $favorite->delete();
+            return response()->json(['status' => 'remove']);
+        } else {
             $new_favorite = new FavoriteModel();
             $new_favorite->favorite_phone_id = $product_favorite_id;
             $new_favorite->favorite_user_id = $id_user;
             $new_favorite->save();
-            return response()->json(['status' => 'success']);
+            return response()->json(['status' => 'add']);
         }
-        $favorite->delete();
-
-        return response()->json(['status' => 'exists']);
     }
 }

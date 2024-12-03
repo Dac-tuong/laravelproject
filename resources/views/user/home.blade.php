@@ -14,10 +14,10 @@
     <h3>SẢN PHẨM MỚI NHẤT</h3>
     <div class="row">
         @foreach ($products as $key => $product)
-        <div class="col-lg-2 col-md-4 col-sm-6 col-6">
+        <div class="col-lg-2 col-md-4 col-sm-6 col-6" style="padding-bottom: 12px;">
             <div class="product-content">
                 <form>
-                    @csrf
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <!-- Input ẩn để lưu trữ thông tin sản phẩm -->
                     <input type="hidden" value="{{ $product->product_id }}"
                         class="product_id_{{ $product->product_id }}">
@@ -69,10 +69,12 @@
                             name="add-to-cart">
                             <img class="btn-cart" src="{{ URL::to('user/image/cart-btn.png' ) }}" alt="">
                         </button>
-                        <button class="add-favorite" id="add-favorite" name="add-favorite"
+
+                        <button type="button" class="toggle-favorite" id="toggle-favorite" name="toggle-favorite"
                             data-id_product="{{ $product->product_id }}">
-                            🤍
+                            <span class="favorite-icon" id="favorite-icon">🤍</span>
                         </button>
+
                     </div>
                 </form>
             </div>

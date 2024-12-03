@@ -11,4 +11,9 @@ class FavoriteModel extends Model
     protected $fillable = ['favorite_phone_id', 'favorite_user_id'];
     protected $primaryKey = 'id_favorite';
     protected $table = 'tbl_favorite';
+    // Quan hệ với model User
+    public function user_favorite()
+    {
+        return $this->belongsTo(User::class, 'favorite_user_id', 'id_user');
+    }
 }
