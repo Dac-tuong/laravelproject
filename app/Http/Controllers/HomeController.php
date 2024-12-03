@@ -88,6 +88,10 @@ class HomeController extends Controller
         $product_favorite = $request->all();
         $id_user = Session::get('id_customer');
         $product_favorite_id = $product_favorite['product_id'];
+        // Kiểm tra người dùng đã đăng nhập hay chưa
+        if (!$id_user) {
+            return response()->json(['status' => 'error', 'message' => 'Vui lòng đăng nhập hoặc đăng ký để thêm vào yêu thích']);
+        }
         $favorite = FavoriteModel::where("favorite_phone_id", $product_favorite_id)
             ->where("favorite_user_id", $id_user)->first();
         if ($favorite) {

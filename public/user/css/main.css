@@ -265,7 +265,38 @@
 }
 
 /* Hiển thị sidebar và overlay */
+.specifications-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    max-height: 90%; /* Đặt chiều cao tối đa */
+    overflow-y: auto; /* Kích hoạt cuộn theo chiều dọc */
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease; /* Hiệu ứng chuyển động */
+    z-index: 2; /* Đảm bảo nằm trên overlay */
+    border-radius: 10px; /* Bo tròn tất cả 4 góc */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    display: none;
+}
 
+.specifications-popup::-webkit-scrollbar {
+    width: 8px; /* Độ rộng của thanh cuộn */
+    border-radius: 10px; /* Bo tròn góc của thanh cuộn */
+}
+
+.specifications-popup::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2); /* Màu thanh cuộn */
+    border-radius: 10px; /* Bo tròn góc của thanh cuộn */
+}
+
+.specifications-popup::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4); /* Màu thanh cuộn khi hover */
+}
 /* ==============================SIDEBAR============================ */
 
 /*==========================HOME PRODUCT=====================*/
@@ -306,7 +337,7 @@
     font-size: 16px;
 }
 .action-buttons {
-    width: 20px;
+    width: 25px;
     top: 0px;
     right: 0px;
     position: absolute;
@@ -462,14 +493,6 @@
 .text-specifi li aside:last-child {
     display: block;
     overflow: hidden;
-}
-
-.text-specifi {
-    display: none;
-}
-
-.text-specifi.active {
-    display: block;
 }
 
 /* review sản phẩm */

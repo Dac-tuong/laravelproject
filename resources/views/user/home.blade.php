@@ -17,7 +17,7 @@
         <div class="col-lg-2 col-md-4 col-sm-6 col-6" style="padding-bottom: 12px;">
             <div class="product-content">
                 <form>
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete>
                     <!-- Input ẩn để lưu trữ thông tin sản phẩm -->
                     <input type="hidden" value="{{ $product->product_id }}"
                         class="product_id_{{ $product->product_id }}">
