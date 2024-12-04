@@ -70,11 +70,6 @@
                             <img class="btn-cart" src="{{ URL::to('user/image/cart-btn.png' ) }}" alt="">
                         </button>
 
-                        <button type="button" class="toggle-favorite" id="toggle-favorite" name="toggle-favorite"
-                            data-id_product="{{ $product->product_id }}">
-                            <span class="favorite-icon" id="favorite-icon">🤍</span>
-                        </button>
-
                     </div>
                 </form>
             </div>

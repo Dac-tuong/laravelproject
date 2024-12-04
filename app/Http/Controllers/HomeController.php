@@ -96,13 +96,28 @@ class HomeController extends Controller
             ->where("favorite_user_id", $id_user)->first();
         if ($favorite) {
             $favorite->delete();
-            return response()->json(['status' => 'remove']);
         } else {
             $new_favorite = new FavoriteModel();
             $new_favorite->favorite_phone_id = $product_favorite_id;
             $new_favorite->favorite_user_id = $id_user;
             $new_favorite->save();
-            return response()->json(['status' => 'add']);
         }
+    }
+
+    public function check_favorite(Request $request)
+    {
+        $product_favorite = $request->all();
+        $id_user = Session::get('id_customer');
+        $product_favorite_id = $product_favorite['product_id'];
+
+        $isFavorite = FavoriteModel::where("favorite_phone_id", $product_favorite_id)
+            ->where("favorite_user_id", $id_user)->exists();
+        $output = '<i class="fa-regular fa-heart"></i>';
+        if ($isFavorite) {
+            $output .= '<i class="fa-solid fa-heart"></i>';
+        } else {
+            $output .= '<i class="fa-regular fa-heart"></i>';
+        }
+        echo $output;
     }
 }

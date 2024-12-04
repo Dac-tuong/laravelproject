@@ -283,6 +283,28 @@
 
      <script>
          $(document).ready(function() {
+             function check_favorite() {
+                 var product_id = $('#toggle-favorite').data('product_id');
+                 var _token = $('input[name="_token"]').val();
+                 $.ajax({
+                     url: "{{ url('/check-favorite') }}",
+                     method: "POST",
+                     data: {
+                         product_id: product_id,
+                         _token: _token
+                     },
+                     success: function(data) {
+                         $('#show-favorite').html(data);
+                     },
+                     error: function(xhr) {
+                         console.log('Có lỗi xáy ra ', xhr.responseText)
+                     }
+
+                 });
+             };
+             check_favorite();
+
+
              //show quantity cart
              show_cart_quantity();
 
@@ -294,7 +316,7 @@
                          $('#quantity-cart').html(data);
                      }
                  });
-             }
+             };
 
              // thực hiện thêm sản phẩm vào giỏ hàng
              $('.add-to-cart').click(function() {
@@ -333,8 +355,8 @@
                  var button = $(this);
                  var product_id = button.data('id_product')
                  //  var favoriteIcon = this.querySelector(".favorite-icon");
-                 var favoriteIcon = button.find(".favorite-icon"); // Tìm icon trong button hiện tại
-                 let _token = $('input[name="_token"]').val()
+                 //  var favoriteIcon = button.find(".favorite-icon"); // Tìm icon trong button hiện tại
+                 let _token = $('input[name="_token"]').val();
 
                  $.ajax({
                      url: '/favorite-toggle', // Đường dẫn đến route xử lý yêu thích
@@ -344,23 +366,14 @@
                          product_id: product_id,
                      },
                      success: function(response) {
-                         if (response.status === "add") {
-                             //  alert("them vao yeu thich");
-                             //  var favoriteIcon = this.querySelector(".favorite-icon");
-                             //  $('#favorite-icon').html('❤️')
-                             favoriteIcon.html('❤️')
-                         } else if (response.status === "remove") {
-                             //  alert("xoa khoi yeu thich");
-                             //  var favoriteIcon = this.querySelector(".favorite-icon");
-                             //  $('#favorite-icon').html('🤍')
-                             favoriteIcon.html('🤍')
-                         }
+                         check_favorite();
                      },
                      error: function() {
                          alert('Không thể thực hiện yêu cầu!');
                      }
                  });
              });
+
 
 
              // Gửi đơn hàng 

@@ -80,7 +80,7 @@ Route::post('/search', [HomeController::class, 'search']);
 
 
 Route::post('/favorite-toggle', [HomeController::class, 'favorite_toggle']);
-
+Route::post('/check-favorite', [HomeController::class, 'check_favorite']);
 // SIDEBAR CONTROLL
 use App\Http\Controllers\SidebarController;
 
