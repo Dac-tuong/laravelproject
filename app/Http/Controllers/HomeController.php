@@ -112,12 +112,30 @@ class HomeController extends Controller
 
         $isFavorite = FavoriteModel::where("favorite_phone_id", $product_favorite_id)
             ->where("favorite_user_id", $id_user)->exists();
-        $output = '<i class="fa-regular fa-heart"></i>';
+        $output = '';
         if ($isFavorite) {
             $output .= '<i class="fa-solid fa-heart"></i>';
         } else {
             $output .= '<i class="fa-regular fa-heart"></i>';
         }
         echo $output;
+    }
+    public function get_review_cmt($product_id)
+    {
+        $review_cmt = ReviewModel::with(['name_customer'])->where('id_phone_review', $product_id)->limit(5)->get();
+        return response()->json($review_cmt);
+    }
+
+    public function average_start($product_id)
+    {
+        $review_product = ReviewModel::where('id_phone_review', $product_id)->get();
+        $average_point_product = $review_product->avg('rating');
+        $count_review = $review_product->count();
+
+
+        return response()->json([
+            'average' => round($average_point_product, 1),
+            'total_reviews' => $count_review
+        ]);
     }
 }

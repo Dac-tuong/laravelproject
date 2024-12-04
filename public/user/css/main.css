@@ -195,7 +195,6 @@
 
 .sidebar-header {
     display: flex;
-
     justify-content: space-between;
 }
 .user-customer-sidebar {
@@ -264,39 +263,6 @@
     z-index: 1;
 }
 
-/* Hiển thị sidebar và overlay */
-.specifications-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    max-height: 90%; /* Đặt chiều cao tối đa */
-    overflow-y: auto; /* Kích hoạt cuộn theo chiều dọc */
-    background-color: white;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease; /* Hiệu ứng chuyển động */
-    z-index: 2; /* Đảm bảo nằm trên overlay */
-    border-radius: 10px; /* Bo tròn tất cả 4 góc */
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    display: none;
-}
-
-.specifications-popup::-webkit-scrollbar {
-    width: 8px; /* Độ rộng của thanh cuộn */
-    border-radius: 10px; /* Bo tròn góc của thanh cuộn */
-}
-
-.specifications-popup::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2); /* Màu thanh cuộn */
-    border-radius: 10px; /* Bo tròn góc của thanh cuộn */
-}
-
-.specifications-popup::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.4); /* Màu thanh cuộn khi hover */
-}
 /* ==============================SIDEBAR============================ */
 
 /*==========================HOME PRODUCT=====================*/
@@ -452,10 +418,77 @@
     border-radius: 5px;
 }
 
+.specifications-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.specifications-btn {
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.1),
+        0 2px 6px 2px rgba(125, 127, 129, 0.15);
+    color: #000;
+    font-size: 16px;
+    display: block;
+    gap: 5px;
+    height: 32px;
+    margin: auto;
+    width: 250px;
+}
+
+.specifications-btn:hover {
+    border: 1px solid red;
+}
+
 .specifications .box-specifi {
     display: block;
     overflow: hidden;
     margin: 0px 10px;
+}
+
+.specifications-popup {
+    display: none; /* Ẩn popup ban đầu */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 550px;
+    max-height: 90%; /* Đặt chiều cao tối đa */
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 20px;
+    border-radius: 8px;
+}
+.specifications-popup-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.specifications-popup-content {
+    max-height: 70vh; /* Chiều cao tối đa để phần nội dung không vượt quá */
+    overflow-y: auto; /* Bật cuộn dọc khi nội dung dài */
+    padding: 10px;
+    background-color: #f9f9f9; /* Màu nền nhẹ để dễ phân biệt */
+    border-radius: 5px;
+}
+
+.specifications-popup-content::-webkit-scrollbar {
+    width: 8px; /* Độ rộng của thanh cuộn */
+    border-radius: 10px; /* Bo tròn góc của thanh cuộn */
+}
+
+.specifications-popup-content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2); /* Màu thanh cuộn */
+    border-radius: 10px; /* Bo tròn góc của thanh cuộn */
+}
+
+.specifications-popup-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4); /* Màu thanh cuộn khi hover */
 }
 
 .box-specifi > a {

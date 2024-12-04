@@ -75,11 +75,10 @@
 
                     <button type="button" class="toggle-favorite" id="toggle-favorite" name="toggle-favorite"
                         data-id_product="{{ $product_detail->product_id }}">
-                        thích
+                        <div id="show-favorite">
+                        </div>
                     </button>
-                    <div id="show-favorite">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
+
                 </form>
             </div>
 
@@ -116,15 +115,10 @@
                 <h2>Đánh giá và nhận xét sản phẩm</h2>
                 <div class="boxReview-review">
                     <div class="star-product">
-                        <span class="point">0.0</span>
+                        <span class="point"></span>
                         <div class="list-star">
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star-half-stroke"></i>
                         </div>
+                        <span class="total-review"></span>
                     </div>
                     <div class="list-rate">
                         <ul class="rate-list">
@@ -183,62 +177,37 @@
                         <div class="filter-item active">
                             Tất cả
                         </div>
-                        <div class="filter-item">
-                            Đơn hàng đã mua
-                        </div>
-                    </div>
-
-                    <div class="filter-container">
                         <div class="filter-item star">
                             <p>5</p>
                             <div>
-
                             </div>
                         </div>
+                        <div class="filter-item star">
+                            <p>4</p>
+                            <div>
+                            </div>
+                        </div>
+                        <div class="filter-item star">
+                            <p>3</p>
+                            <div>
+                            </div>
+                        </div>
+                        <div class="filter-item star">
+                            <p>2</p>
+                        </div>
+                        <div class="filter-item star">
+                            <p>1</p>
+                        </div>
                     </div>
+
                 </div>
 
                 <div class="boxReview-comment">
-                    @foreach ($reviews as $review )
-                    <div class="boxReview-comment-item">
-                        <div class="boxReview-comment-item-title">
-                            <div class="boxReview-comment-item-block">
-                                <div class="box-info-review">
-                                    <img class="avt-review-info" src="{{ URL::to('user/image/avatar-user.png') }}"
-                                        alt="">
-                                    <strong>{{$review->name_customer->name_user}}</strong>
-                                </div>
-                                <div class="box-time-review">
-                                    <span class="time">12:30pm</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="boxReview-comment-item-review">
-                            <div class="star-rating__review">
-                                @for ($i =1; $i<=5 ;$i++) @if ($i<=$review->rating)
-                                    <span class="star">&#9733;</span>
-                                    @else
-                                    <span class="star">&#9734;</span>
-                                    @endif
-                                    @endfor
-                            </div>
-                            <div class="boxReview-comment-item__cmt">
-                                <span>{{$review->review_text}}</span>
-                            </div>
-                        </div>
-
-                        <hr>
-                    </div>
-                    @endforeach
-
-                    <a class="button__view-more-review"
-                        href="{{URL::to('/review-product'.'/'.$product_detail->product_id)}}">
-                        Xem thêm
-                    </a>
-
-
-
                 </div>
+                <a class="button__view-more-review"
+                    href="{{URL::to('/review-product'.'/'.$product_detail->product_id)}}">
+                    Xem thêm
+                </a>
             </div>
 
 
@@ -252,7 +221,7 @@
                         <div class="textarea-cmt">
                             <textarea name="comment-text" placeholder="Xin mời để lại bình luận" class="comment-text"
                                 id="comment-text"></textarea>
-                            <button class="add-comment-btn"><i class="fa-solid fa-paper-plane"></i> Gửi</button>
+                            <button class="add-comment-btn"><i class="fa-solid fa-paper-plane"></i>Gửi</button>
                         </div>
                     </form>
                 </div>
@@ -362,8 +331,8 @@
                         </ul>
                     </div>
                 </div>
-                <div>
-                    <button class="" onclick="openSpecifications()"> Xem thêm</button>
+                <div class="specifications-container">
+                    <button class="specifications-btn" onclick="openSpecifications()"> Xem thêm</button>
                 </div>
             </div>
 
@@ -373,188 +342,191 @@
 
 <div class="specifications-popup" id="specifications-popup">
     <div class="specifications-popup-header">
-        <h5 class="tab-title">Thông số kỹ thuật</h5>
+        <h6 class="tab-title">Thông số kỹ thuật</h6>
+        <button class="close-specifications">X</button>
     </div>
-    <div class="box-specifi">
-        <h6>Màn hình & Camera</h6>
-        <ul class="text-specifi active">
-            <li>
-                <aside><strong>Công nghệ màn hình</strong></aside>
-                <aside>
-                    <span>{{$product_detail->screen_type}}</span>
-                </aside>
-            </li>
-            <li>
-                <aside><strong>Độ phân giải</strong></aside>
-                <aside>
-                    <span>{{$product_detail->resolution}}</span>
-                </aside>
-            </li>
-            <li>
-                <aside><strong>Màn hình rộng</strong></aside>
-                <aside>
-                    <span>{{$product_detail->screen_size}}</span>
-                </aside>
-            </li>
-            <li>
-                <aside><strong>Tần số quét</strong></aside>
-                <aside>
-                    <span>{{$product_detail->refresh_rate}} hz</span>
-                </aside>
-            </li>
+    <div class="specifications-popup-content">
+        <div class="box-specifi">
+            <h6>Màn hình & Camera</h6>
+            <ul class="text-specifi active">
+                <li>
+                    <aside><strong>Công nghệ màn hình</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->screen_type}}</span>
+                    </aside>
+                </li>
+                <li>
+                    <aside><strong>Độ phân giải</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->resolution}}</span>
+                    </aside>
+                </li>
+                <li>
+                    <aside><strong>Màn hình rộng</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->screen_size}}</span>
+                    </aside>
+                </li>
+                <li>
+                    <aside><strong>Tần số quét</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->refresh_rate}} hz</span>
+                    </aside>
+                </li>
 
-            <li>
-                <aside><strong>Độ phân giải camera sau</strong></aside>
-                <aside>
-                    <span>{{$product_detail->camera_main}}</span>
-                </aside>
-            </li>
-            <li>
-                <aside><strong>Tính năng camera sau</strong></aside>
-                <aside>
-                    <span>{{$product_detail->camera_main_features}}</span>
-                </aside>
-            </li>
+                <li>
+                    <aside><strong>Độ phân giải camera sau</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->camera_main}}</span>
+                    </aside>
+                </li>
+                <li>
+                    <aside><strong>Tính năng camera sau</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->camera_main_features}}</span>
+                    </aside>
+                </li>
 
-            <li>
-                <aside><strong>Độ phân giải camera trước</strong></aside>
-                <aside>
-                    <span>{{$product_detail->camera_front}}</span>
-                </aside>
-            </li>
-            <li>
-                <aside><strong>Tính năng camera trước</strong></aside>
-                <aside>
-                    <span>{{$product_detail->camera_front_features}}</span>
-                </aside>
-            </li>
-        </ul>
-    </div>
+                <li>
+                    <aside><strong>Độ phân giải camera trước</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->camera_front}}</span>
+                    </aside>
+                </li>
+                <li>
+                    <aside><strong>Tính năng camera trước</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->camera_front_features}}</span>
+                    </aside>
+                </li>
+            </ul>
+        </div>
 
-    <div class="box-specifi">
-        <a href="#" class="toggle-btn">Cấu hình & bộ nhớ</a>
-        <ul class="text-specifi">
-            <li>
-                <aside><strong>Hệ điều hành</strong></aside>
-                <aside>
-                    <span>{{$product_detail->operating_system}}</span>
-                </aside>
-            </li>
-            <li>
-                <aside><strong>Chip xữ lý (CPU)</strong></aside>
-                <aside>
-                    <span>{{$product_detail->cpu}}</span>
-                </aside>
-            </li>
-            <li>
-                <aside><strong>Chip đồ họa (GPU)</strong></aside>
-                <aside>
-                    <span>{{$product_detail->gpu}}</span>
-                </aside>
-            </li>
-            <li>
-                <aside><strong>ram</strong></aside>
-                <aside>
-                    <span>{{$product_detail->ram}} GB</span>
-                </aside>
-            </li>
-            <li>
-                <aside><strong>Bộ nhớ trong</strong></aside>
-                <aside>
-                    <span>{{$product_detail->storage}} GB</span>
-                </aside>
-            </li>
-            <li>
-                <aside><strong>Hỗ trợ thể nhớ</strong></aside>
-                <aside>
-                    <span>
-                        @if ($product_detail->expandable_storage == false)
-                        Không hổ trợ thẻ nhớ
-                        @else
-                        Có hổ trợ thẻ nhớ
-                        @endif
-                    </span>
-                </aside>
-            </li>
-        </ul>
-    </div>
+        <div class="box-specifi">
+            <a href="#" class="toggle-btn">Cấu hình & bộ nhớ</a>
+            <ul class="text-specifi">
+                <li>
+                    <aside><strong>Hệ điều hành</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->operating_system}}</span>
+                    </aside>
+                </li>
+                <li>
+                    <aside><strong>Chip xữ lý (CPU)</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->cpu}}</span>
+                    </aside>
+                </li>
+                <li>
+                    <aside><strong>Chip đồ họa (GPU)</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->gpu}}</span>
+                    </aside>
+                </li>
+                <li>
+                    <aside><strong>ram</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->ram}} GB</span>
+                    </aside>
+                </li>
+                <li>
+                    <aside><strong>Bộ nhớ trong</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->storage}} GB</span>
+                    </aside>
+                </li>
+                <li>
+                    <aside><strong>Hỗ trợ thể nhớ</strong></aside>
+                    <aside>
+                        <span>
+                            @if ($product_detail->expandable_storage == false)
+                            Không hổ trợ thẻ nhớ
+                            @else
+                            Có hổ trợ thẻ nhớ
+                            @endif
+                        </span>
+                    </aside>
+                </li>
+            </ul>
+        </div>
 
-    <div class="box-specifi">
-        <a href="#" class="toggle-btn">Pin & sạc</a>
-        <ul class="text-specifi">
-            <li>
-                <aside><strong>Dung lượng pin</strong></aside>
-                <aside>
-                    <span>{{$product_detail->battery_capacity}} mAh</span>
-                </aside>
-            </li>
-            <li>
-                <aside><strong>Hỗ trợ sạc nhanh</strong></aside>
-                <aside>
-                    <span>
-                        @if ($product_detail->fast_charging == true)
-                        Có hỗ trợ sạc nhanh
-                        @else
-                        Không hỗ trợ sạc nhanh
-                        @endif
-                    </span>
-                </aside>
-            </li>
-            <li>
-                <aside><strong>Sạc không dây</strong></aside>
-                <aside>
-                    <span>
-                        @if ($product_detail->wireless_charging == true)
-                        Có hỗ trợ sạc không dây
-                        @else
-                        Không hỗ trợ sạc không dây
-                        @endif
-                    </span>
-                </aside>
-            </li>
-        </ul>
-    </div>
+        <div class="box-specifi">
+            <a href="#" class="toggle-btn">Pin & sạc</a>
+            <ul class="text-specifi">
+                <li>
+                    <aside><strong>Dung lượng pin</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->battery_capacity}} mAh</span>
+                    </aside>
+                </li>
+                <li>
+                    <aside><strong>Hỗ trợ sạc nhanh</strong></aside>
+                    <aside>
+                        <span>
+                            @if ($product_detail->fast_charging == true)
+                            Có hỗ trợ sạc nhanh
+                            @else
+                            Không hỗ trợ sạc nhanh
+                            @endif
+                        </span>
+                    </aside>
+                </li>
+                <li>
+                    <aside><strong>Sạc không dây</strong></aside>
+                    <aside>
+                        <span>
+                            @if ($product_detail->wireless_charging == true)
+                            Có hỗ trợ sạc không dây
+                            @else
+                            Không hỗ trợ sạc không dây
+                            @endif
+                        </span>
+                    </aside>
+                </li>
+            </ul>
+        </div>
 
-    <div class="box-specifi">
-        <a href="#" class="toggle-btn">Tính năng</a>
-        <ul class="text-specifi">
-            <li>
-                <aside><strong>Chống nước</strong></aside>
-                <aside>
-                    <span>{{$product_detail->water_resistance}}</span>
-                </aside>
-            </li>
-            <li>
-                <aside><strong>Bảo mật</strong></aside>
-                <aside>
-                    <span>{{$product_detail->biometrics}}</span>
-                </aside>
-            </li>
-        </ul>
-    </div>
+        <div class="box-specifi">
+            <a href="#" class="toggle-btn">Tính năng</a>
+            <ul class="text-specifi">
+                <li>
+                    <aside><strong>Chống nước</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->water_resistance}}</span>
+                    </aside>
+                </li>
+                <li>
+                    <aside><strong>Bảo mật</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->biometrics}}</span>
+                    </aside>
+                </li>
+            </ul>
+        </div>
 
-    <div class="box-specifi">
-        <a href="#" class="toggle-btn">Kết nối</a>
-        <ul class="text-specifi">
-            <li>
-                <aside><strong>Loại sim</strong></aside>
-                <aside>
-                    <span>{{$product_detail->sim_type}}</span>
-                </aside>
-            </li>
-            <li>
-                <aside><strong>Kết nối</strong></aside>
-                <aside>
-                    <span>{{$product_detail->connectivity}}</span>
-                </aside>
-            </li>
-            <li>
-                <aside><strong>Wifi</strong></aside>
-                <aside>
-                    <span>{{$product_detail->wifi_technology}}</span>
-                </aside>
-            </li>
-        </ul>
+        <div class="box-specifi">
+            <a href="#" class="toggle-btn">Kết nối</a>
+            <ul class="text-specifi">
+                <li>
+                    <aside><strong>Loại sim</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->sim_type}}</span>
+                    </aside>
+                </li>
+                <li>
+                    <aside><strong>Kết nối</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->connectivity}}</span>
+                    </aside>
+                </li>
+                <li>
+                    <aside><strong>Wifi</strong></aside>
+                    <aside>
+                        <span>{{$product_detail->wifi_technology}}</span>
+                    </aside>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 

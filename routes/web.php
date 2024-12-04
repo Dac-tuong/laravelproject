@@ -81,6 +81,9 @@ Route::post('/search', [HomeController::class, 'search']);
 
 Route::post('/favorite-toggle', [HomeController::class, 'favorite_toggle']);
 Route::post('/check-favorite', [HomeController::class, 'check_favorite']);
+Route::get('/get-review-cmt/{product_id}', [HomeController::class, 'get_review_cmt']);
+
+Route::get('/average-start/{product_id}', [HomeController::class, 'average_start']);
 // SIDEBAR CONTROLL
 use App\Http\Controllers\SidebarController;
 

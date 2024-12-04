@@ -108,7 +108,7 @@
              </div>
          </header>
          <!-- Overlay -->
-         <div id="overlay" class="overlay"></div>
+         <div id="overlay" class="overlay" onclick="closeAllOverlay()"></div>
 
          <!-- sidebar -->
          <div id="sidebar">
@@ -246,13 +246,6 @@
              document.getElementById('overlay').style.display = 'block';
          }
 
-
-         function openSpecifications() {
-             // Hiển thị overlay bằng cách thay đổi display thành block
-             document.getElementById('overlay').style.display = 'block';
-             document.getElementById('specifications-popup').style.display = 'block';
-         }
-
          // Đóng sidebar
          function closeSidebar() {
              // Hiển thị sidebar bằng cách đặt left về 0
@@ -275,6 +268,24 @@
                  cardView.style.display = 'block';
              }
          }
+
+         function openSpecifications() {
+             // Hiển thị overlay bằng cách thay đổi display thành block
+             document.getElementById('overlay').style.display = 'block';
+             document.getElementById('specifications-popup').style.display = 'block';
+         }
+
+         function closeSpecifications() {
+             // Ẩn overlay và specifications-popup
+             document.getElementById('overlay').style.display = 'none';
+             document.getElementById('specifications-popup').style.display = 'none';
+         }
+
+         function closeAllOverlay() {
+             // Gọi cả hai hàm để đảm bảo mọi thứ được ẩn
+             closeSidebar();
+             closeSpecifications();
+         }
      </script>
 
 
@@ -283,8 +294,90 @@
 
      <script>
          $(document).ready(function() {
+             // tính tổng trung bình của 1 sản phẩm
+             function averageStart() {
+                 var product_id = $('.toggle-favorite').data('id_product');
+                 $.ajax({
+                     url: `/average-start/${product_id}`,
+                     method: 'GET',
+                     success: function(response) {
+                         $('.point').html(response.average);
+                         const avg_star = parseFloat(response.average);
+                         const stars = $('.list-star');
+                         stars.empty();
+                         for (let i = 1; i <= 5; i++) {
+                             if (avg_star >= i) {
+                                 stars.append('<i class="fa-solid fa-star"></i>'); // Sao đầy
+                             } else if (avg_star >= i - 0.5) {
+                                 stars.append(
+                                     '<i class="fa-solid fa-star-half-stroke"></i>'); // Sao nửa
+                             } else {
+                                 stars.append('<i class="fa-regular fa-star"></i>'); // Sao rỗng
+                             }
+                         }
+                         $('.total-review').html(response.total_reviews);
+
+                     },
+                     error: function(err) {
+                         console.error('Lỗi lấy trung bình tổng đánh giá:', err);
+                     }
+                 });
+             };
+
+             averageStart();
+
+             function getReviews() {
+                 var product_id = $('.toggle-favorite').data('id_product');
+                 $.ajax({
+                     url: `/get-review-cmt/${product_id}`, // URL lấy dữ liệu
+                     method: 'GET',
+                     success: function(data) {
+                         const reviewContainer = $('.boxReview-comment');
+                         reviewContainer.empty(); // Xóa nội dung cũ
+
+                         data.forEach(review => {
+                             const stars = Array.from({
+                                 length: 5
+                             }, (_, i) => i < review.rating ? '★' : '☆').join('');
+                             const reviewItem = `
+                            <div class="boxReview-comment-item">
+                                <div class="boxReview-comment-item-title">
+                                    <div class="boxReview-comment-item-block">
+                                        <div class="box-info-review">
+                                            <img class="avt-review-info" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
+                                            <strong>${review.name_customer.name_user}</strong>
+                                        </div>
+                                        <div class="box-time-review">
+                                            <span class="time">${review.created_at}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="boxReview-comment-item-review">
+                                    <div class="star-rating__review">
+                                        ${stars}
+                                    </div>
+                                    <div class="boxReview-comment-item__cmt">
+                                        <span>${review.review_text}</span>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        `;
+                             reviewContainer.append(reviewItem);
+                         });
+                     },
+                     error: function(err) {
+                         console.error('Error fetching reviews:', err);
+                     }
+                 });
+             }
+
+             // Gọi hàm fetchReviews khi cần
+             getReviews();
+
+             // hàm kiểm tra xem đã thích hay chưa
              function check_favorite() {
-                 var product_id = $('#toggle-favorite').data('product_id');
+                 var product_id = $('.toggle-favorite').data('id_product');
                  var _token = $('input[name="_token"]').val();
                  $.ajax({
                      url: "{{ url('/check-favorite') }}",
@@ -299,7 +392,6 @@
                      error: function(xhr) {
                          console.log('Có lỗi xáy ra ', xhr.responseText)
                      }
-
                  });
              };
              check_favorite();
@@ -366,7 +458,13 @@
                          product_id: product_id,
                      },
                      success: function(response) {
-                         check_favorite();
+                         if (response.status === 'error') {
+                             alert(response.message);
+                         } else if (response.status === 'add') {
+                             check_favorite();
+                         } else {
+                             check_favorite();
+                         }
                      },
                      error: function() {
                          alert('Không thể thực hiện yêu cầu!');
