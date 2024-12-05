@@ -14,7 +14,6 @@ $coupon_session = Session::get('coupon');
     <a href="{{URL::to('/cart')}}">Trở lại trang giỏ hàng</a>
 </div>
 
-
 <div class="row">
     <div class="col-sm-7">
         <div class="check-out">

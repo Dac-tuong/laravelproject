@@ -171,12 +171,62 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="add-review">
-                        <button>Thêm đánh giá</button>
+                    <div class="add-review-button">
+                        <button onclick="openReviewPopup()">Thêm đánh giá</button>
                     </div>
-                    <div>
-                        <form action="">
-                            <input type="text">
+                    <div class="review-form-popup" id="review-form-popup">
+                        <div class="">
+                            <p>Đánh giá sản phẩm</p>
+                            <div class="img">
+                                <img src="{{ URL::to('uploads/product/' . $product_detail->product_image) }}"
+                                    class="thumbnail-img-review">
+                            </div>
+                            <h6>{{ $product_detail->product_name}}</h6>
+                        </div>
+                        <ul class="rating-topzonecr-star">
+                            <li data-rating="1">
+                                <i class="fa-regular fa-star"></i>
+                            </li>
+                            <li data-rating="2">
+                                <i class="fa-regular fa-star"></i>
+                            </li>
+                            <li data-rating="3">
+                                <i class="fa-regular fa-star"></i>
+                            </li>
+                            <li data-rating="4">
+                                <i class="fa-regular fa-star"></i>
+                            </li>
+                            <li data-rating="5">
+                                <i class="fa-regular fa-star"></i>
+                            </li>
+                        </ul>
+                        <form action="" class="form-group">
+                            <div class="row" style="margin: 0">
+                                <div class="mb-3 row" style="margin: 0; padding:0;">
+                                    <div class="col-md-6 mb-3">
+                                        <input class="form-control" type="text" data-input-value="fullname"
+                                            name="fullname" id="fullname" placeholder="Họ và tên (Bắt buộc)">
+                                        <label for="" data-check-value="fullname" style="display: none; color: red;">Vui
+                                            lòng điền thông
+                                            tin!</label>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input class="form-control" type="number" data-input-value="phonenumber"
+                                            name="phonenumber" id="phonenumber" placeholder="Số điện thoại (Bắt buộc)">
+                                        <label for="" data-check-value="phonenumber"
+                                            style="display: none; color: red;">Vui lòng điền
+                                            thông tin!</label>
+                                    </div>
+                                    <div class="col-md-12 mb-12">
+                                        <textarea placeholder="mời nhập cảm nhận về sản phẩm"
+                                            class="custom-textarea form-control " name="" id=""
+                                            style=" height: 150px;"></textarea>
+                                        <label for="" style="display: none; color: red;">Vui lòng điền
+                                            thông tin!</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dcap"> <button class="send-review">Gửi đánh giá</button></div>
                         </form>
                     </div>
                 </div>
