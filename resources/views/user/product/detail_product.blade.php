@@ -118,8 +118,10 @@
                         <span class="point"></span>
                         <div class="list-star">
                         </div>
-                        <span class="total-review"></span>
+                        <br>
+                        <a href="" class="total-review"></a>
                     </div>
+
                     <div class="list-rate">
                         <ul class="rate-list">
                             <li>
@@ -129,7 +131,7 @@
                                 <div class="timeline-start">
                                     <p class="timing" style="width: 20%;"></p>
                                 </div>
-                                <span class="number-percent">20%</span>
+                                <span class="number-review"></span>
                             </li>
                             <li>
                                 <div class="number-start">
@@ -168,6 +170,14 @@
                                 <span class="number-percent">20%</span>
                             </li>
                         </ul>
+                    </div>
+                    <div class="add-review">
+                        <button>Thêm đánh giá</button>
+                    </div>
+                    <div>
+                        <form action="">
+                            <input type="text">
+                        </form>
                     </div>
                 </div>
 
@@ -271,7 +281,7 @@
             </div>
         </div>
 
-        <div class="col-sm-4">
+        <div class="col-sm-4 custom-class">
             <h2 class="tab-title">Thông số kỹ thuật</h2>
             <div class="specifications">
                 <div class="specification-item">

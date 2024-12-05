@@ -468,7 +468,18 @@
     display: flex;
     justify-content: space-between;
 }
-
+.close-specifications {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px; /* Đặt chiều rộng cho nút */
+    height: 40px; /* Đặt chiều cao cho nút */
+    background-color: #f1f1f1; /* Màu nền nút */
+    border: 1px solid #ccc; /* Đường viền */
+    border-radius: 5px; /* Bo góc nút */
+    font-size: 20px; /* Kích thước chữ */
+    cursor: pointer; /* Hiển thị con trỏ chuột khi hover */
+}
 .specifications-popup-content {
     max-height: 70vh; /* Chiều cao tối đa để phần nội dung không vượt quá */
     overflow-y: auto; /* Bật cuộn dọc khi nội dung dài */
@@ -1120,4 +1131,11 @@ tbody tr {
 /*==========================CHECK OUT=====================*/
 .footer {
     background-color: aqua;
+}
+/* MEDIA */
+
+@media (max-width: 767px) {
+    .custom-class {
+        display: none;
+    }
 }

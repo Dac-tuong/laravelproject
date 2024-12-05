@@ -130,12 +130,20 @@ class HomeController extends Controller
     {
         $review_product = ReviewModel::where('id_phone_review', $product_id)->get();
         $average_point_product = $review_product->avg('rating');
-        $count_review = $review_product->count();
+        $count_review = $review_product->count() . ' đánh giá';
 
 
         return response()->json([
             'average' => round($average_point_product, 1),
-            'total_reviews' => $count_review
+            'total_reviews' => $count_review,
         ]);
+    }
+
+    public function count_review_start($product_id)
+    {
+        $count_star_review = ReviewModel::where('id_phone_review', $product_id)
+            ->selectRaw('rating, COUNT(*)as count_review')->groupBy('rating')
+            ->orderBy('rating', 'desc')->get();
+        return response()->json($count_star_review);
     }
 }
