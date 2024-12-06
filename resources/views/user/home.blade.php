@@ -69,7 +69,6 @@
                             name="add-to-cart">
                             <img class="btn-cart" src="{{ URL::to('user/image/cart-btn.png' ) }}" alt="">
                         </button>
-
                     </div>
                 </form>
             </div>

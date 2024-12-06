@@ -78,7 +78,6 @@
                         <div id="show-favorite">
                         </div>
                     </button>
-
                 </form>
             </div>
 
@@ -200,30 +199,22 @@
                                 <i class="fa-regular fa-star"></i>
                             </li>
                         </ul>
-                        <form action="" class="form-group">
-                            <div class="row" style="margin: 0">
-                                <div class="mb-3 row" style="margin: 0; padding:0;">
-                                    <div class="col-md-6 mb-3">
-                                        <input class="form-control" type="text" data-input-value="fullname"
-                                            name="fullname" id="fullname" placeholder="Họ và tên (Bắt buộc)">
-                                        <label for="" data-check-value="fullname" style="display: none; color: red;">Vui
-                                            lòng điền thông
-                                            tin!</label>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <input class="form-control" type="number" data-input-value="phonenumber"
-                                            name="phonenumber" id="phonenumber" placeholder="Số điện thoại (Bắt buộc)">
-                                        <label for="" data-check-value="phonenumber"
-                                            style="display: none; color: red;">Vui lòng điền
-                                            thông tin!</label>
-                                    </div>
-                                    <div class="col-md-12 mb-12">
-                                        <textarea placeholder="mời nhập cảm nhận về sản phẩm"
-                                            class="custom-textarea form-control " name="" id=""
-                                            style=" height: 150px;"></textarea>
-                                        <label for="" style="display: none; color: red;">Vui lòng điền
-                                            thông tin!</label>
-                                    </div>
+                        <form class="form-group">
+                            <div class="row" style="margin: 0; padding:0;">
+                                <div class="col-md-6 mb-3">
+                                    <input class="form-control" type="text" name="fullname" id="fullname"
+                                        placeholder="Họ và tên (Bắt buộc)" required>
+
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input class="form-control" type="number" name="phonenumber" id="phonenumber"
+                                        placeholder="Số điện thoại (Bắt buộc)" required>
+
+                                </div>
+                                <div class="col-md-12 mb-12">
+                                    <textarea placeholder="mời nhập cảm nhận về sản phẩm"
+                                        class="custom-textarea form-control " name="" id=""
+                                        style=" height: 150px;"></textarea>
                                 </div>
                             </div>
                             <div class="dcap"> <button class="send-review">Gửi đánh giá</button></div>
