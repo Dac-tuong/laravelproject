@@ -18,4 +18,8 @@ class ReviewModel extends Model
     {
         return $this->belongsTo(User::class, 'id_user_review', 'id_user');
     }
+    public function phone_review()
+    {
+        return $this->belongsTo(User::class, 'id_phone_review', 'product_id');
+    }
 }

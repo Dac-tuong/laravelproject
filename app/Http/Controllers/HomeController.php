@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ReviewModel;
 use Illuminate\Http\Request;
 
 
@@ -13,7 +14,7 @@ use App\Models\Category;
 use App\Models\FavoriteModel;
 use App\Models\Gallery;
 use App\Models\Product;
-use App\Models\ReviewModel;
+
 
 
 session_start();
@@ -122,7 +123,10 @@ class HomeController extends Controller
     }
     public function get_review_cmt($product_id)
     {
-        $review_cmt = ReviewModel::with(['name_customer'])->where('id_phone_review', $product_id)->limit(5)->get();
+        $review_cmt = ReviewModel::with(['name_customer'])
+            ->where('id_phone_review', $product_id)
+            ->orderBy('id_review', 'desc')
+            ->limit(5)->get();
         return response()->json($review_cmt);
     }
 
@@ -145,5 +149,36 @@ class HomeController extends Controller
             ->selectRaw('rating, COUNT(*)as count_review')->groupBy('rating')
             ->orderBy('rating', 'desc')->get();
         return response()->json($count_star_review);
+    }
+
+    public function send_review(Request $request)
+    {
+        $dataReview = $request->all();
+        $id_user = Session::get('id_customer');
+        // $nameorder = $dataReview['fullname'];
+        $text = $dataReview['review'];
+        // $phonenumber = $dataReview['phonenumber'];
+        $product_review_id = $dataReview['id_product'];
+        $rating = $dataReview['rating'];
+        if (!$id_user) {
+            return response()->json(['status' => 'error', 'message' => 'Vui lòng đăng nhập hoặc đăng ký để thêm vào yêu thích']);
+        }
+
+        // Bỏ ghi chú và xử lý thêm đánh giá
+        $review = ReviewModel::where("id_phone_review", $product_review_id)
+            ->where("id_user_review", $id_user)->first();
+
+        if ($review) {
+            return response()->json(['status' => 'error', 'message' => 'Bạn đã đánh giá sản phẩm này trước đó!']);
+        } else {
+            $add_review = new ReviewModel();
+            $add_review->id_phone_review = $product_review_id;
+            $add_review->id_user_review = $id_user;
+            $add_review->review_text = $text;
+            $add_review->rating = $rating;
+            $add_review->save();
+
+            return response()->json(['status' => 'success', 'message' => 'Đánh giá của bạn đã được gửi!']);
+        }
     }
 }

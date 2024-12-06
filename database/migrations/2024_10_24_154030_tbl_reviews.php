@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id_review')->unsigned();
             $table->integer('id_phone_review')->unsigned();
             $table->integer('id_user_review')->unsigned();
-            $table->text('review_text');
+            $table->text('review_text')->nullable();
             $table->integer('rating');
             $table->timestamps();
 
