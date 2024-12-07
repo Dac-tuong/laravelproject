@@ -598,14 +598,14 @@
     display: flex;
 }
 
-.star-product {
+.boxReview-score {
     border: 1px solid black;
     width: 100%;
     font-size: 25px;
     text-align: center; /* Căn giữa cả 2 phần tử con */
     position: relative; /* Để sử dụng căn giữa theo chiều dọc */
 }
-.star-product .point {
+.boxReview-score .point {
     color: #f59e0b;
     font-size: 30px;
     display: block;
@@ -620,38 +620,64 @@
     font-size: 16px;
     text-align: center;
 }
-.rate-list {
-    list-style: none;
-    margin-top: 5px;
-    padding: 0px;
+
+.boxReview-star {
+    border: 1px solid black;
+    width: 100%;
+    font-size: 25px;
+    text-align: center; /* Căn giữa cả 2 phần tử con */
+    position: relative; /* Để sử dụng căn giữa theo chiều dọc */
+    justify-content: center;
 }
-.rate-list li {
-    display: inline-block;
+
+.rating-level {
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: space-between; /* Căn cách đều các phần tử con */
+    font-size: 15px;
+}
+
+.start-count {
+    display: flex;
+    font-weight: 500;
+    justify-content: center;
     align-items: center;
+    margin-right: 10px; /* Tạo khoảng cách giữa phần tử và thanh progress */
 }
-.number-start {
-    display: inline-block;
+.start-count i {
     color: #f59e0b;
 }
-.timeline-start {
-    display: inline-block;
-    background-color: #eee;
-    border-radius: 20px;
-    height: 8px;
-    width: 180px;
+
+.progress {
+    flex-grow: 1; /* Thanh progress sẽ chiếm không gian còn lại */
+    max-width: 240px; /* Đảm bảo không vượt quá chiều dài mong muốn */
+    margin: 0 10px; /* Tạo khoảng cách giữa progress và các phần tử xung quanh */
 }
-.timing {
-    background-color: #f59e0b;
-    border-radius: 20px;
-    left: 0;
-    height: 6px;
+
+.rating-count {
+    font-size: 14px;
+    margin-left: 10px; /* Tạo khoảng cách với thanh progress */
 }
+
+/* Tuỳ chỉnh thanh nền progress */
+.progress::-webkit-progress-bar {
+    background-color: #e0e0e0; /* Màu nền */
+    border-radius: 10px; /* Góc bo tròn */
+}
+
+/* Tuỳ chỉnh thanh giá trị progress */
+.progress::-webkit-progress-value {
+    background-color: #f59e0b; /* Màu giá trị */
+    border-radius: 10px; /* Góc bo tròn */
+}
+
 .rating-topzonecr-star {
     display: flex;
     list-style: none;
     justify-content: center;
     border: 1px solid bisque;
 }
+
 .rating-topzonecr-star li {
     color: #f59e0b;
     font-size: 25px;

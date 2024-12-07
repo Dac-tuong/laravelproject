@@ -306,11 +306,6 @@
 
      <script>
      $(document).ready(function() {
-
-
-
-
-
          // tính tổng trung bình sao của 1 sản phẩm
          function averageStart() {
              var product_id = $('.toggle-favorite').data('id_product');
@@ -332,7 +327,7 @@
                              stars.append('<i class="fa-regular fa-star"></i>'); // Sao rỗng
                          }
                      }
-                     $('.total-review').html(response.total_reviews);
+                     $('.boxReview-score__count').html(response.total_reviews);
 
                  },
                  error: function(err) {

@@ -113,66 +113,51 @@
             <div class="block-review">
                 <h2>Đánh giá và nhận xét sản phẩm</h2>
                 <div class="boxReview-review">
-                    <div class="star-product">
+                    <div class="boxReview-score">
                         <span class="point"></span>
                         <div class="list-star">
                         </div>
                         <br>
-                        <a href="" class="total-review"></a>
+                        <a href="" class="boxReview-score__count"></a>
+                    </div>
+                    <div class="boxReview-star">
+                        <div class="rating-level">
+                            <div class="start-count">
+                                5 <i class="fa-solid fa-star"></i>
+                            </div>
+                            <progress max="10" class="progress" value="5"></progress>
+                            <span class="rating-count"> 5 đánh giá</span>
+                        </div>
+                        <div class="rating-level">
+                            <div class="start-count">
+                                4 <i class="fa-solid fa-star"></i>
+                            </div>
+                            <progress max="10" class="progress" value="5"></progress>
+                            <span class="rating-count"> 5 đánh giá</span>
+                        </div>
+                        <div class="rating-level">
+                            <div class="start-count">
+                                3 <i class="fa-solid fa-star"></i>
+                            </div>
+                            <progress max="10" class="progress" value="5"></progress>
+                            <span class="rating-count"> 5 đánh giá</span>
+                        </div>
+                        <div class="rating-level">
+                            <div class="start-count">
+                                2 <i class="fa-solid fa-star"></i>
+                            </div>
+                            <progress max="10" class="progress" value="5"></progress>
+                            <span class="rating-count"> 5 đánh giá</span>
+                        </div>
+                        <div class="rating-level">
+                            <div class="start-count">
+                                1 <i class="fa-solid fa-star"></i>
+                            </div>
+                            <progress max="10" class="progress" value="5"></progress>
+                            <span class="rating-count"> 5 đánh giá</span>
+                        </div>
                     </div>
 
-                    <div class="list-rate">
-                        <ul class="rate-list">
-                            <li>
-                                <div class="number-start">
-                                    5 <i class="fa-solid fa-star"></i>
-                                </div>
-                                <div class="timeline-start">
-                                    <p class="timing" style="width: 20%;"></p>
-                                </div>
-                                <span class="number-review"></span>
-                            </li>
-                            <li>
-                                <div class="number-start">
-                                    4 <i class="fa-solid fa-star"></i>
-                                </div>
-                                <div class="timeline-start">
-                                    <p class="timing" style="width: 20%;"></p>
-                                </div>
-                                <span class="number-percent">20%</span>
-                            </li>
-                            <li>
-                                <div class="number-start">
-                                    3 <i class="fa-solid fa-star"></i>
-                                </div>
-                                <div class="timeline-start">
-                                    <p class="timing" style="width: 20%;"></p>
-                                </div>
-                                <span class="number-percent">20%</span>
-                            </li>
-                            <li>
-                                <div class="number-start">
-                                    2 <i class="fa-solid fa-star"></i>
-                                </div>
-                                <div class="timeline-start">
-                                    <p class="timing" style="width: 20%;"></p>
-                                </div>
-                                <span class="number-percent">20%</span>
-                            </li>
-                            <li>
-                                <div class="number-start">
-                                    1 <i class="fa-solid fa-star"></i>
-                                </div>
-                                <div class="timeline-start">
-                                    <p class="timing" style="width: 20%;"></p>
-                                </div>
-                                <span class="number-percent">20%</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="add-review-button">
-                        <button onclick="openReviewPopup()">Thêm đánh giá</button>
-                    </div>
                     <div class="review-form-popup" id="review-form-popup">
                         <div class="">
                             <p>Đánh giá sản phẩm</p>
@@ -235,7 +220,9 @@
                         </form>
                     </div>
                 </div>
-
+                <div class="add-review-button">
+                    <button onclick="openReviewPopup()">Thêm đánh giá</button>
+                </div>
                 <div class="box-review-filter">
                     <div class="title-filter">Lọc theo</div>
                     <div class="filter-container">
