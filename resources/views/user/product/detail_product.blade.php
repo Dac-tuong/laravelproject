@@ -216,9 +216,8 @@
                                 </div>
 
                                 <div class="col-md-6 mb-3">
-                                    <label for="" data-check-value="phonenumber" style="display: none; color: red;">Vui
-                                        lòng điền
-                                        thông tin!</label>
+                                    <label for="" data-check-value="phonenumber" style="display: none; color: red;">
+                                        Vui lòng điền thông tin!</label>
                                     <input class="form-control" type="text" data-input-value="phonenumber"
                                         name="phonenumber" id="phonenumber" placeholder="Số điện thoại">
 
@@ -231,7 +230,7 @@
                                         style="height: 120px;"></textarea>
                                 </div>
                             </div>
-                            <div class="dcap"><button class="send-review"
+                            <div class="dcap"><button type="button" class="send-review"
                                     data-id_product="{{ $product_detail->product_id }}">Gửi đánh giá</button></div>
                         </form>
                     </div>
