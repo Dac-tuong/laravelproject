@@ -143,14 +143,6 @@ class HomeController extends Controller
         ]);
     }
 
-    public function count_review_start($product_id)
-    {
-        $count_star_review = ReviewModel::where('id_phone_review', $product_id)
-            ->selectRaw('rating, COUNT(*)as count_review')->groupBy('rating')
-            ->orderBy('rating', 'desc')->get();
-        return response()->json($count_star_review);
-    }
-
     public function send_review(Request $request)
     {
         $dataReview = $request->all();
@@ -180,5 +172,14 @@ class HomeController extends Controller
 
             return response()->json(['status' => 'success', 'message' => 'Đánh giá của bạn đã được gửi!']);
         }
+    }
+
+
+    public function count_with_star($product_id)
+    {
+        $reviews = ReviewModel::where('id_phone_review', $product_id)->get();
+        $reviews_total = $reviews->count();
+        $reviewGroupby = $reviews->groupBy('rating')->count();
+        return response()->json(['total_reviews' => $reviews_total, 'reviewGroupby' => $reviewGroupby]);
     }
 }

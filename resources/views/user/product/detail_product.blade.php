@@ -125,37 +125,15 @@
                             <div class="start-count">
                                 5 <i class="fa-solid fa-star"></i>
                             </div>
-                            <progress max="10" class="progress" value="5"></progress>
-                            <span class="rating-count"> 5 đánh giá</span>
-                        </div>
-                        <div class="rating-level">
-                            <div class="start-count">
-                                4 <i class="fa-solid fa-star"></i>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50"
+                                    aria-valuemin="0" aria-valuemax="100">
+                                </div>
                             </div>
-                            <progress max="10" class="progress" value="5"></progress>
                             <span class="rating-count"> 5 đánh giá</span>
                         </div>
-                        <div class="rating-level">
-                            <div class="start-count">
-                                3 <i class="fa-solid fa-star"></i>
-                            </div>
-                            <progress max="10" class="progress" value="5"></progress>
-                            <span class="rating-count"> 5 đánh giá</span>
-                        </div>
-                        <div class="rating-level">
-                            <div class="start-count">
-                                2 <i class="fa-solid fa-star"></i>
-                            </div>
-                            <progress max="10" class="progress" value="5"></progress>
-                            <span class="rating-count"> 5 đánh giá</span>
-                        </div>
-                        <div class="rating-level">
-                            <div class="start-count">
-                                1 <i class="fa-solid fa-star"></i>
-                            </div>
-                            <progress max="10" class="progress" value="5"></progress>
-                            <span class="rating-count"> 5 đánh giá</span>
-                        </div>
+
+
                     </div>
 
                     <div class="review-form-popup" id="review-form-popup">

@@ -86,7 +86,8 @@ Route::post('/send-review', [HomeController::class, 'send_review']);
 Route::get('/get-review-cmt/{product_id}', [HomeController::class, 'get_review_cmt']);
 
 Route::get('/average-start/{product_id}', [HomeController::class, 'average_start']);
-Route::get('/count-review-start/{product_id}', [HomeController::class, 'count_review_start']);
+Route::get('/count-with-star/{product_id}', [HomeController::class, 'count_with_star']);
+
 // SIDEBAR CONTROLL
 use App\Http\Controllers\SidebarController;
 
