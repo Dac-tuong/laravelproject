@@ -121,7 +121,7 @@
                         <a href="" class="boxReview-score__count"></a>
                     </div>
                     <div class="boxReview-star">
-                        <div class="rating-level">
+                        <div class="rating-level" data-rating_level="5">
                             <div class="start-count">
                                 5 <i class="fa-solid fa-star"></i>
                             </div>
@@ -130,7 +130,55 @@
                                     aria-valuemin="0" aria-valuemax="100">
                                 </div>
                             </div>
-                            <span class="rating-count"> 5 đánh giá</span>
+                            <!-- <progress class="progress" role="progressbar" max="100" value="20"></progress> -->
+                            <span class="rating-count"> 125 đánh giá</span>
+                        </div>
+                        <div class="rating-level" data-rating_level="4">
+                            <div class="start-count">
+                                4 <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50"
+                                    aria-valuemin="0" aria-valuemax="100">
+                                </div>
+                            </div>
+                            <!-- <progress class="progress" role="progressbar" max="100" value="20"></progress> -->
+                            <span class="rating-count"> 125 đánh giá</span>
+                        </div>
+                        <div class="rating-level" data-rating_level="3">
+                            <div class="start-count">
+                                3 <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50"
+                                    aria-valuemin="0" aria-valuemax="100">
+                                </div>
+                            </div>
+                            <!-- <progress class="progress" role="progressbar" max="100" value="20"></progress> -->
+                            <span class="rating-count"> 125 đánh giá</span>
+                        </div>
+                        <div class="rating-level" data-rating_level="2">
+                            <div class="start-count">
+                                2 <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50"
+                                    aria-valuemin="0" aria-valuemax="100">
+                                </div>
+                            </div>
+                            <!-- <progress class="progress" role="progressbar" max="100" value="20"></progress> -->
+                            <span class="rating-count"> 125 đánh giá</span>
+                        </div>
+                        <div class="rating-level" data-rating_level="1">
+                            <div class="start-count">
+                                1 <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 50%;">
+                                </div>
+                            </div>
+                            <!-- <progress class="progress" role="progressbar" max="100" value="20"></progress> -->
+                            <span class="rating-count"> 125 đánh giá</span>
                         </div>
 
 

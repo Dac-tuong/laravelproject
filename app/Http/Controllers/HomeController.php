@@ -179,7 +179,39 @@ class HomeController extends Controller
     {
         $reviews = ReviewModel::where('id_phone_review', $product_id)->get();
         $reviews_total = $reviews->count();
-        $reviewGroupby = $reviews->groupBy('rating')->count();
-        return response()->json(['total_reviews' => $reviews_total, 'reviewGroupby' => $reviewGroupby]);
+
+        // Lấy dữ liệu thực tế từ cơ sở dữ liệu
+        $ratings_count = ReviewModel::where('id_phone_review', $product_id)
+            ->groupBy('rating')
+            ->selectRaw('rating, COUNT(*) as count')
+            ->orderBy('rating', 'desc')
+            ->get()
+            ->keyBy('rating'); // Sử dụng keyBy để dễ dàng kiểm tra các mức đánh giá
+
+        // Đảm bảo tất cả các mức đánh giá từ 1 đến 5 đều có
+        $ratings_array = [];
+        for ($i = 1; $i <= 5; $i++) {
+            if (isset($ratings_count[$i])) {
+                // Nếu mức đánh giá tồn tại, sử dụng giá trị từ database
+                $count = $ratings_count[$i]->count;
+            } else {
+                // Nếu không tồn tại, gán count = 0
+                $count = 0;
+            }
+
+            // Tính phần trăm
+            $percentage = $reviews_total > 0 ? round(($count / $reviews_total) * 100, 2) : 0;
+
+            $ratings_array[] = [
+                'rating' => $i,
+                'count' => $count,
+                'percentage' => $percentage,
+            ];
+        }
+
+        return response()->json([
+            'total_reviews' => $reviews_total,
+            'ratings_count' => $ratings_array
+        ]);
     }
 }

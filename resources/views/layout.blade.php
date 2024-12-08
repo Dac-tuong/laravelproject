@@ -20,7 +20,7 @@
      <link rel="stylesheet" href="{{asset("user/css/bootstrap.css")}}">
 
 
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
      <!-- Link font-awesome -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -231,7 +231,7 @@
      </div>
 
 
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
      <script src="{{asset("user/js/jquery-3.6.0.min.js")}}"></script>
      <script src="{{asset("user/js/sweetalert2.js")}}"></script>
@@ -680,14 +680,18 @@
                      url: `/count-with-star/${product_id}`,
                      method: 'GET',
                      success: function(response) {
-                         console.log(response);
-                         // In ra tổng số đánh giá
-                         console.log("Tổng số đánh giá:", response.total_reviews);
+                         // Log the total review count to the console
+                         //  console.log('Total Reviews:', response.reviews_total);
 
-
+                         //  // Loop through the ratings count and log each rating with its count
+                         //  response.ratings_count.forEach(function(rating) {
+                         //      console.log(
+                         //          `Rating ${rating.rating}: ${rating.count} reviews (${rating.percentage}%)`
+                         //      ); // Log từng mục
+                         //  });
                      },
-                     error: function(error) {
-                         console.error("Đã xảy ra lỗi:", error);
+                     error: function(xhr, status, error) {
+                         console.error('Error fetching review data: ' + error);
                      }
                  });
              }
