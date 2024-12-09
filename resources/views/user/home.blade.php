@@ -31,19 +31,19 @@
                     <input type="hidden" value="1" class="cart_product_qty_{{ $product->product_id }}">
 
                     <!-- Link đến trang chi tiết sản phẩm -->
-                    <a href="{{ URL::to('/detail-product'.'/' . $product->product_id) }}">
+                    <a class="link-product" href="{{ URL::to('/detail-product'.'/' . $product->product_id) }}">
                         <img class="home-product-img" src="{{ URL::to('uploads/product/' . $product->product_image) }}"
                             alt="" />
                         <h5 class="productinfo__name">{{ $product->product_name }}</h5>
                         <div class=" productinfo__price">
                             @if ($product->old_price > 0)
                             <span class="productinfo__price-old">
-                                {{ number_format($product->old_price, 0, ',', '.') }}
+                                {{ number_format($product->old_price, 0, ',', '.') }}đ
                             </span>
                             @endif
 
                             <span class="productinfo__price-current">
-                                {{ number_format($product->sale_price, 0, ',', '.') }}
+                                {{ number_format($product->sale_price, 0, ',', '.') }}đ
                             </span>
 
                         </div>

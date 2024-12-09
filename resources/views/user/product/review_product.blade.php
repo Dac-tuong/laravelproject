@@ -1,11 +1,10 @@
 @extends('layout')
 @section('content')
-<nav area-label="breadcrumb">
-    <ol>
-        <li class="breadcrumb-item"><a href="">Trang chủ</a></li>
-        <li class="breadcrumb-item"><a href="">Đánh giá sản phẩm</a></li>
-    </ol>
-</nav>
+<div class="breadcrumb">
+    <a href="{{ URL::to('/') }}">Trang chủ /</a>
+    <a href="">{{$product_infor->brand->brand_name}} /</a>
+    <a href="">{{ $product_infor->product_name}}</a>
+</div>
 
 <div class="block-product-review">
 
@@ -82,6 +81,6 @@
         </div>
 
     </div>
+</div>
 
-
-    @endsection
+@endsection

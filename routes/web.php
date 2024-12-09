@@ -83,11 +83,11 @@ Route::post('/favorite-toggle', [HomeController::class, 'favorite_toggle']);
 Route::post('/check-favorite', [HomeController::class, 'check_favorite']);
 
 Route::post('/send-review', [HomeController::class, 'send_review']);
-Route::get('/get-review-cmt/{product_id}', [HomeController::class, 'get_review_cmt']);
+Route::get('/get-review-cmt-min/{product_id}', [HomeController::class, 'get_review_cmt_min']);
 
 Route::get('/average-start/{product_id}', [HomeController::class, 'average_start']);
 Route::get('/count-with-star/{product_id}', [HomeController::class, 'count_with_star']);
-Route::get('/filter-reviews', [HomeController::class, 'filter_reviews']);
+Route::get('/filter-reviews-min', [HomeController::class, 'filter_reviews_min']);
 // SIDEBAR CONTROLL
 use App\Http\Controllers\SidebarController;
 

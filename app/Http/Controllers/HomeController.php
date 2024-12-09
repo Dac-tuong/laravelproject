@@ -121,7 +121,7 @@ class HomeController extends Controller
         }
         echo $output;
     }
-    public function get_review_cmt($product_id)
+    public function get_review_cmt_min($product_id)
     {
         $review_cmt = ReviewModel::with(['name_customer'])
             ->where('id_phone_review', $product_id)
@@ -215,15 +215,24 @@ class HomeController extends Controller
         ]);
     }
 
-    public function filter_reviews(Request $request)
+    public function filter_reviews_min(Request $request)
     {
         $dataFilterReview = $request->all();
         $id_filter = $dataFilterReview['id_product'];
         $star_filter = $dataFilterReview['filter_start'];
 
-        return response()->json([
-            'id_filter' => $id_filter,
-            'star_filter' => $star_filter
-        ]);
+        if ($star_filter == 0) {
+            $review_cmt = ReviewModel::with(['name_customer'])
+                ->where('id_phone_review', $id_filter)
+                ->orderBy('id_review', 'desc')
+                ->limit(5)->get();
+            return response()->json($review_cmt);
+        } else {
+            $review_cmt = ReviewModel::with(['name_customer'])
+                ->where('id_phone_review', $id_filter)->where('rating', $star_filter)
+                ->orderBy('id_review', 'desc')
+                ->limit(5)->get();
+            return response()->json($review_cmt);
+        }
     }
 }

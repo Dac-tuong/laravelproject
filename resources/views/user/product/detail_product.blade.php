@@ -1,13 +1,17 @@
 @extends('layout')
 @section('content')
-<div class="breadcrumb">
-    <a href="{{ URL::to('/') }}">Trang chủ /</a>
-    <a href="">{{$product_detail->brand->brand_name}} /</a>
-    <a href="">{{ $product_detail->product_name}}</a>
+<div class="border-white">
+    <div class="breadcrumb">
+        <a href="{{ URL::to('/') }}">Trang chủ /</a>
+        <a href="">{{$product_detail->brand->brand_name}} /</a>
+        <a href="">{{ $product_detail->product_name}}</a>
+    </div>
 </div>
 <div class="product-detail row" style="margin: 0px; padding: 0px;">
     <!-- Product Item -->
-    <h1>{{ $product_detail->product_name}}</h1>
+    <div class="border-white">
+        <h1>{{ $product_detail->product_name}}</h1>
+    </div>
     <input type="hidden" value="{{ $product_detail->product_id }}" class="product_id">
     <div class="col-lg-7 col-md-6 col-sm-12">
         <div class="feature-img">
@@ -44,11 +48,9 @@
     <div class="col-lg-5 col-md-6 col-sm-12">
         <div class="box-right">
             <div class="box-product-variants">
-                <a href="" class="box03__item">{{$product_detail->ram}}-{{$product_detail->storage}}</a>
-                <a href="" class="box03__item">{{$product_detail->ram}}-{{$product_detail->storage}}</a>
-
                 <p class="product-code">Mã sản phẩm: {{$product_detail->product_code}}</p>
-                <p class="product-price">Giá bán:{{ number_format($product_detail->sale_price, 0, ',', '.') }}</p>
+                <strong>Giá bán:</strong>
+                <span class="product-price">{{ number_format($product_detail->sale_price, 0, ',', '.') }}đ</span>
                 <p>Loại điện thoại: {{$product_detail->category->category_name}}</p>
                 <p>Thương hiệu: {{$product_detail->brand->brand_name}}</p>
             </div>
@@ -88,23 +90,22 @@
         @foreach ($similars as $similar )
         <div class="col-lg-2 col-md-4 col-sm-6 col-6">
             <div class="similar-product">
+
                 <img src="{{URL::to('uploads/product'.'/'.$similar->product_image)}}" alt="">
-                <h5>{{$similar->product_name}}</h5>
-                <span class="similar-product-price"> {{ number_format($similar->sale_price, 0, ',', '.') }}</span>
-                <div class="bottom-div">
-                    <div class="product__box-rating">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="product__box-favorite">
-                        <span class="favorite-title">Yêu thích</span>
-                        <span class="favorite-icon"></span>
-                    </div>
-                </div>
+                <h5> <a class="link-product"
+                        href="{{ URL::to('/detail-product'.'/' . $similar->product_id) }}">{{$similar->product_name}}
+                    </a></h5>
+                @if ($similar->old_price > 0)
+                <span class="productinfo__price-old">
+                    {{ number_format($similar->old_price, 0, ',', '.') }}đ
+                </span>
+                @endif
+                <span class="productinfo__price-current">
+                    {{ number_format($similar->sale_price, 0, ',', '.') }}đ
+                </span>
+
             </div>
+
         </div>
         @endforeach
     </div>

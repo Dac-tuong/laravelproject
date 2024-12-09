@@ -55,7 +55,7 @@
      </ul> -->
      <div class="app">
          <header class="header">
-             <div class="container-xl" style=" border: 1px solid black;">
+             <div class="container-xl">
                  <!-- header with search -->
                  <div class="header-nav row" style="margin: 0">
                      <div class="col-lg-2 col-md-3 col-sm-5 col-5">
@@ -138,7 +138,7 @@
          <!-- sidebar -->
 
          <div class="app_container">
-             <div class="container-xl" style=" border: 1px solid black;">
+             <div class="container-xl">
                  <div class="nav-sidebar">
                      <ul class="menu">
                          <li class="megamenu"><a href="{{URL::to('/')}}">TRANG CHỦ</a></li>
@@ -337,58 +337,6 @@
              };
              averageStart();
              // tính tổng trung bình sao của 1 sản phẩm
-
-
-             // lấy các review ra
-             function getReviews() {
-                 var product_id = $('.product_id').val();
-                 $.ajax({
-                     url: `/get-review-cmt/${product_id}`, // URL lấy dữ liệu
-                     method: 'GET',
-                     success: function(data) {
-                         const reviewContainer = $('.boxReview-comment');
-                         reviewContainer.empty(); // Xóa nội dung cũ
-
-                         data.forEach(review => {
-                             const stars = Array.from({
-                                 length: 5
-                             }, (_, i) => i < review.rating ? '★' : '☆').join('');
-                             const reviewItem = `
-                            <div class="boxReview-comment-item">
-                                <div class="boxReview-comment-item-title">
-                                    <div class="boxReview-comment-item-block">
-                                        <div class="box-info-review">
-                                            <img class="avt-review-info" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
-                                            <strong>${review.name_customer.name_user}</strong>
-                                        </div>
-                                        <div class="box-time-review">
-                                            <span class="time">${review.created_at}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="boxReview-comment-item-review">
-                                    <div class="star-rating__review">
-                                        ${stars}
-                                    </div>
-                                    <div class="boxReview-comment-item__cmt">
-                                        <span>${review.review_text}</span>
-                                    </div>
-                                </div>
-                                <hr>
-                            </div>
-                        `;
-                             reviewContainer.append(reviewItem);
-                         });
-                     },
-                     error: function(err) {
-                         console.error('Error fetching reviews:', err);
-                     }
-                 });
-             }
-             // Gọi hàm fetchReviews khi cần
-             getReviews();
-             // lấy các review ra
-
 
              // hàm kiểm tra xem đã thích hay chưa
              function check_favorite() {
@@ -607,8 +555,6 @@
 
              // Gửi nhận xét sản phẩm lên csdl
              $('.send-review').click(function() {
-                 //  event.preventDefault();
-                 // Ngăn gửi form mặc định
 
                  var _token = $('input[name="_token"]').val();
                  var allValid = true;
@@ -708,6 +654,63 @@
              };
              show_quantity_with_star();
 
+
+
+             function getReviewStarMin(filter, product_id) {
+                 const reviewContainer = $('.boxReview-comment');
+
+                 $.ajax({
+                     url: '/filter-reviews-min',
+                     method: 'GET',
+                     data: {
+                         filter_start: filter,
+                         id_product: product_id,
+                     },
+                     success: function(data) {
+                         if (data.length === 0) {
+                             reviewContainer.html('<p>Không có đánh giá nào phù hợp.</p>');
+                             return;
+                         }
+
+                         let reviewsHtml = '';
+                         data.forEach(review => {
+                             const stars = Array.from({
+                                 length: 5
+                             }, (_, i) => i < review.rating ? '★' : '☆').join('');
+                             reviewsHtml += `
+                    <div class="boxReview-comment-item">
+                        <div class="boxReview-comment-item-title">
+                            <div class="boxReview-comment-item-block">
+                                <div class="box-info-review">
+                                    <img class="avt-review-info" src="${review.avatar || '/path/to/default-avatar.png'}" alt="">
+                                    <strong>${review.name_customer.name_user}</strong>
+                                </div>
+                                <div class="box-time-review">
+                                    <span class="time">${review.created_at}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="boxReview-comment-item-review">
+                            <div class="star-rating__review">
+                                ${stars}
+                            </div>
+                            <div class="boxReview-comment-item__cmt">
+                                <span>${review.review_text}</span>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>`;
+                         });
+                         reviewContainer.html(reviewsHtml);
+                     },
+                     error: function(xhr, status, error) {
+                         console.error('Lỗi khi gọi Ajax:', error);
+                         reviewContainer.html('<p>Không thể tải đánh giá. Vui lòng thử lại sau.</p>');
+                     }
+                 });
+             }
+
+
              // Tìm kiếm theo số sao bình luận
              $('.filter-container .filter-item').click(function() {
                  var filter = $(this).data('rating_filter_review');
@@ -716,24 +719,60 @@
                  //  alert(product_id);
                  $('.filter-container .filter-item').removeClass('active');
 
-                 // Thêm class 'active' vào phần tử được click
                  $(this).addClass('active');
-                 $.ajax({
-                     url: '/filter-reviews',
-                     method: 'GET',
-                     data: {
-                         filter_start: filter,
-                         id_product: product_id,
-                     },
-                     success: function(response) {
-                         console.log(response);
-                         console.log(response.id_filter);
-                         console.log(response.star_filter);
-                     }
-
-
-                 });
+                 getReviewStarMin(filter, product_id);
              });
+
+
+             // lấy các review ra
+             function getReviewsMin() {
+                 var product_id = $('.product_id').val();
+                 $.ajax({
+                     url: `/get-review-cmt-min/${product_id}`, // URL lấy dữ liệu
+                     method: 'GET',
+                     success: function(data) {
+                         const reviewContainer = $('.boxReview-comment');
+                         reviewContainer.empty(); // Xóa nội dung cũ
+
+                         data.forEach(review => {
+                             const stars = Array.from({
+                                 length: 5
+                             }, (_, i) => i < review.rating ? '★' : '☆').join('');
+                             const reviewItem = `
+                            <div class="boxReview-comment-item">
+                                <div class="boxReview-comment-item-title">
+                                    <div class="boxReview-comment-item-block">
+                                        <div class="box-info-review">
+                                            <img class="avt-review-info" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
+                                            <strong>${review.name_customer.name_user}</strong>
+                                        </div>
+                                        <div class="box-time-review">
+                                            <span class="time">${review.created_at}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="boxReview-comment-item-review">
+                                    <div class="star-rating__review">
+                                        ${stars}
+                                    </div>
+                                    <div class="boxReview-comment-item__cmt">
+                                        <span>${review.review_text}</span>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        `;
+                             reviewContainer.append(reviewItem);
+                         });
+                     },
+                     error: function(err) {
+                         console.error('Error fetching reviews:', err);
+                     }
+                 });
+             }
+             // Gọi hàm fetchReviews khi cần
+             getReviewsMin();
+             // lấy các review ra
 
 
          });
