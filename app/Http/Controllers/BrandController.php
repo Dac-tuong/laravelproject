@@ -6,7 +6,8 @@ use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Support\Facades\Redirect;
 
 session_start();
@@ -94,5 +95,49 @@ class BrandController extends Controller
         $brand->delete();
         Session::put('message_success', 'Xóa thành công!');
         return Redirect::to('list-brand');
+    }
+
+    // USER
+
+    public function show_brand_user(Request $request, $brand_id)
+    {
+        $brand = Brand::get();
+        $only_brand = Brand::where('brand_id', $brand_id)->first();
+
+        $brand_by_id = Product::where('brand_product_id', $brand_id)
+            ->where('product_status', 1)
+            ->get();
+        if (isset($_GET['sort_by'])) {
+            $sort_by = $_GET['sort_by'];
+            if ($sort_by == 'tang_dan') {
+                $brand_by_id = Product::where('brand_product_id', $brand_id)
+                    ->where('product_status', 1)
+                    ->orderBy('sale_price', 'asc')
+                    ->get();
+            } else if ($sort_by == 'giam_dan') {
+                $brand_by_id = Product::where('brand_product_id', $brand_id)
+                    ->where('product_status', 1)
+                    ->orderBy('sale_price', 'desc')
+                    ->get();
+            } else if ($sort_by == 'tu_az') {
+                $brand_by_id = Product::where('brand_product_id', $brand_id)
+                    ->where('product_status', 1)
+                    ->orderBy('product_name', 'asc')
+                    ->get();
+            } else if ($sort_by == 'tu_za') {
+                $brand_by_id = Product::where('brand_product_id', $brand_id)
+                    ->where('product_status', 1)
+                    ->orderBy('product_name', 'desc')
+                    ->get();
+            }
+        } else {
+            $brand_by_id = Product::where('brand_product_id', $brand_id)
+                ->where('product_status', 1)
+                ->get();
+        }
+        return view('user.other.show_category')
+            ->with('brand', $only_brand)
+            ->with('brand_by_id', $brand_by_id)
+            ->with('brands', $brand);
     }
 }

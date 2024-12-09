@@ -10,6 +10,11 @@ use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
+use App\Models\Brand;
+
+use App\Models\FavoriteModel;
+
+use App\Models\Product;
 use Illuminate\Support\Facades\Redirect;
 
 session_start();
@@ -95,4 +100,8 @@ class CategoryController extends Controller
         Session::put('message_success', 'Xóa thành công!');
         return Redirect::to('list-category-product');
     }
+
+    // USER
+
+
 }

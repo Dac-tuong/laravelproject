@@ -5,7 +5,8 @@
     <h3>DANH MỤC THƯƠNG HIỆU</h3>
     <ul class="menu-brand">
         @foreach ($brands as $brand)
-        <li class="brand-item"><a href="">{{$brand->brand_name}}</a></li>
+        <li class="brand-item"><a
+                href="{{ URL::to('/show-brand-user'.'/' . $brand->brand_id ) }}">{{$brand->brand_name}}</a></li>
         @endforeach
 
     </ul>

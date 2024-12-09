@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
 
-<div class="breadcrumb">
+<div class="breadcrumbs">
     <a href="{{ URL::to('/') }}">Trang chủ </a>/
     <a href="{{ URL::to('/history-order') }}">Lịch sử mua hàng</a>
 </div>

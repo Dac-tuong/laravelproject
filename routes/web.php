@@ -28,6 +28,9 @@ Route::post('/save-category-product', [CategoryController::class, 'save_category
 Route::post('/update-category-product/{categories_product_id}', [CategoryController::class, 'update_category_product']);
 
 
+// dành cho user
+Route::get('/show-category-user/{categories_product_id}', [CategoryController::class, 'show_category_user']);
+
 // Brand
 use App\Http\Controllers\BrandController;
 
@@ -45,7 +48,8 @@ Route::post('/save-brand', [BrandController::class, 'save_brand']);
 Route::post('/update-brand/{brand_id}', [BrandController::class, 'update_brand']);
 
 Route::get('/delete-brand/{brand_id}', [BrandController::class, 'delete_brand']);
-
+// dành cho user
+Route::get('/show-brand-user/{brand_id}', [BrandController::class, 'show_brand_user']);
 
 // Products
 use App\Http\Controllers\ProductControll;

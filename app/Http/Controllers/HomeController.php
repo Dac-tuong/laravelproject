@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\FavoriteModel;
-use App\Models\Gallery;
+
 use App\Models\Product;
 
 

@@ -1,12 +1,12 @@
 @extends('layout')
 @section('content')
-<div class="border-white">
-    <div class="breadcrumb">
-        <a href="{{ URL::to('/') }}">Trang chủ /</a>
-        <a href="">{{$product_detail->brand->brand_name}} /</a>
-        <a href="">{{ $product_detail->product_name}}</a>
-    </div>
+
+<div class="breadcrumbs">
+    <a href="{{ URL::to('/') }}">Trang chủ /</a>
+    <a href="">{{$product_detail->brand->brand_name}} /</a>
+    <a href="">{{ $product_detail->product_name}}</a>
 </div>
+
 <div class="product-detail row" style="margin: 0px; padding: 0px;">
     <!-- Product Item -->
     <div class="border-white">
@@ -78,7 +78,7 @@
 
                     <button type="button" class="toggle-favorite" id="toggle-favorite" name="toggle-favorite"
                         data-id_product="{{ $product_detail->product_id }}">
-                        <div id="show-favorite">
+                        <div class="show-favorite" id="show-favorite">
                         </div>
                     </button>
                 </form>
@@ -183,18 +183,18 @@
                             <!-- <progress class="progress" role="progressbar" max="100" value="20"></progress> -->
                             <span class="rating-count"> </span>
                         </div>
-
-
-                    </div>
-
+                    </div> <!-- kết thúc thẻ div đánh giá sao và hiện sao sản phẩm -->
                     <div class="review-form-popup" id="review-form-popup">
-                        <div class="">
+                        <div class="header_popup">
                             <p>Đánh giá sản phẩm</p>
+                            <button type="button" class="close-popup">X</button>
+                        </div>
+                        <div class="review-infor">
                             <div class="img">
                                 <img src="{{ URL::to('uploads/product/' . $product_detail->product_image) }}"
                                     class="thumbnail-img-review">
                             </div>
-                            <h6>{{ $product_detail->product_name}}</h6>
+                            <h6 class="infor-name">{{ $product_detail->product_name}}</h6>
                         </div>
                         <span for="" class="check-star-point" style="display: none; color: red;">
                             Vui lòng đánh giá!
@@ -250,7 +250,7 @@
                     </div>
                 </div>
                 <div class="add-review-button">
-                    <button onclick="openReviewPopup()">Thêm đánh giá</button>
+                    <button class="btn-add-review" onclick="openReviewPopup()">Thêm đánh giá</button>
                 </div>
                 <div class="box-review-filter">
                     <div class="title-filter">Lọc theo</div>
