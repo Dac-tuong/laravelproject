@@ -706,6 +706,9 @@
     color: #fff;
 }
 
+.star-icon-filter {
+    color: #f59e0b;
+}
 .boxReview-review {
     display: flex;
     justify-content: space-around;

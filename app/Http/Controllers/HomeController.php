@@ -214,4 +214,16 @@ class HomeController extends Controller
             'ratings_count' => $ratings_array
         ]);
     }
+
+    public function filter_reviews(Request $request)
+    {
+        $dataFilterReview = $request->all();
+        $id_filter = $dataFilterReview['id_product'];
+        $star_filter = $dataFilterReview['filter_start'];
+
+        return response()->json([
+            'id_filter' => $id_filter,
+            'star_filter' => $star_filter
+        ]);
+    }
 }

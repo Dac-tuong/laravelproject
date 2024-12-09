@@ -8,6 +8,7 @@
 <div class="product-detail row" style="margin: 0px; padding: 0px;">
     <!-- Product Item -->
     <h1>{{ $product_detail->product_name}}</h1>
+    <input type="hidden" value="{{ $product_detail->product_id }}" class="product_id">
     <div class="col-lg-7 col-md-6 col-sm-12">
         <div class="feature-img">
             <div class="box-thumbnail">
@@ -126,59 +127,60 @@
                                 5 <i class="fa-solid fa-star"></i>
                             </div>
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50"
+                                <div class="progress-bar" role="progressbar" style="  background-color: #f59e0b;"
                                     aria-valuemin="0" aria-valuemax="100">
                                 </div>
                             </div>
                             <!-- <progress class="progress" role="progressbar" max="100" value="20"></progress> -->
-                            <span class="rating-count"> 125 đánh giá</span>
+                            <span class="rating-count"> </span>
                         </div>
                         <div class="rating-level" data-rating_level="4">
                             <div class="start-count">
                                 4 <i class="fa-solid fa-star"></i>
                             </div>
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50"
+                                <div class="progress-bar" role="progressbar" style="  background-color: #f59e0b;"
                                     aria-valuemin="0" aria-valuemax="100">
                                 </div>
                             </div>
                             <!-- <progress class="progress" role="progressbar" max="100" value="20"></progress> -->
-                            <span class="rating-count"> 125 đánh giá</span>
+                            <span class="rating-count"> </span>
                         </div>
                         <div class="rating-level" data-rating_level="3">
                             <div class="start-count">
                                 3 <i class="fa-solid fa-star"></i>
                             </div>
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50"
+                                <div class="progress-bar" role="progressbar" style="  background-color: #f59e0b;"
                                     aria-valuemin="0" aria-valuemax="100">
                                 </div>
                             </div>
                             <!-- <progress class="progress" role="progressbar" max="100" value="20"></progress> -->
-                            <span class="rating-count"> 125 đánh giá</span>
+                            <span class="rating-count"> </span>
                         </div>
                         <div class="rating-level" data-rating_level="2">
                             <div class="start-count">
                                 2 <i class="fa-solid fa-star"></i>
                             </div>
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50"
-                                    aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar" role="progressbar" style="  background-color: #f59e0b;"
+                                    aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
                                 </div>
                             </div>
                             <!-- <progress class="progress" role="progressbar" max="100" value="20"></progress> -->
-                            <span class="rating-count"> 125 đánh giá</span>
+                            <span class="rating-count"></span>
                         </div>
                         <div class="rating-level" data-rating_level="1">
                             <div class="start-count">
                                 1 <i class="fa-solid fa-star"></i>
                             </div>
                             <div class="progress">
-                                <div class="progress-bar" style="width: 50%;">
+                                <div class="progress-bar" role="progressbar" style="  background-color: #f59e0b;"
+                                    aria-valuemin="0" aria-valuemax="100">
                                 </div>
                             </div>
                             <!-- <progress class="progress" role="progressbar" max="100" value="20"></progress> -->
-                            <span class="rating-count"> 125 đánh giá</span>
+                            <span class="rating-count"> </span>
                         </div>
 
 
@@ -252,29 +254,28 @@
                 <div class="box-review-filter">
                     <div class="title-filter">Lọc theo</div>
                     <div class="filter-container">
-                        <div class="filter-item active">
+                        <div class="filter-item active" data-rating_filter_review="0">
                             Tất cả
                         </div>
-                        <div class="filter-item star">
-                            <p>5</p>
-                            <div>
-                            </div>
+                        <div class="filter-item" data-rating_filter_review="5">
+                            <span class="">5</span>
+                            <span class="star-icon-filter"><i class="fa-solid fa-star"></i></span>
                         </div>
-                        <div class="filter-item star">
-                            <p>4</p>
-                            <div>
-                            </div>
+                        <div class="filter-item " data-rating_filter_review="4">
+                            <span class="">4</span>
+                            <span class="star-icon-filter"><i class="fa-solid fa-star"></i></span>
                         </div>
-                        <div class="filter-item star">
-                            <p>3</p>
-                            <div>
-                            </div>
+                        <div class="filter-item " data-rating_filter_review="3">
+                            <span class="">3</span>
+                            <span class="star-icon-filter"><i class="fa-solid fa-star"></i></span>
                         </div>
-                        <div class="filter-item star">
-                            <p>2</p>
+                        <div class="filter-item " data-rating_filter_review="2">
+                            <span class="">2</span>
+                            <span class="star-icon-filter"><i class="fa-solid fa-star"></i></span>
                         </div>
-                        <div class="filter-item star">
-                            <p>1</p>
+                        <div class="filter-item" data-rating_filter_review="1">
+                            <span class="">1</span>
+                            <span class="star-icon-filter"><i class="fa-solid fa-star"></i></span>
                         </div>
                     </div>
 

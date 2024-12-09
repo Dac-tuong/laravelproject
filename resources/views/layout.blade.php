@@ -308,7 +308,7 @@
          $(document).ready(function() {
              // tính tổng trung bình sao của 1 sản phẩm
              function averageStart() {
-                 var product_id = $('.toggle-favorite').data('id_product');
+                 var product_id = $('.product_id').val();
                  $.ajax({
                      url: `/average-start/${product_id}`,
                      method: 'GET',
@@ -341,7 +341,7 @@
 
              // lấy các review ra
              function getReviews() {
-                 var product_id = $('.toggle-favorite').data('id_product');
+                 var product_id = $('.product_id').val();
                  $.ajax({
                      url: `/get-review-cmt/${product_id}`, // URL lấy dữ liệu
                      method: 'GET',
@@ -392,7 +392,7 @@
 
              // hàm kiểm tra xem đã thích hay chưa
              function check_favorite() {
-                 var product_id = $('.toggle-favorite').data('id_product');
+                 var product_id = $('.product_id').val();
                  var _token = $('input[name="_token"]').val();
                  $.ajax({
                      url: "{{ url('/check-favorite') }}",
@@ -613,7 +613,7 @@
                  var _token = $('input[name="_token"]').val();
                  var allValid = true;
                  var formDataReview = {};
-                 var product_id = $(this).data('id_product');
+                 var product_id = $('.product_id').val();
 
 
                  const spanCheckStar = document.querySelector('.check-star-point');
@@ -675,7 +675,7 @@
              });
 
              function show_quantity_with_star() {
-                 var product_id = $('.toggle-favorite').data('id_product');
+                 var product_id = $('.product_id').val();
                  $.ajax({
                      url: `/count-with-star/${product_id}`,
                      method: 'GET',
@@ -684,18 +684,58 @@
                          //  console.log('Total Reviews:', response.reviews_total);
 
                          //  // Loop through the ratings count and log each rating with its count
-                         //  response.ratings_count.forEach(function(rating) {
-                         //      console.log(
-                         //          `Rating ${rating.rating}: ${rating.count} reviews (${rating.percentage}%)`
-                         //      ); // Log từng mục
-                         //  });
+                         response.ratings_count.forEach(function(item) {
+
+                             var ratingLevel = item.rating;
+                             var ratingCount = item.count;
+                             var ratingPercent = item.percentage;
+                             var ratingElement = $(
+                                 `.rating-level[data-rating_level="${ratingLevel}"]`);
+
+                             if (ratingElement.length) {
+                                 ratingElement.find('.progress-bar').css('width',
+                                     ratingPercent + "%");
+                                 ratingElement.find('.rating-count').html(
+                                     `${ratingCount} đánh giá`);
+                             }
+
+                         });
                      },
                      error: function(xhr, status, error) {
                          console.error('Error fetching review data: ' + error);
                      }
                  });
-             }
+             };
              show_quantity_with_star();
+
+             // Tìm kiếm theo số sao bình luận
+             $('.filter-container .filter-item').click(function() {
+                 var filter = $(this).data('rating_filter_review');
+                 var product_id = $('.product_id').val();
+                 //  alert(filter);
+                 //  alert(product_id);
+                 $('.filter-container .filter-item').removeClass('active');
+
+                 // Thêm class 'active' vào phần tử được click
+                 $(this).addClass('active');
+                 $.ajax({
+                     url: '/filter-reviews',
+                     method: 'GET',
+                     data: {
+                         filter_start: filter,
+                         id_product: product_id,
+                     },
+                     success: function(response) {
+                         console.log(response);
+                         console.log(response.id_filter);
+                         console.log(response.star_filter);
+                     }
+
+
+                 });
+             });
+
+
          });
      </script>
  </body>
