@@ -250,7 +250,6 @@
      function closeSidebar() {
          // Hiển thị sidebar bằng cách đặt left về 0
          document.getElementById('sidebar').style.right = '-300px';
-
          // Hiển thị overlay bằng cách thay đổi display thành block
          document.getElementById('overlay').style.display = 'none';
      }
@@ -275,6 +274,11 @@
          document.getElementById('specifications-popup').style.display = 'block';
      }
 
+     function closeSpecifications() {
+         document.getElementById('overlay').style.display = 'none';
+         document.getElementById('specifications-popup').style.display = 'none';
+     }
+
      // mở overlay và  review popup
      function openReviewPopup() {
          document.getElementById('overlay').style.display = 'block';
@@ -284,25 +288,54 @@
      function closeReviewPopup() {
          document.getElementById('overlay').style.display = 'none';
          document.getElementById('review-form-popup').style.display = 'none';
+
      }
+
+     function openReviewPopup2() {
+         document.getElementById('overlay').style.display = 'block';
+         document.getElementById('boxReview-popup').style.display = 'block';
+     }
+
+     function closeReviewPopup2() {
+         document.getElementById('overlay').style.display = 'none';
+         document.getElementById('boxReview-popup').style.display = 'none';
+     }
+
 
      // Ẩn overlay và specifications-popup
-     function closeSpecifications() {
-         document.getElementById('overlay').style.display = 'none';
-         document.getElementById('specifications-popup').style.display = 'none';
-     }
-
-     function closeAllOverlay() {
-         // Gọi cả hai hàm để đảm bảo mọi thứ được ẩn
-         closeSidebar();
-         closeSpecifications();
-         closeReviewPopup();
-     }
      </script>
 
 
      <script src="{{asset("user/js/select_shipping.js")}}"></script>
 
+     <script>
+     document.querySelectorAll('[id="sort-button"]').forEach(button => {
+         button.addEventListener('click', function() {
+             // Lấy giá trị từ data-sort-by và data-sort-type
+             const sortBy = this.getAttribute('data-sort-by');
+             const sortType = this.getAttribute('data-sort-type');
+
+             // Tạo URL mới với tham số sắp xếp
+             const url = new URL(window.location.href);
+             url.searchParams.set('sort_by', sortBy);
+             url.searchParams.set('sort_type', sortType);
+
+             // Reload trang với URL mới
+             window.location.href = url.toString();
+         });
+     });
+
+
+     function sortProducts(sortBy, sortType) {
+         // Tạo URL mới với các tham số
+         const currentUrl = new URL(window.location.href);
+         currentUrl.searchParams.set('sort_by', sortBy);
+         currentUrl.searchParams.set('sort_type', sortType);
+
+         // Reload trang với URL mới
+         window.location.href = currentUrl.toString();
+     }
+     </script>
 
      <script>
      $(document).ready(function() {
@@ -317,6 +350,8 @@
              }
              return false;
          });
+
+
 
          // tính tổng trung bình sao của 1 sản phẩm
          function averageStart() {
@@ -789,6 +824,10 @@
 
      });
      </script>
+ </body>
+
+ </html>
+ </script>
  </body>
 
  </html>

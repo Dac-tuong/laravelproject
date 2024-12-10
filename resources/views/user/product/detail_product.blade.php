@@ -187,7 +187,7 @@
                     <div class="review-form-popup" id="review-form-popup">
                         <div class="header_popup">
                             <p>Đánh giá sản phẩm</p>
-                            <button type="button" class="close-popup">X</button>
+                            <button type="button" class="close-popup" onclick="closeReviewPopup()">X</button>
                         </div>
                         <div class="review-infor">
                             <div class="img">
@@ -423,7 +423,7 @@
 <div class="specifications-popup" id="specifications-popup">
     <div class="specifications-popup-header">
         <h6 class="tab-title">Thông số kỹ thuật</h6>
-        <button class="close-specifications">X</button>
+        <button class="close-specifications" onclick="closeSpecifications()">X</button>
     </div>
     <div class="specifications-popup-content">
         <div class="box-specifi">

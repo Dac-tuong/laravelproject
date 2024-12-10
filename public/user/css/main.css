@@ -493,7 +493,7 @@
 }
 
 .specifications-btn:hover {
-    border: 1px solid red;
+    border: 1px solid #007bff;
 }
 
 .specifications .box-specifi {
@@ -512,7 +512,7 @@
     max-height: 90%; /* Đặt chiều cao tối đa */
     background-color: white;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    z-index: 1;
     padding: 20px;
     border-radius: 8px;
 }
@@ -521,6 +521,18 @@
     justify-content: space-between;
 }
 .close-specifications {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px; /* Đặt chiều rộng cho nút */
+    height: 40px; /* Đặt chiều cao cho nút */
+    background-color: #f1f1f1; /* Màu nền nút */
+    border: 1px solid #ccc; /* Đường viền */
+    border-radius: 5px; /* Bo góc nút */
+    font-size: 20px; /* Kích thước chữ */
+    cursor: pointer; /* Hiển thị con trỏ chuột khi hover */
+}
+.close-popup {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -569,7 +581,28 @@
     padding: 20px;
     border-radius: 8px;
 }
+.header_popup {
+    display: flex;
+    justify-content: space-between;
+}
 
+.add-review-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-add-review {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 5px 10px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+.btn-add-review:hover {
+    color: white;
+    background-color: #007bff;
+}
 .box-specifi > a {
     display: block;
     overflow: hidden;
@@ -623,7 +656,6 @@
 }
 
 .boxReview-score {
-    border: 1px solid black;
     width: 100%;
     font-size: 25px;
     text-align: center; /* Căn giữa cả 2 phần tử con */
@@ -646,7 +678,6 @@
 }
 
 .boxReview-star {
-    border: 1px solid black;
     width: 100%;
     font-size: 25px;
     text-align: center; /* Căn giữa cả 2 phần tử con */
@@ -725,7 +756,7 @@
 }
 
 .filter-item.active {
-    background-color: #d70018;
+    background-color: #007bff;
     border: none;
     color: #fff;
 }
@@ -808,9 +839,9 @@
 }
 
 .button__view-more-review:hover {
-    box-shadow: 0 1px 2px 0 red, 0 2px 6px 2px red;
-    border: 1px solid red;
-    color: red;
+    box-shadow: 0 1px 2px 0 #007bff, 0 2px 6px 2px #007bff;
+    border: 1px solid #007bff;
+    color: #007bff;
 }
 /* block  comment  */
 .box-comments {
@@ -943,6 +974,21 @@
     width: 800px;
     background-color: #f2f4f7;
     margin: 0 auto;
+    position: relative;
+}
+#boxReview-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    max-height: 700%; /* Đặt chiều cao tối đa */
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    z-index: 1;
+    border-radius: 8px;
 }
 .block-product-review {
     display: flex;
