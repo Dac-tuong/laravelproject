@@ -98,46 +98,65 @@ class BrandController extends Controller
     }
 
     // USER
-
     public function show_brand_user(Request $request, $brand_id)
     {
-        $brand = Brand::get();
-        $only_brand = Brand::where('brand_id', $brand_id)->first();
-
-        $brand_by_id = Product::where('brand_product_id', $brand_id)
-            ->where('product_status', 1)
-            ->get();
-        if (isset($_GET['sort_by'])) {
-            $sort_by = $_GET['sort_by'];
-            if ($sort_by == 'tang_dan') {
-                $brand_by_id = Product::where('brand_product_id', $brand_id)
-                    ->where('product_status', 1)
-                    ->orderBy('sale_price', 'asc')
-                    ->get();
-            } else if ($sort_by == 'giam_dan') {
-                $brand_by_id = Product::where('brand_product_id', $brand_id)
-                    ->where('product_status', 1)
-                    ->orderBy('sale_price', 'desc')
-                    ->get();
-            } else if ($sort_by == 'tu_az') {
-                $brand_by_id = Product::where('brand_product_id', $brand_id)
-                    ->where('product_status', 1)
-                    ->orderBy('product_name', 'asc')
-                    ->get();
-            } else if ($sort_by == 'tu_za') {
-                $brand_by_id = Product::where('brand_product_id', $brand_id)
-                    ->where('product_status', 1)
-                    ->orderBy('product_name', 'desc')
-                    ->get();
-            }
-        } else {
-            $brand_by_id = Product::where('brand_product_id', $brand_id)
-                ->where('product_status', 1)
-                ->get();
+        // Lấy thông tin thương hiệu
+        $only_brand = Brand::find($brand_id);
+        if (!$only_brand) {
+            return redirect()->back()->with('error', 'Thương hiệu không tồn tại');
         }
-        return view('user.other.show_category')
-            ->with('brand', $only_brand)
-            ->with('brand_by_id', $brand_by_id)
-            ->with('brands', $brand);
+
+        // Khởi tạo query sản phẩm
+        $query = Product::where('brand_product_id', $brand_id)
+            ->where('product_status', 1);
+
+        // Áp dụng bộ lọc RAM nếu có
+        if ($request->has('filter_mobile_ram')) {
+            switch ($request->input('filter_mobile_ram')) {
+                case '<4':
+                    $query->where('ram', '<', 4);
+                    break;
+                case '4gb_8gb':
+                    $query->whereBetween('ram', [4, 8]);
+                    break;
+                case '8gb_12gb':
+                    $query->whereBetween('ram', [8, 12]);
+                    break;
+                case '>12gb':
+                    $query->where('ram', '>', 12);
+                    break;
+            }
+        }
+
+        // Áp dụng sắp xếp nếu có
+        if ($request->has('sort_by')) {
+            switch ($request->input('sort_by')) {
+                case 'tang_dan':
+                    $query->orderBy('sale_price', 'asc');
+                    break;
+                case 'giam_dan':
+                    $query->orderBy('sale_price', 'desc');
+                    break;
+                case 'tu_az':
+                    $query->orderBy('product_name', 'asc');
+                    break;
+                case 'tu_za':
+                    $query->orderBy('product_name', 'desc');
+                    break;
+            }
+        }
+
+        // Lấy danh sách sản phẩm sau khi áp dụng các điều kiện
+        $brand_by_id = $query->get();
+
+        // Lấy danh sách tất cả thương hiệu (nếu cần)
+        $brands = Brand::all();
+
+        // Trả về view với các tham số
+        return view('user.other.show_category', [
+            'brand' => $only_brand,
+            'brand_by_id' => $brand_by_id,
+            'brands' => $brands,
+        ]);
     }
 }
