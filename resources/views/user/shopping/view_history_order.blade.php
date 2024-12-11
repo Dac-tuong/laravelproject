@@ -5,7 +5,11 @@
 <div class="breadcrumbs">
     <a href="{{ URL::to('/') }}">Trang chủ /</a>
     <a href="{{ URL::to('/history-order') }}">Lịch sử mua hàng /</a>
-    {{$order_historys->order_code}}
+    <a href="{{URL::to('/view-history-order'.'/'.$order_historys->order_code)}}">{{$order_historys->order_code}}</a>
+</div>
+<div>
+    Đơn hàng <span id="order_code"> {{$order_historys->order_code}}</span>
+
 </div>
 <div class="row">
     <div class="col-lg-8 col-md-8 col-sm-12">
@@ -13,6 +17,7 @@
             <div class="d-flex">
                 <span class="me-3">{{$order_historys->created_at}}</span>
                 <span class="me-3"> {{$order_historys->order_code}}</span>
+                <span class="me-3" id="order_status"></span>
             </div>
             <table class="table-cart">
                 <tbody>
@@ -89,6 +94,13 @@
             <p><strong>Quận Huyện:</strong> {{$order_historys->shippingAddress->districts->name}}</p>
             <p><strong>Xã/phường:</strong> {{$order_historys->shippingAddress->wards->name}}</p>
             <p><strong>Địa chỉ :</strong> {{$order_historys->shippingAddress->diachi}}</p>
+        </div>
+        <div class="border-white">
+            <div>
+                <button class="cancel-order" id="cancel-order">
+                    Hủy đơn hàng
+                </button>
+            </div>
         </div>
     </div>
 </div>

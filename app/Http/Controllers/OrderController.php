@@ -165,16 +165,15 @@ class OrderController extends Controller
         $order_update->save();
         $orderStatusText = '';
 
-        if ($order_update->order_status == 0) {
+        if ($orderStatus == 0) {
             $orderStatusText = 'Đã hủy';
-        } elseif ($order_update->order_status == 2) {
+        } elseif ($orderStatus == 2) {
             $orderStatusText = 'Đã xác nhận';
         } else {
             $orderStatusText = 'Đơn hàng mới';
         }
         // Trả về phản hồi JSON mà không lưu vào CSDL
         return response()->json([
-            'message' => 'Đơn hàng đã được cập nhật.',
             'orderStatusText' => $orderStatusText // Trả về tên trạng thái
 
         ]);
@@ -260,5 +259,33 @@ class OrderController extends Controller
             ->with("discount_price", $discount)
             ->with("grandTotal", $grand_total)
         ;
+    }
+
+
+    public function getInforOrder(Request $request)
+    {
+        $data = $request->all();
+        $orderCode = $data['order_code'];
+
+        $order_update = OrderProduct::where('order_code', $orderCode)->first();
+        $orderStatus = $order_update->order_status;
+        $orderReason = $order_update->order_cancellation_reason;
+        $order_update->save();
+        $orderStatusText = '';
+
+        if ($order_update->order_status == 0) {
+            $orderStatusText = 'Đã hủy';
+        } elseif ($order_update->order_status == 2) {
+            $orderStatusText = 'Đã xác nhận';
+        } else {
+            $orderStatusText = 'Đơn hàng mới';
+        }
+        // Trả về phản hồi JSON mà không lưu vào CSDL
+        return response()->json([
+            'message' => 'Đơn hàng đã được cập nhật.',
+            'orderStatus' => $orderStatus,
+            'orderStatusText' => $orderStatusText // Trả về tên trạng thái
+
+        ]);
     }
 }

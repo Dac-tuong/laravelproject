@@ -29,18 +29,19 @@ class SidebarController extends Controller
             ->with(['shippingAddress', 'orderDetail'])->get();
         $order_count = $history_order->count();
         $total_amount = OrderProduct::where('id_customer', $id_user_session)->sum('order_total');
-
+        $avg_amount = $total_amount / $order_count;
         return view('user.profile.personal_infor')->with('brands', $brand)
             ->with('categorys', $category)
             ->with('inforcustomer', $information_customer)
             ->with('historys', $history_order)
             ->with('ordercount', $order_count)
             ->with('totalamount', $total_amount)
+            ->with('avgamount', $avg_amount)
         ;
     }
 
 
-    function all_wishlist()
+    public function all_wishlist()
     {
         $brand = Brand::get();
         $category = Category::get();

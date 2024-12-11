@@ -320,7 +320,31 @@
 
      <script>
          $(document).ready(function() {
+             getInforOrder();
 
+             function getInforOrder() {
+                 let orderCode = $('#order_code').text();
+                 //  console.log(orderCode);
+                 $.ajax({
+                     url: '/getInforOrder',
+                     method: 'GET',
+                     data: {
+                         order_code: orderCode,
+                     },
+                     success: function(data) {
+                         $('#order_status').text(data.orderStatusText);
+                         if (data.orderStatusText === 'Đã hủy' || data.orderStatusText ===
+                             'Đã xác nhận') {
+                             // Ẩn nút "Hủy đơn hàng"
+                             const cancelBtn = document.querySelector('.cancel-order');
+                             cancelBtn.disabled = true;
+                         }
+                     },
+                     error: function(err) {
+                         console.error('Đã có lỗi xảy ra', err);
+                     }
+                 })
+             };
 
              // tính tổng trung bình sao của 1 sản phẩm
              function averageStart() {
@@ -642,10 +666,7 @@
                      url: `/count-with-star/${product_id}`,
                      method: 'GET',
                      success: function(response) {
-                         // Log the total review count to the console
-                         //  console.log('Total Reviews:', response.reviews_total);
 
-                         //  // Loop through the ratings count and log each rating with its count
                          response.ratings_count.forEach(function(item) {
 
                              var ratingLevel = item.rating;

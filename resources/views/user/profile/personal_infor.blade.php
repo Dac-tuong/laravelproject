@@ -40,7 +40,9 @@
                         Tổng chi tiêu
                     </span>
                     <br>
-                    <b>{{$totalamount}}</b>
+                    <b>
+                        {{ number_format($totalamount, 0, ',', '.') }}đ
+                    </b>
                     <br>
                     <span class="sub-title">
                         Cho mỗi đơn hàng được giao
@@ -51,10 +53,12 @@
                         Trung bình mỗi đơn hàng
                     </span>
                     <br>
-                    <b>0</b>
+                    <b>
+                        {{ number_format($avgamount, 0, ',', '.') }}đ
+                    </b>
                     <br>
                     <span class="sub-title">
-                        Trong tổng số 0 đơn hàng đã đặt
+                        Trong tổng số {{$ordercount}} đơn hàng đã đặt
                     </span>
                 </div>
             </div>
@@ -89,17 +93,18 @@
                             Đang chờ
                         </td>
                         <td>
-                            {{$history->order_total}}
+                            {{ number_format($history->order_total, 0, ',', '.') }}đ
+
                         </td>
                         <td>
-                            time
+                            {{$history->created_at}}
                         </td>
                         <td>
-                            <a class="view-order-history" href="">Xem</a>
+                            <a class="view-order-history"
+                                href="{{URL::to('/view-history-order'.'/'.$history->order_code)}}">Xem</a>
                         </td>
                     </tr>
                     @endforeach
-
                 </tbody>
             </table>
         </div>

@@ -50,7 +50,7 @@ Route::post('/update-brand/{brand_id}', [BrandController::class, 'update_brand']
 Route::get('/delete-brand/{brand_id}', [BrandController::class, 'delete_brand']);
 // dành cho user
 Route::get('/show-brand-user/{brand_id}', [BrandController::class, 'show_brand_user']);
-// Route::get('show-brand-user/{brand_id}', [BrandController::class, 'show_brand_user'])->name('brand.show');
+
 
 // Products
 use App\Http\Controllers\ProductControll;
@@ -155,6 +155,7 @@ Route::post('/update-status-order', [OrderController::class, 'update_status_orde
 
 Route::get('/history-order', [OrderController::class, 'history_order']);
 Route::get('/view-history-order/{order_code}', [OrderController::class, 'view_history']);
+Route::get('/getInforOrder', [OrderController::class, 'getInforOrder']);
 // SLIDE CONTROLL
 
 use App\Http\Controllers\SlideController;
