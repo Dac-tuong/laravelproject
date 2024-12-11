@@ -25,9 +25,17 @@ class SidebarController extends Controller
         $output = "Hiện chưa có địa chỉ";
         $information_customer = User::where('id_user', $id_user_session)->first();
 
+        $history_order = OrderProduct::where('id_customer', $id_user_session)
+            ->with(['shippingAddress', 'orderDetail'])->get();
+        $order_count = $history_order->count();
+        $total_amount = OrderProduct::where('id_customer', $id_user_session)->sum('order_total');
+
         return view('user.profile.personal_infor')->with('brands', $brand)
             ->with('categorys', $category)
-            ->with('infocustomer', $information_customer)
+            ->with('inforcustomer', $information_customer)
+            ->with('historys', $history_order)
+            ->with('ordercount', $order_count)
+            ->with('totalamount', $total_amount)
         ;
     }
 
