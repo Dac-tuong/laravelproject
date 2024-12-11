@@ -98,21 +98,85 @@ class BrandController extends Controller
     }
 
     // USER
+    // public function show_brand_user(Request $request, $brand_id)
+    // {
+    //     // Lấy thông tin thương hiệu
+    //     $only_brand = Brand::find($brand_id);
+    //     if (!$only_brand) {
+    //         return redirect()->back()->with('error', 'Thương hiệu không tồn tại');
+    //     }
+
+    //     // Khởi tạo query sản phẩm
+    //     $query = Product::where('brand_product_id', $brand_id)
+    //         ->where('product_status', 1);
+
+    //     // Áp dụng bộ lọc RAM nếu có
+    //     if ($request->has('filter_mobile_ram')) {
+    //         switch ($request->input('filter_mobile_ram')) {
+    //             case '<4':
+    //                 $query->where('ram', '<', 4);
+    //                 break;
+    //             case '4gb_8gb':
+    //                 $query->whereBetween('ram', [4, 8]);
+    //                 break;
+    //             case '8gb_12gb':
+    //                 $query->whereBetween('ram', [8, 12]);
+    //                 break;
+    //             case '>12gb':
+    //                 $query->where('ram', '>', 12);
+    //                 break;
+    //         }
+    //     }
+
+    //     // Áp dụng sắp xếp nếu có
+    //     if ($request->has('sort_by')) {
+    //         switch ($request->input('sort_by')) {
+    //             case 'tang_dan':
+    //                 $query->orderBy('sale_price', 'asc');
+    //                 break;
+    //             case 'giam_dan':
+    //                 $query->orderBy('sale_price', 'desc');
+    //                 break;
+    //             case 'tu_az':
+    //                 $query->orderBy('product_name', 'asc');
+    //                 break;
+    //             case 'tu_za':
+    //                 $query->orderBy('product_name', 'desc');
+    //                 break;
+    //         }
+    //     }
+
+    //     // Lấy danh sách sản phẩm sau khi áp dụng các điều kiện
+    //     $brand_by_id = $query->get();
+
+    //     // Lấy danh sách tất cả thương hiệu (nếu cần)
+    //     $brands = Brand::all();
+
+    //     // Trả về view với các tham số
+    // return view('user.other.show_category', [
+    //     'brand' => $only_brand,
+    //     'brand_by_id' => $brand_by_id,
+    //     'brands' => $brands,
+    // ]);
+    // }
+
     public function show_brand_user(Request $request, $brand_id)
     {
-        // Lấy thông tin thương hiệu
-        $only_brand = Brand::find($brand_id);
-        if (!$only_brand) {
-            return redirect()->back()->with('error', 'Thương hiệu không tồn tại');
-        }
-
-        // Khởi tạo query sản phẩm
         $query = Product::where('brand_product_id', $brand_id)
             ->where('product_status', 1);
 
-        // Áp dụng bộ lọc RAM nếu có
+        // Lọc theo giá
+        if ($request->has('sort_by')) {
+            if ($request->get('sort_by') == 'giam_dan') {
+                $query->orderBy('sale_price', 'desc');
+            } elseif ($request->get('sort_by') == 'tang_dan') {
+                $query->orderBy('sale_price', 'asc');
+            }
+        }
+
+        // Lọc theo RAM
         if ($request->has('filter_mobile_ram')) {
-            switch ($request->input('filter_mobile_ram')) {
+            switch ($request->get('filter_mobile_ram')) {
                 case '<4':
                     $query->where('ram', '<', 4);
                     break;
@@ -128,35 +192,19 @@ class BrandController extends Controller
             }
         }
 
-        // Áp dụng sắp xếp nếu có
-        if ($request->has('sort_by')) {
-            switch ($request->input('sort_by')) {
-                case 'tang_dan':
-                    $query->orderBy('sale_price', 'asc');
-                    break;
-                case 'giam_dan':
-                    $query->orderBy('sale_price', 'desc');
-                    break;
-                case 'tu_az':
-                    $query->orderBy('product_name', 'asc');
-                    break;
-                case 'tu_za':
-                    $query->orderBy('product_name', 'desc');
-                    break;
-            }
-        }
+        // Lấy danh sách sản phẩm sau khi lọc
+        $products = $query->get();
 
-        // Lấy danh sách sản phẩm sau khi áp dụng các điều kiện
-        $brand_by_id = $query->get();
-
-        // Lấy danh sách tất cả thương hiệu (nếu cần)
+        // Lấy danh sách thương hiệu để hiển thị trong bộ lọc
         $brands = Brand::all();
 
-        // Trả về view với các tham số
+        // return view('user.other.show_category', compact('brands'));
         return view('user.other.show_category', [
-            'brand' => $only_brand,
-            'brand_by_id' => $brand_by_id,
+            'products_by_brand' => $products,
             'brands' => $brands,
+            'selected_sort' => $request->get('sort_by', 'none'),
+            'selected_ram' => $request->get('filter_mobile_ram', 'none'),
+
         ]);
     }
 }

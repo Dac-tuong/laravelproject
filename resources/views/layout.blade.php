@@ -301,32 +301,14 @@
              document.getElementById('boxReview-popup').style.display = 'none';
          }
 
-         function applyFilter() {
-             // Lấy các giá trị từ select
-             const sortBy = document.getElementById('sort_by').value;
-             const filterMobileRam = document.getElementById('filter_mobile_ram').value;
-
-             // Lấy URL hiện tại
-             const url = new URL(window.location.href);
-
-             // Cập nhật URL chỉ với các giá trị đã chọn
-             if (sortBy) {
-                 url.searchParams.set('sort_by', sortBy);
+         function updateFilter(param, value) {
+             let url = new URL(window.location.href);
+             if (value === "none") {
+                 url.searchParams.delete(param);
              } else {
-                 url.searchParams.delete('sort_by');
+                 url.searchParams.set(param, value);
              }
-
-             if (filterMobileRam) {
-                 url.searchParams.set('filter_mobile_ram', filterMobileRam);
-             } else {
-                 url.searchParams.delete('filter_mobile_ram');
-             }
-
-             // Cập nhật URL mà không tải lại trang
-             window.history.pushState({}, '', url);
-
-             // Gửi form để lọc dữ liệu mới
-             document.getElementById('filterForm').submit();
+             window.location.href = url.toString();
          }
      </script>
 
@@ -335,12 +317,9 @@
 
 
 
+
      <script>
          $(document).ready(function() {
-
-
-
-
 
 
              // tính tổng trung bình sao của 1 sản phẩm

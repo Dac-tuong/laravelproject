@@ -49,8 +49,8 @@ Route::post('/update-brand/{brand_id}', [BrandController::class, 'update_brand']
 
 Route::get('/delete-brand/{brand_id}', [BrandController::class, 'delete_brand']);
 // dành cho user
-// Route::get('/show-brand-user/{brand_id}', [BrandController::class, 'show_brand_user']);
-Route::get('show-brand-user/{brand_id}', [BrandController::class, 'show_brand_user'])->name('brand.show');
+Route::get('/show-brand-user/{brand_id}', [BrandController::class, 'show_brand_user']);
+// Route::get('show-brand-user/{brand_id}', [BrandController::class, 'show_brand_user'])->name('brand.show');
 
 // Products
 use App\Http\Controllers\ProductControll;
