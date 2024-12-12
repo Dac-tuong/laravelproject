@@ -5,8 +5,10 @@
         <h3>DANH MỤC THƯƠNG HIỆU</h3>
         <ul class="brand-container">
             @foreach ($brands as $brand)
-            <li class="brand-item">{{$brand->brand_name}}</a>
-                @endforeach
+            <li class="brand-item">
+                <a href="{{URL::to('/show-brand-user'.'/'.$brand->brand_id)}}">{{$brand->brand_name}}</a>
+            </li>
+            @endforeach
         </ul>
         <div>
             <form action="" class="form-group">

@@ -5,7 +5,7 @@
 
 use Illuminate\Support\Facades\Session;
 
-$cart = Session::get('cart');
+$cart = Session::get('checkout');
 $total_price = Session::get('total_price');
 $coupon_session = Session::get('coupon');
 

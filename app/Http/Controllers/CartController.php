@@ -272,4 +272,55 @@ class CartController extends Controller
         // Chuyển hướng lại giỏ hàng
         return Redirect::to('cart');
     }
+
+    public function buy_now(Request $request)
+    {
+
+        $productData = $request->all();
+        $product_name = $productData['cart_product_name'];
+        $product_price = $productData['cart_product_price'];
+        $id_product = $productData['cart_product_id'];
+        $product_image = $productData['cart_product_image'];
+        $product_color = $productData['cart_product_color'];
+
+        $session_id = substr(md5(microtime()), rand(0, 26), 5);
+        $buy_list = Session::get('buy_list');
+
+        $soluong = 1;
+        $is_vaiable = false;
+
+        if (!empty($cart)) {
+            foreach ($cart as $key => $val) {
+                if ($val['masp'] == $id_product) {
+                    $is_vaiable = true;
+                    $new_qty = $cart[$key]['soluong'] += $soluong;
+                    $cart[$key]['soluong'] = $new_qty;
+                    $cart[$key]['total'] = $cart[$key]['soluong'] * $cart[$key]['gia'];
+                    break;
+                }
+            }
+        }
+
+        if (!$is_vaiable) {
+            $cart[] = array(
+                'session_id' => $session_id,
+                'masp' => $id_product,
+                'image' => $product_image,
+                'soluong' => $soluong,
+                'tensp' => $product_name,
+                'gia' => $product_price,
+                'color' => $product_color,
+                'total' => $soluong * $product_price,
+            );
+        }
+
+        // Tính toán total_price
+        $total_price = 0;
+        foreach ($cart as $item) {
+            $total_price += $item['total'];
+        }
+        Session::put('cart', $cart);
+        Session::put('total_price', $total_price);
+        Session::save();
+    }
 }
