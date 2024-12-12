@@ -320,7 +320,7 @@ class CartController extends Controller
             $total_price += $item['total'];
         }
         Session::put('cart', $cart);
-        Session::put('total_price', $total_price);
+        Session::put('total_price_buy', $total_price);
         Session::save();
     }
 }

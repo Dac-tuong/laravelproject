@@ -32,7 +32,7 @@
             <td>
                 @if ( $order->order_status == 1)
                 Đang xữ lý
-                @elseif($order->order_status == 0)
+                @elseif($order->order_status == 3)
                 Không xữ lý
                 @elseif($order->order_status == 2)
                 Đã xác nhận đơn

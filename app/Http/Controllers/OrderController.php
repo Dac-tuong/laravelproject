@@ -12,6 +12,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Session;
 
 
+
 class OrderController extends Controller
 {
     // ADMIN
@@ -132,7 +133,7 @@ class OrderController extends Controller
 
 
 
-        if ($order_history->order_status == 0) {
+        if ($order_history->order_status == 3) {
             $order_status = 'Đã hủy';
         } elseif ($order_history->order_status == 2) {
             $order_status = 'Đã xác nhận';
@@ -182,18 +183,43 @@ class OrderController extends Controller
 
     // USER
 
-    public function history_order()
+    public function history_order(Request $request)
     {
         $brand = Brand::get();
         $category = Category::get();
 
         $id_user = Session::get('id_customer');
-        $history_order = OrderProduct::where('id_customer', $id_user)->with(['shippingAddress', 'orderDetail'])->get();
+        $orders = OrderProduct::where('id_customer', $id_user);
+
+        if ($request->has('order_code')) {
+            if ($request->get('order_code')) {
+                $orders->where('order_code', 'LIKE', '%' . $request->get('order_code') . '%');
+            }
+        }
+
+        if ($request->has('order_date')) {
+            if ($request->get('order_date')) {
+
+                $orders->whereDate('created_at', $request->get('order_date'));
+            }
+        }
+
+        if ($request->has('order_status')) {
+            if ($request->get('order_status')) {
+
+                $orders->where('order_status', $request->get('order_status'));
+            }
+        }
+
+        $history = $orders->get();
+
 
         return view('user.shopping.history_order')
             ->with('brands', $brand)
             ->with("categorys", $category)
-            ->with("historys", $history_order);
+            ->with("historys", $history)
+
+        ;
     }
 
     public function view_history($order_code)
@@ -239,7 +265,7 @@ class OrderController extends Controller
             $discount = 0 . ' VNĐ'; // Không có giảm giá
         }
 
-        if ($order_history->order_status == 0) {
+        if ($order_history->order_status == 3) {
             $order_status = 'Đã hủy';
         } elseif ($order_history->order_status == 2) {
             $order_status = 'Đã xác nhận';
@@ -273,7 +299,7 @@ class OrderController extends Controller
         $order_update->save();
         $orderStatusText = '';
 
-        if ($order_update->order_status == 0) {
+        if ($order_update->order_status == 3) {
             $orderStatusText = 'Đã hủy';
         } elseif ($order_update->order_status == 2) {
             $orderStatusText = 'Đã xác nhận';

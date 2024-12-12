@@ -89,6 +89,7 @@ class CheckoutController extends Controller
         $brand = Brand::get();
         $category = Category::get();
 
+
         return view('user.shopping.checkout')->with('provinces', $province)->with('brands', $brand)->with('categorys', $category);
     }
 
