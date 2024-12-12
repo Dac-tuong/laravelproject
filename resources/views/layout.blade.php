@@ -152,7 +152,6 @@
                                  @endforeach
                              </ul>
                          </li>
-
                          <li class="megamenu"><a href="">BLOG</a></li>
                          <li class="megamenu"><a href="">KHÁC</a></li>
                          <li class="megamenu"><a href="">PHỤ KIỆN</a></li>
@@ -162,9 +161,7 @@
                  </div>
 
                  <div class="content">
-                     <div class="home-product">
-                         @yield('content')
-                     </div>
+                     @yield('content')
                  </div>
              </div>
          </div>

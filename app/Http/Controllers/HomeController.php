@@ -23,17 +23,49 @@ use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $brand = Brand::get();
         $category = Category::get();
         $list_product =  Product::with(['category', 'brand'])
-            ->where('product_status', 1)
-            ->orderBy('product_id', 'ASC')
-            ->paginate(10);
+            ->where('product_status', 1);
 
-        return view('user.home')->with('products', $list_product)
-            ->with('brands', $brand)->with('categorys', $category);
+
+        // Lọc theo giá
+        if ($request->has('sort_by')) {
+            if ($request->get('sort_by') == 'giam_dan') {
+                $list_product->orderBy('sale_price', 'desc');
+            } elseif ($request->get('sort_by') == 'tang_dan') {
+                $list_product->orderBy('sale_price', 'asc');
+            }
+        }
+
+        // Lọc theo RAM
+        if ($request->has('filter_mobile_ram')) {
+            switch ($request->get('filter_mobile_ram')) {
+                case '<4':
+                    $list_product->where('ram', '<', 4);
+                    break;
+                case '4gb_8gb':
+                    $list_product->whereBetween('ram', [4, 8]);
+                    break;
+                case '8gb_12gb':
+                    $list_product->whereBetween('ram', [8, 12]);
+                    break;
+                case '>12gb':
+                    $list_product->where('ram', '>', 12);
+                    break;
+            }
+        }
+
+
+        // Lấy danh sách sản phẩm sau khi lọc
+        $products = $list_product->get();
+
+        return view('user.home')
+            ->with('products', $products)
+            ->with('brands', $brand)
+            ->with('categorys', $category);
     }
 
     public function detail_product($product_id)
