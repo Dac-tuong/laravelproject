@@ -2,6 +2,41 @@
 @section('content')
 <div class="home-product">
     <div class="left-contaner">
+        <div id="filter_mobile_ram" class="form-group">
+            <label>
+                <input type="checkbox" name="filter_mobile_ram" value="none"
+                    {{ in_array('none', explode(',', request()->get('filter_mobile_ram', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_mobile_ram', this)">
+                --Lọc theo--
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_mobile_ram" value="<4"
+                    {{ in_array('<4', explode(',', request()->get('filter_mobile_ram', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_mobile_ram', this)">
+                --Nhỏ hơn 4GB--
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_mobile_ram" value="4gb_8gb"
+                    {{ in_array('4gb_8gb', explode(',', request()->get('filter_mobile_ram', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_mobile_ram', this)">
+                --4GB-8GB--
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" name="filter_mobile_ram" value="8gb_12gb"
+                    {{ in_array('8gb_12gb', explode(',', request()->get('filter_mobile_ram', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_mobile_ram', this)">
+                --8GB-12GB--
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_mobile_ram" value=">12gb"
+                    {{ in_array('>12gb', explode(',', request()->get('filter_mobile_ram', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_mobile_ram', this)">
+                -- lớn hơn 12GB--
+            </label>
+        </div>
+
+
 
         <!-- <div>
             <label for="">filter_mobile_ram</label>
@@ -17,25 +52,6 @@
             </select>
 
         </div> -->
-
-        <div>
-            <h3>Color</h3>
-            <label><input type="checkbox" name="color" value="red" onchange="updateFilterCheckbox('color')"> Red</label>
-            <label><input type="checkbox" name="color" value="blue" onchange="updateFilterCheckbox('color')">
-                Blue</label>
-            <label><input type="checkbox" name="color" value="green" onchange="updateFilterCheckbox('color')">
-                Green</label>
-        </div>
-
-        <div>
-            <h3>Size</h3>
-            <label><input type="checkbox" name="size" value="small" onchange="updateFilterCheckbox('size')">
-                Small</label>
-            <label><input type="checkbox" name="size" value="medium" onchange="updateFilterCheckbox('size')">
-                Medium</label>
-            <label><input type="checkbox" name="size" value="large" onchange="updateFilterCheckbox('size')">
-                Large</label>
-        </div>
 
     </div>
     <div class="body-content">

@@ -42,25 +42,33 @@ class HomeController extends Controller
 
         // Lọc theo RAM
         if ($request->has('filter_mobile_ram')) {
-            switch ($request->get('filter_mobile_ram')) {
-                case '<4':
-                    $list_product->where('ram', '<', 4);
-                    break;
-                case '4gb_8gb':
-                    $list_product->whereBetween('ram', [4, 8]);
-                    break;
-                case '8gb_12gb':
-                    $list_product->whereBetween('ram', [8, 12]);
-                    break;
-                case '>12gb':
-                    $list_product->where('ram', '>', 12);
-                    break;
-            }
+            // Chuyển giá trị thành mảng
+            $ramFilters = explode(',', $request->get('filter_mobile_ram'));
+
+            // Áp dụng các điều kiện lọc
+            $list_product->where(function ($query) use ($ramFilters) {
+                foreach ($ramFilters as $ramFilter) {
+                    switch ($ramFilter) {
+                        case '<4':
+                            $query->orWhere('ram', '<', 4);
+                            break;
+                        case '4gb_8gb':
+                            $query->orWhereBetween('ram', [4, 8]);
+                            break;
+                        case '8gb_12gb':
+                            $query->orWhereBetween('ram', [8, 12]);
+                            break;
+                        case '>12gb':
+                            $query->orWhere('ram', '>', 12);
+                            break;
+                    }
+                }
+            });
         }
 
 
         // Lấy danh sách sản phẩm sau khi lọc
-        $products = $list_product->paginate(1);
+        $products = $list_product->paginate(10);
 
         return view('user.home')
             ->with('products', $products)
