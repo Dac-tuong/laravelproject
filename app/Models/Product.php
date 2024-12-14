@@ -69,4 +69,9 @@ class Product extends Model
     {
         return $this->hasMany(Gallery::class, 'id_sanpham_gallery', 'product_id');
     }
+
+    public function product_favorite()
+    {
+        return $this->belongsTo(FavoriteModel::class, 'favorite_phone_id', 'product_id');
+    }
 }

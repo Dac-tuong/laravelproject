@@ -17,31 +17,30 @@
         </div>
     </div>
     <div class="filler-order">
-        <form action="{{URL::to('/history-order')}}" method="GET" class="filler-order-form" id="filterOrderForm">
-            <div class="row">
-                <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
-                    <input type="text" id="orderCode" placeholder="Mã đơn hàng" class="form-control">
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
-                    <input type="date" id="orderDate" placeholder="Ngày mua hàng" class="form-control">
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
-                    <select id="orderStatus" class="form-control">
-                        <option value="none">Tìm trạng thái</option>
-                        <option value="1">Chờ xữ lý</option>
-                        <option value="2">Đã xữ lý</option>
-                        <option value="3">Đã hủy</option>
-                    </select>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
-                    <button type="button" class="btn btn-primary w-100 filter-order"
-                        onclick="filterOrders()">Lọc</button>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
-                    <a href="#" class="btn btn-secondary w-100">Tải lại</a>
-                </div>
+
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
+                <input type="text" id="orderCode" placeholder="Mã đơn hàng" class="form-control">
             </div>
-        </form>
+            <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
+                <input type="date" id="orderDate" placeholder="Ngày mua hàng" class="form-control">
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
+                <select id="orderStatus" class="form-control">
+                    <option value="none">Tìm trạng thái</option>
+                    <option value="1">Chờ xữ lý</option>
+                    <option value="2">Đã xữ lý</option>
+                    <option value="3">Đã hủy</option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
+                <button type="button" class="btn btn-primary w-100 filter-order" onclick="filterOrders()">Lọc</button>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
+                <a href="#" class="btn btn-secondary w-100">Tải lại</a>
+            </div>
+        </div>
+
     </div>
 
     <div class="list-history-order">
@@ -110,7 +109,7 @@
                     @else
                     <tr>
                         <td colspan="8">
-                            <h3>Không có đơn hàng nào được lọc</h3>
+                            <h3>Không có đơn hàng nào được tìm thấy</h3>
                         </td>
                     </tr>
                     @endif

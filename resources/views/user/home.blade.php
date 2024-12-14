@@ -3,44 +3,44 @@
 <div class="home-product">
     <div class="left-contaner">
         <h3>DANH MỤC THƯƠNG HIỆU</h3>
-        <ul class="brand-container">
+        <div class="brand-container">
             @foreach ($brands as $brand)
-            <li class="brand-item">
+            <div class="brand-item">
                 <a href="{{URL::to('/show-brand-user'.'/'.$brand->brand_id)}}">{{$brand->brand_name}}</a>
-            </li>
+            </div>
             @endforeach
-        </ul>
-        <div>
-            <form action="" class="form-group">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete>
-
-                <label for="">SORT BY</label>
-                <select name="sort_by" id="sort_by" class="form-control" onchange="updateFilter('sort_by', this.value)">
-                    <option value="none" {{ request()->get('sort_by') == 'none' ? 'selected' : '' }}>--Lọc theo--
-                    </option>
-                    <option value="tang_dan" {{ request()->get('sort_by') == 'tang_dan' ? 'selected' : '' }}>--Lọc theo
-                        giá tăng
-                        dần--</option>
-                    <option value="giam_dan" {{ request()->get('sort_by') == 'giam_dan' ? 'selected' : '' }}>--Lọc theo
-                        giá giảm
-                        dần--</option>
-                </select>
-
-                <label for="">filter_mobile_ram</label>
-                <select name="filter_mobile_ram" id="filter_mobile_ram" class="form-control"
-                    onchange="updateFilter('filter_mobile_ram', this.value)">
-                    <option value="none" {{ request()->get('filter_mobile_ram') == 'none' ? 'selected' : '' }}>--Lọc
-                        theo--</option>
-                    <option value="<4" {{ request()->get('filter_mobile_ram') == '<4' ? 'selected' : '' }}>--Nhỏ hơn
-                        4GB--</option>
-                    <option value="4gb_8gb" {{ request()->get('filter_mobile_ram') == '4gb_8gb' ? 'selected' : '' }}>
-                        --4GB-8GB--
-                    </option>
-                </select>
-            </form>
         </div>
+        <!-- <div>
+            <label for="">filter_mobile_ram</label>
+            <select name="filter_mobile_ram" id="filter_mobile_ram" class="form-control"
+                onchange="updateFilter('filter_mobile_ram', this.value)">
+                <option value="none" {{ request()->get('filter_mobile_ram') == 'none' ? 'selected' : '' }}>--Lọc
+                    theo--</option>
+                <option value="<4" {{ request()->get('filter_mobile_ram') == '<4' ? 'selected' : '' }}>--Nhỏ hơn
+                    4GB--</option>
+                <option value="4gb_8gb" {{ request()->get('filter_mobile_ram') == '4gb_8gb' ? 'selected' : '' }}>
+                    --4GB-8GB--
+                </option>
+            </select>
+
+        </div> -->
+
+
     </div>
     <div class="body-content">
+        <div>
+            <label for="">SORT BY</label>
+            <select name="sort_by" id="sort_by" class="form-control" onchange="updateFilter('sort_by', this.value)">
+                <option value="none" {{ request()->get('sort_by') == 'none' ? 'selected' : '' }}>--Lọc theo--
+                </option>
+                <option value="tang_dan" {{ request()->get('sort_by') == 'tang_dan' ? 'selected' : '' }}>--Lọc theo
+                    giá tăng
+                    dần--</option>
+                <option value="giam_dan" {{ request()->get('sort_by') == 'giam_dan' ? 'selected' : '' }}>--Lọc theo
+                    giá giảm
+                    dần--</option>
+            </select>
+        </div>
         <h3>SẢN PHẨM MỚI NHẤT</h3>
         <div class="row">
             @foreach ($products as $key => $product)
@@ -107,7 +107,6 @@
             </div>
             @endforeach
             <!-- Hiển thị liên kết phân trang tùy chỉnh -->
-
 
         </div>
     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\FavoriteModel;
 use App\Models\Gallery;
 use App\Models\OrderProduct;
 use App\Models\Product;
@@ -41,12 +42,23 @@ class SidebarController extends Controller
     }
 
 
-    public function all_wishlist()
+    public function wishlist()
     {
         $brand = Brand::get();
         $category = Category::get();
+        $id_user_session = Session::get('id_customer');
+        $favorite = FavoriteModel::with(['user_favorite', 'product_favorite'])->where("favorite_user_id", $id_user_session)->get();
         return view('user.product.wishlist')
             ->with('brands', $brand)
-            ->with("categorys", $category);
+            ->with("categorys", $category)
+            ->with('favorites', $favorite)
+        ;
+    }
+
+    public function data_wishlist()
+    {
+        $id_user_session = Session::get('id_customer');
+        $favorite = FavoriteModel::with(['user_favorite', 'product_favorite'])->where("favorite_user_id", $id_user_session)->get();
+        return response()->json($favorite);
     }
 }

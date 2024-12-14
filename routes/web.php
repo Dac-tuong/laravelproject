@@ -98,7 +98,8 @@ use App\Http\Controllers\SidebarController;
 
 Route::get('/thong-tin-ca-nhan', [SidebarController::class, 'thong_tin_ca_nhan']);
 
-Route::get('/wishlist', [SidebarController::class, 'all_wishlist']);
+Route::get('/wishlist', [SidebarController::class, 'wishlist']);
+Route::get('/data-wishlist', [SidebarController::class, 'data_wishlist']);
 
 // Users account
 use App\Http\Controllers\CheckoutController;
@@ -156,7 +157,7 @@ Route::post('/update-status-order', [OrderController::class, 'update_status_orde
 Route::get('/history-order', [OrderController::class, 'history_order']);
 Route::get('/view-history-order/{order_code}', [OrderController::class, 'view_history']);
 Route::get('/getInforOrder', [OrderController::class, 'getInforOrder']);
-// Route::get('/filterOrder', [OrderController::class, 'filterOrder']);
+
 // SLIDE CONTROLL
 
 use App\Http\Controllers\SlideController;
