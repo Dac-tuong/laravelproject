@@ -136,6 +136,7 @@ Route::get('/delete-coupon', [CartController::class, 'delete_coupon']);
 Route::get('count-cart', [CartController::class, 'count_cart']);
 Route::post('/check-coupon', [CartController::class, 'check_coupon']);
 
+Route::post('/buy-now', [CartController::class, 'buy_now']);
 // Coupons
 
 use App\Http\Controllers\CouponsController;

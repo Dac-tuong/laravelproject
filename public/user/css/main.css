@@ -157,22 +157,12 @@
     border-radius: 5px;
 }
 .brand-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Mỗi dòng có 2 cột */
-    gap: 10px; /* Khoảng cách giữa các item */
-    list-style: none; /* Bỏ dấu đầu dòng */
+    display: flex;
+    justify-content: space-between;
     padding: 0; /* Bỏ padding mặc định */
     margin: 0; /* Bỏ margin mặc định */
 }
 .brand-item {
-    padding: 5px 10px;
-    flex: 0 0 calc(50%-10px);
-    border: 1px solid blue;
-    list-style: none;
-    box-sizing: border-box;
-    text-align: center;
-    display: block;
-    border-radius: 20px;
 }
 .brand-item a {
     text-decoration: none;

@@ -74,7 +74,10 @@
                         name="add-to-cart">
                         <img class="btn-cart" src="{{ URL::to('user/image/cart-btn.png' ) }}" alt="">
                     </button>
-                    <button type="button" class="buy-now">Mua ngay</button>
+                    <button type="button" class="buy-now" data-id_product="{{ $product_detail->product_id }}"
+                        name="buy-now">
+                        <img class="btn-cart" src="{{ URL::to('user/image/cart-btn.png' ) }}" alt="">
+                    </button>
 
                     <button type="button" class="toggle-favorite" id="toggle-favorite" name="toggle-favorite"
                         data-id_product="{{ $product_detail->product_id }}">

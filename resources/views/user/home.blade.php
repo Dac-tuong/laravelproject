@@ -2,14 +2,7 @@
 @section('content')
 <div class="home-product">
     <div class="left-contaner">
-        <h3>DANH MỤC THƯƠNG HIỆU</h3>
-        <div class="brand-container">
-            @foreach ($brands as $brand)
-            <div class="brand-item">
-                <a href="{{URL::to('/show-brand-user'.'/'.$brand->brand_id)}}">{{$brand->brand_name}}</a>
-            </div>
-            @endforeach
-        </div>
+
         <!-- <div>
             <label for="">filter_mobile_ram</label>
             <select name="filter_mobile_ram" id="filter_mobile_ram" class="form-control"
@@ -25,12 +18,30 @@
 
         </div> -->
 
+        <div>
+            <h3>Color</h3>
+            <label><input type="checkbox" name="color" value="red" onchange="updateFilterCheckbox('color')"> Red</label>
+            <label><input type="checkbox" name="color" value="blue" onchange="updateFilterCheckbox('color')">
+                Blue</label>
+            <label><input type="checkbox" name="color" value="green" onchange="updateFilterCheckbox('color')">
+                Green</label>
+        </div>
+
+        <div>
+            <h3>Size</h3>
+            <label><input type="checkbox" name="size" value="small" onchange="updateFilterCheckbox('size')">
+                Small</label>
+            <label><input type="checkbox" name="size" value="medium" onchange="updateFilterCheckbox('size')">
+                Medium</label>
+            <label><input type="checkbox" name="size" value="large" onchange="updateFilterCheckbox('size')">
+                Large</label>
+        </div>
 
     </div>
     <div class="body-content">
         <div>
-            <label for="">SORT BY</label>
-            <select name="sort_by" id="sort_by" class="form-control" onchange="updateFilter('sort_by', this.value)">
+            <label for="">sắp xếp</label>
+            <select name="sort_by" id="sort_by" onchange="updateFilter('sort_by', this.value)">
                 <option value="none" {{ request()->get('sort_by') == 'none' ? 'selected' : '' }}>--Lọc theo--
                 </option>
                 <option value="tang_dan" {{ request()->get('sort_by') == 'tang_dan' ? 'selected' : '' }}>--Lọc theo
