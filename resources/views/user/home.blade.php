@@ -2,13 +2,8 @@
 @section('content')
 <div class="home-product">
     <div class="left-contaner">
-        <div id="filter_mobile_ram" class="form-group">
-            <label>
-                <input type="checkbox" name="filter_mobile_ram" value="none"
-                    {{ in_array('none', explode(',', request()->get('filter_mobile_ram', ''))) ? 'checked' : '' }}
-                    onchange="updateCheckboxFilter('filter_mobile_ram', this)">
-                --Lọc theo--
-            </label><br>
+        <div class="filter-item">
+            <b>Dung lượng ram</b><br>
             <label>
                 <input type="checkbox" name="filter_mobile_ram" value="<4"
                     {{ in_array('<4', explode(',', request()->get('filter_mobile_ram', ''))) ? 'checked' : '' }}
@@ -36,7 +31,9 @@
             </label>
         </div>
 
-        <div id="filter_mobile_stogare" class="form-group">
+        <div class="filter-item">
+            <b>Bộ nhớ trong</b>
+            <br>
             <label>
                 <input type="checkbox" name="filter_mobile_stogare" value="128"
                     {{ in_array('128', explode(',', request()->get('filter_mobile_stogare', ''))) ? 'checked' : '' }}
@@ -52,26 +49,9 @@
 
         </div>
 
-
-
-        <!-- <div>
-            <label for="">filter_mobile_ram</label>
-            <select name="filter_mobile_ram" id="filter_mobile_ram" class="form-control"
-                onchange="updateFilter('filter_mobile_ram', this.value)">
-                <option value="none" {{ request()->get('filter_mobile_ram') == 'none' ? 'selected' : '' }}>--Lọc
-                    theo--</option>
-                <option value="<4" {{ request()->get('filter_mobile_ram') == '<4' ? 'selected' : '' }}>--Nhỏ hơn
-                    4GB--</option>
-                <option value="4gb_8gb" {{ request()->get('filter_mobile_ram') == '4gb_8gb' ? 'selected' : '' }}>
-                    --4GB-8GB--
-                </option>
-            </select>
-
-        </div> -->
-
     </div>
     <div class="body-content">
-        <div>
+        <div class="sort">
             <label for="">sắp xếp</label>
             <select name="sort_by" id="sort_by" onchange="updateFilter('sort_by', this.value)">
                 <option value="none" {{ request()->get('sort_by') == 'none' ? 'selected' : '' }}>--Lọc theo--

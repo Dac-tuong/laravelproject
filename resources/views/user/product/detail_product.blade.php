@@ -72,12 +72,9 @@
                     <input type="hidden" value="1" class="cart_product_qty_{{ $product_detail->product_id }}">
                     <button type="button" class="add-to-cart" data-id_product="{{ $product_detail->product_id }}"
                         name="add-to-cart">
-                        <img class="btn-cart" src="{{ URL::to('user/image/cart-btn.png' ) }}" alt="">
+                        <i class="fa-solid fa-cart-shopping"></i>
                     </button>
-                    <button type="button" class="buy-now" data-id_product="{{ $product_detail->product_id }}"
-                        name="buy-now">
-                        <img class="btn-cart" src="{{ URL::to('user/image/cart-btn.png' ) }}" alt="">
-                    </button>
+
 
                     <button type="button" class="toggle-favorite" id="toggle-favorite" name="toggle-favorite"
                         data-id_product="{{ $product_detail->product_id }}">
@@ -127,7 +124,7 @@
                     </div>
                     <div class="boxReview-star">
                         <div class="rating-level" data-rating_level="5">
-                            <div class="start-count">
+                            <div class="star-count">
                                 5 <i class="fa-solid fa-star"></i>
                             </div>
                             <div class="progress">
@@ -139,7 +136,7 @@
                             <span class="rating-count"> </span>
                         </div>
                         <div class="rating-level" data-rating_level="4">
-                            <div class="start-count">
+                            <div class="star-count">
                                 4 <i class="fa-solid fa-star"></i>
                             </div>
                             <div class="progress">
@@ -151,7 +148,7 @@
                             <span class="rating-count"> </span>
                         </div>
                         <div class="rating-level" data-rating_level="3">
-                            <div class="start-count">
+                            <div class="star-count">
                                 3 <i class="fa-solid fa-star"></i>
                             </div>
                             <div class="progress">
@@ -163,7 +160,7 @@
                             <span class="rating-count"> </span>
                         </div>
                         <div class="rating-level" data-rating_level="2">
-                            <div class="start-count">
+                            <div class="star-count">
                                 2 <i class="fa-solid fa-star"></i>
                             </div>
                             <div class="progress">
@@ -175,7 +172,7 @@
                             <span class="rating-count"></span>
                         </div>
                         <div class="rating-level" data-rating_level="1">
-                            <div class="start-count">
+                            <div class="star-count">
                                 1 <i class="fa-solid fa-star"></i>
                             </div>
                             <div class="progress">
@@ -257,27 +254,27 @@
                 </div>
                 <div class="box-review-filter">
                     <div class="title-filter">Lọc theo</div>
-                    <div class="filter-container">
-                        <div class="filter-item active" data-rating_filter_review="0">
+                    <div class="filter-star-container">
+                        <div class="filter-star-item active" data-rating_filter_review="0">
                             Tất cả
                         </div>
-                        <div class="filter-item" data-rating_filter_review="5">
+                        <div class="filter-star-item" data-rating_filter_review="5">
                             <span class="">5</span>
                             <span class="star-icon-filter"><i class="fa-solid fa-star"></i></span>
                         </div>
-                        <div class="filter-item " data-rating_filter_review="4">
+                        <div class="filter-star-item " data-rating_filter_review="4">
                             <span class="">4</span>
                             <span class="star-icon-filter"><i class="fa-solid fa-star"></i></span>
                         </div>
-                        <div class="filter-item " data-rating_filter_review="3">
+                        <div class="filter-star-item " data-rating_filter_review="3">
                             <span class="">3</span>
                             <span class="star-icon-filter"><i class="fa-solid fa-star"></i></span>
                         </div>
-                        <div class="filter-item " data-rating_filter_review="2">
+                        <div class="filter-star-item " data-rating_filter_review="2">
                             <span class="">2</span>
                             <span class="star-icon-filter"><i class="fa-solid fa-star"></i></span>
                         </div>
-                        <div class="filter-item" data-rating_filter_review="1">
+                        <div class="filter-star-item" data-rating_filter_review="1">
                             <span class="">1</span>
                             <span class="star-icon-filter"><i class="fa-solid fa-star"></i></span>
                         </div>

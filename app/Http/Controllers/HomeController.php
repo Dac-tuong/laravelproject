@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BannerModel;
 use App\Models\ReviewModel;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,7 @@ class HomeController extends Controller
         $list_product =  Product::with(['category', 'brand'])
             ->where('product_status', 1);
 
-
+        $banners = BannerModel::all();
         // Lọc theo giá
         if ($request->has('sort_by')) {
             if ($request->get('sort_by') == 'giam_dan') {
@@ -72,6 +73,7 @@ class HomeController extends Controller
 
         return view('user.home')
             ->with('products', $products)
+            ->with('banners', $banners)
             ->with('brands', $brand)
             ->with('categorys', $category);
     }
@@ -169,6 +171,16 @@ class HomeController extends Controller
             ->limit(5)->get();
         return response()->json($review_cmt);
     }
+    public function get_review_cmt_all($product_id)
+    {
+        $review_cmt = ReviewModel::with(['name_customer'])
+            ->where('id_phone_review', $product_id)
+            ->orderBy('id_review', 'desc')
+            ->get();
+        return response()->json($review_cmt);
+    }
+
+
 
     public function average_start($product_id)
     {
@@ -274,5 +286,38 @@ class HomeController extends Controller
                 ->limit(5)->get();
             return response()->json($review_cmt);
         }
+    }
+
+
+    public function filter_reviews(Request $request)
+    {
+        $dataFilterReview = $request->all();
+        $id_filter = $dataFilterReview['id_product'];
+        $star_filter = $dataFilterReview['filter_start'];
+
+        if ($star_filter == 0) {
+            $review_cmt = ReviewModel::with(['name_customer'])
+                ->where('id_phone_review', $id_filter)
+                ->orderBy('id_review', 'desc')
+                ->limit(5)->get();
+            return response()->json($review_cmt);
+        } else {
+            $review_cmt = ReviewModel::with(['name_customer'])
+                ->where('id_phone_review', $id_filter)->where('rating', $star_filter)
+                ->orderBy('id_review', 'desc')
+                ->get();
+            return response()->json($review_cmt);
+        }
+    }
+    public function delete_favorite(Request $request)
+    {
+        $product_favorite = $request->all();
+        $id_user = Session::get('id_customer');
+        $product_favorite_id = $product_favorite['product_id'];
+
+        // Bỏ ghi chú và xử lý thêm đánh giá
+        $favorite = FavoriteModel::where("favorite_phone_id", $product_favorite_id)
+            ->where("favorite_user_id", $id_user)->first();
+        $favorite->delete();
     }
 }

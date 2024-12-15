@@ -1,4 +1,5 @@
-.header {
+.top-heading {
+    width: 100%;
     background-color: blue;
 }
 .header-nav {
@@ -115,6 +116,12 @@
     border-radius: 4px;
 }
 
+.nav-heading-container {
+    background: #e0e0e0;
+}
+.nav-sidebar {
+    background: #e0e0e0;
+}
 .sign-in-btn {
     font-weight: 500;
     color: white;
@@ -269,7 +276,17 @@
 
 /* ==============================SIDEBAR============================ */
 
+/* ============================SLIDE BANNER==================================== */
+.banner-container {
+    background: #e0e0e0;
+}
+
+/* ============================SLIDE BANNER==================================== */
+
 /*==========================HOME PRODUCT=====================*/
+.sort {
+    background-color: #f1f1f1;
+}
 .product-content {
     padding-block: 10px;
     padding: 10px;
@@ -277,6 +294,7 @@
     position: relative;
     border-radius: 5px;
     text-decoration: none;
+    overflow: hidden;
 }
 .product-content:hover .action-buttons {
     right: 0px;
@@ -334,13 +352,13 @@
     font-size: 16px;
 }
 .action-buttons {
-    width: 37px;
+    width: 29px;
     top: 0px;
-    right: -37px;
+    right: -29px;
     position: absolute;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Căn trái, bạn có thể chỉnh thành center hoặc flex-end nếu cần */
+    /* align-items: flex-start; Căn trái, bạn có thể chỉnh thành center hoặc flex-end nếu cần */
     gap: 10px; /* Khoảng cách giữa các phần tử */
     transition: opacity 0.3s, right 0.3s;
 }
@@ -449,8 +467,7 @@
 
 /* ======================DETAIL PRODUCT====================== */
 .add-to-cart {
-    /* border: 1px solid blue; */
-    /* padding: 5px 10px; */
+    padding: 5px 5px;
     border-radius: 5px;
     background-color: #ffffff;
 }
@@ -708,14 +725,14 @@
     font-size: 15px;
 }
 
-.start-count {
+.star-count {
     display: flex;
     font-weight: 500;
     justify-content: center;
     align-items: center;
     margin-right: 10px; /* Tạo khoảng cách giữa phần tử và thanh progress */
 }
-.start-count i {
+.star-count i {
     color: #f59e0b;
 }
 
@@ -744,7 +761,7 @@
 .box-review-filter {
     display: block;
 }
-.filter-container {
+.filter-star-container {
     gap: 10px;
     margin-bottom: 10px;
     overflow: auto;
@@ -755,7 +772,7 @@
     font-size: 26px;
     font-weight: 500;
 }
-.filter-item {
+.filter-star-item {
     align-items: center;
     background-color: #fff;
     border: 1px solid #637381;
@@ -771,7 +788,7 @@
     box-sizing: inherit;
 }
 
-.filter-item.active {
+.filter-star-item.active {
     background-color: #007bff;
     border: none;
     color: #fff;
@@ -987,12 +1004,12 @@
 }
 /* Trang xem review sản phẩm */
 .boxReview {
-    width: 800px;
+    max-width: 800px;
     background-color: #f2f4f7;
     margin: 0 auto;
     position: relative;
 }
-#boxReview-popup {
+.boxReview-popup {
     display: none;
     position: fixed;
     top: 50%;
@@ -1092,6 +1109,30 @@
 }
 
 /*  sản phẩm cùng loại */
+
+/* trang xem đánh giá sản phẩm */
+.inforReview {
+    display: flex;
+    padding: 8px;
+    border: 1px solid black;
+}
+
+.inforReview-thumbnail {
+    max-width: 200px;
+}
+.inforReview-thumbnail_img {
+    max-height: 200px;
+}
+
+.inforReview-boxReview {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+/* trang xem đánh giá sản phẩm */
+
 /* ======================DETAIL PRODUCT====================== */
 
 /*==========================HOME PRODUCT=====================*/

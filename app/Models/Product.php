@@ -74,4 +74,9 @@ class Product extends Model
     {
         return $this->belongsTo(FavoriteModel::class, 'favorite_phone_id', 'product_id');
     }
+
+    public function product_banner()
+    {
+        return $this->hasMany(BannerModel::class, 'id_phones_banner', 'product_id');
+    }
 }

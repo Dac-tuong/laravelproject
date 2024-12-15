@@ -2,33 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SliderModel;
+use App\Models\BannerModel;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class SlideController extends Controller
 {
     public function new_slide()
     {
-        return view('admin.slide.new_slider');
+        $get_product = Product::all();
+        return view('admin.slide.new_slider')->with('products', $get_product);
     }
     public function save_slide(Request $request)
     {
         $data = $request->all();
-        $save_slide = new SliderModel();
-        $save_slide->name_slide = $data['name_slide'];
-        $save_slide->status_slide = 1;
+        $save_slide = new BannerModel();
+        $save_slide->id_phones_banner = $data['product_id'];
+        $save_slide->name_banner = $data['banner_name'];
+        $save_slide->status_banner = 1;
 
-        $get_image = $request->file('slide_image');
+        $get_image = $request->file('banner_image');
 
         // xữ lý phần up hình ảnh lên mysql
         if ($get_image) {
             $new_image = time() . '_' . $get_image->getClientOriginalName();
             $get_image->move('uploads/slide', $new_image);
-            $save_slide->slide_image = $new_image;
+            $save_slide->banner_image = $new_image;
         } else {
-            $save_slide->slide_image = '';
+            $save_slide->banner_image = '';
         }
 
         $save_slide->save();
+    }
+
+    public function list_banner()
+    {
+        $banners = BannerModel::with(['product_banner'])->get();
+        return view('admin.slide.list_banner')->with('banners', $banners);
     }
 }

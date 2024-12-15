@@ -61,7 +61,7 @@ class SidebarController extends Controller
         $products = FavoriteModel::with(['user_favorite', 'product_favorite'])
             ->where("favorite_user_id", $id_user_session)->get();
 
-        // return response()->json($products);
+
         $output = '';
         foreach ($products as $product) {
 
@@ -103,7 +103,7 @@ class SidebarController extends Controller
                         </span>
                           ' . $oldPriceText . '
                      </div>
-                    
+                    <span> ' . $brandName . ' </span>
             <div class="action-buttons">
                       <form>
                            <input type="hidden" name="_token" value="' . csrf_token() . '">
@@ -113,13 +113,17 @@ class SidebarController extends Controller
                             <input type="hidden" value="' . $salePrice . '" class="product_price_' . $product->favorite_phone_id . '">
                             <input type="hidden" value="' . $productFavorite->color . '" class="product_color_' . $product->favorite_phone_id . '">
                             <input type="hidden" value="1" class="cart_product_qty_' . $product->favorite_phone_id . '">
-                            <button type="button" class="add-to-cart" data-id_product="' . $product->favorite_phone_id . '" name="add-to-cart">Thêm giỏ hàng</button>
-                        </form>
+                            <button type="button" class="add-to-cart" data-id_product="' . $product->favorite_phone_id . '" name="add-to-cart"><i class="fa-solid fa-cart-shopping"></i></button>
+                            <button type="button" class="delete-favorite" data-id_product="' . $product->favorite_phone_id . '" name="delete-favorite">X</button>
+                            </form>
                     </div>
         </div>
     </div>';
         }
-
-        echo $output;
+        if ($products->count() > 0) {
+            echo $output;
+        } else {
+            echo '<span>Hiện không có sản phẩm yêu thích nào</span>';
+        }
     }
 }
