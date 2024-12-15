@@ -6,10 +6,9 @@
     <a href="{{ URL::to('/wishlist') }}">Danh sách yêu thích</a>
 </div>
 
-<div class="row wishlist-container">
+<div class="row" id="wishlist-container">
 
-    <div class=""></div>
 </div>
-<p></p>
+
 
 @endsection

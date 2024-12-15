@@ -58,7 +58,68 @@ class SidebarController extends Controller
     public function data_wishlist()
     {
         $id_user_session = Session::get('id_customer');
-        $favorite = FavoriteModel::with(['user_favorite', 'product_favorite'])->where("favorite_user_id", $id_user_session)->get();
-        return response()->json($favorite);
+        $products = FavoriteModel::with(['user_favorite', 'product_favorite'])
+            ->where("favorite_user_id", $id_user_session)->get();
+
+        // return response()->json($products);
+        $output = '';
+        foreach ($products as $product) {
+
+            $productFavorite = $product->product_favorite; // Simplify access to related product
+
+            $oldPrice = $productFavorite->old_price ?? 0;
+            $salePrice = $productFavorite->sale_price;
+            $brandName = $productFavorite->brand_name;
+            $imagePath = asset('uploads/product/' . $productFavorite->product_image);
+            $detailLink = url('/detail-product' . '/' .  $productFavorite->id);
+
+            $percentDiscount = $oldPrice > 0 ? ceil((($oldPrice - $salePrice) / $oldPrice) * 100) : 0;
+            $oldPriceText = '';
+            if ($oldPrice > 0) {
+                $oldPriceText .= '<span class="productinfo__price-old">' . number_format($oldPrice, 0, ',', '.') . 'đ</span>';
+            }
+            $pecent = '';
+            if ($oldPrice > 0) {
+                $pecent .= '<div class="product__price--percent">
+                            <p class="product__price--percent-detail">' . $percentDiscount . '%</p>
+                        </div>';
+            }
+
+            $output .= '
+              <div class="col-lg-3 col-md-3 col-sm-12 col-12" style="padding-bottom: 12px;">
+        <div class="product-content">
+        <div class="thumbnail-product-img">
+     <img class="home-product-img" src="' . $imagePath . '" alt="" />   
+        </div>
+
+  <h5 class="productinfo__name">
+                        <a class="link-product"
+                            href="' . $detailLink . '">' . $productFavorite->product_name . '
+                        </a>
+                    </h5>
+                     <div class="productinfo__price">
+                      <span class="productinfo__price-current">
+                            ' .  number_format($salePrice, 0, ',', '.') . '
+                        </span>
+                          ' . $oldPriceText . '
+                     </div>
+                    
+            <div class="action-buttons">
+                      <form>
+                           <input type="hidden" name="_token" value="' . csrf_token() . '">
+                            <input type="hidden" value="' . $product->favorite_phone_id . '" class="product_id_' . $product->favorite_phone_id . '">
+                            <input type="hidden" value="' . $productFavorite->product_name . '" class="product_name_' . $product->favorite_phone_id . '">
+                            <input type="hidden" value="' . $productFavorite->product_image . '" class="product_image_' . $product->favorite_phone_id . '">
+                            <input type="hidden" value="' . $salePrice . '" class="product_price_' . $product->favorite_phone_id . '">
+                            <input type="hidden" value="' . $productFavorite->color . '" class="product_color_' . $product->favorite_phone_id . '">
+                            <input type="hidden" value="1" class="cart_product_qty_' . $product->favorite_phone_id . '">
+                            <button type="button" class="add-to-cart" data-id_product="' . $product->favorite_phone_id . '" name="add-to-cart">Thêm giỏ hàng</button>
+                        </form>
+                    </div>
+        </div>
+    </div>';
+        }
+
+        echo $output;
     }
 }

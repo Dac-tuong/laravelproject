@@ -218,7 +218,6 @@ class OrderController extends Controller
             ->with('brands', $brand)
             ->with("categorys", $category)
             ->with("historys", $history)
-
         ;
     }
 

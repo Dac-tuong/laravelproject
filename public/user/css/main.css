@@ -162,8 +162,7 @@
     padding: 0; /* Bỏ padding mặc định */
     margin: 0; /* Bỏ margin mặc định */
 }
-.brand-item {
-}
+
 .brand-item a {
     text-decoration: none;
     font-weight: 500;
@@ -273,13 +272,14 @@
 /*==========================HOME PRODUCT=====================*/
 .product-content {
     padding-block: 10px;
-    /* padding-bottom: 12px; */
+    padding: 10px;
     background-color: #ffffff;
     position: relative;
     border-radius: 5px;
-}
-.product-content {
     text-decoration: none;
+}
+.product-content:hover .action-buttons {
+    right: 0px;
 }
 .link-product {
     text-decoration: none;
@@ -304,12 +304,16 @@
     display: flex;
 
     justify-content: space-between;
-    /* border: 1px solid black; */
-    /* background-color: white; */
+}
+.thumbnail-product-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .home-product-img {
     height: 170px;
     max-width: 100%;
+    margin: 0 auto;
 }
 
 .productinfo__name {
@@ -330,15 +334,15 @@
     font-size: 16px;
 }
 .action-buttons {
-    width: 25px;
+    width: 37px;
     top: 0px;
-    right: 0px;
+    right: -37px;
     position: absolute;
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     align-items: flex-start; /* Căn trái, bạn có thể chỉnh thành center hoặc flex-end nếu cần */
     gap: 10px; /* Khoảng cách giữa các phần tử */
+    transition: opacity 0.3s, right 0.3s;
 }
 .btn-cart {
     width: 14px;
@@ -445,8 +449,8 @@
 
 /* ======================DETAIL PRODUCT====================== */
 .add-to-cart {
-    border: 1px solid blue;
-    padding: 5px 10px;
+    /* border: 1px solid blue; */
+    /* padding: 5px 10px; */
     border-radius: 5px;
     background-color: #ffffff;
 }
