@@ -51,7 +51,6 @@
     <div class="body-content">
         <h3>SẢN PHẨM MỚI NHẤT</h3>
         <div class="row">
-
             @foreach ($products_by_brand as $key => $product)
             <div class="col-lg-4 col-md-4 col-sm-12 col-12" style="padding-bottom: 12px;">
                 <div class="product-content">

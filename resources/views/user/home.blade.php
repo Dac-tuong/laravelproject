@@ -48,6 +48,45 @@
             </label>
 
         </div>
+
+        <div class="filter-item">
+            <b>Loại điện thoại</b>
+            <br>
+            @foreach ($categorys as $category )
+            <label>
+                <input type="checkbox" name="filter_mobile" value="{{$category->category_id}}"
+                    {{ in_array($category->category_id, explode(',', request()->get('filter_mobile', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_mobile', this)">
+                {{$category->category_name}}
+            </label><br>
+            @endforeach
+        </div>
+
+        <div class="filter-item">
+            <b>Tần số quét</b>
+            <br>
+            @foreach ($categorys as $category )
+            <label>
+                <input type="checkbox" name="filter_mobile" value="{{$category->category_id}}"
+                    {{ in_array($category->category_id, explode(',', request()->get('filter_mobile', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_mobile', this)">
+                {{$category->category_name}}
+            </label><br>
+            @endforeach
+        </div>
+
+        <div class="filter-item">
+            <b>Tần số quét</b>
+            <br>
+            @foreach ($refresh_rates as $refresh_rate )
+            <label>
+                <input type="checkbox" name="filter_mobile" value="{{$refresh_rate->refresh_rate}}"
+                    {{ in_array($refresh_rate->refresh_rate, explode(',', request()->get('filter_mobile', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_mobile', this)">
+                {{$refresh_rate->refresh_rate}}
+            </label><br>
+            @endforeach
+        </div>
         <div class="slider-range">
             <p>
                 <label for="amount">Target sales goal (Millions):</label>
@@ -61,18 +100,19 @@
             </form>
         </div>
 
+
     </div>
     <div class="body-content">
         <div class="sort">
             <label for="">sắp xếp</label>
             <select name="sort_by" id="sort_by" onchange="updateFilter('sort_by', this.value)">
-                <option value="none" {{ request()->get('sort_by') == 'none' ? 'selected' : '' }}>--Lọc theo--
+                <option value="none" {{ request()->get('sort_by') == 'none' ? 'selected' : '' }}>--Sắp xếp--
                 </option>
-                <option value="tang_dan" {{ request()->get('sort_by') == 'tang_dan' ? 'selected' : '' }}>--Lọc theo
-                    giá tăng
+                <option value="tang_dan" {{ request()->get('sort_by') == 'tang_dan' ? 'selected' : '' }}>--
+                    Giá tăng
                     dần--</option>
-                <option value="giam_dan" {{ request()->get('sort_by') == 'giam_dan' ? 'selected' : '' }}>--Lọc theo
-                    giá giảm
+                <option value="giam_dan" {{ request()->get('sort_by') == 'giam_dan' ? 'selected' : '' }}>--
+                    Giá giảm
                     dần--</option>
             </select>
         </div>

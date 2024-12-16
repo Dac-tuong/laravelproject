@@ -261,7 +261,7 @@
      <script src="{{asset("user/js/jquery-3.6.0.min.js")}}"></script>
      <script src="{{asset("user/js/sweetalert2.js")}}"></script>
      <script src="{{asset("user/js/toastr.js")}}"></script>
-     <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+     <script src="{{asset("user/js/jquery-ui.js")}}"></script>
      <script>
          let currentIndex = 0;
 

@@ -30,6 +30,8 @@ class HomeController extends Controller
         $category = Category::get();
         $list_product =  Product::with(['category', 'brand'])
             ->where('product_status', 1);
+        $max_price = $list_product->max('sale_price');
+        $min_price = $list_product->min('sale_price');
 
         $banners = BannerModel::all();
         // Lọc theo giá
@@ -67,6 +69,12 @@ class HomeController extends Controller
             });
         }
 
+        // Lọc theo loại điện thoại
+        if ($request->has('filter_mobile')) {
+            $filterMobiles = explode(',', $request->get('filter_mobile'));
+            $list_product->whereIn('categories_product_id', $filterMobiles);
+        }
+
 
         // Lấy danh sách sản phẩm sau khi lọc
         $products = $list_product->paginate(10);
@@ -75,7 +83,11 @@ class HomeController extends Controller
             ->with('products', $products)
             ->with('banners', $banners)
             ->with('brands', $brand)
-            ->with('categorys', $category);
+            ->with('categorys', $category)
+            ->with('max_price', $max_price)
+            ->with('min_price', $min_price)
+
+        ;
     }
 
     public function detail_product($product_id)
