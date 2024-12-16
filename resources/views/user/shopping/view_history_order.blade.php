@@ -82,6 +82,12 @@
             <p><strong>Email:</strong> {{$order_historys->order_email}}</p>
             <p><strong>Số điện thoại:</strong> {{$order_historys->shippingAddress->order_phone}}</p>
         </div>
+        <div class="border-white">
+            <b>Lý do hủy đơn hàng:</b>
+            <p id="cancel_reason" class="cancel_reason">
+
+            </p>
+        </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-12">
         <div class="border-white">
@@ -97,9 +103,17 @@
         </div>
         <div class="border-white">
             <div>
-                <button class="cancel-order" id="cancel-order">
-                    Hủy đơn hàng
-                </button>
+                <form action="">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete>
+                    <label for="" class="reason-label" style="display: none; color: red;">Vui lòng điền
+                        thông tin!</label>
+                    <textarea name="cancel-reason" id="cancel-reason" class="cancel-reason"></textarea>
+                    <br>
+                    <button type="button" class="cancel-order" id="cancel-order"
+                        data-order_code="{{$order_historys->order_code}}">
+                        Hủy đơn hàng
+                    </button>
+
             </div>
         </div>
     </div>

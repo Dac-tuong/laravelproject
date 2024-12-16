@@ -295,15 +295,15 @@ class OrderController extends Controller
         $data = $request->all();
         $orderCode = $data['order_code'];
 
-        $order_update = OrderProduct::where('order_code', $orderCode)->first();
-        $orderStatus = $order_update->order_status;
-        $orderReason = $order_update->order_cancellation_reason;
-        $order_update->save();
+        $order_get = OrderProduct::where('order_code', $orderCode)->first();
+        $orderStatus = $order_get->order_status;
+        $orderReason = $order_get->order_cancellation_reason;
+
         $orderStatusText = '';
 
-        if ($order_update->order_status == 3) {
+        if ($order_get->order_status == 3) {
             $orderStatusText = 'Đã hủy';
-        } elseif ($order_update->order_status == 2) {
+        } elseif ($order_get->order_status == 2) {
             $orderStatusText = 'Đã xác nhận';
         } else {
             $orderStatusText = 'Đơn hàng mới';
@@ -312,7 +312,23 @@ class OrderController extends Controller
         return response()->json([
             'message' => 'Đơn hàng đã được cập nhật.',
             'orderStatus' => $orderStatus,
-            'orderStatusText' => $orderStatusText // Trả về tên trạng thái
+            'orderStatusText' => $orderStatusText, // Trả về tên trạng thái
+            'orderReason' => $orderReason
         ]);
+    }
+
+
+    public function cancel_order(Request $request)
+    {
+        $data = $request->all();
+        $orderCode = $data['order_code'];
+        $cancelReason = $data['cancel_reason'];
+        $id_user = Session::get('id_customer');
+        $order = OrderProduct::where('order_code', $orderCode)
+            ->where('id_customer', $id_user)
+            ->first();
+        $order->order_status = 3;
+        $order->order_cancellation_reason = $cancelReason;
+        $order->save();
     }
 }

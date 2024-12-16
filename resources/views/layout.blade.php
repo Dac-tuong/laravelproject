@@ -19,8 +19,6 @@
      <link rel="stylesheet" href="{{asset("user/css/toastr.css")}}">
      <link rel="stylesheet" href="{{asset("user/css/bootstrap.css")}}">
 
-     <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
-
      <!-- Link font-awesome -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -171,30 +169,11 @@
 
          </div>
          <!-- sidebar -->
-         <div class="banner-container">
-             <div class="container-xl">
-                 <div class="banner-slide">
-                     <button class="slider-btn prev" onclick="prevSlide()">❮</button>
-                     <div class="banners">
-                         @foreach ($banners as $banner)
-                         <a class="banner-link-product"
-                             href=" {{ URL::to('/detail-product'.'/' . $banner->id_phones_banner) }}"
-                             title="{{$banner->name_banner}}">
-                             <img class="banner-image" src="{{ URL::to('uploads/slide/' . $banner->banner_image) }}"
-                                 alt="" />
-                         </a>
-                         @endforeach
-                     </div>
-                     <button class="slider-btn next" onclick="nextSlide()">❯</button>
-                 </div>
-             </div>
-         </div>
+
          <div class="app_container">
              <div class="container-xl">
+                 @yield('content')
 
-                 <div class="content">
-                     @yield('content')
-                 </div>
              </div>
          </div>
 
@@ -262,7 +241,6 @@
      <script src="{{asset("user/js/jquery-3.6.0.min.js")}}"></script>
      <script src="{{asset("user/js/sweetalert2.js")}}"></script>
      <script src="{{asset("user/js/toastr.js")}}"></script>
-     <script src="{{asset("user/js/jquery-ui.js")}}"></script>
      <script>
          let currentIndex = 0;
 
@@ -422,20 +400,40 @@
      <script>
          $(document).ready(function() {
 
-             $("#slider-range").slider({
-                 orientation: "horizontal",
-                 range: true,
-                 values: [17, 67],
-                 slide: function(event, ui) {
-                     $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-                     $("#start_price").val("$" + ui.values[0]);
-                     $("#to_price").val("$" + ui.values[1]);
 
+             $(document).on('click', '.cancel-order', function() {
+                 var cancelReason = $('#cancel-reason').val(); // Lấy nội dung textarea
+
+                 var orderCode = $(this).data('order_code'); // Lấy mã đơn hàng từ data attribute của nút
+                 var _token = $('input[name="_token"]').val();
+                 var allValid = true;
+                 const checkReason = document.querySelector('.reason-label');
+                 if (cancelReason === "") {
+                     var allValid = false;
+                     checkReason.style.display = "block";
                  }
-             });
-             $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-                 " - $" + $("#slider-range").slider("values", 1));
+                 //  alert(_token);
+                 // Bạn có thể gửi dữ liệu này lên server qua Ajax
 
+                 if (allValid) {
+                     $.ajax({
+                         url: '/cancel-order',
+                         method: 'POST',
+                         data: {
+                             order_code: orderCode,
+                             cancel_reason: cancelReason,
+                             _token: _token
+                         },
+                         success: function(data) {
+                             getInforOrder();
+                         },
+                         error: function(err) {
+                             console.error('Đã có lỗi xảy ra', err);
+                         }
+                     });
+                 }
+
+             });
 
 
 
@@ -467,6 +465,7 @@
                      },
                      success: function(data) {
                          $('#order_status').text(data.orderStatusText);
+                         $('#cancel_reason').text(data.orderReason);
                          if (data.orderStatusText === 'Đã hủy' || data.orderStatusText ===
                              'Đã xác nhận') {
                              // Ẩn nút "Hủy đơn hàng"
@@ -812,14 +811,6 @@
                                  $('#phonenumber').val("");
                                  $('#review').val("");
 
-                                 //  const closeOverlay = document.querySelector('.overlay');
-                                 //  closeOverlay.style.display = "none";
-                                 //  const closePopupReview = document.querySelector(
-                                 //      '.review-form-popup');
-                                 //  closePopupReview.style.display = "none";
-                                 //  const closePopupReview2 = document.getElementById(
-                                 //      'boxReview-popup');
-                                 //  closePopupReview2.style.display = "none";
                              }
                          },
                          error: function(err) {

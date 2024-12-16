@@ -285,6 +285,7 @@
 }
 .banners {
     display: flex;
+    transition: transform 0.5s ease-in-out;
 }
 
 .slider-btn {
@@ -296,7 +297,6 @@
     border: none;
     padding: 10px 15px;
     cursor: pointer;
-    z-index: 10;
 }
 
 .slider-btn.prev {
@@ -1004,11 +1004,6 @@
     box-shadow: #000;
 }
 
-.content {
-    font-size: 13px;
-    margin: 0;
-}
-
 .content .content-question {
     padding-left: 4px;
     margin: 0px;
@@ -1335,6 +1330,15 @@ p {
     border-radius: 10px;
 }
 
+.cancel-reason {
+    resize: none;
+    width: 100%;
+    height: 120px;
+}
+.cancel-order {
+    border-radius: 5px;
+    padding: 4px 6px;
+}
 /* HISTORY ORDER */
 
 /*==========================INFORMATION CUSTOMER=====================*/

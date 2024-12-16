@@ -105,7 +105,7 @@ class BrandController extends Controller
     {
         $category = Category::get();
         $banners = BannerModel::all();
-        $list_product = Product::where('brand_product_id', $brand_id)
+        $list_product = Product::with(['category'])->where('brand_product_id', $brand_id)
             ->where('product_status', 1);
 
         // Lọc theo giá
@@ -202,18 +202,17 @@ class BrandController extends Controller
         // Lấy danh sách sản phẩm sau khi lọc
         $products = $list_product->get();
 
+        $groupedCateProducts = $products->groupBy('categories_product_id');
         // Lấy danh sách thương hiệu để hiển thị trong bộ lọc
         $brands = Brand::all();
 
-        // return view('user.other.show_category', compact('brands'));
-        return view('user.other.show_category', [
-            'products_by_brand' => $products,
-            'brands' => $brands,
-            'banners' => $banners,
-            'categorys' => $category,
-            'selected_sort' => $request->get('sort_by', 'none'),
-            'selected_ram' => $request->get('filter_mobile_ram', 'none'),
-
-        ]);
+        return view('user.other.show_category')
+            ->with('products_by_brand', $products)
+            ->with('brands', $brands)
+            ->with('banners', $banners)
+            ->with('categorys', $category)
+            ->with('groupedCateProducts', $groupedCateProducts)
+            ->with('selected_sort', $request->get('sort_by', 'none'))
+            ->with('selected_ram', $request->get('filter_mobile_ram', 'none'));
     }
 }
