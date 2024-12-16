@@ -23,7 +23,9 @@ html {
     font-family: "Roboto", sans-serif;
     box-sizing: border-box;
 }
-
+.app {
+    background: #e0e0e0;
+}
 .app__contend {
     padding: 15px 0 15px 0;
 }
@@ -48,7 +50,9 @@ html {
         transform: scale(var(--growth-to));
     }
 }
-
+body {
+    background: #e0e0e0;
+}
 /* button style */
 .btn-delete {
     padding: 4px 6px;

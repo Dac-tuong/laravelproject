@@ -19,7 +19,7 @@
      <link rel="stylesheet" href="{{asset("user/css/toastr.css")}}">
      <link rel="stylesheet" href="{{asset("user/css/bootstrap.css")}}">
 
-
+     <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
 
      <!-- Link font-awesome -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -171,11 +171,20 @@
          </div>
          <!-- sidebar -->
          <div class="banner-container">
-             <div class="container-xl" style="border:1px solid black;">
-                 <div class="banners">
-                     @foreach ($banners as $banner)
-                     <img class="" src="{{ URL::to('uploads/slide/' . $banner->banner_image) }}" alt="" />
-                     @endforeach
+             <div class="container-xl">
+                 <div class="banner-slide">
+                     <button class="slider-btn prev" onclick="prevSlide()">❮</button>
+                     <div class="banners">
+                         @foreach ($banners as $banner)
+                         <a class="banner-link-product"
+                             href=" {{ URL::to('/detail-product'.'/' . $banner->id_phones_banner) }}"
+                             title="{{$banner->name_banner}}">
+                             <img class="banner-image" src="{{ URL::to('uploads/slide/' . $banner->banner_image) }}"
+                                 alt="" />
+                         </a>
+                         @endforeach
+                     </div>
+                     <button class="slider-btn next" onclick="nextSlide()">❯</button>
                  </div>
              </div>
          </div>
@@ -252,7 +261,33 @@
      <script src="{{asset("user/js/jquery-3.6.0.min.js")}}"></script>
      <script src="{{asset("user/js/sweetalert2.js")}}"></script>
      <script src="{{asset("user/js/toastr.js")}}"></script>
+     <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+     <script>
+         let currentIndex = 0;
 
+         function showSlide(index) {
+             const banners = document.querySelector('.banners');
+             const totalSlides = document.querySelectorAll('.banner-link-product').length;
+
+             if (index >= totalSlides) {
+                 currentIndex = 0; // Quay về slide đầu
+             } else if (index < 0) {
+                 currentIndex = totalSlides - 1; // Quay về slide cuối
+             } else {
+                 currentIndex = index;
+             }
+
+             banners.style.transform = `translateX(-${currentIndex * 100}%)`;
+         }
+
+         function nextSlide() {
+             showSlide(currentIndex + 1);
+         }
+
+         function prevSlide() {
+             showSlide(currentIndex - 1);
+         }
+     </script>
      <script>
          function updateCheckboxFilter(filterName, element) {
              // Lấy giá trị checkbox được thay đổi
@@ -385,6 +420,25 @@
 
      <script>
          $(document).ready(function() {
+
+             $("#slider-range").slider({
+                 orientation: "horizontal",
+                 range: true,
+                 values: [17, 67],
+                 slide: function(event, ui) {
+                     $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                     $("#start_price").val("$" + ui.values[0]);
+                     $("#to_price").val("$" + ui.values[1]);
+
+                 }
+             });
+             $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+                 " - $" + $("#slider-range").slider("values", 1));
+
+
+
+
+
              function getWishlist() {
                  $.ajax({
                      url: '/data-wishlist',

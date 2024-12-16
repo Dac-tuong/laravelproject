@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\BannerModel;
 use Illuminate\Support\Facades\Session;
 
 
@@ -187,7 +188,7 @@ class OrderController extends Controller
     {
         $brand = Brand::get();
         $category = Category::get();
-
+        $banners = BannerModel::all();
         $id_user = Session::get('id_customer');
         $orders = OrderProduct::where('id_customer', $id_user);
 
@@ -218,6 +219,7 @@ class OrderController extends Controller
             ->with('brands', $brand)
             ->with("categorys", $category)
             ->with("historys", $history)
+            ->with('banners', $banners)
         ;
     }
 
@@ -225,7 +227,7 @@ class OrderController extends Controller
     {
         $brand = Brand::get();
         $category = Category::get();
-
+        $banners = BannerModel::all();
         $order_count_quantity = 0;
         $grand_total = 0;
 
@@ -283,6 +285,7 @@ class OrderController extends Controller
             ->with("code_coupon", $coupon)
             ->with("discount_price", $discount)
             ->with("grandTotal", $grand_total)
+            ->with('banners', $banners)
         ;
     }
 
@@ -310,7 +313,6 @@ class OrderController extends Controller
             'message' => 'Đơn hàng đã được cập nhật.',
             'orderStatus' => $orderStatus,
             'orderStatusText' => $orderStatusText // Trả về tên trạng thái
-
         ]);
     }
 }

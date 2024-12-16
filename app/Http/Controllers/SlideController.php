@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BannerModel;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class SlideController extends Controller
 {
@@ -33,11 +34,12 @@ class SlideController extends Controller
         }
 
         $save_slide->save();
+        return Redirect::to('list-banner');
     }
 
     public function list_banner()
     {
-        $banners = BannerModel::with(['product_banner'])->get();
+        $banners = BannerModel::all();
         return view('admin.slide.list_banner')->with('banners', $banners);
     }
 }

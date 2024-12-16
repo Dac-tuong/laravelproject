@@ -48,6 +48,18 @@
             </label>
 
         </div>
+        <div class="slider-range">
+            <p>
+                <label for="amount">Target sales goal (Millions):</label>
+                <input type="text" id="amount" readonly="" style="border:0; color:#f6931f; font-weight:bold;">
+            </p>
+            <form action="">
+                <div id="slider-range" style="height:10px;"></div>
+                <input type="hidden" id="start_price" name="start_price">
+                <input type="hidden" id="to_price" name="to_price">
+                <button name="filter_price" value="Lọc giá theo">Áp dụng</button>
+            </form>
+        </div>
 
     </div>
     <div class="body-content">

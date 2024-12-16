@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\FavoriteModel;
-use App\Models\Gallery;
+
 use App\Models\OrderProduct;
-use App\Models\Product;
+use App\Models\BannerModel;
 use App\Models\ShippingAddress;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
@@ -21,6 +21,7 @@ class SidebarController extends Controller
     {
         $brand = Brand::get();
         $category = Category::get();
+        $banners = BannerModel::all();
 
         $id_user_session = Session::get('id_customer');
         $output = "Hiện chưa có địa chỉ";
@@ -38,6 +39,7 @@ class SidebarController extends Controller
             ->with('ordercount', $order_count)
             ->with('totalamount', $total_amount)
             ->with('avgamount', $avg_amount)
+            ->with('banners', $banners)
         ;
     }
 
@@ -46,12 +48,14 @@ class SidebarController extends Controller
     {
         $brand = Brand::get();
         $category = Category::get();
+        $banners = BannerModel::all();
         $id_user_session = Session::get('id_customer');
         $favorite = FavoriteModel::with(['user_favorite', 'product_favorite'])->where("favorite_user_id", $id_user_session)->get();
         return view('user.product.wishlist')
             ->with('brands', $brand)
             ->with("categorys", $category)
             ->with('favorites', $favorite)
+            ->with('banners', $banners)
         ;
     }
 

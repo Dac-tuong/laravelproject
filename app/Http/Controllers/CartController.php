@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Coupons;
-use App\Models\ShoppingCartModel;
+use App\Models\BannerModel;
 use Illuminate\Support\Facades\Redirect;
 
 session_start();
@@ -20,9 +20,13 @@ class CartController extends Controller
         // $shipping_fee = 25000;
         $brand = Brand::get();
         $category = Category::get();
+        $banners = BannerModel::all();
         // Truyền dữ liệu vào view bằng mảng
         // Session::put('fee_ship', $shipping_fee);
-        return view('user.shopping.cart')->with('brands', $brand)->with('categorys', $category);
+        return view('user.shopping.cart')->with('brands', $brand)
+            ->with('categorys', $category)
+            ->with('banners', $banners)
+        ;
     }
 
     public function addToCart(Request $request)
@@ -271,21 +275,5 @@ class CartController extends Controller
 
         // Chuyển hướng lại giỏ hàng
         return Redirect::to('cart');
-    }
-
-    public function buy_now(Request $request)
-    {
-        $brand = Brand::get();
-        $category = Category::get();
-
-        $productData = $request->all();
-        $product_name = $productData['cart_product_name'];
-        $product_price = $productData['cart_product_price'];
-        $id_product = $productData['cart_product_id'];
-        $product_image = $productData['cart_product_image'];
-        $product_color = $productData['cart_product_color'];
-
-        $session_id = substr(md5(microtime()), rand(0, 26), 5);
-        $buy = Session::get('buy');
     }
 }

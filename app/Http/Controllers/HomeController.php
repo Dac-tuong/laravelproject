@@ -82,6 +82,7 @@ class HomeController extends Controller
     {
         $brand = Brand::get();
         $category = Category::get();
+        $banners = BannerModel::all();
         $detail_product = Product::with(['category', 'brand', 'galleries'])->where('tbl_phones.product_id', $product_id)->first();
         $product_price = $detail_product->sale_price;
         $similar_product = Product::whereBetween('sale_price', [$product_price - 100, $product_price + 100, $product_price])
@@ -94,13 +95,15 @@ class HomeController extends Controller
             ->with('brands', $brand)
             ->with('categorys', $category)
             ->with('similars', $similar_product)
-            ->with('reviews', $get_review);
+            ->with('reviews', $get_review)
+            ->with('banners', $banners);
     }
 
     public function search(Request $request)
     {
         $brand = Brand::get();
         $category = Category::get();
+        $banners = BannerModel::all();
         $keyword = $request->keywords_search;
 
         $search_product = Product::with(['category', 'brand'])->where('product_name', 'like', '%' . $keyword . '%')
@@ -110,12 +113,15 @@ class HomeController extends Controller
         return view('user.product.search')
             ->with('search_product', $search_product)
             ->with('brands', $brand)
-            ->with('categorys', $category);
+            ->with('categorys', $category)
+            ->with('banners', $banners)
+        ;
     }
     public function review_product($product_id)
     {
         $brand = Brand::get();
         $category = Category::get();
+        $banners = BannerModel::all();
         $get_product = Product::with(['category', 'brand', 'galleries'])
             ->where('tbl_phones.product_id', $product_id)->first();
 
@@ -123,6 +129,7 @@ class HomeController extends Controller
             ->with('product_infor', $get_product)
             ->with('brands', $brand)
             ->with('categorys', $category)
+            ->with('banners', $banners)
         ;
     }
 

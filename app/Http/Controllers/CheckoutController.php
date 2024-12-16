@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 use App\Models\Brand;
-use App\Models\Coupons;
+use App\Models\BannerModel;
 
 use App\Models\Category;
 use Illuminate\Support\Str;
@@ -88,9 +88,14 @@ class CheckoutController extends Controller
         $province = Province::all();
         $brand = Brand::get();
         $category = Category::get();
+        $banners = BannerModel::all();
 
 
-        return view('user.shopping.checkout')->with('provinces', $province)->with('brands', $brand)->with('categorys', $category);
+        return view('user.shopping.checkout')
+            ->with('provinces', $province)
+            ->with('brands', $brand)
+            ->with('categorys', $category)
+            ->with('banners', $banners);
     }
 
 
@@ -206,7 +211,6 @@ class CheckoutController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Đơn hàng đã được gửi thành công!',
-
         ]);
     }
 }
