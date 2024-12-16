@@ -7,49 +7,174 @@
 
 <div class="home-product">
     <div class="left-contaner">
-        <h3>DANH MỤC THƯƠNG HIỆU</h3>
-        <ul class="brand-container">
-            @foreach ($brands as $brand)
-            <li class="brand-item">
-                <a href="{{URL::to('/show-brand-user'.'/'.$brand->brand_id)}}">{{$brand->brand_name}}</a>
-            </li>
-            @endforeach
-        </ul>
-        <div>
-            <form action="" class="form-group">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete>
-
-                <label for="">SORT BY</label>
-                <select name="sort_by" id="sort_by" class="form-control" onchange="updateFilter('sort_by', this.value)">
-                    <option value="none" {{ request()->get('sort_by') == 'none' ? 'selected' : '' }}>--Lọc theo--
-                    </option>
-                    <option value="tang_dan" {{ request()->get('sort_by') == 'tang_dan' ? 'selected' : '' }}>--Lọc theo
-                        giá tăng
-                        dần--</option>
-                    <option value="giam_dan" {{ request()->get('sort_by') == 'giam_dan' ? 'selected' : '' }}>--Lọc theo
-                        giá giảm
-                        dần--</option>
-                </select>
-
-                <label for="">filter_mobile_ram</label>
-                <select name="filter_mobile_ram" id="filter_mobile_ram" class="form-control"
-                    onchange="updateFilter('filter_mobile_ram', this.value)">
-                    <option value="none" {{ request()->get('filter_mobile_ram') == 'none' ? 'selected' : '' }}>--Lọc
-                        theo--</option>
-                    <option value="<4" {{ request()->get('filter_mobile_ram') == '<4' ? 'selected' : '' }}>--Nhỏ hơn
-                        4GB--</option>
-                    <option value="4gb_8gb" {{ request()->get('filter_mobile_ram') == '4gb-8gb' ? 'selected' : '' }}>
-                        --4GB-8GB--
-                    </option>
-                    <option value="8gb-12gb" {{ request()->get('filter_mobile_ram') == '8gb-12gb' ? 'selected' : '' }}>
-                        --8GB-12GB--
-                    </option>
-                </select>
-            </form>
+        <div class="filter-item">
+            <b>Dung lượng ram</b><br>
+            <label>
+                <input type="checkbox" name="filter_mobile_ram" value="<4"
+                    {{ in_array('<4', explode(',', request()->get('filter_mobile_ram', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_mobile_ram', this)">
+                --Nhỏ hơn 4GB--
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_mobile_ram" value="4gb_8gb"
+                    {{ in_array('4gb_8gb', explode(',', request()->get('filter_mobile_ram', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_mobile_ram', this)">
+                --4GB-8GB--
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" name="filter_mobile_ram" value="8gb_12gb"
+                    {{ in_array('8gb_12gb', explode(',', request()->get('filter_mobile_ram', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_mobile_ram', this)">
+                --8GB-12GB--
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_mobile_ram" value=">12gb"
+                    {{ in_array('>12gb', explode(',', request()->get('filter_mobile_ram', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_mobile_ram', this)">
+                -- lớn hơn 12GB--
+            </label>
         </div>
+
+        <div class="filter-item">
+            <b>Bộ nhớ trong</b>
+            <br>
+            <label>
+                <input type="checkbox" name="filter_mobile_stogare" value="128"
+                    {{ in_array('128', explode(',', request()->get('filter_mobile_stogare', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_mobile_stogare', this)">
+                128GB
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_mobile_stogare" value="256"
+                    {{ in_array('256', explode(',', request()->get('filter_mobile_stogare', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_mobile_stogare', this)">
+                256GB
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" name="filter_mobile_stogare" value="512"
+                    {{ in_array('512', explode(',', request()->get('filter_mobile_stogare', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_mobile_stogare', this)">
+                512GB
+            </label>
+        </div>
+
+        <div class="filter-item">
+            <b>Loại điện thoại</b>
+            <br>
+            @foreach ($categorys as $category )
+            <label>
+                <input type="checkbox" name="filter_mobile" value="{{$category->category_id}}"
+                    {{ in_array($category->category_id, explode(',', request()->get('filter_mobile', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_mobile', this)">
+                {{$category->category_name}}
+            </label><br>
+            @endforeach
+        </div>
+
+        <div class="filter-item">
+            <b>Tần số quét</b>
+            <br>
+
+            <label>
+                <input type="checkbox" name="filter_refresh_rates" value="60-120hz"
+                    {{ in_array('60-120hz', explode(',', request()->get('filter_refresh_rates', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_refresh_rates', this)">
+                60-120hz
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_refresh_rates" value="60hz"
+                    {{ in_array('60hz', explode(',', request()->get('filter_refresh_rates', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_refresh_rates', this)">
+                60hz
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_refresh_rates" value="90hz"
+                    {{ in_array('90hz', explode(',', request()->get('filter_refresh_rates', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_refresh_rates', this)">
+                90hz
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_refresh_rates" value="120hz"
+                    {{ in_array('120hz', explode(',', request()->get('filter_refresh_rates', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_refresh_rates', this)">
+                120hz
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_refresh_rates" value="165hz"
+                    {{ in_array('165hz', explode(',', request()->get('filter_refresh_rates', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_refresh_rates', this)">
+                165hz
+            </label><br>
+
+        </div>
+
+
+        <div class="filter-item">
+            <b>Giá bán</b>
+            <br>
+            <label>
+                <input type="checkbox" name="filter_price" value="1000000-5000000"
+                    {{ in_array('1000000-5000000', explode(',', request()->get('filter_price', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_price', this)">
+                1.000.000-5.000.000 triệu
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_price" value="5000000-10000000"
+                    {{ in_array('5000000-10000000', explode(',', request()->get('filter_price', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_price', this)">
+                5.000.000-10.000.000 triệu
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_price" value="10000000-15000000"
+                    {{ in_array('10000000-19000000', explode(',', request()->get('filter_price', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_price', this)">
+                10.000.000-15.000.000 triệu
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_price" value="15000000-20000000"
+                    {{ in_array('15000000-20000000', explode(',', request()->get('filter_price', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_price', this)">
+                15000000-20000000 triệu
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_refresh_rates" value="20000000-25000000"
+                    {{ in_array('20000000-25000000', explode(',', request()->get('filter_price', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_price', this)">
+                20000000-25000000 triệu
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_price" value="25000000-30000000"
+                    {{ in_array('25000000-30000000', explode(',', request()->get('filter_price', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_price', this)">
+                25000000-30000000 triệu
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_price" value=">30000000"
+                    {{ in_array('>30000000', explode(',', request()->get('filter_price', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_price', this)">
+                Trên 30000000 triệu
+            </label><br>
+
+        </div>
+
+
     </div>
     <div class="body-content">
-        <h3>SẢN PHẨM MỚI NHẤT</h3>
+        <div class="sort">
+            <label for="">sắp xếp</label>
+            <select name="sort_by" id="sort_by" onchange="updateFilter('sort_by', this.value)">
+                <option value="none" {{ request()->get('sort_by') == 'none' ? 'selected' : '' }}>--Sắp xếp--
+                </option>
+                <option value="tang_dan" {{ request()->get('sort_by') == 'tang_dan' ? 'selected' : '' }}>--
+                    Giá tăng
+                    dần--</option>
+                <option value="giam_dan" {{ request()->get('sort_by') == 'giam_dan' ? 'selected' : '' }}>--
+                    Giá giảm
+                    dần--</option>
+            </select>
+        </div>
         <div class="row">
             @foreach ($products_by_brand as $key => $product)
             <div class="col-lg-4 col-md-4 col-sm-12 col-12" style="padding-bottom: 12px;">

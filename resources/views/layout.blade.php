@@ -131,7 +131,8 @@
                          <div class="brand-container">
                              @foreach ( $brands as $brand )
                              <div class="brand-item">
-                                 <a href="{{URL::to('/brand'.'/'.$brand->brand_id)}}">{{$brand->brand_name}}</a>
+                                 <a href="{{URL::to('/show-brand-user'.'/'.$brand->brand_id)}}">{{$brand->brand_name}}
+                                 </a>
                              </div>
                              @endforeach
                          </div>

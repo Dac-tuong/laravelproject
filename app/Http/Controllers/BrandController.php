@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\BannerModel;
 use Illuminate\Support\Facades\Redirect;
 
 session_start();
@@ -102,38 +103,104 @@ class BrandController extends Controller
 
     public function show_brand_user(Request $request, $brand_id)
     {
-        $query = Product::where('brand_product_id', $brand_id)
+        $category = Category::get();
+        $banners = BannerModel::all();
+        $list_product = Product::where('brand_product_id', $brand_id)
             ->where('product_status', 1);
 
         // Lọc theo giá
         if ($request->has('sort_by')) {
             if ($request->get('sort_by') == 'giam_dan') {
-                $query->orderBy('sale_price', 'desc');
+                $list_product->orderBy('sale_price', 'desc');
             } elseif ($request->get('sort_by') == 'tang_dan') {
-                $query->orderBy('sale_price', 'asc');
+                $list_product->orderBy('sale_price', 'asc');
             }
         }
 
         // Lọc theo RAM
         if ($request->has('filter_mobile_ram')) {
-            switch ($request->get('filter_mobile_ram')) {
-                case '<4':
-                    $query->where('ram', '<', 4);
-                    break;
-                case '4gb-8gb':
-                    $query->whereBetween('ram', [4, 8]);
-                    break;
-                case '8gb-12gb':
-                    $query->whereBetween('ram', [8, 12]);
-                    break;
-                case '>12gb':
-                    $query->where('ram', '>', 12);
-                    break;
+            // Chuyển giá trị thành mảng
+            $ramFilters = explode(',', $request->get('filter_mobile_ram'));
+
+            // Áp dụng các điều kiện lọc
+            $list_product->where(function ($query) use ($ramFilters) {
+                foreach ($ramFilters as $ramFilter) {
+                    switch ($ramFilter) {
+                        case '<4':
+                            $query->orWhere('ram', '<', 4);
+                            break;
+                        case '4gb_8gb':
+                            $query->orWhereBetween('ram', [4, 8]);
+                            break;
+                        case '8gb_12gb':
+                            $query->orWhereBetween('ram', [8, 12]);
+                            break;
+                        case '>12gb':
+                            $query->orWhere('ram', '>', 12);
+                            break;
+                    }
+                }
+            });
+        }
+
+        if ($request->has('filter_price')) {
+            // Chuyển giá trị thành mảng
+            $filterPrices = explode(',', $request->get('filter_price'));
+
+            // Áp dụng các điều kiện lọc
+            $list_product->where(function ($query) use ($filterPrices) {
+                foreach ($filterPrices as $filterPrice) {
+                    switch ($filterPrice) {
+                        case '1000000-5000000':
+                            $query->orWhereBetween('sale_price', [1000000, 5000000]);
+                            break;
+                        case '5000000-10000000':
+                            $query->orWhereBetween('sale_price', [5000000, 10000000]);
+                            break;
+                        case '10000000-15000000':
+                            $query->orWhereBetween('sale_price', [10000000, 15000000]);
+                            break;
+                        case '15000000-20000000':
+                            $query->orWhereBetween('sale_price', [15000000, 20000000]);
+                            break;
+                        case '20000000-25000000':
+                            $query->orWhereBetween('sale_price', [20000000, 25000000]);
+                            break;
+                        case '25000000-30000000':
+                            $query->orWhereBetween('sale_price', [25000000, 30000000]);
+                            break;
+                        case '>30000000':
+                            $query->orWhere('sale_price', '>', 30000000);
+                            break;
+                    }
+                }
+            });
+        }
+
+
+        // Lọc theo loại điện thoại
+        if ($request->has('filter_mobile')) {
+            $filterMobiles = explode(',', $request->get('filter_mobile'));
+            $list_product->whereIn('categories_product_id', $filterMobiles);
+        }
+
+        if ($request->has('filter_refresh_rates')) {
+            $filterRefresh = $request->get('filter_refresh_rates');
+            if ($filterRefresh === '60-120hz') {
+                $list_product->whereBetween('refresh_rate', [60, 120]);
+            } else {
+                $filterValues = explode(',', $filterRefresh);
+                $list_product->whereIn('refresh_rate', $filterValues);
             }
         }
 
+
         // Lấy danh sách sản phẩm sau khi lọc
-        $products = $query->get();
+        $products = $list_product->paginate(10);
+
+
+        // Lấy danh sách sản phẩm sau khi lọc
+        $products = $list_product->get();
 
         // Lấy danh sách thương hiệu để hiển thị trong bộ lọc
         $brands = Brand::all();
@@ -142,6 +209,8 @@ class BrandController extends Controller
         return view('user.other.show_category', [
             'products_by_brand' => $products,
             'brands' => $brands,
+            'banners' => $banners,
+            'categorys' => $category,
             'selected_sort' => $request->get('sort_by', 'none'),
             'selected_ram' => $request->get('filter_mobile_ram', 'none'),
 

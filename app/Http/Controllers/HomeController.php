@@ -69,10 +69,55 @@ class HomeController extends Controller
             });
         }
 
+        if ($request->has('filter_price')) {
+            // Chuyển giá trị thành mảng
+            $filterPrices = explode(',', $request->get('filter_price'));
+
+            // Áp dụng các điều kiện lọc
+            $list_product->where(function ($query) use ($filterPrices) {
+                foreach ($filterPrices as $filterPrice) {
+                    switch ($filterPrice) {
+                        case '1000000-5000000':
+                            $query->orWhereBetween('sale_price', [1000000, 5000000]);
+                            break;
+                        case '5000000-10000000':
+                            $query->orWhereBetween('sale_price', [5000000, 10000000]);
+                            break;
+                        case '10000000-15000000':
+                            $query->orWhereBetween('sale_price', [10000000, 15000000]);
+                            break;
+                        case '15000000-20000000':
+                            $query->orWhereBetween('sale_price', [15000000, 20000000]);
+                            break;
+                        case '20000000-25000000':
+                            $query->orWhereBetween('sale_price', [20000000, 25000000]);
+                            break;
+                        case '25000000-30000000':
+                            $query->orWhereBetween('sale_price', [25000000, 30000000]);
+                            break;
+                        case '>30000000':
+                            $query->orWhere('sale_price', '>', 30000000);
+                            break;
+                    }
+                }
+            });
+        }
+
+
         // Lọc theo loại điện thoại
         if ($request->has('filter_mobile')) {
             $filterMobiles = explode(',', $request->get('filter_mobile'));
             $list_product->whereIn('categories_product_id', $filterMobiles);
+        }
+
+        if ($request->has('filter_refresh_rates')) {
+            $filterRefresh = $request->get('filter_refresh_rates');
+            if ($filterRefresh === '60-120hz') {
+                $list_product->whereBetween('refresh_rate', [60, 120]);
+            } else {
+                $filterValues = explode(',', $filterRefresh);
+                $list_product->whereIn('refresh_rate', $filterValues);
+            }
         }
 
 
@@ -86,7 +131,6 @@ class HomeController extends Controller
             ->with('categorys', $category)
             ->with('max_price', $max_price)
             ->with('min_price', $min_price)
-
         ;
     }
 

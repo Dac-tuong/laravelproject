@@ -46,7 +46,13 @@
                     onchange="updateCheckboxFilter('filter_mobile_stogare', this)">
                 256GB
             </label>
-
+            <br>
+            <label>
+                <input type="checkbox" name="filter_mobile_stogare" value="512"
+                    {{ in_array('512', explode(',', request()->get('filter_mobile_stogare', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_mobile_stogare', this)">
+                512GB
+            </label>
         </div>
 
         <div class="filter-item">
@@ -62,43 +68,93 @@
             @endforeach
         </div>
 
-        <div class="filter-item">
-            <b>Tần số quét</b>
-            <br>
-            @foreach ($categorys as $category )
-            <label>
-                <input type="checkbox" name="filter_mobile" value="{{$category->category_id}}"
-                    {{ in_array($category->category_id, explode(',', request()->get('filter_mobile', ''))) ? 'checked' : '' }}
-                    onchange="updateCheckboxFilter('filter_mobile', this)">
-                {{$category->category_name}}
-            </label><br>
-            @endforeach
-        </div>
 
         <div class="filter-item">
             <b>Tần số quét</b>
             <br>
-            @foreach ($refresh_rates as $refresh_rate )
+
             <label>
-                <input type="checkbox" name="filter_mobile" value="{{$refresh_rate->refresh_rate}}"
-                    {{ in_array($refresh_rate->refresh_rate, explode(',', request()->get('filter_mobile', ''))) ? 'checked' : '' }}
-                    onchange="updateCheckboxFilter('filter_mobile', this)">
-                {{$refresh_rate->refresh_rate}}
+                <input type="checkbox" name="filter_refresh_rates" value="60-120hz"
+                    {{ in_array('60-120hz', explode(',', request()->get('filter_refresh_rates', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_refresh_rates', this)">
+                60-120hz
             </label><br>
-            @endforeach
+            <label>
+                <input type="checkbox" name="filter_refresh_rates" value="60hz"
+                    {{ in_array('60hz', explode(',', request()->get('filter_refresh_rates', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_refresh_rates', this)">
+                60hz
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_refresh_rates" value="90hz"
+                    {{ in_array('90hz', explode(',', request()->get('filter_refresh_rates', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_refresh_rates', this)">
+                90hz
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_refresh_rates" value="120hz"
+                    {{ in_array('120hz', explode(',', request()->get('filter_refresh_rates', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_refresh_rates', this)">
+                120hz
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_refresh_rates" value="165hz"
+                    {{ in_array('165hz', explode(',', request()->get('filter_refresh_rates', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_refresh_rates', this)">
+                165hz
+            </label><br>
+
         </div>
-        <div class="slider-range">
-            <p>
-                <label for="amount">Target sales goal (Millions):</label>
-                <input type="text" id="amount" readonly="" style="border:0; color:#f6931f; font-weight:bold;">
-            </p>
-            <form action="">
-                <div id="slider-range" style="height:10px;"></div>
-                <input type="hidden" id="start_price" name="start_price">
-                <input type="hidden" id="to_price" name="to_price">
-                <button name="filter_price" value="Lọc giá theo">Áp dụng</button>
-            </form>
+
+
+        <div class="filter-item">
+            <b>Giá bán</b>
+            <br>
+            <label>
+                <input type="checkbox" name="filter_price" value="1000000-5000000"
+                    {{ in_array('1000000-5000000', explode(',', request()->get('filter_price', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_price', this)">
+                1.000.000-5.000.000 triệu
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_price" value="5000000-10000000"
+                    {{ in_array('5000000-10000000', explode(',', request()->get('filter_price', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_price', this)">
+                5.000.000-10.000.000 triệu
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_price" value="10000000-15000000"
+                    {{ in_array('10000000-19000000', explode(',', request()->get('filter_price', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_price', this)">
+                10.000.000-15.000.000 triệu
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_price" value="15000000-20000000"
+                    {{ in_array('15000000-20000000', explode(',', request()->get('filter_price', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_price', this)">
+                15000000-20000000 triệu
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_refresh_rates" value="20000000-25000000"
+                    {{ in_array('20000000-25000000', explode(',', request()->get('filter_price', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_price', this)">
+                20000000-25000000 triệu
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_price" value="25000000-30000000"
+                    {{ in_array('25000000-30000000', explode(',', request()->get('filter_price', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_price', this)">
+                25000000-30000000 triệu
+            </label><br>
+            <label>
+                <input type="checkbox" name="filter_price" value=">30000000"
+                    {{ in_array('>30000000', explode(',', request()->get('filter_price', ''))) ? 'checked' : '' }}
+                    onchange="updateCheckboxFilter('filter_price', this)">
+                Trên 30000000 triệu
+            </label><br>
+
         </div>
+
 
 
     </div>
@@ -116,7 +172,6 @@
                     dần--</option>
             </select>
         </div>
-        <h3>SẢN PHẨM MỚI NHẤT</h3>
         <div class="row">
             @foreach ($products as $key => $product)
             <div class="col-lg-3 col-md-3 col-sm-12 col-12" style="padding-bottom: 12px;">
