@@ -24,6 +24,7 @@ class CouponsController extends Controller
         $coupon->discount = $data_coupon['discount_amount'];
         $coupon->start_date = $data_coupon['start_date'];
         $coupon->end_date = $data_coupon['end_date'];
+        $coupon->coupon_status = 1;
         $coupon->save();
         return Redirect::to('/add-discount-code');
     }

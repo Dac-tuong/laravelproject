@@ -25,7 +25,6 @@ return new class extends Migration
             $table->integer('product_quantity');
             $table->integer('categories_product_id')->unsigned(); // Foreign key must be unsigned
             $table->integer('brand_product_id')->unsigned();
-            $table->string('product_model', 50); // Mẫu điện thoại (model VARCHAR(50) NOT NULL)
             $table->date('release_date')->nullable(); // Ngày phát hành (release_date DATE)
             $table->string('operating_system', 50); // Hệ điều hành (operating_system VARCHAR(50) NOT NULL)
             $table->string('screen_type', 50)->nullable(); // Loại màn hình (screen_type VARCHAR(50))
@@ -51,7 +50,7 @@ return new class extends Migration
             $table->string('connectivity', 200)->nullable(); // Kết nối (connectivity VARCHAR(200))
             $table->string('biometrics', 50)->nullable(); // Công nghệ bảo mật (biometrics VARCHAR(50))
             $table->string('color', 100)->nullable(); // Các tùy chọn màu sắc (color VARCHAR(100))
-            $table->string('charging_port', 100)->nullable(); // Các tùy chọn màu sắc ( charging_port VARCHAR(100))
+            $table->string('charging_port', 100)->nullable(); // Cổng sạc ( charging_port VARCHAR(100))
             $table->string('other_connections', 100)->nullable(); // Các công nghệ kết nối khác ( other_connections VARCHAR(100))
             $table->string('wifi_technology', 50)->nullable(); // Công nghệ wifi (wifi_technology INT DEFAULT 0)
             $table->integer('warranty_period')->default(12); // Thời gian bảo hành (warranty_period INT DEFAULT 12 tháng)

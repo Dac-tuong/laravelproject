@@ -69,12 +69,6 @@
         </div>
 
         <div class="form-group">
-            <label for="product_model">Mẫu Điện Thoại:</label>
-            <input type="text" class="form-control" id="product_model" name="product_model"
-                value="{{$products->product_model}}">
-        </div>
-
-        <div class="form-group">
             <label for="release_date">Ngày Phát Hành:</label>
             <input type="date" class="form-control" id="release_date" name="release_date"
                 value="{{$products->release_date}}">

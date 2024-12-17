@@ -20,7 +20,6 @@ class Product extends Model
         'product_quantity', // Số lượng sản phẩm trong kho
         'categories_product_id', // ID của danh mục sản phẩm
         'brand_product_id', // ID của thương hiệu sản phẩm
-        'product_model', // Model sản phẩm
         'release_date', // Ngày ra mắt sản phẩm
         'operating_system', // Hệ điều hành của sản phẩm
         'screen_type', // Loại màn hình

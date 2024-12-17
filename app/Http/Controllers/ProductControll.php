@@ -96,7 +96,6 @@ class ProductControll extends Controller
         $product->product_quantity =  $data['product_quantity'];
         $product->categories_product_id = $data['categories_product_id'];
         $product->brand_product_id = $data['brand_product'];
-        $product->product_model = $data['product_model'];
         $product->release_date = $data['release_date'];
 
         $product->operating_system = $data['operating_system'];
@@ -178,7 +177,6 @@ class ProductControll extends Controller
         $product->product_quantity =  $data['product_quantity'];
         $product->categories_product_id = $data['categories_product_id'];
         $product->brand_product_id = $data['brand_product'];
-        $product->product_model = $data['product_model'];
         $product->release_date = $data['release_date'];
 
         $product->operating_system = $data['operating_system'];

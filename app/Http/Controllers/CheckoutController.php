@@ -149,7 +149,6 @@ class CheckoutController extends Controller
         $data = $request->all();
         $variable_Cart = Session::get('cart');
         $id_user = Session::get('id_customer');
-
         $nameorder = $data['fullname'];
         $phonenumber = $data['phonenumber'];
         $city = $data['city'];
@@ -158,7 +157,6 @@ class CheckoutController extends Controller
         $address = $data['address'];
 
         $shipping_address = new ShippingAddress();
-        $shipping_address->id_customer = $id_user;
         $shipping_address->fullname = $nameorder;
         $shipping_address->order_phone = $phonenumber;
         $shipping_address->matp = $city;
@@ -197,10 +195,7 @@ class CheckoutController extends Controller
                 $add_detail_order = new OrderDetail();
                 $add_detail_order->order_code = $code_order_detail;
                 $add_detail_order->order_phone_id = $item['masp'];
-                $add_detail_order->product_name_order = $item['tensp'];
                 $add_detail_order->product_price = $item['gia'];
-                $add_detail_order->image = $item['image'];
-                $add_detail_order->color = $item['color'];
                 $add_detail_order->product_sale_quantity = $item['soluong'];
                 $add_detail_order->save();
             }

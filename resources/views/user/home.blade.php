@@ -237,7 +237,7 @@
                                 <input type="hidden" value="{{ $product->color }}"
                                     class="product_color_{{ $product->product_id }}">
                                 <input type="hidden" value="1" class="cart_product_qty_{{ $product->product_id }}">
-                                <button class="add-to-cart" data-id_product="{{ $product->product_id }}"
+                                <button type="button" class="add-to-cart" data-id_product="{{ $product->product_id }}"
                                     name="add-to-cart">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </button>

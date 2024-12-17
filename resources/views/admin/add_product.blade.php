@@ -73,10 +73,6 @@ if ($message_success) {
             </select>
         </div>
 
-        <div class="form-group">
-            <label for="product_model">Mẫu Điện Thoại:</label>
-            <input type="text" class="form-control" id="product_model" name="product_model">
-        </div>
 
         <div class="form-group">
             <label for="release_date">Ngày Phát Hành:</label>

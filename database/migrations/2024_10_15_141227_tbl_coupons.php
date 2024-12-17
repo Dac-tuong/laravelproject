@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('customer_id');
             $table->date('start_date');
             $table->date('end_date');
+            $table->integer('coupon_status');
         });
     }
 
