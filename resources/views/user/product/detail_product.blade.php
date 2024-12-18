@@ -88,10 +88,12 @@
     </div>
     <div class="similar-products row" style="margin-top: 10px; margin-bottom: 10px;">
         @foreach ($similars as $similar )
-        <div class="col-lg-2 col-md-4 col-sm-6 col-6">
-            <div class="similar-product">
-
-                <img src="{{URL::to('uploads/product'.'/'.$similar->product_image)}}" alt="">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+            <div class="product-content">
+                <div class="thumbnail-product-img">
+                    <img class="home-product-img" src="{{ URL::to('uploads/product/' . $similar->product_image) }}"
+                        alt="" />
+                </div>
                 <h5> <a class="link-product"
                         href="{{ URL::to('/detail-product'.'/' . $similar->product_id) }}">{{$similar->product_name}}
                     </a></h5>
@@ -103,7 +105,27 @@
                 <span class="productinfo__price-current">
                     {{ number_format($similar->sale_price, 0, ',', '.') }}đ
                 </span>
-
+                <div class="action-buttons">
+                    <form>
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete>
+                        <!-- Input ẩn để lưu trữ thông tin sản phẩm -->
+                        <input type="hidden" value="{{ $similar->product_id }}"
+                            class="product_id_{{ $similar->product_id }}">
+                        <input type="hidden" value="{{ $similar->product_name }}"
+                            class="product_name_{{ $similar->product_id }}">
+                        <input type="hidden" value="{{ $similar->product_image }}"
+                            class="product_image_{{ $similar->product_id }}">
+                        <input type="hidden" value="{{ $similar->sale_price }}"
+                            class="product_price_{{ $similar->product_id }}">
+                        <input type="hidden" value="{{ $similar->color }}"
+                            class="product_color_{{ $similar->product_id }}">
+                        <input type="hidden" value="1" class="cart_product_qty_{{ $similar->product_id }}">
+                        <button type="button" class="add-to-cart" data-id_product="{{ $similar->product_id }}"
+                            name="add-to-cart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
 
         </div>
@@ -219,31 +241,15 @@
 
                         <form class="form-group">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete>
-                            <div class="row" style="margin: 0; padding:0;">
-                                <div class="col-md-6 mb-3">
-                                    <label for="" data-check-value="fullname" style="display: none; color: red;">Vui
-                                        lòng điền thông
-                                        tin!</label>
-                                    <input class="form-control" type="text" data-input-value="fullname" name="fullname"
-                                        id="fullname" placeholder="Họ và tên">
 
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                    <label for="" data-check-value="phonenumber" style="display: none; color: red;">
-                                        Vui lòng điền thông tin!</label>
-                                    <input class="form-control" type="text" data-input-value="phonenumber"
-                                        name="phonenumber" id="phonenumber" placeholder="Số điện thoại">
-
-                                </div>
-                                <div class="col-md-12 mb-12">
-                                    <label for="review" data-check-value="review" style="display: none; color: red;">Vui
-                                        lòng nhập cảm nhận!</label>
-                                    <textarea placeholder="Mời nhập cảm nhận về sản phẩm"
-                                        class="custom-textarea form-control" data-input-value="review" id="review"
-                                        style="height: 120px;"></textarea>
-                                </div>
+                            <div class="text-review">
+                                <label for="review" data-check-value="review" style="display: none; color: red;">Vui
+                                    lòng nhập cảm nhận!</label>
+                                <textarea placeholder="Mời nhập cảm nhận về sản phẩm"
+                                    class="custom-textarea form-control" data-input-value="review" id="review"
+                                    style="height: 120px;"></textarea>
                             </div>
+
                             <div class="dcap"><button type="button" class="send-review"
                                     data-id_product="{{ $product_detail->product_id }}">Gửi đánh giá</button></div>
                         </form>
@@ -301,7 +307,8 @@
                         <div class="textarea-cmt">
                             <textarea name="comment-text" placeholder="Xin mời để lại bình luận" class="comment-text"
                                 id="comment-text"></textarea>
-                            <button class="add-comment-btn"><i class="fa-solid fa-paper-plane"></i>Gửi</button>
+                            <button type="button" class="add-comment-btn"><i
+                                    class="fa-solid fa-paper-plane"></i>Gửi</button>
                         </div>
                     </form>
                 </div>

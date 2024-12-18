@@ -78,4 +78,9 @@ class Product extends Model
     {
         return $this->hasMany(BannerModel::class, 'id_phones_banner', 'product_id');
     }
+
+    public function phone()
+    {
+        return $this->belongsTo(OrderDetail::class, 'order_phone_id', 'product_id');
+    }
 }

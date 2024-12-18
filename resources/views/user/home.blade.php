@@ -174,9 +174,6 @@
                 </label><br>
 
             </div>
-
-
-
         </div>
         <div class="body-content">
             <div class="sort">
@@ -259,9 +256,54 @@
                     </div>
                 </div>
                 @endforeach
-                <!-- Hiển thị liên kết phân trang tùy chỉnh -->
+
 
             </div>
+
+            <!-- Hiển thị liên kết phân trang tùy chỉnh -->
+            <div class="pagination justify-content-center">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <!-- Previous Page Link -->
+                        @if ($products->onFirstPage())
+                        <li class="page-item disabled">
+                            <span class="page-link">&laquo; Previous</span>
+                        </li>
+                        @else
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $products->previousPageUrl() }}" rel="prev">&laquo;
+                                Previous</a>
+                        </li>
+                        @endif
+
+                        <!-- Page Number Links -->
+                        @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+                        @if ($page == $products->currentPage())
+                        <li class="page-item active">
+                            <span class="page-link">{{ $page }}</span>
+                        </li>
+                        @else
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                        </li>
+                        @endif
+                        @endforeach
+
+                        <!-- Next Page Link -->
+                        @if ($products->hasMorePages())
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $products->nextPageUrl() }}" rel="next">Next &raquo;</a>
+                        </li>
+                        @else
+                        <li class="page-item disabled">
+                            <span class="page-link">Next &raquo;</span>
+                        </li>
+                        @endif
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Hiển thị liên kết phân trang tùy chỉnh -->
         </div>
     </div>
 </div>

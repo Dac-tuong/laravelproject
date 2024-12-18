@@ -42,4 +42,9 @@ class SlideController extends Controller
         $banners = BannerModel::all();
         return view('admin.slide.list_banner')->with('banners', $banners);
     }
+
+
+    // usser
+
+
 }

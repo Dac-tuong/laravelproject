@@ -1084,13 +1084,17 @@
 /* review sản phẩm */
 /*  sản phẩm cùng loại */
 .similar-products {
-    border: 1px solid black;
-    display: flex;
+    width: 100%;
 }
 
-.similar-product {
+.similar-product-item {
     padding-block: 10px;
+    padding: 10px;
     background-color: #ffffff;
+    position: relative;
+    border-radius: 5px;
+    text-decoration: none;
+    overflow: hidden;
 }
 
 .similar-product img {
@@ -1175,7 +1179,20 @@
     color: black;
     width: 100%;
 }
+.btn-delete {
+    border: 1px solid red;
+    display: block;
+    font-size: 12px;
+    color: red;
+    border-radius: 5px;
+    text-decoration: none;
+}
 
+.btn-delete:hover {
+    text-decoration: none;
+    color: white;
+    background-color: red;
+}
 .coupon-container {
     margin-top: 10px;
     font-size: 15px;
@@ -1317,7 +1334,6 @@ p {
 .table-list-order {
     width: 100%;
     text-align: center;
-    /* display: none; */
 }
 
 #card-view {

@@ -44,98 +44,125 @@
     </div>
 
     <div class="list-history-order">
-        <div class="table-view" id="table-view">
-            <table class="table-list-order">
-                <thead>
-                    <tr>
-                        <th>
-                            STT
-                        </th>
-                        <th>
-                            Mã đơn hàng
-                        </th>
-                        <th>
-                            Tên người mua
-                        </th>
-                        <th>
-                            Số lượng
-                        </th>
-                        <th>
-                            Chi phí
-                        </th>
-                        <th>
-                            Thời gian mua
-                        </th>
-                        <th>
-                            Trạng thái
-                        </th>
-                        <th>
-                            Tác vụ
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if ($historys->count() > 0)
-                    @foreach ($historys as $history )
-                    <tr>
-                        <td>
-                            {{ $loop->iteration }}
-                        </td>
-                        <td>
-                            {{$history->order_code }}
-                        </td>
-                        <td>
-                            {{$history->shippingAddress->fullname}}
-                        </td>
-                        <td>
 
-                            {{$history->orderDetail->sum('product_sale_quantity')}}
+        <table class="table-list-order">
+            <thead>
+                <tr>
+                    <th>
+                        STT
+                    </th>
+                    <th>
+                        Mã đơn hàng
+                    </th>
+                    <th>
+                        Tên người mua
+                    </th>
+                    <th>
+                        Số lượng
+                    </th>
+                    <th>
+                        Chi phí
+                    </th>
+                    <th>
+                        Thời gian mua
+                    </th>
+                    <th>
+                        Trạng thái
+                    </th>
+                    <th>
+                        Tác vụ
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="scroll">
+                @if ($historys->count() > 0)
+                @foreach ($historys as $history )
+                <tr>
+                    <td>
+                        {{ $loop->iteration }}
+                    </td>
+                    <td>
+                        {{$history->order_code }}
+                    </td>
+                    <td>
+                        {{$history->shippingAddress->fullname}}
+                    </td>
+                    <td>
 
-                        </td>
-                        <td>
-                            {{ number_format($history->order_total, 0, ',', '.') }} đ
-                        </td>
-                        <td>
-                            {{$history->created_at}}
-                        </td>
-                        <td>
-                            {{$history->order_status}}
-                        </td>
-                        <td>
-                            <a href="{{URL::to('/view-history-order'.'/'.$history->order_code)}}">Xem</a>
-                        </td>
-                    </tr>
-                    @endforeach
+                        {{$history->orderDetail->sum('product_sale_quantity')}}
+
+                    </td>
+                    <td>
+                        {{ number_format($history->order_total, 0, ',', '.') }} đ
+                    </td>
+                    <td>
+                        {{$history->created_at}}
+                    </td>
+                    <td>
+                        {{$history->order_status}}
+                    </td>
+                    <td>
+                        <a href="{{URL::to('/view-history-order'.'/'.$history->order_code)}}">Xem</a>
+                    </td>
+                </tr>
+                @endforeach
+                @else
+                <tr>
+                    <td colspan="8">
+                        <h3>Không có đơn hàng nào được tìm thấy</h3>
+                    </td>
+                </tr>
+                @endif
+
+
+            </tbody>
+        </table>
+
+
+        <!-- Hiển thị liên kết phân trang tùy chỉnh -->
+        <div class="pagination justify-content-center">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <!-- Previous Page Link -->
+                    @if ($historys->onFirstPage())
+                    <li class="page-item disabled">
+                        <span class="page-link">&laquo; Previous</span>
+                    </li>
                     @else
-                    <tr>
-                        <td colspan="8">
-                            <h3>Không có đơn hàng nào được tìm thấy</h3>
-                        </td>
-                    </tr>
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $historys->previousPageUrl() }}" rel="prev">&laquo;
+                            Previous</a>
+                    </li>
                     @endif
 
+                    <!-- Page Number Links -->
+                    @foreach ($historys->getUrlRange(1, $historys->lastPage()) as $page => $url)
+                    @if ($page == $historys->currentPage())
+                    <li class="page-item active">
+                        <span class="page-link">{{ $page }}</span>
+                    </li>
+                    @else
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                    </li>
+                    @endif
+                    @endforeach
 
-
-
-                </tbody>
-            </table>
+                    <!-- Next Page Link -->
+                    @if ($historys->hasMorePages())
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $historys->nextPageUrl() }}" rel="next">Next &raquo;</a>
+                    </li>
+                    @else
+                    <li class="page-item disabled">
+                        <span class="page-link">Next &raquo;</span>
+                    </li>
+                    @endif
+                </ul>
+            </nav>
         </div>
 
-        <div class="card-view" id="card-view">
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                    <div class="border-card ">
-                        <div class="card-header">
-                            <div class="pull-right"><label class="">Chờ xữ lý</label></div>
-                            <span>Mã đơn hàng <a href=""> 0921asewssd</a></span>
-                            <br>
-                            <span><strong>Nguyễn Văn A</strong></span><br />
-                            Quantity : 4, cost: $523.13<br />
-                            <div>order made on: 06/20/2014 by <a href="#">Jane Doe</a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Hiển thị liên kết phân trang tùy chỉnh -->
     </div>
-    @endsection
+</div>
+@endsection

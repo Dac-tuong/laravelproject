@@ -162,7 +162,7 @@
                      <li> <a href="{{URL::to('/checkout')}}">Thanh toán</a></li>
                      <li> <a href="{{ URL::to('/wishlist') }}">Danh sách yêu thích</a></li>
                      <li> <a href="{{ URL::to('/history-order') }}">Lịch sử mua hàng</a></li>
-                     <li> <a href="{{ URL::to('') }}">Cài đặt</a></li>
+                     <li> <a href="{{ URL::to('/setting') }}">Cài đặt</a></li>
                      <li> <a href="{{ URL::to('/logout') }}">Đăng xuất</a></li>
                  </ul>
              </div>
@@ -399,6 +399,12 @@
 
      <script>
          $(document).ready(function() {
+
+             $(document).on('click', '.add-comment-btn', function() {
+                 var comment = $('#comment-text').val();
+                 var id = $('.product_id').val();
+                 alert(comment);
+             });
 
 
              $(document).on('click', '.cancel-order', function() {
@@ -685,7 +691,9 @@
                                  success: function(response) {
                                      if (response.status === 'success') {
                                          Swal.fire('Thành công', response.message,
-                                             'success');
+                                             'success').then(() => {
+                                             location.reload();
+                                         });
                                      }
                                  },
                                  error: function(xhr, status, error) {

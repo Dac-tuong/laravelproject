@@ -21,12 +21,11 @@ $coupon_session = Session::get('coupon');
                         <th>Số lượng</th>
                         <th>Thành tiền</th>
                         <th>
-                            <a class="btn btn-sm btn-outline-danger" href="{{URL::to('/delete-all')}}"
+
+                            <a class="btn-delete" href="{{URL::to('/delete-all')}}"
                                 onclick="return confirm('Bạn có chắc là muốn xoá tất cả sản phẩm ra khỏi giỏ hàng?')">Xoá
                                 tất cả
                             </a>
-
-                            <!-- <a class="btn-delete" href="">Xóa tất cả</a> -->
                         </th>
                     </tr>
                 </thead>

@@ -168,29 +168,12 @@
 
     <form class="form-group">
         <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete>
-        <div class="row" style="margin: 0; padding:0;">
-            <div class="col-md-6 mb-3">
-                <label for="" data-check-value="fullname" style="display: none; color: red;">Vui
-                    lòng điền thông
-                    tin!</label>
-                <input class="form-control" type="text" data-input-value="fullname" name="fullname" id="fullname"
-                    placeholder="Họ và tên">
 
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label for="" data-check-value="phonenumber" style="display: none; color: red;">
-                    Vui lòng điền thông tin!</label>
-                <input class="form-control" type="text" data-input-value="phonenumber" name="phonenumber"
-                    id="phonenumber" placeholder="Số điện thoại">
-
-            </div>
-            <div class="col-md-12 mb-12">
-                <label for="review" data-check-value="review" style="display: none; color: red;">Vui
-                    lòng nhập cảm nhận!</label>
-                <textarea placeholder="Mời nhập cảm nhận về sản phẩm" class="custom-textarea form-control"
-                    data-input-value="review" id="review" style="height: 120px;"></textarea>
-            </div>
+        <div class="text-review">
+            <label for="review" data-check-value="review" style="display: none; color: red;">Vui
+                lòng nhập cảm nhận!</label>
+            <textarea placeholder="Mời nhập cảm nhận về sản phẩm" class="custom-textarea form-control"
+                data-input-value="review" id="review" style="height: 120px;"></textarea>
         </div>
         <div class="dcap"><button type="button" class="send-review"
                 data-id_product="{{ $product_infor->product_id }}">Gửi đánh giá</button></div>

@@ -206,7 +206,7 @@ class BrandController extends Controller
         // Lấy danh sách thương hiệu để hiển thị trong bộ lọc
         $brands = Brand::all();
 
-        return view('user.other.show_category')
+        return view('user.category.show_category')
             ->with('products_by_brand', $products)
             ->with('brands', $brands)
             ->with('banners', $banners)

@@ -28,9 +28,6 @@ Route::post('/save-category-product', [CategoryController::class, 'save_category
 Route::post('/update-category-product/{categories_product_id}', [CategoryController::class, 'update_category_product']);
 
 
-// dành cho user
-Route::get('/show-category-user/{categories_product_id}', [CategoryController::class, 'show_category_user']);
-
 // Brand
 use App\Http\Controllers\BrandController;
 
@@ -96,15 +93,23 @@ Route::get('/average-start/{product_id}', [HomeController::class, 'average_start
 Route::get('/count-with-star/{product_id}', [HomeController::class, 'count_with_star']);
 Route::get('/filter-reviews-min', [HomeController::class, 'filter_reviews_min']);
 Route::get('/filter-reviews', [HomeController::class, 'filter_reviews']);
+
+// Users sidebar
+Route::get('/thong-tin-ca-nhan', [HomeController::class, 'thong_tin_ca_nhan']);
+
+Route::get('/wishlist', [HomeController::class, 'wishlist']);
+Route::get('/data-wishlist', [HomeController::class, 'data_wishlist']);
+Route::get('/setting', [HomeController::class, 'setting']);
+
 // SIDEBAR CONTROLL
 use App\Http\Controllers\SidebarController;
 
-Route::get('/thong-tin-ca-nhan', [SidebarController::class, 'thong_tin_ca_nhan']);
+// Route::get('/thong-tin-ca-nhan', [SidebarController::class, 'thong_tin_ca_nhan']);
 
-Route::get('/wishlist', [SidebarController::class, 'wishlist']);
-Route::get('/data-wishlist', [SidebarController::class, 'data_wishlist']);
-
-// Users account
+// Route::get('/wishlist', [SidebarController::class, 'wishlist']);
+// Route::get('/data-wishlist', [SidebarController::class, 'data_wishlist']);
+// Route::get('/setting', [SidebarController::class, 'setting']);
+// // Users s
 use App\Http\Controllers\CheckoutController;
 
 Route::get('/login-index', [CheckoutController::class, 'login_index']);

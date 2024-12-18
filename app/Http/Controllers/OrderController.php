@@ -190,7 +190,7 @@ class OrderController extends Controller
         $category = Category::get();
         $banners = BannerModel::all();
         $id_user = Session::get('id_customer');
-        $orders = OrderProduct::where('id_customer', $id_user);
+        $orders = OrderProduct::with(['shippingAddress'])->where('id_customer', $id_user);
 
         if ($request->has('order_code')) {
             if ($request->get('order_code')) {
@@ -212,7 +212,7 @@ class OrderController extends Controller
             }
         }
 
-        $history = $orders->get();
+        $history = $orders->paginate(10);
 
 
         return view('user.shopping.history_order')

@@ -17,4 +17,9 @@ class OrderDetail extends Model
     {
         return $this->belongsTo(ShippingAddress::class, 'shipping_id', 'id_shipping');
     }
+
+    public function phone()
+    {
+        return $this->belongsTo(Product::class, 'order_phone_id', 'product_id');
+    }
 }
