@@ -15,6 +15,6 @@ class CommentModel extends Model
 
     public function cmt_name()
     {
-        return $this->hasMany(User::class, 'id_user_comment', 'id_user');
+        return $this->belongsTo(User::class, 'id_user_comment', 'id_user');
     }
 }

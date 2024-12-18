@@ -100,15 +100,8 @@ Route::get('/thong-tin-ca-nhan', [HomeController::class, 'thong_tin_ca_nhan']);
 Route::get('/wishlist', [HomeController::class, 'wishlist']);
 Route::get('/data-wishlist', [HomeController::class, 'data_wishlist']);
 Route::get('/setting', [HomeController::class, 'setting']);
-
-// SIDEBAR CONTROLL
-use App\Http\Controllers\SidebarController;
-
-// Route::get('/thong-tin-ca-nhan', [SidebarController::class, 'thong_tin_ca_nhan']);
-
-// Route::get('/wishlist', [SidebarController::class, 'wishlist']);
-// Route::get('/data-wishlist', [SidebarController::class, 'data_wishlist']);
-// Route::get('/setting', [SidebarController::class, 'setting']);
+Route::post('/change-password', [HomeController::class, 'change_password']);
+Route::post('/change-avatar', [HomeController::class, 'change_avatar']);
 // // Users s
 use App\Http\Controllers\CheckoutController;
 
@@ -121,6 +114,7 @@ Route::post('/login-customer', [CheckoutController::class, 'login_customer']);
 // Check out
 Route::get('/checkout', [CheckoutController::class, 'checkout']);
 Route::get('/logout', action: [CheckoutController::class, 'logout']);
+
 
 Route::post('/select-wards-shipping', [CheckoutController::class, 'select_wards_shipping']);
 Route::post('/select-district-shipping', [CheckoutController::class, 'select_district_shipping']);
@@ -184,4 +178,5 @@ Route::post('/add-feeship', [FeeshipController::class, 'add_feeship']);
 
 use App\Http\Controllers\CommentController;
 
-Route::post('/add-comment', [CommentController::class, 'add_comment']);
+Route::post('/send-comment', [CommentController::class, 'send_comment']);
+Route::get('/get-comment', [CommentController::class, 'get_comment']);

@@ -140,27 +140,43 @@ $coupon_session = Session::get('coupon');
             @if ($coupon_session)
             <div>
                 <span>Đã áp dụng mã giảm giá</span>
-                <span> <a class="btn-delete" href="{{URL::to('/delete-coupon')}}">Xóa mã giảm giá</a></span>
+                <span> <a class="btn-delete-coupon" href="{{URL::to('/delete-coupon')}}">Xóa mã giảm giá</a></span>
             </div>
             @endif
             <div>
-                @if ($cart== true)
+
                 <div class="coupon-container">
                     <form action="{{ URL::to('/check-coupon') }}" method="POST" class="">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete="off">
                         <label>Dùng code giảm giá nếu có</label>
                         <br>
+                        @if (Session::get('id_customer'))
                         <div class="discount-code-area">
                             <input class="coupon-input" type="text" name="code_coupon"
                                 placeholder="Dùng mã giảm giá (nếu có)" required>
                             <input class="coupon-check" type="submit" name="use_code" value="Dùng mã">
                         </div>
+                        @else
+                        <div class="discount-code-area">
+                            <input class="coupon-input" type="text" name="code_coupon"
+                                placeholder="Dùng mã giảm giá (nếu có)" required>
+                            <input class="coupon-check disable" type="submit" name="use_code" value="Dùng mã" disabled>
+                        </div>
+                        @endif
+
                     </form>
                 </div>
-                @endif
+
             </div>
             <div>
+
+                @if (Session::get('id_customer'))
                 <a class="checkout-link" href="{{ URL::to('/checkout') }}">Thanh toán</a>
+                @else
+                <a class="checkout-link" href="" onclick="return confirm('Vui lòng đăng nhập tài khoản hoặc đăng ký?')">
+                    Thanh toán</a>
+                @endif
+
             </div>
         </div>
 

@@ -192,56 +192,36 @@ class CartController extends Controller
         $data = $request->all();
         $id_user = Session::get('id_customer');
 
-        $coupon = Coupons::where('coupon_code', $data['code_coupon'])->first();
-        if ($id_user) {
-            if ($coupon) {
-                $count_coupon = $coupon->count();
-                if ($count_coupon > 0) {
-                    $coupon_session = Session::get('coupon');
-                    if ($coupon_session == true) {
-                        $is_avaiabel = 0;
-                        if ($is_avaiabel == 0) {
-                            $cou[] = array(
-                                'coupon_id' => $coupon->id_coupon,
-                                'coupon_code' => $coupon->coupon_code,
-                                'coupon_type' => $coupon->coupon_type,
-                                'discount' => $coupon->discount_amount,
-                            );
-                            Session::put('coupon', $cou);
-                        }
-                    } else {
-                        $cou[] = array(
-                            'coupon_id' => $coupon->id_coupon,
-                            'coupon_code' => $coupon->coupon_code,
-                            'coupon_type' => $coupon->coupon_type,
-                            'discount' => $coupon->discount_amount,
-                        );
-                        Session::put('coupon', $cou);
-                    }
-                    Session::save();
+        $coupon = Coupons::where('coupon_code', $data['code_coupon'])->where('coupon_status', 1)->first();
 
-                    $extist_id = explode(',', $coupon->customer_id);
-                    if (in_array($id_user, $extist_id)) {
-                        echo 'Bạn đã sử dụng mã giảm giá này rồi';
-                    } else {
-                        if ($coupon->customer_id) {
-                            $coupon->customer_id .= ',' . $id_user;
-                        } else {
-                            $coupon->customer_id = $id_user;
-                        }
-                        $coupon->coupon_qty = $coupon->coupon_qty - 1;
-                        // Session::forget('final_total');
-                        $coupon->save();
-                        echo 'Dùng mã giảm giá thành công';
-                    }
-                }
+        if ($coupon) {
+            $cou[] = array(
+                'coupon_id' => $coupon->id_coupon,
+                'coupon_code' => $coupon->coupon_code,
+                'coupon_type' => $coupon->coupon_type,
+                'discount' => $coupon->discount_amount,
+            );
+            Session::put('coupon', $cou);
+
+
+
+            Session::save();
+
+            $extist_id = explode(',', $coupon->customer_id);
+            if (in_array($id_user, $extist_id)) {
+                echo 'Bạn đã sử dụng mã giảm giá này rồi';
             } else {
-                echo 'Mã này không đúng';
+                if ($coupon->customer_id) {
+                    $coupon->customer_id .= ',' . $id_user;
+                } else {
+                    $coupon->customer_id = $id_user;
+                }
+                $coupon->coupon_qty = $coupon->coupon_qty - 1;
+                // Session::forget('final_total');
+                $coupon->save();
+                echo 'Dùng mã giảm giá thành công';
             }
-        } else {
-            echo 'Bạn chưa đăng nhập';
         }
-
         return Redirect::to('cart');
     }
 

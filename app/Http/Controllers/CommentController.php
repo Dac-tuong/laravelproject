@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 
 class CommentController extends Controller
 {
-    public function add_comment(Request $request)
+    public function send_comment(Request $request)
     {
 
         $data = $request->all();
@@ -28,13 +28,57 @@ class CommentController extends Controller
 
     public function get_comment(Request $request)
     {
-        $data = $request->all();
-        $id_product = $data['id_product'];
-        $data_comment = CommentModel::where("id_phone_comment ", $id_product)->get();
-        $output_cmt = "";
-        foreach ($data_comment as $commemt) {
-            $name = $commemt->cmt_name;
+        $id_product = $request->input('idProduct'); // Use the input() method to retrieve data
+        $comments = CommentModel::where('id_phone_comment', $id_product)
+            ->orderBy('id_comment', 'desc')
+            ->get();
+        $outputComment = "";
+        foreach ($comments as $comment) {
+            $commentFind = $comment->cmt_name;
+            $avatar = asset('uploads/avatar_user/' . $commentFind->avatar_user);
+
+            $comment_rep = "";
+            if ($comment->rep_comment != "") {
+
+                $comment_rep .= '
+                <div class="item-comment__box-rep-comment">
+                            <div class="item-rep-comment">
+                                <div class="box-info">
+                                    <img class="avt-cmt-info" src="" alt="">
+                                    <strong>QTV</strong>
+                                </div>
+                                <div class="box-time-cmt">
+                                    <span class="time">' . $comment->updated_at . '</span>
+                                </div>
+                            </div>
+
+                            <div class="box-cmt__box-question">
+                                <p>' . $comment->rep_comment . '
+                                </p>
+                            </div>
+                        </div>
+                ';
+            }
+            $outputComment .= '<div class="item-comment__box-cmt">
+                        <div class="box-cmt__box-info">
+                            <div class="box-info">
+                                <img class="avt-cmt-info" src="' . $avatar . '" alt="">
+                                <strong>' . $commentFind->name_user . '</strong>
+                            </div>
+                            <div class="box-time-cmt">
+                                <span class="time">' . $comment->created_ad . '</span>
+                            </div>
+                        </div>
+                        <div class="box-cmt__box-question">
+                            <div class="content">
+                                <span class="content-question">' . $comment->comment_text . '</span>
+                            </div>
+                        </div>
+
+                        ' . $comment_rep . '
+                    </div>';
         }
-        echo $output_cmt;
+
+        echo  $outputComment;
     }
 }

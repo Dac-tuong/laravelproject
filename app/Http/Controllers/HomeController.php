@@ -383,9 +383,6 @@ class HomeController extends Controller
 
 
 
-
-
-
     public function thong_tin_ca_nhan()
     {
         $brand = Brand::get();
@@ -518,5 +515,17 @@ class HomeController extends Controller
         ;
     }
 
-    public function change_password() {}
+    public function change_password(Request $request)
+    {
+        $dataChangpass = $request->all();
+        $old_pass = $dataChangpass['old_pass'];
+        $new_pass = $dataChangpass['new_pass'];
+        $id_user_session = Session::get('id_customer');
+        $dataUser = User::where('id_user', $id_user_session)
+            ->first();
+        if ($dataUser->password_user = $old_pass) {
+            $dataUser->password_user = $new_pass;
+            $dataUser->save();
+        }
+    }
 }
