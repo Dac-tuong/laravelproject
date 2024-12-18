@@ -20,4 +20,9 @@ class User extends Model
     {
         return $this->hasMany(User::class, 'favorite_user_id', 'id_user');
     }
+
+    public function cmt_name()
+    {
+        return $this->hasMany(CommentModel::class, 'id_user_comment', 'id_user');
+    }
 }

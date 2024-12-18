@@ -21,8 +21,7 @@ class CartController extends Controller
         $brand = Brand::get();
         $category = Category::get();
         $banners = BannerModel::all();
-        // Truyền dữ liệu vào view bằng mảng
-        // Session::put('fee_ship', $shipping_fee);
+
         return view('user.shopping.cart')->with('brands', $brand)
             ->with('categorys', $category)
             ->with('banners', $banners)

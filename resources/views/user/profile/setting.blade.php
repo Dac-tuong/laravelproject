@@ -20,10 +20,24 @@
     <div class="col-lg-8 col-md-8 col-sm-12">
         <div class="border-white">
             <div class="change-password">
-                <form action="">
+                <form action="" class="form-group">
                     <div>
-                        <label for="">Mật khẩu củ</label>
-                        <input type="text" name="" id="old-password">
+                        <label for="">Mật khẩu củ:</label>
+                        <br>
+                        <input class="form-control" type="text" name="" id="old-password">
+                    </div>
+                    <div>
+                        <label for="">Mật khẩu mới:</label>
+                        <br>
+                        <input class="form-control" type="text" name="" id="new-password">
+                    </div>
+                    <div>
+                        <label for="">Nhập lại mật khẩu mới:</label>
+                        <br>
+                        <input class="form-control" type="text" name="" id="re-password">
+                    </div>
+                    <div>
+                        <button class="change-pass">Đổi mật khẩu</button>
                     </div>
                 </form>
             </div>

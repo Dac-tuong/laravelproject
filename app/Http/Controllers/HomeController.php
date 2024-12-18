@@ -259,9 +259,9 @@ class HomeController extends Controller
     {
         $dataReview = $request->all();
         $id_user = Session::get('id_customer');
-        // $nameorder = $dataReview['fullname'];
+
         $text = $dataReview['review'];
-        // $phonenumber = $dataReview['phonenumber'];
+
         $product_review_id = $dataReview['id_product'];
         $rating = $dataReview['rating'];
         if (!$id_user) {
@@ -517,4 +517,6 @@ class HomeController extends Controller
 
         ;
     }
+
+    public function change_password() {}
 }

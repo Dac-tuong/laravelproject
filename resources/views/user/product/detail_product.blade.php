@@ -307,13 +307,133 @@
                         <div class="textarea-cmt">
                             <textarea name="comment-text" placeholder="Xin mời để lại bình luận" class="comment-text"
                                 id="comment-text"></textarea>
-                            <button type="button" class="add-comment-btn"><i
-                                    class="fa-solid fa-paper-plane"></i>Gửi</button>
+                            <button type="button" class="add-comment-btn"><i class="fa-solid fa-paper-plane"></i>
+                                Gửi</button>
                         </div>
                     </form>
                 </div>
 
                 <div class="box-comments-item">
+                    <div class="item-comment__box-cmt">
+                        <div class="box-cmt__box-info">
+                            <div class="box-info">
+                                <img class="avt-cmt-info" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
+                                <strong>Tran Truong</strong>
+                            </div>
+                            <div class="box-time-cmt">
+                                <span class="time">12:30pm</span>
+                            </div>
+                        </div>
+                        <div class="box-cmt__box-question">
+                            <div class="content">
+                                <span class="content-question">Tại sao lại không mua được</span>
+                            </div>
+                        </div>
+
+                        <div class="item-comment__box-rep-comment">
+                            <div class="item-rep-comment">
+                                <div class="box-info">
+                                    <img class="avt-cmt-info" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
+                                    <strong>QTV</strong>
+                                </div>
+                                <div class="box-time-cmt">
+                                    <span class="time">12:30pm</span>
+                                </div>
+                            </div>
+
+                            <div class="box-cmt__box-question">
+                                <p>CellphoneS xin chào anh Phạm Nguyễn Hoàng Giang,
+                                    Dạ khi sản phẩm gặp vấn đề lỗi Anh có thể mang tới cửa hàng chi nhánh gần nhất bên
+                                    em. Các bạn ki thuật sẽ kiểm tra và báo lại với mình chính xác nhất nhé ạ.
+                                    TECNO SPARK 20 PRO PLUS 8GB 256GB VÀNG - Giá thời điểm hiện tại 4.890.000đ. Khu vực
+                                    miền Nam.
+                                    Không biết hiện tại mình đang ở quận nào của HCM/HN hay tỉnh thành nào để em kiểm
+                                    tra cửa hàng gần mình nhất có sẵn sản phẩm ạ.
+                                    Thông tin đến Anh.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-comment__box-cmt">
+                        <div class="box-cmt__box-info">
+                            <div class="box-info">
+                                <img class="avt-cmt-info" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
+                                <strong>Tran Truong</strong>
+                            </div>
+                            <div class="box-time-cmt">
+                                <span class="time">12:30pm</span>
+                            </div>
+                        </div>
+                        <div class="box-cmt__box-question">
+                            <div class="content">
+                                <span class="content-question">Tại sao lại không mua được</span>
+                            </div>
+                        </div>
+
+                        <div class="item-comment__box-rep-comment">
+                            <div class="item-rep-comment">
+                                <div class="box-info">
+                                    <img class="avt-cmt-info" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
+                                    <strong>QTV</strong>
+                                </div>
+                                <div class="box-time-cmt">
+                                    <span class="time">12:30pm</span>
+                                </div>
+                            </div>
+
+                            <div class="box-cmt__box-question">
+                                <p>CellphoneS xin chào anh Phạm Nguyễn Hoàng Giang,
+                                    Dạ khi sản phẩm gặp vấn đề lỗi Anh có thể mang tới cửa hàng chi nhánh gần nhất bên
+                                    em. Các bạn ki thuật sẽ kiểm tra và báo lại với mình chính xác nhất nhé ạ.
+                                    TECNO SPARK 20 PRO PLUS 8GB 256GB VÀNG - Giá thời điểm hiện tại 4.890.000đ. Khu vực
+                                    miền Nam.
+                                    Không biết hiện tại mình đang ở quận nào của HCM/HN hay tỉnh thành nào để em kiểm
+                                    tra cửa hàng gần mình nhất có sẵn sản phẩm ạ.
+                                    Thông tin đến Anh.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-comment__box-cmt">
+                        <div class="box-cmt__box-info">
+                            <div class="box-info">
+                                <img class="avt-cmt-info" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
+                                <strong>Tran Truong</strong>
+                            </div>
+                            <div class="box-time-cmt">
+                                <span class="time">12:30pm</span>
+                            </div>
+                        </div>
+                        <div class="box-cmt__box-question">
+                            <div class="content">
+                                <span class="content-question">Tại sao lại không mua được</span>
+                            </div>
+                        </div>
+
+                        <div class="item-comment__box-rep-comment">
+                            <div class="item-rep-comment">
+                                <div class="box-info">
+                                    <img class="avt-cmt-info" src="{{ URL::to('user/image/avatar-user.png') }}" alt="">
+                                    <strong>QTV</strong>
+                                </div>
+                                <div class="box-time-cmt">
+                                    <span class="time">12:30pm</span>
+                                </div>
+                            </div>
+
+                            <div class="box-cmt__box-question">
+                                <p>CellphoneS xin chào anh Phạm Nguyễn Hoàng Giang,
+                                    Dạ khi sản phẩm gặp vấn đề lỗi Anh có thể mang tới cửa hàng chi nhánh gần nhất bên
+                                    em. Các bạn ki thuật sẽ kiểm tra và báo lại với mình chính xác nhất nhé ạ.
+                                    TECNO SPARK 20 PRO PLUS 8GB 256GB VÀNG - Giá thời điểm hiện tại 4.890.000đ. Khu vực
+                                    miền Nam.
+                                    Không biết hiện tại mình đang ở quận nào của HCM/HN hay tỉnh thành nào để em kiểm
+                                    tra cửa hàng gần mình nhất có sẵn sản phẩm ạ.
+                                    Thông tin đến Anh.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                     <div class="item-comment__box-cmt">
                         <div class="box-cmt__box-info">
                             <div class="box-info">

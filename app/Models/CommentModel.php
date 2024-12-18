@@ -12,4 +12,9 @@ class CommentModel extends Model
     protected $fillable = ['id_phone_comment', 'id_user_comment', 'comment_text', 'rep_comment'];
     protected $primaryKey = 'id_comment';
     protected $table = 'tbl_comments';
+
+    public function cmt_name()
+    {
+        return $this->hasMany(User::class, 'id_user_comment', 'id_user');
+    }
 }
