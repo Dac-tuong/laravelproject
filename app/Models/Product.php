@@ -81,6 +81,6 @@ class Product extends Model
 
     public function phone()
     {
-        return $this->belongsTo(OrderDetail::class, 'order_phone_id', 'product_id');
+        return $this->hasMany(OrderDetail::class, 'order_phone_id', 'product_id');
     }
 }

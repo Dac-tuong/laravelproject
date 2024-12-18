@@ -30,7 +30,7 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
             <tbody>
                 @foreach ($order_infomations as $order)
                 <tr>
-                    <td>{{$order->product_name_order}}</td>
+                    <td>{{$order->phone->product_name}}</td>
                     <td>{{$order->product_sale_quantity}}</td>
                     <td>{{ number_format($order->product_price, 0, ',', '.') }} VNĐ</td>
                     <td>
@@ -83,7 +83,7 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
             <select name="order-status" id="order-status">
                 <option value="1" {{ $order_historys->order_status == 1 ? 'selected' : '' }}>Chờ xử lý</option>
                 <option value="2" {{ $order_historys->order_status == 2 ? 'selected' : '' }}>Đã xác nhận</option>
-                <option value="3" {{ $order_historys->order_status == 3 ? 'selected' : '' }}>Đã hủy</option>
+                <option value="3" {{ $order_historys->order_status == 3 ? 'selected' : '' }}>Hủy đơn hàng</option>
             </select>
             <br>
             <label for="order-note">Thêm ghi chú:</label>

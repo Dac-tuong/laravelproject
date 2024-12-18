@@ -1180,7 +1180,12 @@ $name = Session::get('name_customer')
                         _token: _token,
                     },
                     success: function(response) {
-
+                        if (response.success) {
+                            alert(response.message);
+                            location.reload;
+                        } else {
+                            alert(response.message);
+                        }
                     },
                     error: function() {
                         alert('Không thể thực hiện yêu cầu!');

@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\App;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\BannerModel;
+use App\Models\SantisticalModel;
 use Illuminate\Support\Facades\Session;
-
+use Carbon\Carbon;
 
 
 class OrderController extends Controller
@@ -100,7 +101,7 @@ class OrderController extends Controller
         $order_count_quantity = 0;
 
         // Lấy thông tin ở bảng order detail
-        $order_infomation = OrderDetail::where('order_code', $order_code)->get();
+        $order_infomation = OrderDetail::with('phone')->where('order_code', $order_code)->get();
         // Lấy thông tin ở bảng order detail
 
         foreach ($order_infomation as $detailOrder) {
@@ -160,23 +161,37 @@ class OrderController extends Controller
         $orderCode = $data['ordercode'];
         $orderReason = $data['orderreason'];
         $orderStatus = $data['orderstatus'];
-
         $order_update = OrderProduct::where('order_code', $orderCode)->first();
         $order_update->order_status = $orderStatus;
         $order_update->order_cancellation_reason = $orderReason;
         $order_update->save();
+        $currentDate = Carbon::now()->format('Y-m-d');
+
+
         $orderStatusText = '';
 
         if ($orderStatus == 0) {
             $orderStatusText = 'Đã hủy';
-        } elseif ($orderStatus == 2) {
-            $orderStatusText = 'Đã xác nhận';
-        } else {
+        } elseif ($orderStatus == 1) {
             $orderStatusText = 'Đơn hàng mới';
+        } else {
+            $orderStatusText = 'Đã xác nhận';
+            $santistical = SantisticalModel::get();
+            if ($santistical->order_date == $currentDate) {
+            } else {
+                $santistical->order_date = $currentDate;
+                $santistical->total_price_orders = 1;
+                $santistical->profit = 1;
+                $santistical->quantity_sale_products = 1;
+                $santistical->total_orders = 1;
+                $santistical->save();
+            }
         }
-        // Trả về phản hồi JSON mà không lưu vào CSDL
+
+        // Trả về phản hồi JSON
         return response()->json([
-            'orderStatusText' => $orderStatusText // Trả về tên trạng thái
+            'message' => 'Cập nhật thành công',
+            'orderStatusText' => $orderStatusText,
 
         ]);
     }

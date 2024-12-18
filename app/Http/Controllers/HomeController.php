@@ -526,6 +526,9 @@ class HomeController extends Controller
         if ($dataUser->password_user = $old_pass) {
             $dataUser->password_user = $new_pass;
             $dataUser->save();
+            return response()->json(['success' => true, 'message' => 'Đổi mật khẩu thành công!']);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Mật khẩu cũ không chính xác!']);
         }
     }
 }

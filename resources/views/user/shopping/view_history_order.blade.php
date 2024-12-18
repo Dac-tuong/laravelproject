@@ -26,12 +26,12 @@
                         <td>
                             <div class="d-flex mb-2">
                                 <div class="flex-shrink-0">
-                                    <img src="{{ URL::to('uploads/product/'.$info->image ) }}" alt="" width="35"
-                                        class="img-fluid">
+                                    <img src="{{ URL::to('uploads/product/'.$info->phone->product_image ) }}" alt=""
+                                        width="35" class="img-fluid">
                                 </div>
                                 <div class="flex-lg-grow-1 ms-3">
                                     <h6 class="small mb-0">
-                                        <a href="#" class="text-reset">{{$info->product_name_order}}</a>
+                                        <a href="#" class="text-reset">{{$info->phone->product_name}}</a>
                                     </h6>
                                     <span class="small">Color: Black</span>
                                 </div>
