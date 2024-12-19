@@ -8,6 +8,7 @@ use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Models\Brand;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\BannerModel;
 use App\Models\SantisticalModel;
@@ -133,8 +134,6 @@ class OrderController extends Controller
             $discount = 0 . ' VNĐ'; // Không có giảm giá
         }
 
-
-
         if ($order_history->order_status == 3) {
             $order_status = 'Đã hủy';
         } elseif ($order_history->order_status == 2) {
@@ -161,38 +160,74 @@ class OrderController extends Controller
         $orderCode = $data['ordercode'];
         $orderReason = $data['orderreason'];
         $orderStatus = $data['orderstatus'];
+        $orderItem = $data['orderitem'];
         $order_update = OrderProduct::where('order_code', $orderCode)->first();
-        $order_update->order_status = $orderStatus;
-        $order_update->order_cancellation_reason = $orderReason;
-        $order_update->save();
-        $currentDate = Carbon::now()->format('Y-m-d');
-
 
         $orderStatusText = '';
 
-        if ($orderStatus == 0) {
+        if ($orderStatus == 3) {
             $orderStatusText = 'Đã hủy';
-        } elseif ($orderStatus == 1) {
-            $orderStatusText = 'Đơn hàng mới';
-        } else {
+            $order_update->order_status = 3;
+            $order_update->order_cancellation_reason = $orderReason;
+        } elseif ($orderStatus == 2) {
             $orderStatusText = 'Đã xác nhận';
-            $santistical = SantisticalModel::get();
-            if ($santistical->order_date == $currentDate) {
-            } else {
-                $santistical->order_date = $currentDate;
-                $santistical->total_price_orders = 1;
-                $santistical->profit = 1;
-                $santistical->quantity_sale_products = 1;
-                $santistical->total_orders = 1;
-                $santistical->save();
+            $order_update->order_status = 2;
+
+            $order_update->order_item = $orderItem;
+            $order_details = OrderDetail::with('phone')
+                ->where('order_code', $orderCode)->get();
+            $profit_order_sum = 0;
+            foreach ($order_details as $order_detail) {
+                $profit =
+                    ($order_detail->product_price - $order_detail->phone->purchase_price)
+                    * $order_detail->product_sale_quantity;
+                $profit_order_sum += $profit;
             }
+            $order_update->profit_order = $profit_order_sum;
+            // Cập nhật tất cả đơn hàng đã xác nhận
+
+        }
+        $order_update->save();
+
+        foreach ($order_details as $oderDetail) {
+            $product = Product::find($oderDetail->order_phone_id);
+            $product->product_quantity -= $oderDetail->product_sale_quantity;
+            $product->save();
         }
 
-        // Trả về phản hồi JSON
+
+        if ($orderStatus == 2) {
+            $currentDate = Carbon::now()->format('Y-m-d');
+            $santistical = SantisticalModel::where('order_date', $currentDate)->first();
+
+            $totalOrderTotal_price =
+                OrderProduct::where('order_status', 2)->sum('order_total');
+            $totalProfitOrder =
+                OrderProduct::where('order_status', 2)->sum('profit_order');
+            $totalOrderItem =
+                OrderProduct::where('order_status', 2)->sum('order_item');
+            $totalOrder = OrderProduct::where('order_status', 2)->count();
+
+            if ($santistical) {
+                $santistical->order_date = $currentDate;
+                $santistical->total_price_orders = $totalOrderTotal_price;
+                $santistical->profit = $totalProfitOrder;
+                $santistical->quantity_sale_products = $totalOrderItem;
+                $santistical->total_orders = $totalOrder;
+                $santistical->save();
+            } else {
+                $santistical_new = new SantisticalModel();
+                $santistical_new->order_date = $currentDate;
+                $santistical_new->total_price_orders = $totalOrderTotal_price;
+                $santistical_new->profit = $totalProfitOrder;
+                $santistical_new->quantity_sale_products = $totalOrderItem;
+                $santistical_new->total_orders = $totalOrder;
+                $santistical_new->save();
+            }
+        }
         return response()->json([
             'message' => 'Cập nhật thành công',
             'orderStatusText' => $orderStatusText,
-
         ]);
     }
 

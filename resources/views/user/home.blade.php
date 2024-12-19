@@ -209,7 +209,19 @@
                                 {{ number_format($product->old_price, 0, ',', '.') }}đ
                             </span>
                             @endif
-
+                            @if ($product->old_price > 0)
+                            <div class="product__price--percent">
+                                <p class="product__price--percent-detail">
+                                    @php
+                                    $percent_discount = (($product->old_price - $product->sale_price) /
+                                    $product->old_price)
+                                    *
+                                    100;
+                                    echo ceil($percent_discount) . '%'
+                                    @endphp
+                                </p>
+                            </div>
+                            @endif
                             <span class="productinfo__price-current">
                                 {{ number_format($product->sale_price, 0, ',', '.') }}đ
                             </span>
@@ -241,18 +253,7 @@
                             </form>
                         </div>
 
-                        @if ($product->old_price > 0)
-                        <div class="product__price--percent">
-                            <p class="product__price--percent-detail">
-                                @php
-                                $percent_discount = (($product->old_price - $product->sale_price) / $product->old_price)
-                                *
-                                100;
-                                echo ceil($percent_discount) . '%'
-                                @endphp
-                            </p>
-                        </div>
-                        @endif
+
                     </div>
                 </div>
                 @endforeach

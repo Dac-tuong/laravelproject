@@ -9,7 +9,7 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
     </div>
     <!-- Hành động-->
     <div class="order-details-action">
-        <a href="order-list">Quay lại danh sách đơn hàng</a>
+        <a href="{{URL::to('/order-view')}}">Quay lại danh sách đơn hàng</a>
         <a href="{{URL::to('/print-order'.'/'.$order_historys->order_code)}}">In đơn hàng</a>
     </div>
 </div>
@@ -50,9 +50,9 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
 
     <div class="order-summary">
         <h2>Tổng kết đơn hàng</h2>
-        <p><strong>Tổng số lượng sản phẩm:</strong>
-            {{$orderCount}}
-        </p>
+        <strong>Tổng số lượng sản phẩm:</strong>
+        <span id="order-item"> {{$orderCount}}
+        </span>
         <p><strong>Tổng tiền sản phẩm:</strong>{{ number_format($totalCart, 0, ',', '.') }} VNĐ</p>
         <p><strong>Giảm giá:</strong> {{$discount_price}}</p>
         <p><strong>Mã giảm giá:</strong> {{$code_coupon->coupon_code ?? ""}} </p>

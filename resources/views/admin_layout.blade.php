@@ -281,14 +281,9 @@
              var orderStatus = $('#order-status').val();
              var orderNote = $('#order-note').val();
              var orderCode = $('#order-code').val();
+             var orderItem = document.getElementById('order-item').textContent;
              var _token = $('input[name="_token"]').val();
              var statusText = $("#order-status option:selected").text();
-             var formupdate = {
-                 orderStatus: orderStatus,
-                 orderNote: orderNote,
-                 orderCode: orderCode,
-                 _token: _token
-             }
 
              $.ajax({
                  url: "/update-status-order",
@@ -297,6 +292,7 @@
                      orderstatus: orderStatus,
                      orderreason: orderNote,
                      ordercode: orderCode,
+                     orderitem: orderItem,
                      _token: _token
                  },
                  success: function(response) {

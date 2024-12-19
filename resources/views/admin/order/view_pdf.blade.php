@@ -134,7 +134,7 @@
             <p>Tên khách hàng: {{$orderShip->shippingAddress->fullname}}</p>
             <p>Email: {{$orderShip->order_email}}</p>
             <p>Số điện thoại: {{$orderShip->shippingAddress->order_phone}}</p>
-            <p>Địa chỉ giao hàng"
+            <p>Địa chỉ giao hàng:
                 {{$orderShip->shippingAddress->province->name}}, {{$orderShip->shippingAddress->districts->name}}
                 , {{$orderShip->shippingAddress->wards->name}}, {{$orderShip->shippingAddress->diachi}}
             </p>
@@ -153,7 +153,7 @@
             <tbody>
                 @foreach ($detailOrder as $order)
                 <tr>
-                    <td>{{$order->product_name_order}}</td>
+                    <td>{{$order->phone->product_name}}</td>
                     <td>{{$order->product_sale_quantity}}</td>
                     <td>{{ number_format($order->product_price, 0, ',', '.') }} VNĐ</td>
                     <td>{{ number_format($summaryProduct, 0, ',', '.') }} VNĐ</td>

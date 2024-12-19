@@ -172,8 +172,8 @@
     font-weight: 500;
 }
 .body-content {
-    border: 1px solid black;
     width: 100%;
+    margin-left: 10px;
 }
 .breadcrumbs {
     font-size: 17px;
@@ -319,6 +319,7 @@
 /*==========================HOME PRODUCT=====================*/
 .sort {
     background-color: #f1f1f1;
+    margin-bottom: 5px;
 }
 .product-content {
     padding-block: 10px;
@@ -330,7 +331,7 @@
     overflow: hidden;
 }
 .product-content:hover .action-buttons {
-    right: 0px;
+    right: 6px;
 }
 .link-product {
     text-decoration: none;
@@ -373,6 +374,7 @@
 .product__price--percent {
     position: absolute;
     top: 0px;
+    left: -1px;
     background-color: #d70018;
     width: 40px;
     color: white;
@@ -382,6 +384,7 @@
 }
 .product__price--percent-detail {
     margin: 0px;
+    padding: 0px;
     font-size: 16px;
 }
 .action-buttons {
