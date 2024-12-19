@@ -198,7 +198,7 @@ p {
 
 .navbar-cls-top .navbar-brand {
     color: #fff;
-    background: #c90000;
+    background: #0057c9;
     width: 260px;
     text-align: center;
     height: 60px;
@@ -206,7 +206,7 @@ p {
     font-weight: 700;
 }
 .active-menu {
-    background-color: #c90000 !important;
+    background-color: #0057c9 !important;
 }
 
 .arrow {
@@ -297,7 +297,7 @@ p {
     border-bottom: none;
 }
 .navbar-cls-top .navbar-brand:hover {
-    background: #c90000;
+    background: #0057c9;
     color: #fff;
 }
 
@@ -305,7 +305,7 @@ p {
     border: 0px solid black;
 }
 .navbar-header {
-    background: #a70303;
+    background: #0057c9;
 }
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
@@ -461,4 +461,8 @@ p {
 }
 .gallery {
     display: flex;
+}
+
+.logo-shop {
+    height: 60px;
 }

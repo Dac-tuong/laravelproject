@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActicleControll;
 use Illuminate\Support\Facades\Route;
 
 
@@ -129,8 +130,7 @@ use App\Http\Controllers\CartController;
 Route::get('/cart', [CartController::class, 'index']);
 
 Route::post('/add-cart', [CartController::class, 'addToCart']);
-// Route::get('/increase-quantity/{product_id}', [CartController::class, 'increaseProduct']);
-// Route::get('/decrease-quantity/{product_id}', [CartController::class, 'decreaseProduct']);
+
 Route::get('/delete/{session_id}', [CartController::class, 'delete']);
 Route::get('/delete-all', [CartController::class, 'delete_all_cart']);
 Route::get('/delete-coupon', [CartController::class, 'delete_coupon']);
@@ -178,6 +178,16 @@ Route::post('/add-feeship', [FeeshipController::class, 'add_feeship']);
 
 use App\Http\Controllers\CommentController;
 
+
 Route::post('/send-comment', [CommentController::class, 'send_comment']);
 Route::get('/get-comment', [CommentController::class, 'get_comment']);
 Route::get('/comments-index', [CommentController::class, 'comments_index']);
+Route::post('/rep-comment/{id_comment}', [CommentController::class, 'rep_comment']);
+
+// POST
+Route::get('/add-cate-post', [ActicleControll::class, 'add_cate_post']);
+Route::get('/list-cate-post', [ActicleControll::class, 'list_cate_post']);
+Route::post('/save-cate-post', [ActicleControll::class, 'save_cate_post']);
+
+Route::get('/active-cate-post/{id_cate_post}', [ActicleControll::class, 'active_cate_post']);
+Route::get('/inactive-cate-post/{id_cate_post}', [ActicleControll::class, 'inactive_cate_post']);

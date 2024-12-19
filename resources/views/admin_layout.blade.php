@@ -26,7 +26,7 @@ $id = Session::get('admin_id')
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css"> -->
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
@@ -42,8 +42,7 @@ $id = Session::get('admin_id')
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><img src="{{ URL::to('/admin/images/logo/logo.png') }}"
-                        alt=""></a>
+                <img class="logo-shop" src="{{ URL::to('/admin/images/logo/logo.png') }}" alt="">
             </div>
             <div style="color: white; padding: 15px 50px 5px 50px;float: right; font-size: 16px;">
                 <?php
@@ -127,56 +126,31 @@ $id = Session::get('admin_id')
                             </li>
                         </ul>
                     </li>
-                    <li class="notification">
-                        <a href="{{URL::to('/order-view')}}">
-                            <i class="fa fa-qrcode fa-3x"></i> Danh sách đơn hàng
-                        </a>
-                        <span class="badge">3</span>
-                    </li>
-                    <li class="notification">
-                        <a href="{{URL::to('/feeship')}}">
-                            <i class="fa fa-qrcode fa-3x"></i>Phí giao hàng
-                        </a>
-                    </li>
                     <li>
-                        <a href="chart.html"><i class="fa fa-bar-chart-o fa-3x"></i> Morris Charts</a>
-                    </li>
-                    <li>
-                        <a href="{{URL::to('/comments-index')}}"> Bình luận</a>
-                    </li>
-                    <li>
-                        <a href="form.html"><i class="fa fa-edit fa-3x"></i> Forms </a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-sitemap fa-3x"></i> Multi-Level Dropdown<span
-                                class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-sitemap fa-3x"> </i> Loại bài viết<span class="fa arrow">
+                            </span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">Second Level Link</a>
+                                <a href="{{URL::to('/add-cate-post')}}">Thêm loại bài viết</a>
                             </li>
                             <li>
-                                <a href="#">Second Level Link</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-
-                                </ul>
-
+                                <a href="{{URL::to('/list-cate-post')}}">Danh sách loại bài viết</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="blank.html"><i class="fa fa-square-o fa-3x"></i> Blank Page</a>
+                        <a href="{{URL::to('/order-view')}}">
+                            <i class="fa fa-qrcode fa-3x"></i> Danh sách đơn hàng
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{URL::to('/feeship')}}">
+                            <i class="fa fa-qrcode fa-3x"></i>Phí giao hàng
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{URL::to('/comments-index')}}"> Bình luận</a>
                     </li>
                 </ul>
 
@@ -210,69 +184,32 @@ $id = Session::get('admin_id')
 
     <script src="{{asset('admin/js/jquery-3.6.0.min.js')}}"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#add-feeship').click(function() {
-                var id_province = $('#province').val();
-                var _token = $('input[name="_token"]').val();
-
-                $.ajax({
-                    url: '/add-feeship',
-                    method: 'POST',
-                    data: {
-                        id_province: id_province,
-                        _token: _token
-                    },
-                    success: function(response) {
-                        if (response.exists) {
-                            alert('Dữ liệu này đã tồn tại');
-                        } else {
-                            alert('Thêm phí vận chuyển thành công');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        alert('Đã có lỗi xảy ra: ' + error);
-                    }
-                });
-            });
-        })
-    </script>
-
-
     <!-- <script>
-        function removeVietnameseDiacritics(str) {
-            return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D');
-        }
+    $(document).ready(function() {
+        $('#add-feeship').click(function() {
+            var id_province = $('#province').val();
+            var _token = $('input[name="_token"]').val();
 
-        function generateRandomString(length) {
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let result = '';
-            const charactersLength = characters.length;
-            for (let i = 0; i < length; i++) {
-                result += characters.charAt(Math.floor(Math.random() * charactersLength));
-            }
-            return result;
-        }
-
-        document.querySelectorAll('[data-slug-source]').forEach(function(input) {
-            input.addEventListener('input', function() {
-                var sourceType = this.getAttribute('data-slug-source');
-                var title = this.value;
-                var slug = removeVietnameseDiacritics(title)
-                    .toLowerCase()
-                    .replace(/ /g, '-')
-                    .replace(/[^\w-]+/g, '')
-                    .replace(/--+/g, '-')
-                    .replace(/^-+/, '')
-                    .replace(/-+$/, '');
-                var randomString = generateRandomString(6); // Độ dài chuỗi ngẫu nhiên là 6
-                slug += '-' + randomString;
-                var targetInput = document.querySelector('[data-slug-target="' + sourceType + '"]');
-                if (targetInput) {
-                    targetInput.value = slug;
+            $.ajax({
+                url: '/add-feeship',
+                method: 'POST',
+                data: {
+                    id_province: id_province,
+                    _token: _token
+                },
+                success: function(response) {
+                    if (response.exists) {
+                        alert('Dữ liệu này đã tồn tại');
+                    } else {
+                        alert('Thêm phí vận chuyển thành công');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('Đã có lỗi xảy ra: ' + error);
                 }
             });
         });
+    })
     </script> -->
 
     <script>
@@ -307,9 +244,9 @@ $id = Session::get('admin_id')
             });
         });
     </script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-    <script>
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script> -->
+    <!-- <script>
         new Morris.Line({
             // ID of the element in which to draw the chart.
             element: 'myfirstchart',
@@ -344,7 +281,7 @@ $id = Session::get('admin_id')
             // chart.
             labels: ['Value']
         });
-    </script>
+    </script> -->
 
 
 </body>

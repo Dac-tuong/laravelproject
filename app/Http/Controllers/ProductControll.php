@@ -35,13 +35,13 @@ class ProductControll extends Controller
         $cate_product = Category::get();
         $brand_product = Brand::get();
 
-        return view('admin.add_product')->with('cate_product', $cate_product)->with('brand_product', $brand_product);
+        return view('admin.product.add_product')->with('cate_product', $cate_product)->with('brand_product', $brand_product);
     }
     public function list_product()
     {
         $this->AuthLogin();
         $list_product = Product::with(['category', 'brand'])->orderBy('product_id', 'ASC')->get();
-        return view('admin.list_product')->with('products', $list_product);
+        return view('admin.product.list_product')->with('products', $list_product);
     }
 
     public function edit_product($product_id)
@@ -49,15 +49,10 @@ class ProductControll extends Controller
         $this->AuthLogin();
         $cate_product = Category::all();
         $brand_product = Brand::all();
-        // $gallery_product = Gallery::where('');
 
-        // $product = Product::find($product_id);
-
-        // return view('admin.edit_product')->with('products', $product)->with('cate_products', $cate_product)
-        //     ->with('brand_products', $brand_product)->with('image_gallery', $gallery_product);
 
         $product = Product::with(['galleries'])->where('product_id', $product_id)->first();
-        return view('admin.edit_product')->with('products', $product)->with('cate_products', $cate_product)
+        return view('admin.product.edit_product')->with('products', $product)->with('cate_products', $cate_product)
             ->with('brand_products', $brand_product);
     }
 
@@ -89,7 +84,6 @@ class ProductControll extends Controller
         $product = new Product;
         $product->product_code = $data['product_code'];
         $product->product_name =  $data['product_name'];
-        $product->name_product_slug =  $data['name_product_slug'];
         $product->sale_price = $data['sale_price'];
         $product->purchase_price = $data['purchase_price'];
         $product->old_price = $data['old_price'];
@@ -170,7 +164,6 @@ class ProductControll extends Controller
 
         $product->product_code = $data['product_code'];
         $product->product_name =  $data['product_name'];
-        $product->name_product_slug =  $data['name_product_slug'];
         $product->sale_price = $data['sale_price'];
         $product->purchase_price = $data['purchase_price'];
         $product->old_price = $data['old_price'];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -29,7 +30,9 @@ class AdminController extends Controller
     public function show_dashboard()
     {
         $this->AuthLogin();
-        return view('admin.dashboard');
+
+        $orders = OrderProduct::where('order_status', 1)->count();
+        return view('admin.dashboard')->with('order_pedding', $orders);
     }
     public function login(Request $request)
     {

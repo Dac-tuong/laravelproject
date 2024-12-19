@@ -12,7 +12,6 @@ class Product extends Model
         'brand', // Thương hiệu sản phẩm
         'product_code', // Mã sản phẩm
         'product_name', // Tên sản phẩm
-        'name_product_slug', // Slug của sản phẩm (SEO friendly URL)
         'product_image', // Hình ảnh sản phẩm
         'purchase_price', // Giá nhập hàng
         'old_price', // Giá bán củ

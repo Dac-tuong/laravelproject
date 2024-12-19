@@ -28,7 +28,7 @@ class BrandController extends Controller
     public function add_brand()
     {
         $this->AuthLogin();
-        return view('admin.add_brand');
+        return view('admin.brand.add_brand');
     }
     public function save_brand(Request $request)
     {
@@ -36,7 +36,6 @@ class BrandController extends Controller
         $data = $request->all();
         $brand = new Brand();
         $brand->brand_name = $data['brand_name'];
-        $brand->brand_name_slug = $data['brand_name_slug'];
         $brand->brand_status = $data['brand_status'];
         $brand->save();
 
@@ -49,7 +48,7 @@ class BrandController extends Controller
         $this->AuthLogin();
         $list_brand = Brand::all();
         $manager_brand = view('admin.list_brand')->with('list_brand', $list_brand);
-        return view('admin_layout')->with('admin.list_brand', $manager_brand);
+        return view('admin_layout')->with('admin.brand.list_brand', $manager_brand);
     }
     public function inactive_brand($brand_id)
     {
@@ -75,7 +74,7 @@ class BrandController extends Controller
         $edit_brand = Brand::find($brand_id);
 
         $manager_brand = view('admin.edit_brand')->with('edit_brand', $edit_brand);
-        return view('admin_layout')->with('admin.edit_brand', $manager_brand);
+        return view('admin_layout')->with('admin.brand.edit_brand', $manager_brand);
     }
 
     public function update_brand(Request $request, $brand_id)
@@ -84,7 +83,6 @@ class BrandController extends Controller
         $this->AuthLogin();
         $brand = Brand::find($brand_id);
         $brand->brand_name = $request->brand_name;
-        $brand->brand_name_slug = $request->brand_slug;
         $brand->save();
         Session::put('message_success', 'Cập nhật thành công!');
         return Redirect::to('list-brand');
@@ -196,7 +194,7 @@ class BrandController extends Controller
 
 
         // Lấy danh sách sản phẩm sau khi lọc
-        $products = $list_product->paginate(10);
+        $products = $list_product->get();
 
 
         // Lấy danh sách sản phẩm sau khi lọc

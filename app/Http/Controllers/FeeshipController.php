@@ -14,7 +14,7 @@ class FeeshipController extends Controller
     {
         $provinces = Province::all();
 
-        $feeship_list = FeeshipModel::paginate(10); // 10 là số lượng bản ghi trên mỗi trang
+        $feeship_list = FeeshipModel::get(); // 10 là số lượng bản ghi trên mỗi trang
 
         return view('admin.feeship.feeship_page')->with(compact('provinces', 'feeship_list'));
     }

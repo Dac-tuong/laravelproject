@@ -157,13 +157,12 @@
 }
 
 .left-contaner {
-    display: flex;
-    flex-direction: column;
     padding: 5px;
     min-width: 210px;
     max-width: 210px;
     background-color: white;
     border-radius: 5px;
+    max-height: 900px;
 }
 .brand-container {
     display: flex;

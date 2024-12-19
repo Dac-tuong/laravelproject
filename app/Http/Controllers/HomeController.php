@@ -121,7 +121,7 @@ class HomeController extends Controller
 
 
         // Lấy danh sách sản phẩm sau khi lọc
-        $products = $list_product->paginate(10);
+        $products = $list_product->get();
 
         return view('user.home')
             ->with('products', $products)

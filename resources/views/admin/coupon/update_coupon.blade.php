@@ -14,7 +14,6 @@
             <label for="discountCodeInput">Mã giảm giá</label>
             <input type="text" name="discountCode" class="form-control" id="discountCodeInput"
                 value="{{$coupon_update->coupon_code}}">
-            <a href="#" class="generate">Tạo mã giảm giá</a>
         </div>
     </div>
     <div class="form-group">
@@ -44,28 +43,6 @@
         <button type="submit" name="save_coupon" class="btn btn-primary">Lưu mã giảm giá</button>
     </div>
 </form>
-
-
-<script>
-    function generateRandomString(length) {
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let result = '';
-        const charactersLength = characters.length;
-        for (let i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-        return result;
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelector('.generate').addEventListener('click', function(event) {
-            event.preventDefault();
-            const discountCode = generateRandomString(10);
-            document.getElementById('discountCodeInput').value = discountCode;
-        });
-    });
-</script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const typeSelect = document.getElementById('type_code');

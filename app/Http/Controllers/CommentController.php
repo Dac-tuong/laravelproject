@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CommentModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class CommentController extends Controller
 {
@@ -22,6 +23,7 @@ class CommentController extends Controller
         $add_comment->id_phone_comment = $id_product;
         $add_comment->id_user_comment = $id_user;
         $add_comment->comment_text = $comment;
+        $add_comment->repped = 1;
         $add_comment->save();
         return response()->json(['status' => 'success', 'message' => 'Đánh giá của bạn đã được gửi!']);
     }
@@ -84,7 +86,16 @@ class CommentController extends Controller
 
     public function comments_index()
     {
-        $comments = CommentModel::paginate(6);
+        $comments = CommentModel::get();
         return view('admin.comments.comments_list')->with('comments', $comments);
+    }
+
+    public function rep_comment(Request $request, $id_comment)
+    {
+        $comment = CommentModel::find($id_comment);
+        $comment->rep_comment = $request->rep_comment;
+        $comment->repped = 2;
+        $comment->save();
+        return Redirect::to('comments-index');
     }
 }

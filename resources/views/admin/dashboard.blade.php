@@ -1,11 +1,7 @@
 @extends('admin_layout')
 @section('admin_content')
 <h1>Dashboard</h1>
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div id="myfirstchart" style="height: 250px;"></div>
-    </div>
-</div>
+
 <div class="row">
     <div class="col-md-3 col-sm-6 col-xs-6">
         <div class="panel panel-back noti-box">
@@ -13,8 +9,8 @@
                 <i class="fa fa-envelope-o"></i>
             </span>
             <div class="text-box">
-                <p class="main-text">120 New</p>
-                <p class="text-muted">Messages</p>
+                <p class="main-text"> New</p>
+                <p class="text-muted">Bình luận</p>
             </div>
         </div>
     </div>
@@ -46,7 +42,7 @@
                 <i class="fa fa-rocket"></i>
             </span>
             <div class="text-box">
-                <p class="main-text">3 Orders</p>
+                <p class="main-text">{{$order_pedding}} Orders</p>
                 <p class="text-muted">Pending</p>
             </div>
         </div>

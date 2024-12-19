@@ -33,13 +33,13 @@ class CategoryController extends Controller
     public function add_category_product()
     {
         $this->AuthLogin();
-        return view('admin.add_categories_product');
+        return view('admin.category.add_categories_product');
     }
     public function list_category_product()
     {
         $this->AuthLogin();
         $list_category_product = Category::all();
-        $manager_category_product = view('admin.list_category_product')->with('list_category_product', $list_category_product);
+        $manager_category_product = view('admin.category.list_category_product')->with('list_category_product', $list_category_product);
         return view('admin_layout')->with('admin.list_category_product', $manager_category_product);
     }
     public function save_category_product(Request $request)
@@ -79,7 +79,7 @@ class CategoryController extends Controller
     {
         $this->AuthLogin();
         $edit_category = Category::find($categories_product_id);
-        $manager_category = view('admin.edit_categories_product')->with('edit_category', $edit_category);
+        $manager_category = view('admin.category.edit_categories_product')->with('edit_category', $edit_category);
         return view('admin_layout')->with('admin.edit_category', $manager_category);
     }
 

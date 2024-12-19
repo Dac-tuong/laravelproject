@@ -119,50 +119,7 @@
         </table>
 
 
-        <!-- Hiển thị liên kết phân trang tùy chỉnh -->
-        <div class="pagination justify-content-center">
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <!-- Previous Page Link -->
-                    @if ($historys->onFirstPage())
-                    <li class="page-item disabled">
-                        <span class="page-link">&laquo; Previous</span>
-                    </li>
-                    @else
-                    <li class="page-item">
-                        <a class="page-link" href="{{ $historys->previousPageUrl() }}" rel="prev">&laquo;
-                            Previous</a>
-                    </li>
-                    @endif
 
-                    <!-- Page Number Links -->
-                    @foreach ($historys->getUrlRange(1, $historys->lastPage()) as $page => $url)
-                    @if ($page == $historys->currentPage())
-                    <li class="page-item active">
-                        <span class="page-link">{{ $page }}</span>
-                    </li>
-                    @else
-                    <li class="page-item">
-                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                    </li>
-                    @endif
-                    @endforeach
-
-                    <!-- Next Page Link -->
-                    @if ($historys->hasMorePages())
-                    <li class="page-item">
-                        <a class="page-link" href="{{ $historys->nextPageUrl() }}" rel="next">Next &raquo;</a>
-                    </li>
-                    @else
-                    <li class="page-item disabled">
-                        <span class="page-link">Next &raquo;</span>
-                    </li>
-                    @endif
-                </ul>
-            </nav>
-        </div>
-
-        <!-- Hiển thị liên kết phân trang tùy chỉnh -->
     </div>
 </div>
 @endsection

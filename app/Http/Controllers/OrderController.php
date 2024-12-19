@@ -195,7 +195,6 @@ class OrderController extends Controller
             $product->save();
         }
 
-
         if ($orderStatus == 2) {
             $currentDate = Carbon::now()->format('Y-m-d');
             $santistical = SantisticalModel::where('order_date', $currentDate)->first();
@@ -262,7 +261,7 @@ class OrderController extends Controller
             }
         }
 
-        $history = $orders->paginate(10);
+        $history = $orders->get();
 
 
         return view('user.shopping.history_order')
