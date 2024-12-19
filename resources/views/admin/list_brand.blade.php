@@ -2,16 +2,15 @@
 @section('admin_content')
 <h1>Trang danh sách loại sản phẩm</h1>
 <div class="table-wrapper">
-    <?php
-
+    @php
     use Illuminate\Support\Facades\Session;
 
     $message_success = Session::get('message_success');
     if ($message_success) {
-        echo '<p class="text-success" >',  $message_success, '</p>';
-        Session::put('message_success', null);
+    echo '<p class="text-success">', $message_success, '</p>';
+    Session::put('message_success', null);
     }
-    ?>
+    @endphp
     <table>
         <thead>
             <tr>

@@ -622,17 +622,8 @@ $name = Session::get('name_customer')
 
 
             //show quantity cart
-            show_cart_quantity();
 
-            function show_cart_quantity() {
-                $.ajax({
-                    url: "{{ url('/count-cart') }}", // Sử dụng URL helper để đảm bảo URL chính xác
-                    method: "GET",
-                    success: function(data) {
-                        $('#quantity-cart').html(data);
-                    }
-                });
-            };
+
 
 
             // thực hiện thêm sản phẩm vào giỏ hàng
@@ -1192,6 +1183,50 @@ $name = Session::get('name_customer')
                     }
 
                 });
+            });
+
+
+            function show_cart_quantity() {
+                $.ajax({
+                    url: "{{ url('/count-cart') }}",
+                    method: "GET",
+                    success: function(data) {
+                        $('#quantity-cart').html(data);
+                    },
+                    error: function() {
+                        console.error("Lỗi khi lấy số lượng giỏ hàng.");
+                    }
+                });
+            }
+            show_cart_quantity();
+            $(document).on('keydown', '.quantity', function(e) {
+                if (e.key === "Enter") {
+                    e.preventDefault(); // Ngăn form submit
+                    var quantityValue = $(this).closest('form').find('.quantity').val();
+                    var maspValue = $(this).closest('form').find('.masp').val();
+                    var _token = $(this).closest('form').find('input[name="_token"]').val();
+
+                    $.ajax({
+                        url: "/update-quantity-cart",
+                        method: "POST",
+                        data: {
+                            masp: maspValue,
+                            quantity: quantityValue,
+                            _token: _token
+                        },
+                        success: function(response) {
+                            if (response.status === 'error') {
+                                alert(response.message);
+                            } else if (response.status === 'success') {
+                                // alert(response.message);
+                                location.reload();
+                            }
+                        },
+                        error: function() {
+                            alert("Có lỗi xảy ra!");
+                        }
+                    });
+                }
             });
         });
     </script>

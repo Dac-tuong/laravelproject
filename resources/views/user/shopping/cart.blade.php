@@ -21,7 +21,6 @@ $coupon_session = Session::get('coupon');
                         <th>Số lượng</th>
                         <th>Thành tiền</th>
                         <th>
-
                             <a class="btn-delete" href="{{URL::to('/delete-all')}}"
                                 onclick="return confirm('Bạn có chắc là muốn xoá tất cả sản phẩm ra khỏi giỏ hàng?')">Xoá
                                 tất cả
@@ -36,22 +35,27 @@ $coupon_session = Session::get('coupon');
                             <div style="display: flex; align-items: center;">
                                 <img src="{{ URL::to('uploads/product/' .$item['image'] ) }}" alt="Tên sản phẩm"
                                     style="width: 50px; height: 50px; margin-right: 10px;">
-                                <span> {{ $item['tensp'] }}</span>
-                                <br>
-                                <span>Color: {{$item['color']}}</span>
+                                <div>
+                                    <span> {{ $item['tensp'] }}</span><br>
+                                    <span>Color: {{$item['color']}}</span>
+                                </div>
                             </div>
+
+
                         </td>
 
-                        <td>{{ number_format($item['gia'], 0, ',', '.') }} VNĐ</td>
+                        <td><span>{{ number_format($item['gia'], 0, ',', '.') }} đ</span></td>
                         <td>
-                            <a href="{{ URL::to('/increase-quantity') . '/' . $item['masp'] }}" title="Tăng số lượng">
-                                <i class="fa-solid fa-plus"></i></a>
-                            {{ $item['soluong'] }}
-                            <a href="{{ URL::to('/decrease-quantity') . '/' . $item['masp'] }}" title="Giảm số lượng">
-                                <i class="fas fa-minus"></i>
-                            </a>
+                            <form action="">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete>
+                                <input type="text" name="" class="quantity" id="" value="{{ $item['soluong'] }}">
+                                <input type="hidden" name="" class="masp" id="" value="{{ $item['masp'] }}">
+                                <button type="button" style="display:none;">update</button>
+                            </form>
+
+
                         </td>
-                        <td>{{ number_format($item['total'], 0, ',', '.') }} VNĐ</td>
+                        <td>{{ number_format($item['total'], 0, ',', '.') }} đ</td>
                         <th><a href="{{ URL::to('/delete') . '/' . $item['session_id'] }}"
                                 title="Xoá sản phẩm ra khỏi giỏ">
                                 <i class="fa-solid fa-trash"></i></a>

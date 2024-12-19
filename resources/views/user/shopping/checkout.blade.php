@@ -119,7 +119,7 @@ $coupon_session = Session::get('coupon');
                                 Color: {{$item['color']}}
                             </p>
                         </td>
-                        <td>{{ number_format($item['total'], 0, ',', '.') }} VND</td>
+                        <td>{{ number_format($item['total'], 0, ',', '.') }} đ</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -133,7 +133,7 @@ $coupon_session = Session::get('coupon');
                 <div>
                     <span>Tổng cộng :</span>
                     <span>
-                        {{ number_format($total_price, 0, ',', '.') }} VNĐ
+                        {{ number_format($total_price, 0, ',', '.') }} đ
                     </span>
                 </div>
 
@@ -161,7 +161,7 @@ $coupon_session = Session::get('coupon');
                         Số tiền sau khi giảm:
                     </span>
                     <span>
-                        {{ number_format($price_cart, 0, ',', '.') }} VNĐ
+                        {{ number_format($price_cart, 0, ',', '.') }} đ
                     </span>
                 </div>
                 @elseif($coupon['coupon_type'] == 'fixed')
@@ -171,7 +171,7 @@ $coupon_session = Session::get('coupon');
                     <span>
                         Giảm giá :
                     </span>
-                    <span> {{ number_format($coupon['discount'], 0, ',', '.') }} VNĐ</span>
+                    <span> {{ number_format($coupon['discount'], 0, ',', '.') }} đ</span>
                 </div>
                 @php
                 $price_discount = $coupon['discount'];
@@ -180,8 +180,9 @@ $coupon_session = Session::get('coupon');
                 <div>
                     <span>
                         Số tiền sau khi giảm:
+                        <span id="price_cart"> {{ number_format($price_cart, 0, ',', '.') }}</span>đ
                     </span>
-                    <span id="price_cart"> {{ number_format($price_cart, 0, ',', '.') }}</span>
+
                 </div>
                 @endif
                 @endforeach
@@ -196,19 +197,20 @@ $coupon_session = Session::get('coupon');
                 <div>
                     <span>
                         Thành tiền:
+                        <span id="price_cart"> {{ number_format($total_price, 0, ',', '.') }}</span> đ
                     </span>
-                    <span id="price_cart"> {{ number_format($total_price, 0, ',', '.') }}</span>
+
                 </div>
                 @endif
 
                 <input type="hidden" id="id_coupon" value="">
-                <span> Phí vận chuyển: <strong id="feeship">0</strong> VND</span>
+                <span> Phí vận chuyển: <strong id="feeship">0</strong> đ</span>
                 <hr>
                 <p>Tổng giá trị: <strong id="displayTotal">
                         @if ($total_price)
-                        {{ number_format($total_price, 0, ',', '.') }} VNĐ
+                        {{ number_format($total_price, 0, ',', '.') }} đ
                         @else
-                        0 VNĐ
+                        0 đ
                         @endif
                     </strong> </p>
             </div>

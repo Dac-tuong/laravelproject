@@ -2,16 +2,15 @@
 @section('admin_content')
 <h1>Trang danh sách loại sản phẩm</h1>
 <div class="table-wrapper">
-    <?php
-
+    @php
     use Illuminate\Support\Facades\Session;
 
     $message_success = Session::get('message_success');
     if ($message_success) {
-        echo '<p class="text-success" >',  $message_success, '</p>';
-        Session::put('message_success', null);
+    echo '<p class="text-success">', $message_success, '</p>';
+    Session::put('message_success', null);
     }
-    ?>
+    @endphp
     <table>
         <thead>
             <tr>
@@ -30,10 +29,10 @@
                     <?php
                     if ($cate_pro->category_status == 0) {
                     ?>
-                    <a href="{{URL::to('/inactive-cate-product'.'/'.$cate_pro->category_id)}}">Ẩn</a>
+                        <a href="{{URL::to('/inactive-cate-product'.'/'.$cate_pro->category_id)}}">Ẩn</a>
                     <?php
                     } else { ?>
-                    <a href="{{URL::to('/active-cate-product'.'/'.$cate_pro->category_id)}}">Hện</a>
+                        <a href="{{URL::to('/active-cate-product'.'/'.$cate_pro->category_id)}}">Hện</a>
                     <?php  } ?>
                 <td><a href="{{URL::to('/edit-category-product'.'/'.$cate_pro->category_id)}}">Sửa</a>/
                     <a href="{{URL::to('/delete-category-product'.'/'.$cate_pro->category_id)}}">Xóa</a>

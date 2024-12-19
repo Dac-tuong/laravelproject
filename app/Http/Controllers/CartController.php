@@ -9,6 +9,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Coupons;
 use App\Models\BannerModel;
+use App\Models\Product;
 use Illuminate\Support\Facades\Redirect;
 
 session_start();
@@ -98,62 +99,62 @@ class CartController extends Controller
         echo $output;
     }
 
-    public function increaseProduct($product_id)
-    {
-        $cart = Session::get('cart');
+    // public function increaseProduct($product_id)
+    // {
+    //     $cart = Session::get('cart');
 
-        $soluong = 1;
-        if ($cart == true) {
-            foreach ($cart as $key => $val) {
-                if ($val['masp'] == $product_id) {
-                    $cart[$key]['soluong'] += $soluong;
+    //     $soluong = 1;
+    //     if ($cart == true) {
+    //         foreach ($cart as $key => $val) {
+    //             if ($val['masp'] == $product_id) {
+    //                 $cart[$key]['soluong'] += $soluong;
 
-                    $cart[$key]['total'] = $cart[$key]['soluong'] * $cart[$key]['gia'];
-                    break;
-                }
-            }
-        }
-        Session::put('cart', $cart);
+    //                 $cart[$key]['total'] = $cart[$key]['soluong'] * $cart[$key]['gia'];
+    //                 break;
+    //             }
+    //         }
+    //     }
+    //     Session::put('cart', $cart);
 
-        $total_price = 0;
-        foreach ($cart as $item) {
-            $total_price += $item['total'];
-        }
-        Session::put('total_price', $total_price);
-        Session::save();
-        return Redirect::to('cart');
-    }
+    //     $total_price = 0;
+    //     foreach ($cart as $item) {
+    //         $total_price += $item['total'];
+    //     }
+    //     Session::put('total_price', $total_price);
+    //     Session::save();
+    //     return Redirect::to('cart');
+    // }
 
-    public function decreaseProduct($product_id)
-    {
-        $cart = Session::get('cart');
-        $soluong = 1;
-        if ($cart == true) {
-            foreach ($cart as $key => $val) {
-                if ($val['masp'] == $product_id) {
-                    $new_qty = $cart[$key]['soluong'] -= $soluong;
-                    if ($new_qty < 1) {
-                        $new_qty = 1;
-                        return redirect()->back()->with('message', 'You can add min than 1 of this product to the cart');
-                    }
-                    $cart[$key]['soluong'] = $new_qty;
+    // public function decreaseProduct($product_id)
+    // {
+    //     $cart = Session::get('cart');
+    //     $soluong = 1;
+    //     if ($cart == true) {
+    //         foreach ($cart as $key => $val) {
+    //             if ($val['masp'] == $product_id) {
+    //                 $new_qty = $cart[$key]['soluong'] -= $soluong;
+    //                 if ($new_qty < 1) {
+    //                     $new_qty = 1;
+    //                     return redirect()->back()->with('message', 'You can add min than 1 of this product to the cart');
+    //                 }
+    //                 $cart[$key]['soluong'] = $new_qty;
 
-                    $cart[$key]['total'] = $cart[$key]['soluong'] * $cart[$key]['gia'];
-                    break;
-                }
-            }
-        }
-        Session::put('cart', $cart);
-        $total_price = 0;
-        foreach ($cart as $item) {
-            $total_price += $item['total'];
-        }
-        Session::put('total_price', $total_price);
+    //                 $cart[$key]['total'] = $cart[$key]['soluong'] * $cart[$key]['gia'];
+    //                 break;
+    //             }
+    //         }
+    //     }
+    //     Session::put('cart', $cart);
+    //     $total_price = 0;
+    //     foreach ($cart as $item) {
+    //         $total_price += $item['total'];
+    //     }
+    //     Session::put('total_price', $total_price);
 
-        Session::save();
+    //     Session::save();
 
-        return Redirect::to('cart');
-    }
+    //     return Redirect::to('cart');
+    // }
 
     public function delete($session_id)
     {
@@ -254,5 +255,58 @@ class CartController extends Controller
 
         // Chuyển hướng lại giỏ hàng
         return Redirect::to('cart');
+    }
+
+    public function update_quantity_cart(Request $request)
+    {
+        $quantity = $request->input('quantity');
+        $masp = $request->input('masp');
+
+        // Xử lý dữ liệu (ví dụ: cập nhật vào cơ sở dữ liệu)
+        // Bạn có thể thêm logic lưu dữ liệu vào bảng sản phẩm của mình
+        $product = Product::find($masp);
+        $find_quantity = $product->product_quantity;
+        if ($quantity > $find_quantity) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Bạn đã vượt quá số lượng sản phẩm đang có của chúng tôi.',
+            ]);
+            // return redirect()->back()->with('message', 'Bạn đã mua quá số lượng mà chúng tôi có');
+        }
+
+        $cart = Session::get('cart');
+        if ($cart == true) {
+            foreach ($cart as $key => $val) {
+                if ($val['masp'] == $masp) {
+                    $new_qty = $cart[$key]['soluong'] = $quantity;
+                    if ($new_qty < 1) {
+                        $new_qty = 1;
+                        // return redirect()->back()->with('message', 'You can add min than 1 of this product to the cart');
+                        return response()->json([
+                            'status' => 'error',
+                            'message' => 'Bạn không thể nhập số nhỏ hơn 0.',
+                        ]);
+                    }
+                    $cart[$key]['soluong'] = $new_qty;
+
+                    $cart[$key]['total'] = $cart[$key]['soluong'] * $cart[$key]['gia'];
+                    break;
+                }
+            }
+        }
+        Session::put('cart', $cart);
+        $total_price = 0;
+        foreach ($cart as $item) {
+            $total_price += $item['total'];
+        }
+        Session::put('total_price', $total_price);
+
+        Session::save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Dữ liệu đã được cập nhật',
+
+        ]);
     }
 }

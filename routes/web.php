@@ -129,16 +129,16 @@ use App\Http\Controllers\CartController;
 Route::get('/cart', [CartController::class, 'index']);
 
 Route::post('/add-cart', [CartController::class, 'addToCart']);
-Route::get('/increase-quantity/{product_id}', [CartController::class, 'increaseProduct']);
-Route::get('/decrease-quantity/{product_id}', [CartController::class, 'decreaseProduct']);
+// Route::get('/increase-quantity/{product_id}', [CartController::class, 'increaseProduct']);
+// Route::get('/decrease-quantity/{product_id}', [CartController::class, 'decreaseProduct']);
 Route::get('/delete/{session_id}', [CartController::class, 'delete']);
 Route::get('/delete-all', [CartController::class, 'delete_all_cart']);
 Route::get('/delete-coupon', [CartController::class, 'delete_coupon']);
 
 Route::get('count-cart', [CartController::class, 'count_cart']);
 Route::post('/check-coupon', [CartController::class, 'check_coupon']);
+Route::post('/update-quantity-cart', [CartController::class, 'update_quantity_cart']);
 
-Route::post('/buy-now', [CartController::class, 'buy_now']);
 // Coupons
 
 use App\Http\Controllers\CouponsController;
@@ -180,3 +180,4 @@ use App\Http\Controllers\CommentController;
 
 Route::post('/send-comment', [CommentController::class, 'send_comment']);
 Route::get('/get-comment', [CommentController::class, 'get_comment']);
+Route::get('/comments-index', [CommentController::class, 'comments_index']);

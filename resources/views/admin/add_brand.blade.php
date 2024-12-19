@@ -1,16 +1,16 @@
 @extends('admin_layout')
 @section('admin_content')
-<?php
+@php
 
 use Illuminate\Support\Facades\Session;
 
 $message_success = Session::get('message_success');
 if ($message_success) {
-    echo '<p class="text-success" >', $message_success, '</p>';
-    Session::put('message_success', null);
+echo '<p class="text-success">', $message_success, '</p>';
+Session::put('message_success', null);
 }
 
-?>
+@endphp
 
 <form action="{{URL::to('/save-brand')}}" method="POST">
     {{csrf_field()}}

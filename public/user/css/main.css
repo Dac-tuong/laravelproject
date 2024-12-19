@@ -84,6 +84,11 @@
     border-radius: 50%;
 }
 
+.quantity {
+    width: 60px;
+    text-align: center;
+}
+
 .customer {
     display: flex;
     justify-content: space-evenly;

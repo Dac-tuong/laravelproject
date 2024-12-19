@@ -1,7 +1,11 @@
 @extends('admin_layout')
 @section('admin_content')
 <h1>Dashboard</h1>
-
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div id="myfirstchart" style="height: 250px;"></div>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-3 col-sm-6 col-xs-6">
         <div class="panel panel-back noti-box">
@@ -48,6 +52,7 @@
         </div>
     </div>
 </div>
+
 
 
 @endsection

@@ -81,4 +81,10 @@ class CommentController extends Controller
 
         echo  $outputComment;
     }
+
+    public function comments_index()
+    {
+        $comments = CommentModel::paginate(6);
+        return view('admin.comments.comments_list')->with('comments', $comments);
+    }
 }
