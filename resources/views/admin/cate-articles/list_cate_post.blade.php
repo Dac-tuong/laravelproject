@@ -19,12 +19,12 @@
                 <td>
 
                     <?php
-                    if ($cate_post->status_post == 0) {
+                    if ($cate_post->status_cate_post == 1) {
                     ?>
-                        <a href="{{URL::to('/inactive-cate-post'.'/'.$cate_post->id_loaibaiviet)}}">Ẩn</a>
+                    <a href="{{URL::to('/inactive-cate-post'.'/'.$cate_post->id_loaibaiviet)}}">inactive</a>
                     <?php
                     } else { ?>
-                        <a href="{{URL::to('/active-cate-post'.'/'.$cate_post->id_loaibaiviet)}}">Hện</a>
+                    <a href="{{URL::to('/active-cate-post'.'/'.$cate_post->id_loaibaiviet)}}">active</a>
                     <?php  } ?>
                 </td>
 

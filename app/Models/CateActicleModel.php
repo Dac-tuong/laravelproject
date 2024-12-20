@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CateActicleModel extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['tenloaibaiviet', 'status_post'];
+    protected $fillable = ['tenloaibaiviet', 'status_cate_post'];
     protected $primaryKey = 'id_loaibaiviet';
     protected $table = 'tbl_loaibaiviet';
 }

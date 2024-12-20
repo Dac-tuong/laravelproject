@@ -13,8 +13,8 @@
     <div class="form-group">
         <label>Tình Trạng</label>
         <select name="cate_post_status" class="form-control">
-            <option value="1">Hiện</option>
-            <option value="0">Ẩn</option>
+            <option value="1">active</option>
+            <option value="2">inactive</option>
         </select>
     </div>
     <button type="submit" name="add" class="btn btn-primary">Submit</button>

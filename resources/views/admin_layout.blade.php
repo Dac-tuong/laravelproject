@@ -22,6 +22,10 @@ $id = Session::get('admin_id')
     <link href="{{asset('admin/css/custom.css')}}" rel="stylesheet" />
     <link href="{{asset('admin/css/custom_table.css')}}" rel="stylesheet" />
 
+
+    <link href='https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css' rel='stylesheet'
+        type='text/css' />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -98,6 +102,18 @@ $id = Session::get('admin_id')
                             </li>
                             <li>
                                 <a href="{{URL::to('/list-product')}}">Danh Sách Sản Phẩm</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap fa-3x"> </i> Bài viết<span class="fa arrow"> </span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{URL::to('/add-post')}}">Thêm bài viết</a>
+                            </li>
+                            <li>
+                                <a href="{{URL::to('/list-product')}}">Danh Sách bài viết</a>
                             </li>
 
                         </ul>
@@ -183,8 +199,14 @@ $id = Session::get('admin_id')
     <script src="{{asset('admin/js/custom.js')}}"></script>
 
     <script src="{{asset('admin/js/jquery-3.6.0.min.js')}}"></script>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'>
+    </script>
 
-    <!-- <script>
+    <script>
+    var editor = new FroalaEditor('#example');
+    </script>
+
+    <script>
     $(document).ready(function() {
         $('#add-feeship').click(function() {
             var id_province = $('#province').val();
@@ -210,39 +232,39 @@ $id = Session::get('admin_id')
             });
         });
     })
-    </script> -->
+    </script>
 
     <script>
-        $(document).ready(function() {
-            $('.update-order').click(function() {
-                var orderStatus = $('#order-status').val();
-                var orderNote = $('#order-note').val();
-                var orderCode = $('#order-code').val();
-                var orderItem = document.getElementById('order-item').textContent;
-                var _token = $('input[name="_token"]').val();
-                var statusText = $("#order-status option:selected").text();
+    $(document).ready(function() {
+        $('.update-order').click(function() {
+            var orderStatus = $('#order-status').val();
+            var orderNote = $('#order-note').val();
+            var orderCode = $('#order-code').val();
+            var orderItem = document.getElementById('order-item').textContent;
+            var _token = $('input[name="_token"]').val();
+            var statusText = $("#order-status option:selected").text();
 
-                $.ajax({
-                    url: "/update-status-order",
-                    method: 'POST',
-                    data: {
-                        orderstatus: orderStatus,
-                        orderreason: orderNote,
-                        ordercode: orderCode,
-                        orderitem: orderItem,
-                        _token: _token
-                    },
-                    success: function(response) {
-                        alert(response.message);
-                        $('#current-order-status').text(statusText);
+            $.ajax({
+                url: "/update-status-order",
+                method: 'POST',
+                data: {
+                    orderstatus: orderStatus,
+                    orderreason: orderNote,
+                    ordercode: orderCode,
+                    orderitem: orderItem,
+                    _token: _token
+                },
+                success: function(response) {
+                    alert(response.message);
+                    $('#current-order-status').text(statusText);
 
-                    },
-                    error: function(xhr, status, error) {
-                        alert('Có lỗi xảy ra, vui lòng thử lại.');
-                    }
-                });
+                },
+                error: function(xhr, status, error) {
+                    alert('Có lỗi xảy ra, vui lòng thử lại.');
+                }
             });
         });
+    });
     </script>
     <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script> -->
