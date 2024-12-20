@@ -122,13 +122,8 @@ $name = Session::get('name_customer')
                                 </ul>
                             </li>
                             <li class="megamenu-blog">
-                                <span>BLOG</span>
-                                <div class="sub-megamenu_blog">
-                                    @foreach ( $cate_acticles as $cate_post )
-                                    <a href="{{URL::to('/list-post'.'/'.$cate_post->id_loaibaiviet )}}">
-                                        {{$cate_post->tenloaibaiviet}}</a>
-                                    @endforeach
-                                </div>
+                                <span><a href="{{URL::to('/list-post')}}">BÀI VIẾT</a></span>
+
                             </li>
                             <li class="megamenu"><a href="">KHÁC</a></li>
                             <li class="megamenu"><a href="">PHỤ KIỆN</a></li>

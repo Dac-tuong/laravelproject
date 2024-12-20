@@ -197,6 +197,7 @@ Route::get('/inactive-cate-post/{id_cate_post}', [ActicleControll::class, 'inact
 Route::get('/add-post', [ActicleControll::class, 'add_post']);
 Route::post('/save-post', [ActicleControll::class, 'save_post']);
 Route::get('/all-post', [ActicleControll::class, 'all_post']);
-
+Route::get('/active-post/{id_post}', [ActicleControll::class, 'active_post']);
+Route::get('/inactive-post/{id_post}', [ActicleControll::class, 'inactive_post']);
 // user
-Route::get('/list-post/{id_cate_acticle}', [ActicleControll::class, 'list_post']);
+Route::get('/list-post', [ActicleControll::class, 'list_post']);

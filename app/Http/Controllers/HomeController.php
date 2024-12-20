@@ -35,7 +35,7 @@ class HomeController extends Controller
 
         $banners = BannerModel::all();
 
-        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
+
         // Lọc theo giá
         if ($request->has('sort_by')) {
             if ($request->get('sort_by') == 'giam_dan') {
@@ -131,7 +131,7 @@ class HomeController extends Controller
             ->with('banners', $banners)
             ->with('brands', $brand)
             ->with('categorys', $category)
-            ->with('cate_acticles', $post_cate)
+
         ;
     }
 
@@ -145,7 +145,7 @@ class HomeController extends Controller
         $similar_product = Product::whereBetween('sale_price', [$product_price - 100, $product_price + 100, $product_price])
             ->where('product_id', '!=', $product_id)
             ->get();
-        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
+
         $get_review = ReviewModel::with(['name_customer'])->where('id_phone_review', $product_id)->limit(5)->get();
         return view('user.product.detail_product')
             ->with('product_detail', $detail_product)
@@ -154,7 +154,7 @@ class HomeController extends Controller
             ->with('similars', $similar_product)
             ->with('reviews', $get_review)
             ->with('banners', $banners)
-            ->with('cate_acticles', $post_cate)
+
         ;
     }
 
@@ -165,7 +165,7 @@ class HomeController extends Controller
         $banners = BannerModel::all();
         $keyword = $request->keywords_search;
 
-        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
+
 
         $search_product = Product::with(['category', 'brand'])->where('product_name', 'like', '%' . $keyword . '%')
             ->where('product_status', 1)
@@ -176,7 +176,7 @@ class HomeController extends Controller
             ->with('brands', $brand)
             ->with('categorys', $category)
             ->with('banners', $banners)
-            ->with('cate_acticles', $post_cate)
+
         ;
     }
     public function review_product($product_id)
@@ -184,7 +184,7 @@ class HomeController extends Controller
         $brand = Brand::get();
         $category = Category::get();
         $banners = BannerModel::all();
-        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
+
         $get_product = Product::with(['category', 'brand', 'galleries'])
             ->where('tbl_phones.product_id', $product_id)->first();
 
@@ -193,7 +193,7 @@ class HomeController extends Controller
             ->with('brands', $brand)
             ->with('categorys', $category)
             ->with('banners', $banners)
-            ->with('cate_acticles', $post_cate)
+
         ;
     }
 
@@ -399,7 +399,7 @@ class HomeController extends Controller
         $brand = Brand::get();
         $category = Category::get();
         $avg_amount = 0;
-        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
+
 
         $id_user_session = Session::get('id_customer');
         $output = "Hiện chưa có địa chỉ";
@@ -421,7 +421,7 @@ class HomeController extends Controller
             ->with('ordercount', $order_count)
             ->with('totalamount', $total_amount)
             ->with('avgamount', $avg_amount)
-            ->with('cate_acticles', $post_cate)
+
         ;
     }
 
@@ -431,7 +431,7 @@ class HomeController extends Controller
         $brand = Brand::get();
         $category = Category::get();
         $banners = BannerModel::all();
-        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
+
         $id_user_session = Session::get('id_customer');
         $favorite = FavoriteModel::with(['user_favorite', 'product_favorite'])->where("favorite_user_id", $id_user_session)->get();
         return view('user.product.wishlist')
@@ -439,7 +439,7 @@ class HomeController extends Controller
             ->with("categorys", $category)
             ->with('favorites', $favorite)
             ->with('banners', $banners)
-            ->with('cate_acticles', $post_cate)
+
         ;
     }
 
@@ -519,13 +519,13 @@ class HomeController extends Controller
         $brand = Brand::get();
         $category = Category::get();
         $id_user_session = Session::get('id_customer');
-        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
+
 
         $informations = User::where('id_user', $id_user_session)->first();
         return view('user.profile.setting')->with('brands', $brand)
             ->with('categorys', $category)
             ->with('informations', $informations)
-            ->with('cate_acticles', $post_cate)
+
         ;
     }
 

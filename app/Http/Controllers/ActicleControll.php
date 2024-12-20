@@ -25,49 +25,11 @@ class ActicleControll extends Controller
             return Redirect::to('admincp')->send();
         }
     }
-    public function add_cate_post()
-    {
-        return view('admin.cate-articles.cate_acticle');
-    }
-    public function save_cate_post(Request $request)
-    {
-        $cate_post = new CateActicleModel();
-        $cate_post->tenloaibaiviet = $request->cate_post_name;
-        $cate_post->status_cate_post = $request->cate_post_status;
-        $cate_post->save();
-        return Redirect::to('list-cate-post');
-    }
 
-
-    public function list_cate_post()
-    {
-
-        $cate_post = CateActicleModel::get();
-        return view('admin.cate-articles.list_cate_post')
-            ->with('cate_posts', $cate_post);
-    }
-
-    public function inactive_cate_post($id_cate_post)
-    {
-
-        $cate_post = CateActicleModel::find($id_cate_post);
-        $cate_post->status_cate_post = 2;
-        $cate_post->save();
-
-        return Redirect::to('list-cate-post');
-    }
-    public function active_cate_post($id_cate_post)
-    {
-        $cate_post = CateActicleModel::find($id_cate_post);
-        $cate_post->status_cate_post = 1;
-        $cate_post->save();
-        return Redirect::to('list-cate-post');
-    }
 
     public function add_post()
     {
-        $cate_post = CateActicleModel::get();
-        return view('admin.post.add_post')->with('cate_posts', $cate_post);
+        return view('admin.post.add_post');
     }
 
     public function save_post(Request $request)
@@ -75,7 +37,6 @@ class ActicleControll extends Controller
         $new_post = new ActicleModel();
         // $data = $request->all();
         $new_post->name_article = $request->post_name;
-        $new_post->group_cate_acticle = $request->id_cate_acticle;
         $new_post->content_article = $request->content_post;
         $new_post->status_article = 1;
 
@@ -85,14 +46,36 @@ class ActicleControll extends Controller
         if ($get_image) {
             $new_image = time() . '_' . $get_image->getClientOriginalName();
             $get_image->move('uploads/post', $new_image);
-            $new_post->image_acticle = $new_image;
+            $new_post->image_article = $new_image;
         } else {
-            $new_post->image_acticle = '';
+            $new_post->image_article = '';
         }
         // echo $new_image;
         $new_post->save();
         return Redirect::to('all-post');
     }
+
+
+    public function inactive_post($id_post)
+    {
+
+
+        $post = ActicleModel::find($id_post);
+        $post->status_article = 1;
+        $post->save();
+
+        return Redirect::to('all-post');
+    }
+    public function active_post($id_post)
+    {
+
+        $post = ActicleModel::find($id_post);
+        $post->status_article = 2;
+        $post->save();
+
+        return Redirect::to('all-post');
+    }
+
 
 
     public function all_post()
@@ -104,16 +87,15 @@ class ActicleControll extends Controller
 
     // USER
 
-    public function list_post($id_cate_acticle)
+    public function list_post()
     {
         $brand = Brand::get();
         $category = Category::get();
-        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
-        $posts = ActicleModel::where('group_cate_acticle', $id_cate_acticle)->where('status_article', 1)->get();
+
+        $posts = ActicleModel::where('status_article', 1)->get();
         return view('user.view_post.view_list_post')
             ->with('brands', $brand)
             ->with('categorys', $category)
-            ->with('cate_acticles', $post_cate)
             ->with('posts', $posts)
         ;
     }

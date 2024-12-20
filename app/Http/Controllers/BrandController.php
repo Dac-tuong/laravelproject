@@ -104,7 +104,7 @@ class BrandController extends Controller
     {
         $category = Category::get();
         $banners = BannerModel::all();
-        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
+
         $list_product = Product::with(['category'])->where('brand_product_id', $brand_id)
             ->where('product_status', 1);
 
@@ -214,7 +214,7 @@ class BrandController extends Controller
             ->with('groupedCateProducts', $groupedCateProducts)
             ->with('selected_sort', $request->get('sort_by', 'none'))
             ->with('selected_ram', $request->get('filter_mobile_ram', 'none'))
-            ->with('cate_acticles', $post_cate)
+
         ;
     }
 }

@@ -90,7 +90,7 @@ class CheckoutController extends Controller
         $brand = Brand::get();
         $category = Category::get();
         $banners = BannerModel::all();
-        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
+
 
 
         return view('user.shopping.checkout')
@@ -98,7 +98,8 @@ class CheckoutController extends Controller
             ->with('brands', $brand)
             ->with('categorys', $category)
             ->with('banners', $banners)
-            ->with('cate_acticles', $post_cate);
+
+        ;
     }
 
 

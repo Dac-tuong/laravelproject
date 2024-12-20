@@ -142,18 +142,7 @@ $id = Session::get('admin_id')
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-sitemap fa-3x"> </i> Loại bài viết<span class="fa arrow">
-                            </span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{URL::to('/add-cate-post')}}">Thêm loại bài viết</a>
-                            </li>
-                            <li>
-                                <a href="{{URL::to('/list-cate-post')}}">Danh sách loại bài viết</a>
-                            </li>
-                        </ul>
-                    </li>
+
                     <li>
                         <a href="{{URL::to('/order-view')}}">
                             <i class="fa fa-qrcode fa-3x"></i> Danh sách đơn hàng

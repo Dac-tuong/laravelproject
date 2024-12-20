@@ -6,15 +6,6 @@
         <label for="">Tên bài viết</label>
         <input type="text" class="form-control" name="post_name" id="">
     </div>
-    <div class="form-group">
-        <label for="">Loại bài viết</label>
-        <select name="id_cate_acticle" id="">
-            @foreach($cate_posts as $index => $cate_post)
-            <option value="{{$cate_post->id_loaibaiviet }}">{{$cate_post->tenloaibaiviet}}</option>
-            @endforeach
-
-        </select>
-    </div>
     <br>
     <div class="form-group">
         <label>Ảnh đại diện</label>
