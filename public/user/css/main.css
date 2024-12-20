@@ -187,6 +187,57 @@
 .sub-megamenu li a:hover {
     color: white;
 }
+
+.megamenu-blog {
+    position: relative;
+    list-style: none;
+    background-color: aqua;
+    margin: 0px;
+    padding: 0px;
+    /* padding: 5px 6px 5px 6px; */
+}
+.megamenu-blog:hover .sub-megamenu_blog {
+    opacity: 1; /* Hiển thị khi hover */
+    visibility: visible; /* Bỏ ẩn */
+}
+.sub-megamenu_blog {
+    z-index: 1;
+    /* background: rgba(0, 0, 0, 0.4);
+     */
+    background-color: white;
+    position: absolute;
+    border-radius: 5px;
+    /* display: flex; */
+    min-width: 300px;
+    max-width: 300px;
+    padding: 0;
+    /* flex-wrap: wrap; */
+    /* padding: 10px; */
+    margin: 0;
+    list-style: none; /* Loại bỏ dấu đầu dòng của danh sách */
+    opacity: 0; /* Ẩn ban đầu */
+    visibility: hidden; /* Ngăn hiển thị sub-megamenu */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Hiệu ứng chuyển tiếp */
+}
+
+.sub-megamenu_blog li:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.sub-megamenu_blog a {
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    display: block;
+    padding: 5px 10px;
+}
+
+.sub-megamenu_blog a:hover {
+    color: white;
+    background-color: #007bff;
+}
+
 .app_container {
     background: #e0e0e0;
 }

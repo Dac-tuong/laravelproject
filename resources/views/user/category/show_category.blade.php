@@ -2,7 +2,6 @@
 @section('content')
 <div class="breadcrumbs">
     <a href="{{ URL::to('/') }}">Trang chủ </a>/
-
 </div>
 
 <div class="home-product">

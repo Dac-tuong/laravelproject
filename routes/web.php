@@ -193,7 +193,10 @@ Route::post('/save-cate-post', [ActicleControll::class, 'save_cate_post']);
 Route::get('/active-cate-post/{id_cate_post}', [ActicleControll::class, 'active_cate_post']);
 Route::get('/inactive-cate-post/{id_cate_post}', [ActicleControll::class, 'inactive_cate_post']);
 // post
-
+// admin
 Route::get('/add-post', [ActicleControll::class, 'add_post']);
 Route::post('/save-post', [ActicleControll::class, 'save_post']);
-Route::get('/list-post', [ActicleControll::class, 'list_post']);
+Route::get('/all-post', [ActicleControll::class, 'all_post']);
+
+// user
+Route::get('/list-post/{id_cate_acticle}', [ActicleControll::class, 'list_post']);

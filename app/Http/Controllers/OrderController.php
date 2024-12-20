@@ -14,6 +14,7 @@ use App\Models\BannerModel;
 use App\Models\SantisticalModel;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
+use App\Models\CateActicleModel;
 
 
 class OrderController extends Controller
@@ -239,6 +240,9 @@ class OrderController extends Controller
         $category = Category::get();
         $banners = BannerModel::all();
         $id_user = Session::get('id_customer');
+        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
+
+        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
         $orders = OrderProduct::with(['shippingAddress'])->where('id_customer', $id_user);
 
         if ($request->has('order_code')) {
@@ -269,6 +273,7 @@ class OrderController extends Controller
             ->with("categorys", $category)
             ->with("historys", $history)
             ->with('banners', $banners)
+            ->with('cate_acticles', $post_cate)
         ;
     }
 
@@ -279,6 +284,7 @@ class OrderController extends Controller
         $banners = BannerModel::all();
         $order_count_quantity = 0;
         $grand_total = 0;
+        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
 
         // Lấy thông tin ở bảng order detail
         $order_infomation = OrderDetail::where('order_code', $order_code)->get();
@@ -323,7 +329,7 @@ class OrderController extends Controller
             $order_status = 'Đơn hàng mới';
         }
 
-
+        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
         return view('user.shopping.view_history_order')
             ->with('brands', $brand)
             ->with("categorys", $category)
@@ -335,6 +341,7 @@ class OrderController extends Controller
             ->with("discount_price", $discount)
             ->with("grandTotal", $grand_total)
             ->with('banners', $banners)
+            ->with('cate_acticles', $post_cate)
         ;
     }
 

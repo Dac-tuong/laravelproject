@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
+use App\Models\Brand;
+
+use App\Models\Category;
+
 session_start();
 class ActicleControll extends Controller
 {
@@ -29,7 +33,7 @@ class ActicleControll extends Controller
     {
         $cate_post = new CateActicleModel();
         $cate_post->tenloaibaiviet = $request->cate_post_name;
-        $cate_post->status_post = $request->cate_post_status;
+        $cate_post->status_cate_post = $request->cate_post_status;
         $cate_post->save();
         return Redirect::to('list-cate-post');
     }
@@ -74,7 +78,43 @@ class ActicleControll extends Controller
         $new_post->group_cate_acticle = $request->id_cate_acticle;
         $new_post->content_article = $request->content_post;
         $new_post->status_article = 1;
-        // echo  $request->id_cate_acticle;
+
+        $get_image = $request->file('post_image');
+
+        // xữ lý phần up hình ảnh lên mysql
+        if ($get_image) {
+            $new_image = time() . '_' . $get_image->getClientOriginalName();
+            $get_image->move('uploads/post', $new_image);
+            $new_post->image_acticle = $new_image;
+        } else {
+            $new_post->image_acticle = '';
+        }
+        // echo $new_image;
         $new_post->save();
+        return Redirect::to('all-post');
+    }
+
+
+    public function all_post()
+    {
+        $posts = ActicleModel::all();
+        return view('admin.post.all_post')->with('all_post', $posts);
+    }
+
+
+    // USER
+
+    public function list_post($id_cate_acticle)
+    {
+        $brand = Brand::get();
+        $category = Category::get();
+        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
+        $posts = ActicleModel::where('group_cate_acticle', $id_cate_acticle)->where('status_article', 1)->get();
+        return view('user.view_post.view_list_post')
+            ->with('brands', $brand)
+            ->with('categorys', $category)
+            ->with('cate_acticles', $post_cate)
+            ->with('posts', $posts)
+        ;
     }
 }

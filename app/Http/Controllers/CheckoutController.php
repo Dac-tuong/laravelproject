@@ -17,6 +17,7 @@ use App\Models\FeeshipModel;
 use App\Models\OrderDetail;
 use App\Models\OrderProduct;
 use App\Models\Ward;
+use App\Models\CateActicleModel;
 
 
 
@@ -89,13 +90,15 @@ class CheckoutController extends Controller
         $brand = Brand::get();
         $category = Category::get();
         $banners = BannerModel::all();
+        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
 
 
         return view('user.shopping.checkout')
             ->with('provinces', $province)
             ->with('brands', $brand)
             ->with('categorys', $category)
-            ->with('banners', $banners);
+            ->with('banners', $banners)
+            ->with('cate_acticles', $post_cate);
     }
 
 

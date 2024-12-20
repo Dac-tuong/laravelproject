@@ -113,7 +113,7 @@ $id = Session::get('admin_id')
                                 <a href="{{URL::to('/add-post')}}">Thêm bài viết</a>
                             </li>
                             <li>
-                                <a href="{{URL::to('/list-product')}}">Danh Sách bài viết</a>
+                                <a href="{{URL::to('/all-post')}}">Danh Sách bài viết</a>
                             </li>
 
                         </ul>
@@ -203,68 +203,68 @@ $id = Session::get('admin_id')
     </script>
 
     <script>
-    var editor = new FroalaEditor('#example');
+        var editor = new FroalaEditor('#example');
     </script>
 
     <script>
-    $(document).ready(function() {
-        $('#add-feeship').click(function() {
-            var id_province = $('#province').val();
-            var _token = $('input[name="_token"]').val();
+        $(document).ready(function() {
+            $('#add-feeship').click(function() {
+                var id_province = $('#province').val();
+                var _token = $('input[name="_token"]').val();
 
-            $.ajax({
-                url: '/add-feeship',
-                method: 'POST',
-                data: {
-                    id_province: id_province,
-                    _token: _token
-                },
-                success: function(response) {
-                    if (response.exists) {
-                        alert('Dữ liệu này đã tồn tại');
-                    } else {
-                        alert('Thêm phí vận chuyển thành công');
+                $.ajax({
+                    url: '/add-feeship',
+                    method: 'POST',
+                    data: {
+                        id_province: id_province,
+                        _token: _token
+                    },
+                    success: function(response) {
+                        if (response.exists) {
+                            alert('Dữ liệu này đã tồn tại');
+                        } else {
+                            alert('Thêm phí vận chuyển thành công');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Đã có lỗi xảy ra: ' + error);
                     }
-                },
-                error: function(xhr, status, error) {
-                    alert('Đã có lỗi xảy ra: ' + error);
-                }
+                });
             });
-        });
-    })
+        })
     </script>
 
     <script>
-    $(document).ready(function() {
-        $('.update-order').click(function() {
-            var orderStatus = $('#order-status').val();
-            var orderNote = $('#order-note').val();
-            var orderCode = $('#order-code').val();
-            var orderItem = document.getElementById('order-item').textContent;
-            var _token = $('input[name="_token"]').val();
-            var statusText = $("#order-status option:selected").text();
+        $(document).ready(function() {
+            $('.update-order').click(function() {
+                var orderStatus = $('#order-status').val();
+                var orderNote = $('#order-note').val();
+                var orderCode = $('#order-code').val();
+                var orderItem = document.getElementById('order-item').textContent;
+                var _token = $('input[name="_token"]').val();
+                var statusText = $("#order-status option:selected").text();
 
-            $.ajax({
-                url: "/update-status-order",
-                method: 'POST',
-                data: {
-                    orderstatus: orderStatus,
-                    orderreason: orderNote,
-                    ordercode: orderCode,
-                    orderitem: orderItem,
-                    _token: _token
-                },
-                success: function(response) {
-                    alert(response.message);
-                    $('#current-order-status').text(statusText);
+                $.ajax({
+                    url: "/update-status-order",
+                    method: 'POST',
+                    data: {
+                        orderstatus: orderStatus,
+                        orderreason: orderNote,
+                        ordercode: orderCode,
+                        orderitem: orderItem,
+                        _token: _token
+                    },
+                    success: function(response) {
+                        alert(response.message);
+                        $('#current-order-status').text(statusText);
 
-                },
-                error: function(xhr, status, error) {
-                    alert('Có lỗi xảy ra, vui lòng thử lại.');
-                }
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Có lỗi xảy ra, vui lòng thử lại.');
+                    }
+                });
             });
         });
-    });
     </script>
     <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script> -->

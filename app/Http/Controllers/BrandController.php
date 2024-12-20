@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\BannerModel;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\CateActicleModel;
 
 session_start();
 class BrandController extends Controller
@@ -47,8 +48,8 @@ class BrandController extends Controller
     {
         $this->AuthLogin();
         $list_brand = Brand::all();
-        $manager_brand = view('admin.list_brand')->with('list_brand', $list_brand);
-        return view('admin_layout')->with('admin.brand.list_brand', $manager_brand);
+        $manager_brand = view('admin.brand.list_brand')->with('list_brand', $list_brand);
+        return view('admin_layout')->with('admin.list_brand', $manager_brand);
     }
     public function inactive_brand($brand_id)
     {
@@ -103,6 +104,7 @@ class BrandController extends Controller
     {
         $category = Category::get();
         $banners = BannerModel::all();
+        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
         $list_product = Product::with(['category'])->where('brand_product_id', $brand_id)
             ->where('product_status', 1);
 
@@ -211,6 +213,8 @@ class BrandController extends Controller
             ->with('categorys', $category)
             ->with('groupedCateProducts', $groupedCateProducts)
             ->with('selected_sort', $request->get('sort_by', 'none'))
-            ->with('selected_ram', $request->get('filter_mobile_ram', 'none'));
+            ->with('selected_ram', $request->get('filter_mobile_ram', 'none'))
+            ->with('cate_acticles', $post_cate)
+        ;
     }
 }

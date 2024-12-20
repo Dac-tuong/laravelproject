@@ -6,8 +6,8 @@
     {{csrf_field()}}
     <div class="form-group">
         <label>Tên loại bài viết</label>
-        <input type="text" class="form-control" name="cate_post_name" data-slug-source="brand"
-            placeholder="Nhập tên thương hiệu">
+        <input type="text" class="form-control" name="cate_post_name" data-slug-source="brand" placeholder="Nhập tên loại bài viết
+            ">
     </div>
 
     <div class="form-group">

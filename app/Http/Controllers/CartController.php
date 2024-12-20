@@ -11,6 +11,7 @@ use App\Models\Coupons;
 use App\Models\BannerModel;
 use App\Models\Product;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\CateActicleModel;
 
 session_start();
 class CartController extends Controller
@@ -22,10 +23,12 @@ class CartController extends Controller
         $brand = Brand::get();
         $category = Category::get();
         $banners = BannerModel::all();
+        $post_cate = CateActicleModel::where('status_cate_post', 1)->get();
 
         return view('user.shopping.cart')->with('brands', $brand)
             ->with('categorys', $category)
             ->with('banners', $banners)
+            ->with('cate_acticles', $post_cate)
         ;
     }
 

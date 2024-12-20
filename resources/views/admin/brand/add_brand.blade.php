@@ -20,11 +20,6 @@ Session::put('message_success', null);
             placeholder="Nhập tên thương hiệu">
     </div>
     <div class="form-group">
-        <label>Thương hiệu</label>
-        <input type="text" class="form-control" name="brand_name_slug" data-slug-target="brand"
-            placeholder="Nhập tên thương hiệu">
-    </div>
-    <div class="form-group">
         <label>Tình Trạng</label>
         <select name="brand_status" class="form-control">
             <option value="0">Ẩn</option>
