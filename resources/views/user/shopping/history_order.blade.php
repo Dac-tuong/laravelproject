@@ -10,11 +10,7 @@
         <h4 class="title-history">
             LỊCH SỬ MUA HÀNG CỦA BẠN
         </h4>
-        <div class="toggle-view" onclick="toggleView()">
-            <span class="toggle-title">Hiển thị theo</span>
-            <img src="" alt="">
-            <span class="type-view">Dạng thẻ</span>
-        </div>
+
     </div>
     <div class="filler-order">
 
@@ -27,7 +23,7 @@
             </div>
             <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
                 <select id="orderStatus" class="form-control">
-                    <option value="none">Tìm trạng thái</option>
+                    <option value="">Tìm trạng thái</option>
                     <option value="1">Chờ xữ lý</option>
                     <option value="2">Đã xữ lý</option>
                     <option value="3">Đã hủy</option>
@@ -37,7 +33,7 @@
                 <button type="button" class="btn btn-primary w-100 filter-order" onclick="filterOrders()">Lọc</button>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
-                <a href="#" class="btn btn-secondary w-100">Tải lại</a>
+                <a href="" class="btn btn-secondary w-100">Tải lại</a>
             </div>
         </div>
 

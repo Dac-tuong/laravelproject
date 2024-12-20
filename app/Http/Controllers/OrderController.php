@@ -92,11 +92,32 @@ class OrderController extends Controller
             ->with('summaryProduct', $summary_product)
             ->with('summaryOrder', $summary_order);
     }
-    public function order_view()
+    public function order_view(Request $request)
     {
-        $ls_dataOrder = OrderProduct::with(['shippingAddress'])->get();
+        $ls_dataOrder = OrderProduct::with(['shippingAddress']);
+        if ($request->has('order_code')) {
+            if ($request->get('order_code')) {
+                $ls_dataOrder->where('order_code', 'LIKE', '%' . $request->get('order_code') . '%');
+            }
+        }
 
-        return view('admin.order.order_view')->with('lsOrder', $ls_dataOrder);
+        if ($request->has('order_date')) {
+            if ($request->get('order_date')) {
+
+                $ls_dataOrder->whereDate('created_at', $request->get('order_date'));
+            }
+        }
+
+        if ($request->has('order_status')) {
+            if ($request->get('order_status')) {
+
+                $ls_dataOrder->where('order_status', $request->get('order_status'));
+            }
+        }
+
+        $history = $ls_dataOrder->get();
+
+        return view('admin.order.order_view')->with('lsOrder', $history);
     }
     public function view_detail($order_code)
     {
@@ -193,9 +214,6 @@ class OrderController extends Controller
         foreach ($order_details as $oderDetail) {
             $product = Product::find($oderDetail->order_phone_id);
             $product->product_quantity -= $oderDetail->product_sale_quantity;
-            if ($product->product_quantity == 0) {
-                $product->product_status = 2;
-            }
             $product->save();
         }
 
@@ -286,7 +304,6 @@ class OrderController extends Controller
         $order_count_quantity = 0;
         $grand_total = 0;
 
-
         // Lấy thông tin ở bảng order detail
         $order_infomation = OrderDetail::where('order_code', $order_code)->get();
         // Lấy thông tin ở bảng order detail
@@ -329,8 +346,6 @@ class OrderController extends Controller
         } else {
             $order_status = 'Đơn hàng mới';
         }
-
-
         return view('user.shopping.view_history_order')
             ->with('brands', $brand)
             ->with("categorys", $category)
@@ -342,7 +357,6 @@ class OrderController extends Controller
             ->with("discount_price", $discount)
             ->with("grandTotal", $grand_total)
             ->with('banners', $banners)
-
         ;
     }
 

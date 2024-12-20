@@ -140,7 +140,7 @@ class HomeController extends Controller
         $brand = Brand::get();
         $category = Category::get();
         $banners = BannerModel::all();
-        $detail_product = Product::with(['category', 'brand', 'galleries'])->where('tbl_phones.product_id', $product_id)->first();
+        $detail_product = Product::with(['category', 'brand',])->where('tbl_phones.product_id', $product_id)->first();
         $product_price = $detail_product->sale_price;
         $similar_product = Product::whereBetween('sale_price', [$product_price - 100, $product_price + 100, $product_price])
             ->where('product_id', '!=', $product_id)

@@ -41,7 +41,7 @@ $id = Session::get('admin_id')
         <nav class="navbar navbar-default navbar-cls-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
+                    <span class="sr-only"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -155,7 +155,11 @@ $id = Session::get('admin_id')
                     </li>
 
                     <li>
-                        <a href="{{URL::to('/comments-index')}}"> Bình luận</a>
+                        <a href="{{URL::to('/comments-index')}}"> <i class="fa-solid fa-comment"></i> Bình luận</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::to('/comments-index')}}"><i class="fa-solid fa-user"></i> Tài khoản người
+                            dùng</a>
                     </li>
                 </ul>
 
@@ -223,6 +227,25 @@ $id = Session::get('admin_id')
         })
     </script>
 
+    <script>
+        function filterOrders() {
+            // Lấy giá trị từ các input
+            const orderCode = document.getElementById('orderCode').value || ''; // Mặc định là rỗng
+            const orderDate = document.getElementById('orderDate').value || ''; // Mặc định là rỗng
+            const orderStatus = document.getElementById('orderStatus').value || ''; // Mặc định là 1 (Chờ xử lý)
+
+            // Tạo URL mới với tất cả các tham số
+            const params = new URLSearchParams({
+                order_code: orderCode,
+                order_date: orderDate,
+                order_status: orderStatus
+            });
+
+            // Reload lại URL với tham số
+            const currentUrl = window.location.origin + window.location.pathname;
+            window.location.href = `${currentUrl}?${params.toString()}`;
+        }
+    </script>
     <script>
         $(document).ready(function() {
             $('.update-order').click(function() {

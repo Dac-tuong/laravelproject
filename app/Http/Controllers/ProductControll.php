@@ -51,7 +51,7 @@ class ProductControll extends Controller
         $brand_product = Brand::all();
 
 
-        $product = Product::with(['galleries'])->where('product_id', $product_id)->first();
+        $product = Product::where('product_id', $product_id)->first();
         return view('admin.product.edit_product')->with('products', $product)->with('cate_products', $cate_product)
             ->with('brand_products', $brand_product);
     }
@@ -135,21 +135,7 @@ class ProductControll extends Controller
         }
         $product->save();
         // lấy id của sản phẩm
-        $id = $product->product_id;
 
-        // xữ lý phần hình ảnh gallery 
-        $get_gallery = $request->file('gallery');
-        if ($get_gallery) {
-            foreach ($get_gallery as $gallery_image) {
-                $gallery_path = time() . '_' . $gallery_image->getClientOriginalName();
-                $gallery_image->move('uploads/product', $gallery_path);
-
-                $gallery = new Gallery();
-                $gallery->id_sanpham = $id;
-                $gallery->gallery_path = $gallery_path;
-                $gallery->save();
-            }
-        }
         Session::put('message_success', 'Thêm thành công!');
         return Redirect::to('list-product');
     }
@@ -220,30 +206,7 @@ class ProductControll extends Controller
 
         $product->save();
 
-        $get_gallery = $request->file('gallery');
-        $galleries = Gallery::where('id_sanpham_gallery', $product_id)->get();
 
-        if ($get_gallery) {
-            // Xóa các hình ảnh cũ trong gallery
-            foreach ($galleries as $gallery) {
-                $gallery_image_path = 'uploads/product/' . $gallery->gallery_path;
-                if (file_exists($gallery_image_path)) {
-                    unlink($gallery_image_path);
-                }
-                $gallery->delete();
-            }
-
-            // Thêm các hình ảnh mới vào gallery
-            foreach ($get_gallery as $gallery_image) {
-                $gallery_path = time() . '_' . $gallery_image->getClientOriginalName();
-                $gallery_image->move('uploads/product', $gallery_path);
-
-                $gallery = new Gallery();
-                $gallery->id_sanpham_gallery  = $product_id;
-                $gallery->gallery_path = $gallery_path;
-                $gallery->save();
-            }
-        }
 
         Session::put('message_success', 'Cập nhật thành công!');
         return Redirect::to('list-product');
@@ -265,17 +228,6 @@ class ProductControll extends Controller
             // Xóa dữ liệu sản phẩm từ cơ sở dữ liệu
             Product::where('product_id', $product_id)->delete();
             Session::put('message_success', 'Xóa thành công!');
-        }
-
-        $gallery_images = Gallery::where('id_sanpham_gallery ', $product_id)->get();
-
-        foreach ($gallery_images as $old_gallery_image) {
-
-            $gallery_image_path = 'uploads/product/' .  $old_gallery_image->gallery_path;
-            if (file_exists($gallery_image_path)) {
-                unlink($gallery_image_path);
-            }
-            $old_gallery_image->delete();
         }
 
         return Redirect::to('list-product');

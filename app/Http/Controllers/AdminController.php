@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CommentModel;
 use App\Models\OrderProduct;
+use App\Models\Product;
+use App\Models\SantisticalModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -31,8 +34,20 @@ class AdminController extends Controller
     {
         $this->AuthLogin();
 
-        $orders = OrderProduct::where('order_status', 1)->count();
-        return view('admin.dashboard')->with('order_pedding', $orders);
+        $order_pedding = OrderProduct::where('order_status', 1)->count();
+        $order_success = OrderProduct::where('order_status', 2)->count();
+        $count_comment = CommentModel::where('repped', 1)->count();
+        $total_order = OrderProduct::count();
+        $product = Product::count();
+        $santisticle = SantisticalModel::get();
+        return view('admin.dashboard')
+            ->with('order_pedding', $order_pedding)
+            ->with('count_product', $product)
+            ->with('total_order', $total_order)
+            ->with('order_success', $order_success)
+            ->with('new_comment', $count_comment)
+            ->with('santisticle', $santisticle)
+        ;
     }
     public function login(Request $request)
     {

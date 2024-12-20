@@ -1,6 +1,6 @@
 @extends('admin_layout')
 @section('admin_content')
-<h1>Trang danh sách loại sản phẩm</h1>
+<h1>Trang danh thương hiệu sản phẩm</h1>
 <div class="table-wrapper">
     @php
     use Illuminate\Support\Facades\Session;
@@ -15,7 +15,7 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>Tên danh mục</th>
+                <th>Tên thương hiệu</th>
                 <th>Hiển thị</th>
                 <th>Quản lý</th>
             </tr>

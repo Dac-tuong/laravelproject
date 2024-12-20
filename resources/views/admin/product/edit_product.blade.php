@@ -241,22 +241,6 @@
             <input type="file" class="form-control" name="product_image">
         </div>
 
-        <div class="form-group">
-            <h4>Hình ảnh trưng bày</h4>
-            @if($products && $products->galleries->count())
-            <div class="gallery">
-                @foreach($products->galleries as $gallery)
-                <img src=" {{ URL::to('uploads/product/' . $gallery->gallery_path) }}" style="height: 80px;"
-                    alt="Product Image">
-                @endforeach
-            </div>
-            @else
-            <p>No images available.</p>
-            @endif
-
-
-            <input type="file" name="gallery[]" multiple>
-        </div>
     </div>
     <div class="col-sm-12">
         <button type="submit" name="update" class="btn btn-primary">Cập nhật</button>

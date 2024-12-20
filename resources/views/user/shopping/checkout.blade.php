@@ -1,6 +1,5 @@
 @extends('layout')
 @section('content')
-<h1>Trang Check Out</h1>
 <?php
 
 use Illuminate\Support\Facades\Session;
@@ -10,9 +9,13 @@ $total_price = Session::get('total_price');
 $coupon_session = Session::get('coupon');
 
 ?>
-<div>
-    <a href="{{URL::to('/cart')}}">Trở lại trang giỏ hàng</a>
+
+<div class="breadcrumbs">
+    <a href="{{ URL::to('/') }}">Trang chủ /</a>
+    <a href="{{URL::to('/cart')}}">Giỏ hàng /</a>
+    <a href="{{ URL::to('/checkout') }}">Thanh toán</a>
 </div>
+
 
 <div class="row">
     <div class="col-sm-7">

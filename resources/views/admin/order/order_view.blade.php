@@ -1,6 +1,32 @@
 @extends('admin_layout')
 @section('admin_content')
 
+<div class="filler-order">
+
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
+            <input type="text" id="orderCode" placeholder="Mã đơn hàng" class="form-control">
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
+            <input type="date" id="orderDate" placeholder="Ngày mua hàng" class="form-control">
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
+            <select id="orderStatus" class="form-control">
+                <option value="">Tìm trạng thái</option>
+                <option value="1">Chờ xữ lý</option>
+                <option value="2">Đã xữ lý</option>
+                <option value="3">Đã hủy</option>
+            </select>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
+            <button type="button" class="btn btn-primary w-100 filter-order" onclick="filterOrders()">Lọc</button>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-6 col-12 mb-2">
+            <a href="{{URL::to('/order-view')}}" class="btn btn-secondary w-100">Tải lại</a>
+        </div>
+    </div>
+
+</div>
 <table>
     <thead>
         <tr>
@@ -24,7 +50,7 @@
         <tr>
             <td>{{ $loop->iteration }}</td>
             <td>
-                <a href="{{URL::to('/view-detail'.'/'.$order->order_code)}}">{{ $order->order_code }}</a>
+                {{ $order->order_code }}
             </td>
             <td>{{ $order->shippingAddress->fullname ?? 'N/A' }}</td>
             <td>{{ $order->order_total }}</td>
@@ -38,7 +64,7 @@
                 Đã xác nhận đơn
                 @endif
             </td>
-            <td></td>
+            <td><a href="{{URL::to('/view-detail'.'/'.$order->order_code)}}">xem</a></td>
         </tr>
         @endforeach
     </tbody>

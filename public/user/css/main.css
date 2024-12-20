@@ -133,6 +133,7 @@
     font-size: 18px;
     text-decoration: none;
 }
+
 .menu {
     display: flex;
     justify-content: space-between;
@@ -253,8 +254,9 @@
 .brand-container {
     display: flex;
     justify-content: space-between;
-    padding: 0; /* Bỏ padding mặc định */
-    margin: 0; /* Bỏ margin mặc định */
+    background-color: white;
+    padding: 10px 0px; /* Bỏ padding mặc định */
+    margin: 5px 0px; /* Bỏ margin mặc định */
 }
 
 .brand-item a {
@@ -425,6 +427,7 @@
 }
 .link-product {
     text-decoration: none;
+    font-size: 15px;
 }
 .box-right {
     border: 1px solid black;

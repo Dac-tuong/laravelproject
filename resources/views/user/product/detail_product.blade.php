@@ -20,15 +20,7 @@
                     class="box-thumbnail-img">
                 <div class="mirror"></div>
             </div>
-            <div class="gallery-product" id="gallery-product">
-                @if($product_detail && $product_detail->galleries->count())
-                @foreach($product_detail->galleries as $gallery)
-                <img src="{{ URL::to('uploads/product/' . $gallery->gallery_path) }}" alt="Product Image">
-                @endforeach
-                @else
-                <p>No images available.</p>
-                @endif
-            </div>
+
         </div>
 
 
@@ -73,6 +65,7 @@
                     <button type="button" class="add-to-cart" data-id_product="{{ $product_detail->product_id }}"
                         name="add-to-cart">
                         <i class="fa-solid fa-cart-shopping"></i>
+                        Thêm giỏ hàng
                     </button>
 
 

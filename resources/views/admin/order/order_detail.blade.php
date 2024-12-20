@@ -6,10 +6,11 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
 <!-- Tiêu đề trang -->
 <div class="order-details-header">
     <div class="order-details-label">
+        <a href="{{URL::to('/order-view')}}">Quay lại danh sách đơn hàng</a>
     </div>
     <!-- Hành động-->
     <div class="order-details-action">
-        <a href="{{URL::to('/order-view')}}">Quay lại danh sách đơn hàng</a>
+
         <a href="{{URL::to('/print-order'.'/'.$order_historys->order_code)}}">In đơn hàng</a>
     </div>
 </div>
@@ -17,7 +18,7 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
 
 <div class="col-sm-8">
     <div class="order-table">
-        <h2>Sản phẩm trong đơn hàng</h2>
+        <h3>Sản phẩm trong đơn hàng</h3>
         <table>
             <thead>
                 <tr>
@@ -49,7 +50,7 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
     </div>
 
     <div class="order-summary">
-        <h2>Tổng kết đơn hàng</h2>
+        <h3>Tổng kết đơn hàng</h3>
         <strong>Tổng số lượng sản phẩm:</strong>
         <span id="order-item"> {{$orderCount}}
         </span>
@@ -66,7 +67,7 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
 <div class="col-sm-4">
     <!-- Thông tin đơn hàng -->
     <div class="order-info">
-        <h2>Thông tin đơn hàng</h2>
+        <h3>Thông tin đơn hàng</h3>
         <p><strong>Mã đơn hàng:</strong> #{{$order_historys->order_code}}</p>
         <p><strong>Ngày đặt hàng:</strong> {{$order_historys->created_at}}</p>
         <p><strong>Tình trạng đơn hàng:</strong> <span id="current-order-status">{{$orderStatus}}</span></p>
@@ -74,7 +75,7 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
         <p><strong>Ghi chú:</strong> {{$order_historys->order_note}}</p>
     </div>
     <div>
-        <h2>Chỉnh sửa đơn hàng</h2>
+        <h3>Chỉnh sửa đơn hàng</h3>
         <form>
             @csrf
             <input type="hidden" id="order-code" value="{{$order_historys->order_code}}">
@@ -95,13 +96,13 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
 
     <!-- Thông tin khách hàng -->
     <div class="customer-info">
-        <h2>Thông tin khách hàng</h2>
+        <h3>Thông tin khách hàng</h3>
         <p><strong>Tên khách hàng:</strong> {{$order_historys->shippingAddress->fullname}}</p>
         <p><strong>Email:</strong> {{$order_historys->order_email}}</p>
         <p><strong>Số điện thoại:</strong> {{$order_historys->shippingAddress->order_phone}}</p>
     </div>
     <div class="shipping-address">
-        <h2>Địa chỉ giao hàng</h2>
+        <h3>Địa chỉ giao hàng</h3>
         <p><strong>Tỉnh/thành:</strong> {{$order_historys->shippingAddress->province->name}}</p>
         <p><strong>Quận Huyện:</strong> {{$order_historys->shippingAddress->districts->name}}</p>
         <p><strong>Xã/phường:</strong> {{$order_historys->shippingAddress->wards->name}}</p>

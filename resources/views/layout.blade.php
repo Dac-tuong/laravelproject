@@ -108,27 +108,6 @@ $name = Session::get('name_customer')
             <div class="nav-heading-container">
                 <div class="container-xl">
                     <div class="nav-sidebar">
-                        <ul class="menu">
-                            <li class="megamenu"><a href="{{URL::to('/')}}">TRANG CHỦ</a></li>
-                            <li class="megamenu">
-                                <span>ĐIỆN THOẠI</span>
-                                <ul class="sub-megamenu">
-                                    @foreach ( $brands as $brand )
-                                    <li>
-                                        <a
-                                            href="{{URL::to('/show-brand-user'.'/'.$brand->brand_id)}}">{{$brand->brand_name}}</a>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                            <li class="megamenu-blog">
-                                <span><a href="{{URL::to('/list-post')}}">BÀI VIẾT</a></span>
-
-                            </li>
-                            <li class="megamenu"><a href="">KHÁC</a></li>
-                            <li class="megamenu"><a href="">PHỤ KIỆN</a></li>
-                            <li class="megamenu"><a href="">TIN TỨC</a></li>
-                        </ul>
                         <div class="brand-container">
                             @foreach ( $brands as $brand )
                             <div class="brand-item">

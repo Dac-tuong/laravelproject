@@ -1,6 +1,6 @@
 @extends('admin_layout')
 @section('admin_content')
-<h1>Trang danh sách loại sản phẩm</h1>
+<h1>Danh sách phiếu giảm giá</h1>
 <div class="table-wrapper">
     <table>
         <thead>
@@ -24,7 +24,7 @@
                 <td>{{ $coupon->coupon_code }}</td>
                 <td>{{ $coupon->coupon_qty }}</td>
                 <td>{{ $coupon->coupon_type }}</td>
-                <td>{{ $coupon->discount }}</td>
+                <td>{{ $coupon->discount_amount }}</td>
                 <td>{{ $coupon->start_date }}</td>
                 <td>{{ $coupon->end_date }}</td>
                 <td>

@@ -234,10 +234,6 @@ Session::put('message_success', null);
             <label>Ảnh đại diện</label>
             <input type="file" class="form-control" name="product_image">
         </div>
-        <div class="form-group">
-            <label>Danh mục ảnh</label>
-            <input type="file" name="gallery[]" multiple>
-        </div>
     </div>
     <div class="col-sm-12">
         <button type="submit" name="add" class="btn btn-primary">Thêm Sản Phẩm</button>
