@@ -251,6 +251,24 @@ $name = Session::get('name_customer')
         }
     </script>
     <script>
+        function filterOrders() {
+            // Lấy giá trị từ các input
+            const orderCode = document.getElementById('orderCode').value || ''; // Mặc định là rỗng
+            const orderDate = document.getElementById('orderDate').value || ''; // Mặc định là rỗng
+            const orderStatus = document.getElementById('orderStatus').value || ''; // Mặc định là 1 (Chờ xử lý)
+
+            // Tạo URL mới với tất cả các tham số
+            const params = new URLSearchParams({
+                order_code: orderCode,
+                order_date: orderDate,
+                order_status: orderStatus
+            });
+
+            // Reload lại URL với tham số
+            const currentUrl = window.location.origin + window.location.pathname;
+            window.location.href = `${currentUrl}?${params.toString()}`;
+        }
+
         function updateCheckboxFilter(filterName, element) {
             // Lấy giá trị checkbox được thay đổi
             const value = element.value;
@@ -308,19 +326,6 @@ $name = Session::get('name_customer')
             document.getElementById('overlay').style.display = 'none';
         }
 
-        function toggleView() {
-            const tableView = document.getElementById('table-view');
-            const cardView = document.getElementById('card-view');
-            if (getComputedStyle(tableView).display === 'none') {
-                // Hiển thị table-view và ẩn card-view
-                tableView.style.display = 'block';
-                cardView.style.display = 'none';
-            } else {
-                // Ẩn table-view và hiển thị card-view
-                tableView.style.display = 'none';
-                cardView.style.display = 'block';
-            }
-        }
 
         function openSpecifications() {
             // Hiển thị overlay bằng cách thay đổi display thành block
@@ -353,24 +358,6 @@ $name = Session::get('name_customer')
         function closeReviewPopup2() {
             document.getElementById('overlay').style.display = 'none';
             document.getElementById('boxReview-popup').style.display = 'none';
-        }
-
-        function filterOrders() {
-            // Lấy giá trị từ các input
-            const orderCode = document.getElementById('orderCode').value || ''; // Mặc định là rỗng
-            const orderDate = document.getElementById('orderDate').value || ''; // Mặc định là rỗng
-            const orderStatus = document.getElementById('orderStatus').value || ''; // Mặc định là 1 (Chờ xử lý)
-
-            // Tạo URL mới với tất cả các tham số
-            const params = new URLSearchParams({
-                order_code: orderCode,
-                order_date: orderDate,
-                order_status: orderStatus
-            });
-
-            // Reload lại URL với tham số
-            const currentUrl = window.location.origin + window.location.pathname;
-            window.location.href = `${currentUrl}?${params.toString()}`;
         }
     </script>
 
