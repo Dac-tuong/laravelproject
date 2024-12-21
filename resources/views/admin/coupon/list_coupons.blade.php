@@ -28,8 +28,8 @@
                 <td>{{ $coupon->start_date }}</td>
                 <td>{{ $coupon->end_date }}</td>
                 <td>
-                    <a href="{{URL::to('/update-coupon'.'/'.$coupon->id_coupon)}}">Sửa</a>/
-                    <a href="{{URL::to('/delete-coupon'.'/'.$coupon->id_coupon)}}">Xóa</a>
+                    <a class="edit-btn" href="{{URL::to('/update-coupon'.'/'.$coupon->id_coupon)}}">Sửa</a>/
+                    <a class="delete-btn" href="{{URL::to('/delete-coupon'.'/'.$coupon->id_coupon)}}">Xóa</a>
                 </td>
             </tr>
 

@@ -30,6 +30,11 @@ $id = Session::get('admin_id')
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- Link font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Link font-awesome -->
     <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css"> -->
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
@@ -48,21 +53,18 @@ $id = Session::get('admin_id')
                 </button>
                 <img class="logo-shop" src="{{ URL::to('/admin/images/logo/logo.png') }}" alt="">
             </div>
-            <div style="color: white; padding: 15px 50px 5px 50px;float: right; font-size: 16px;">
-                <?php
-                if ($name) {
-                    echo 'Welcome ' . $name;
-                }
-                ?>
-                <a href="{{URL::to('/logout')}}" class="btn btn-danger square-btn-adjust">Logout</a>
-            </div>
+
         </nav>
         <!-- /. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <li class="text-center">
-                        <img src="assets/img/find_user.png" class="user-image img-responsive" />
+                        <?php
+                        if ($name) {
+                            echo 'Welcome ' . $name;
+                        }
+                        ?>
                     </li>
                     <li>
                         <a class="active-menu" href="{{URL::to('/dashboard')}}"><i class="fa fa-dashboard fa-3x"></i>
@@ -106,18 +108,7 @@ $id = Session::get('admin_id')
 
                         </ul>
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-sitemap fa-3x"> </i> Bài viết<span class="fa arrow"> </span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{URL::to('/add-post')}}">Thêm bài viết</a>
-                            </li>
-                            <li>
-                                <a href="{{URL::to('/all-post')}}">Danh Sách bài viết</a>
-                            </li>
 
-                        </ul>
-                    </li>
                     <li>
                         <a href="#"><i class="fa fa-sitemap fa-3x"> </i> Phiếu giảm giá<span class="fa arrow">
                             </span></a>
@@ -144,23 +135,35 @@ $id = Session::get('admin_id')
                     </li>
 
                     <li>
+                        <a href="{{URL::to('/comments-index')}}"> <i class="fa-solid fa-comment"></i> Bình luận</a>
+                    </li>
+                    <li>
                         <a href="{{URL::to('/order-view')}}">
                             <i class="fa fa-qrcode fa-3x"></i> Danh sách đơn hàng
                         </a>
                     </li>
                     <li>
-                        <a href="{{URL::to('/feeship')}}">
-                            <i class="fa fa-qrcode fa-3x"></i>Phí giao hàng
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="{{URL::to('/comments-index')}}"> <i class="fa-solid fa-comment"></i> Bình luận</a>
-                    </li>
-                    <li>
                         <a href="{{URL::to('/comments-index')}}"><i class="fa-solid fa-user"></i> Tài khoản người
                             dùng</a>
                     </li>
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap fa-3x"> </i> Bài viết<span class="fa arrow"> </span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{URL::to('/add-post')}}">Thêm bài viết</a>
+                            </li>
+                            <li>
+                                <a href="{{URL::to('/all-post')}}">Danh Sách bài viết</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div style="color: white; padding: 15px 50px 5px 50px;float: right; font-size: 16px;">
+
+                            <a href="{{URL::to('/logout')}}" class="btn btn-danger square-btn-adjust">Logout</a>
+                        </div>
+                    </li>
+
                 </ul>
 
             </div>
@@ -199,33 +202,7 @@ $id = Session::get('admin_id')
         var editor = new FroalaEditor('#example');
     </script>
 
-    <script>
-        $(document).ready(function() {
-            $('#add-feeship').click(function() {
-                var id_province = $('#province').val();
-                var _token = $('input[name="_token"]').val();
 
-                $.ajax({
-                    url: '/add-feeship',
-                    method: 'POST',
-                    data: {
-                        id_province: id_province,
-                        _token: _token
-                    },
-                    success: function(response) {
-                        if (response.exists) {
-                            alert('Dữ liệu này đã tồn tại');
-                        } else {
-                            alert('Thêm phí vận chuyển thành công');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        alert('Đã có lỗi xảy ra: ' + error);
-                    }
-                });
-            });
-        })
-    </script>
 
     <script>
         function filterOrders() {

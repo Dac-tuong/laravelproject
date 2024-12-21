@@ -43,6 +43,23 @@ class SlideController extends Controller
         return view('admin.slide.list_banner')->with('banners', $banners);
     }
 
+    public function inactive_banner($id_banner)
+    {
+        $banner = BannerModel::find($id_banner);
+        $banner->status_banner = 1;
+        $banner->save();
+
+        return Redirect::to('list-banner');
+    }
+    public function active_banner($id_banner)
+    {
+
+        $banner = BannerModel::find($id_banner);
+        $banner->status_banner = 2;
+        $banner->save();
+
+        return Redirect::to('list-banner');
+    }
 
     // usser
 

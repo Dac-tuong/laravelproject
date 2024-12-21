@@ -74,7 +74,7 @@ class BrandController extends Controller
         $this->AuthLogin();
         $edit_brand = Brand::find($brand_id);
 
-        $manager_brand = view('admin.edit_brand')->with('edit_brand', $edit_brand);
+        $manager_brand = view('admin.brand.edit_brand')->with('edit_brand', $edit_brand);
         return view('admin_layout')->with('admin.brand.edit_brand', $manager_brand);
     }
 

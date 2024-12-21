@@ -32,10 +32,12 @@
                         <a href="{{URL::to('/inactive-cate-product'.'/'.$cate_pro->category_id)}}">Ẩn</a>
                     <?php
                     } else { ?>
-                        <a href="{{URL::to('/active-cate-product'.'/'.$cate_pro->category_id)}}">Hện</a>
+                        <a href="{{URL::to('/active-cate-product'.'/'.$cate_pro->category_id)}}">Hiện</a>
                     <?php  } ?>
-                <td><a href="{{URL::to('/edit-category-product'.'/'.$cate_pro->category_id)}}">Sửa</a>/
-                    <a href="{{URL::to('/delete-category-product'.'/'.$cate_pro->category_id)}}">Xóa</a>
+                <td><a class="edit-btn" href="{{URL::to('/edit-category-product'.'/'.$cate_pro->category_id)}}">Sửa <i
+                            class="fa-solid fa-pen"></i></a>
+                    <a class="delete-btn" href="{{URL::to('/delete-category-product'.'/'.$cate_pro->category_id)}}">Xóa
+                        <i class="fa-solid fa-trash"></i></a>
                 </td>
             </tr>
             @endforeach

@@ -36,8 +36,11 @@
                     } else { ?>
                         <a href="{{URL::to('/active-brand'.'/'.$brand->brand_id)}}">Hiện</a>
                     <?php  } ?>
-                <td><a href="{{URL::to('/edit-brand'.'/'.$brand->brand_id)}}">Sửa</a>/
-                    <a href="{{URL::to('/delete-brand'.'/'.$brand->brand_id)}}">Xóa</a>
+                <td>
+                    <a class="edit-btn" href="{{URL::to('/edit-brand'.'/'.$brand->brand_id)}}"> Sửa <i
+                            class="fa-solid fa-pen"></i></a>
+                    <a class="delete-btn" href="{{URL::to('/delete-brand'.'/'.$brand->brand_id)}}">Xóa <i
+                            class="fa-solid fa-trash"></i></a>
                 </td>
             </tr>
             @endforeach

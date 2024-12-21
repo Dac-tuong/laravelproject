@@ -35,6 +35,9 @@ body {
 
 .text-center {
     text-align: center;
+    height: 60px;
+    color: white;
+    font-size: 18px;
 }
 .no-boder {
     border: 1px solid #f3f3f3;
@@ -465,4 +468,32 @@ p {
 
 .logo-shop {
     height: 60px;
+}
+
+.edit-btn {
+    text-decoration: none;
+    border: 1px solid #4d4d4d;
+    padding: 4px 6px;
+    border-radius: 4px;
+}
+.edit-btn:hover {
+    text-decoration: none;
+}
+.delete-btn {
+    text-decoration: none;
+    border: 1px solid #4d4d4d;
+    padding: 4px 6px;
+    border-radius: 4px;
+}
+
+.delete-btn:hover {
+    text-decoration: none;
+    color: white;
+    background-color: red;
+}
+
+.rep_comment {
+    width: 300px;
+    height: 150px;
+    resize: none;
 }

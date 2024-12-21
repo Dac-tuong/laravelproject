@@ -53,7 +53,7 @@
                 {{ $order->order_code }}
             </td>
             <td>{{ $order->shippingAddress->fullname ?? 'N/A' }}</td>
-            <td>{{ $order->order_total }}</td>
+            <td>{{ number_format($order->order_total, 0, ',', '.') }} đ</td>
             <td>{{ $order->created_at }}</td>
             <td>
                 @if ( $order->order_status == 1)

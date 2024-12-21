@@ -71,7 +71,6 @@ $totalCart = 0; // Khởi tạo biến tổng tiền
         <p><strong>Mã đơn hàng:</strong> #{{$order_historys->order_code}}</p>
         <p><strong>Ngày đặt hàng:</strong> {{$order_historys->created_at}}</p>
         <p><strong>Tình trạng đơn hàng:</strong> <span id="current-order-status">{{$orderStatus}}</span></p>
-        <p><strong>Phương thức thanh toán:</strong> Thẻ tín dụng</p>
         <p><strong>Ghi chú:</strong> {{$order_historys->order_note}}</p>
     </div>
     <div>

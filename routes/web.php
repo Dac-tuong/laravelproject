@@ -122,7 +122,6 @@ Route::post('/select-district-shipping', [CheckoutController::class, 'select_dis
 
 Route::post('/order-product', [CheckoutController::class, 'order_product']);
 
-Route::post('/get-feeship', [CheckoutController::class, 'get_feeship']);
 
 // Cart Product
 use App\Http\Controllers\CartController;
@@ -170,11 +169,8 @@ Route::post('/save-slide', [SlideController::class, 'save_slide']);
 
 Route::get('/list-banner', [SlideController::class, 'list_banner']);
 
-use App\Http\Controllers\FeeshipController;
-
-Route::get('/feeship', [FeeshipController::class, 'feeship']);
-Route::post('/add-feeship', [FeeshipController::class, 'add_feeship']);
-
+Route::get('/active-banner/{id_banner}', [SlideController::class, 'active_banner']);
+Route::get('/inactive-banner/{id_banner}', [SlideController::class, 'inactive_banner']);
 
 use App\Http\Controllers\CommentController;
 
@@ -185,13 +181,6 @@ Route::get('/comments-index', [CommentController::class, 'comments_index']);
 Route::post('/rep-comment/{id_comment}', [CommentController::class, 'rep_comment']);
 
 // POST
-// cate post
-Route::get('/add-cate-post', [ActicleControll::class, 'add_cate_post']);
-Route::get('/list-cate-post', [ActicleControll::class, 'list_cate_post']);
-Route::post('/save-cate-post', [ActicleControll::class, 'save_cate_post']);
-
-Route::get('/active-cate-post/{id_cate_post}', [ActicleControll::class, 'active_cate_post']);
-Route::get('/inactive-cate-post/{id_cate_post}', [ActicleControll::class, 'inactive_cate_post']);
 // post
 // admin
 Route::get('/add-post', [ActicleControll::class, 'add_post']);

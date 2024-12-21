@@ -13,7 +13,7 @@ Session::put('message_success', null);
 <form action="{{URL::to('/save-category-product')}}" method="POST">
     {{csrf_field()}}
     <div class="form-group">
-        <label>Tên Danh mục</label>
+        <label>Tên loại sản phẩm</label>
         <input type="text" class="form-control" name="categories_name" data-slug-source="category"
             placeholder="Nhập tên loại">
     </div>
@@ -21,10 +21,10 @@ Session::put('message_success', null);
     <div class="form-group">
         <label>Tình Trạng</label>
         <select name="categories_product_status" class="form-control">
-            <option value="0">Ẩn</option>
             <option value="1">Hiện</option>
+            <option value="0">Ẩn</option>
         </select>
     </div>
-    <button type="submit" name="add" class="btn btn-primary">Submit</button>
+    <button type="submit" name="add" class="btn btn-primary">Thêm loại sản phẩm</button>
 </form>
 @endsection

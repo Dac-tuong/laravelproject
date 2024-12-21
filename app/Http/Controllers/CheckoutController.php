@@ -127,24 +127,7 @@ class CheckoutController extends Controller
         echo $output;
     }
 
-    public function get_feeship(Request $request)
-    {
 
-        $data = $request->all();
-        $city_id = $data['id_city'];
-        $district_id = $data['id_district'];
-        $ward_id = $data['id_ward'];
-
-        $get_feeship = FeeshipModel::where('matp_feeship', $city_id)
-            ->where('maqh_feeship', $district_id)
-            ->where('xaid_feeship', $ward_id)
-            ->first();
-        $output = '';
-        $output = number_format($get_feeship->feeship, 0, ',', '.');
-
-        // Xuất kết quả
-        echo $output;
-    }
 
 
     public function order_product(Request $request)

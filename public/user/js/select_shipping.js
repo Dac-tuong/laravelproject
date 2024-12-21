@@ -33,38 +33,22 @@ $(document).ready(function () {
     });
 
     $("#wards").change(function () {
-        var id_ward = $(this).val();
-        var _token = $('input[name="_token"]').val();
-        var id_district = $("#district").val();
-        var id_city = $("#city").val();
+        var valuesArray = [60000, 70000, 80000, 90000, 100000, 120000, 150000];
+        var randomValue =
+            valuesArray[Math.floor(Math.random() * valuesArray.length)];
+        var formattedValue = randomValue.toLocaleString("vi-VN");
+        $("#feeship").html(formattedValue);
+        var priceCartText = $("#price_cart").text();
+        // alert(priceCartText);
+        var priceCartInt = parseInt(priceCartText.replace(/\./g, ""));
+        // alert(priceCartInt);
 
-        $.ajax({
-            url: "/get-feeship", // Đảm bảo URL này đúng
-            method: "POST",
-            data: {
-                id_city: id_city,
-                id_district: id_district,
-                id_ward: id_ward,
-                _token: _token,
-            },
-            success: function (data) {
-                var feeshipValue = data;
-                $("#feeship").html(data);
-                var priceCartText = $("#price_cart").text();
-                var priceCartInt = parseInt(priceCartText.replace(/\./g, ""));
-                var priceFeeshipInt = parseInt(feeshipValue.replace(/\./g, ""));
+        var totalOrder = priceCartInt + randomValue;
+        // alert(totalOrder);
+        function formatNumber(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
 
-                var totalOrder = priceCartInt + priceFeeshipInt;
-                // Hàm định dạng số theo kiểu "1.234.567"
-                function formatNumber(number) {
-                    return number
-                        .toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                }
-
-                // Hiển thị tổng số tiền đã được định dạng
-                $("#displayTotal").html(formatNumber(totalOrder) + " VNĐ");
-            },
-        });
+        $("#displayTotal").html(formatNumber(totalOrder) + " đ");
     });
 });

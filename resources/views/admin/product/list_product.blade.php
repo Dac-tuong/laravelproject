@@ -36,7 +36,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{$product->product_code}}</td>
                     <td><img src="{{ URL::to('uploads/product/' . $product->product_image) }}" alt=""
-                            style="height: 100px;"></td>
+                            style="height: 90px;"></td>
                     <td>{{$product->product_name}}</td>
                     <td>{{$product->product_price}}</td>
                     <td>{{$product->product_quantity}}</td>
@@ -45,14 +45,16 @@
                     <td> <?php
                             if ($product->product_status == 0) {
                             ?>
-                        <a href="{{URL::to('/inactive-product'.'/'.$product->product_id)}}">Ẩn</a>
+                            <a href="{{URL::to('/inactive-product'.'/'.$product->product_id)}}">Ẩn</a>
                         <?php
                             } else { ?>
-                        <a href="{{URL::to('/active-product'.'/'.$product->product_id)}}">Hiện</a>
+                            <a href="{{URL::to('/active-product'.'/'.$product->product_id)}}">Hiện</a>
                         <?php  } ?>
                     </td>
-                    <td><a href="{{URL::to('/edit-product'.'/'.$product->product_id)}}">Sửa</a>/
-                        <a href="{{URL::to('/delete-product'.'/'.$product->product_id)}}">Xóa</a>
+                    <td>
+                        <a class="edit-btn" href="{{URL::to('/edit-product'.'/'.$product->product_id)}}">Sửa </a>
+
+                        <a class="delete-btn" href="{{URL::to('/delete-product'.'/'.$product->product_id)}}">Xóa </a>
                     </td>
                 </tr>
 
